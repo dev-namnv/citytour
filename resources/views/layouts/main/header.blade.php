@@ -2,43 +2,48 @@
     <div id="top_line">
         <div class="container">
             <div class="row">
-                <div class="col-6"><i class="icon-phone"></i><strong>0045 043204434</strong><span id="opening"><i class=" icon-clock-1"></i>Mon-Fri: 8.00am - 6.00pm</span>
+                <div class="col-6"><i class="icon-phone"></i><strong>{{ __('info.hotline') }}</strong><span
+                        id="opening"><i class=" icon-clock-1"></i>{{ __('info.opening') }}</span>
                 </div>
 
                 <div class="col-6">
                     <ul id="top_links">
+
+                        {{--If auth valid--}}
                         @auth
                             <li>
                                 <div class="dropdown dropdown-mini">
                                     <a href="#" data-toggle="dropdown" id="lang_link">{{ Auth::user()->first_name }}</a>
                                     <div class="dropdown-menu">
                                         <ul id="lang_menu">
-                                            <li><a href="wishlist.html">Wishlist</a>
-                                            <li><a href="#">Profile</a>
+                                            <li><a href="#">{{ __('button.profile') }}</a>
                                             </li>
-                                            <li><a href="#">History</a>
+                                            <li><a href="#">{{ __('button.history') }}</a>
                                             </li>
-                                            <li><a href="#" onclick="Main.logoutGlobal(this)">Logout</a>
+                                            <li><a href="#" onclick="Main.logoutGlobal(this)">{{ __('button.sign_out') }}</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <!-- End Dropdown access -->
                             </li>
+                            <li><a href="wishlist.html" id="wishlist_link">{{ __('button.wishlist') }}</a></li>
                         @endauth
+
+                        {{--If auth invalid--}}
                         @guest
-                            <li><a href="#sign-in-dialog" id="access_link">Sign in</a></li>
-                        @endguest
+                            <li><a href="#sign-in-dialog" id="access_link">{{ __('button.sign_in') }}</a></li>
+                            @endguest
 
 
-                        </li>
-                        <li id="social_top">
-                            <a href="#0"><i class="icon-facebook"></i></a>
-                            <a href="#0"><i class="icon-twitter"></i></a>
-                            <a href="#0"><i class="icon-google"></i></a>
-                            <a href="#0"><i class="icon-instagramm"></i></a>
-                            <a href="#0"><i class="icon-vimeo"></i></a>
-                        </li>
+                            </li>
+                            <li id="social_top">
+                                <a href="#"><i class="icon-facebook"></i></a>
+                                <a href="#"><i class="icon-twitter"></i></a>
+                                <a href="#"><i class="icon-google"></i></a>
+                                <a href="#"><i class="icon-instagramm"></i></a>
+                                <a href="#"><i class="icon-vimeo"></i></a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -52,14 +57,15 @@
         <div class="row">
             <div class="col-3">
                 <div id="logo_home">
-                    <h1><a href="index.html" title="City tours travel template">City Tours travel template</a></h1>
+                    <h1><a href="{{ route('home') }}" title="{{ __('info.title') }}">{{ __('info.title') }}</a></h1>
                 </div>
             </div>
             <nav class="col-9">
                 <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                 <div class="main-menu">
                     <div id="header_menu">
-                        <img src="{{ asset('libraries/main/img/logo_sticky.png') }}" width="160" height="34" alt="City tours" data-retina="true">
+                        <img src="{{ asset('libraries/main/img/logo_sticky.png') }}" width="160" height="34"
+                             alt="City tours" data-retina="true">
                     </div>
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                     <ul>
@@ -107,10 +113,12 @@
                                 <li class="third-level"><a href="javascript:void(0);">Single tour fixed sidebar</a>
                                     <ul>
                                         <li><a href="single_tour_fixed_sidebar.html">Single tour fixed sidebar</a></li>
-                                        <li><a href="single_tour_with_gallery_fixed_sidebar.html">Single tour 2 Fixed Sidebar</a></li>
+                                        <li><a href="single_tour_with_gallery_fixed_sidebar.html">Single tour 2 Fixed
+                                                Sidebar</a></li>
                                         <li><a href="cart_fixed_sidebar.html">Cart Fixed Sidebar</a></li>
                                         <li><a href="payment_fixed_sidebar.html">Payment Fixed Sidebar</a></li>
-                                        <li><a href="confirmation_fixed_sidebar.html">Confirmation Fixed Sidebar</a></li>
+                                        <li><a href="confirmation_fixed_sidebar.html">Confirmation Fixed Sidebar</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li><a href="single_tour_working_booking.php">Single tour working booking</a></li>
@@ -120,7 +128,9 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="show-submenu">Hotels <i class="icon-down-open-mini"></i></a><ul>
+                            <a href="javascript:void(0);" class="show-submenu">Hotels <i
+                                    class="icon-down-open-mini"></i></a>
+                            <ul>
                                 <li><a href="all_hotels_list.html">All hotels list</a></li>
                                 <li><a href="all_hotels_grid.html">All hotels grid</a></li>
                                 <li><a href="all_hotels_grid_masonry.html">All hotels Sort Masonry</a></li>
@@ -136,7 +146,8 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="show-submenu">Transfers <i class="icon-down-open-mini"></i></a>
+                            <a href="javascript:void(0);" class="show-submenu">Transfers <i
+                                    class="icon-down-open-mini"></i></a>
                             <ul>
                                 <li><a href="all_transfer_list.html">All transfers list</a></li>
                                 <li><a href="all_transfer_grid.html">All transfers grid</a></li>
@@ -149,7 +160,8 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="show-submenu">Restaurants <i class="icon-down-open-mini"></i></a>
+                            <a href="javascript:void(0);" class="show-submenu">Restaurants <i
+                                    class="icon-down-open-mini"></i></a>
                             <ul>
                                 <li><a href="all_restaurants_list.html">All restaurants list</a></li>
                                 <li><a href="all_restaurants_grid.html">All restaurants grid</a></li>
@@ -162,7 +174,8 @@
                             </ul>
                         </li>
                         <li class="megamenu submenu">
-                            <a href="javascript:void(0);" class="show-submenu-mega">Bonus<i class="icon-down-open-mini"></i></a>
+                            <a href="javascript:void(0);" class="show-submenu-mega">Bonus<i
+                                    class="icon-down-open-mini"></i></a>
                             <div class="menu-wrapper">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -202,7 +215,8 @@
                             </div><!-- End menu-wrapper -->
                         </li>
                         <li class="megamenu submenu">
-                            <a href="javascript:void(0);" class="show-submenu-mega">Pages<i class="icon-down-open-mini"></i></a>
+                            <a href="javascript:void(0);" class="show-submenu-mega">Pages<i
+                                    class="icon-down-open-mini"></i></a>
                             <div class="menu-wrapper">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -234,22 +248,31 @@
                                             <li><a href="404.html">404 Error page</a></li>
                                             <li><a href="site_launch/index.html">Site launch / Coming soon</a></li>
                                             <li><a href="timeline.html">Tour timeline</a></li>
-                                            <li><a href="page_with_map.html"><i class="icon-map"></i>  Full screen map</a></li>
+                                            <li><a href="page_with_map.html"><i class="icon-map"></i> Full screen
+                                                    map</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-4">
                                         <h3>Elements</h3>
                                         <ul>
-                                            <li><a href="footer_2.html"><i class="icon-columns"></i> Footer with working newsletter</a></li>
-                                            <li><a href="footer_5.html"><i class="icon-columns"></i> Footer with Twitter feed</a></li>
-                                            <li><a href="icon_pack_1.html"><i class="icon-inbox-alt"></i> Icon pack 1 (1900)</a></li>
-                                            <li><a href="icon_pack_2.html"><i class="icon-inbox-alt"></i> Icon pack 2 (100)</a></li>
-                                            <li><a href="icon_pack_3.html"><i class="icon-inbox-alt"></i> Icon pack 3 (30)</a></li>
-                                            <li><a href="icon_pack_4.html"><i class="icon-inbox-alt"></i> Icon pack 4 (200)</a></li>
-                                            <li><a href="icon_pack_5.html"><i class="icon-inbox-alt"></i> Icon pack 5 (360)</a></li>
+                                            <li><a href="footer_2.html"><i class="icon-columns"></i> Footer with working
+                                                    newsletter</a></li>
+                                            <li><a href="footer_5.html"><i class="icon-columns"></i> Footer with Twitter
+                                                    feed</a></li>
+                                            <li><a href="icon_pack_1.html"><i class="icon-inbox-alt"></i> Icon pack 1
+                                                    (1900)</a></li>
+                                            <li><a href="icon_pack_2.html"><i class="icon-inbox-alt"></i> Icon pack 2
+                                                    (100)</a></li>
+                                            <li><a href="icon_pack_3.html"><i class="icon-inbox-alt"></i> Icon pack 3
+                                                    (30)</a></li>
+                                            <li><a href="icon_pack_4.html"><i class="icon-inbox-alt"></i> Icon pack 4
+                                                    (200)</a></li>
+                                            <li><a href="icon_pack_5.html"><i class="icon-inbox-alt"></i> Icon pack 5
+                                                    (360)</a></li>
                                             <li><a href="shortcodes.html"><i class="icon-tools"></i> Shortcodes</a></li>
-                                            <li><a href="newsletter_template/newsletter.html" target="blank"><i class=" icon-mail"></i> Responsive email template</a></li>
-                                            <li><a href="admin.html"><i class="icon-cog-1"></i>  Admin area</a></li>
+                                            <li><a href="newsletter_template/newsletter.html" target="blank"><i
+                                                        class=" icon-mail"></i> Responsive email template</a></li>
+                                            <li><a href="admin.html"><i class="icon-cog-1"></i> Admin area</a></li>
                                         </ul>
                                     </div>
                                 </div><!-- End row -->
@@ -263,27 +286,31 @@
                     </li>
                     <li>
                         <div class="dropdown dropdown-cart">
-                            <a href="#" data-toggle="dropdown" class="cart_bt"><i class="icon_bag_alt"></i><strong>3</strong></a>
+                            <a href="#" data-toggle="dropdown" class="cart_bt"><i
+                                    class="icon_bag_alt"></i><strong>3</strong></a>
                             <ul class="dropdown-menu" id="cart_items">
                                 <li>
-                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_1.jpg') }}" alt="image"></div>
+                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_1.jpg') }}"
+                                                            alt="image"></div>
                                     <strong><a href="#">Louvre museum</a>1x $36.00 </strong>
                                     <a href="#" class="action"><i class="icon-trash"></i></a>
                                 </li>
                                 <li>
-                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_2.jpg') }}" alt="image"></div>
+                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_2.jpg') }}"
+                                                            alt="image"></div>
                                     <strong><a href="#">Versailles tour</a>2x $36.00 </strong>
                                     <a href="#" class="action"><i class="icon-trash"></i></a>
                                 </li>
                                 <li>
-                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_3.jpg') }}" alt="image"></div>
+                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_3.jpg') }}"
+                                                            alt="image"></div>
                                     <strong><a href="#">Versailles tour</a>1x $36.00 </strong>
                                     <a href="#" class="action"><i class="icon-trash"></i></a>
                                 </li>
                                 <li>
-                                    <div>Total: <span>$120.00</span></div>
-                                    <a href="cart.html" class="button_drop">Go to cart</a>
-                                    <a href="payment.html" class="button_drop outline">Check out</a>
+                                    <div>{{ __('label.cart_total') }}: <span>$120.00</span></div>
+                                    <a href="cart.html" class="button_drop outline">{{ __('button.go_to_cart') }}</a>
+                                    <a href="payment.html" class="button_drop outline">{{ __('button.checkout') }}</a>
                                 </li>
                             </ul>
                         </div><!-- End dropdown-cart-->

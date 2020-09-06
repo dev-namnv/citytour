@@ -49619,6 +49619,11 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -49642,11 +49647,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/*
-Main Js
- */
-// jQuery validate with Vietnamese
-__webpack_require__(/*! jquery-validation/dist/localization/messages_vi.min */ "./node_modules/jquery-validation/dist/localization/messages_vi.min.js");
+/* Import libraries */
+__webpack_require__(/*! jquery-validation/dist/localization/messages_vi.min */ "./node_modules/jquery-validation/dist/localization/messages_vi.min.js"); // Main js
+
 
 Main = {
   // Validate form login
@@ -49661,7 +49664,6 @@ Main = {
           required: true
         }
       },
-      // errorElement: 'span',
       invalidClass: 'is-invalid',
       validClass: 'is-valid'
     });
@@ -49669,10 +49671,24 @@ Main = {
   // Logout global
   logoutGlobal: function logoutGlobal() {
     $('.form-logout').submit();
+  },
+  forgotPasswordValidate: function forgotPasswordValidate() {
+    $('.form-forgot-password').validate({
+      rules: {
+        email: {
+          required: true,
+          email: true
+        }
+      },
+      invalidClass: 'is-invalid',
+      validClass: 'is-valid'
+    });
   }
-};
+}; // Run function
+
 $(window).on('load', function () {
   Main.loginValidate();
+  Main.forgotPasswordValidate();
 });
 
 /***/ }),

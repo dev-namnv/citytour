@@ -1,10 +1,7 @@
-/*
-Main Js
- */
-
-// jQuery validate with Vietnamese
+/* Import libraries */
 require('jquery-validation/dist/localization/messages_vi.min')
 
+// Main js
 Main = {
     // Validate form login
     loginValidate: () => {
@@ -18,7 +15,6 @@ Main = {
                     required: true
                 }
             },
-            // errorElement: 'span',
             invalidClass: 'is-invalid',
             validClass: 'is-valid'
         })
@@ -27,9 +23,24 @@ Main = {
     // Logout global
     logoutGlobal: () => {
         $('.form-logout').submit()
+    },
+
+    forgotPasswordValidate: () => {
+        $('.form-forgot-password').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            invalidClass: 'is-invalid',
+            validClass: 'is-valid'
+        })
     }
 }
 
-$(window).on('load', function () {
+// Run function
+$(window).on('load', () => {
     Main.loginValidate()
+    Main.forgotPasswordValidate()
 })
