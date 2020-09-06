@@ -15,5 +15,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
+
+// Authentication
+Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () {
+    Route::get('/', 'AuthenticationController@index')->name('authentication');
+    Route::get('/confirm', 'AuthenticationController@confirm')->name('confirm');
+});
+
+// Manager
+Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'manager'], function () {
+    // Manager
+    Route::get('/', function () {
+        return redirect()->route('dashboard-analytic');
+    })->name('manager');
+
+    // Dashboard
+    Route::group(['prefix' => 'dashboard'], function () {
+        Route::get('/', function () {
+            return redirect()->route('dashboard-analytic');
+        })->name('dashboard');
+        Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
+        Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
+    });
+});

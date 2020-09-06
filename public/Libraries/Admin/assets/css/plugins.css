@@ -1,0 +1,11 @@
+@import url('main.min.css');
+@import url('structure.min.css');
+/*
+    Importing highlight.js CSS code
+
+    Just for demo purpose only
+
+	@Note:-  monokai-sublime.css stylesheet is for highliting the code;
+
+*/
+/*@import '../../plugins/highlight/styles/monokai-sublime.css';*/

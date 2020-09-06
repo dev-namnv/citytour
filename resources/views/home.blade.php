@@ -18,7 +18,7 @@
                         <div class="ribbon_3 popular"><span>Popular</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>39</span>
                                 </div>
@@ -41,7 +41,7 @@
                         <div class="ribbon_3 popular"><span>Popular</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_2.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_2.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="badge_save">Save<strong>30%</strong></div>
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-43"></i>Churches<span class="price"><sup>$</sup>45</span>
@@ -65,7 +65,7 @@
                         <div class="ribbon_3 popular"><span>Popular</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_3.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_3.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>48</span>
                                 </div>
@@ -88,7 +88,7 @@
                         <div class="ribbon_3"><span>Top rated</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_4.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_4.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="badge_save">Save<strong>30%</strong></div>
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-30"></i>Walking tour<span class="price"><sup>$</sup>36</span>
@@ -112,7 +112,7 @@
                         <div class="ribbon_3"><span>Top rated</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_14.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_14.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-28"></i>Skyline tours<span class="price"><sup>$</sup>42</span>
                                 </div>
@@ -135,7 +135,7 @@
                         <div class="ribbon_3"><span>Top rated</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_5.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_5.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>40</span>
                                 </div>
@@ -158,7 +158,7 @@
                         <div class="ribbon_3"><span>Top rated</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_8.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_8.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-3"></i>City sightseeing<span class="price"><sup>$</sup>35</span>
                                 </div>
@@ -181,7 +181,7 @@
                         <div class="ribbon_3"><span>Top rated</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_9.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_9.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-4"></i>Museums<span class="price"><sup>$</sup>38</span>
                                 </div>
@@ -204,7 +204,7 @@
                         <div class="ribbon_3"><span>Top rated</span></div>
                         <div class="img_container">
                             <a href="single_tour.html">
-                                <img src="main/img/tour_box_12.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="libraries/main/img/tour_box_12.jpg" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-14"></i>Eat &amp; drink<span class="price"><sup>$</sup>25</span>
                                 </div>
@@ -300,7 +300,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 text-center">
                         <p>
-                            <a href="#"><img src="main/img/bus.jpg" alt="Pic" class="img-fluid"></a>
+                            <a href="#"><img src="libraries/main/img/bus.jpg" alt="Pic" class="img-fluid"></a>
                         </p>
                         <h4><span>Sightseen tour</span> booking</h4>
                         <p>
@@ -309,7 +309,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <p>
-                            <a href="#"><img src="main/img/transfer.jpg" alt="Pic" class="img-fluid"></a>
+                            <a href="#"><img src="libraries/main/img/transfer.jpg" alt="Pic" class="img-fluid"></a>
                         </p>
                         <h4><span>Transfer</span> booking</h4>
                         <p>
@@ -318,7 +318,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <p>
-                            <a href="#"><img src="main/img/guide.jpg" alt="Pic" class="img-fluid"></a>
+                            <a href="#"><img src="libraries/main/img/guide.jpg" alt="Pic" class="img-fluid"></a>
                         </p>
                         <h4><span>Tour guide</span> booking</h4>
                         <p>
@@ -327,7 +327,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <p>
-                            <a href="#"><img src="main/img/hotel.jpg" alt="Pic" class="img-fluid"></a>
+                            <a href="#"><img src="libraries/main/img/hotel.jpg" alt="Pic" class="img-fluid"></a>
                         </p>
                         <h4><span>Hotel</span> booking</h4>
                         <p>
@@ -406,7 +406,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <img src="main/img/laptop.png" alt="Laptop" class="img-fluid laptop">
+                    <img src="libraries/main/img/laptop.png" alt="Laptop" class="img-fluid laptop">
                 </div>
                 <div class="col-md-6">
                     <h3><span>Get started</span> with CityTours</h3>

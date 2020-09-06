@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
 
         // Admin
         DB::table('users')->insert([
-            'first_name' => $faker->firstName,
+            'first_name' => 'Admin',
             'last_name' => $faker->lastName,
             'email' => 'admin@gmail.com',
             'phone' => $faker->phoneNumber,
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
 
         // User
         DB::table('users')->insert([
-            'first_name' => $faker->firstName,
+            'first_name' => 'User',
             'last_name' => $faker->lastName,
             'email' => 'user@gmail.com',
             'phone' => $faker->phoneNumber,
@@ -45,6 +45,22 @@ class UserSeeder extends Seeder
             'country' => $faker->country,
             'points' => rand(),
             'role' => 0
+        ]);
+
+        // Manager
+        DB::table('users')->insert([
+            'first_name' => 'Manager',
+            'last_name' => $faker->lastName,
+            'email' => 'manager@gmail.com',
+            'phone' => $faker->phoneNumber,
+            'birthday' => $faker->date(),
+            'address' => $faker->address,
+            'password' => Hash::make('manager'),
+            'city' => $faker->city,
+            'zipcode' => $faker->postcode,
+            'country' => $faker->country,
+            'points' => rand(),
+            'role' => 2
         ]);
     }
 }

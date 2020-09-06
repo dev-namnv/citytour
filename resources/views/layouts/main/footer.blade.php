@@ -5,7 +5,7 @@
                 <h3>Need help?</h3>
                 <a href="tel://004542344599" id="phone">+45 423 445 99</a>
                 <a href="mailto:help@citytours.com" id="email_footer">help@citytours.com</a>
-                <p><img src="{{ asset('main/img/payments.png') }}" width="231" height="30" alt="Image" data-retina="true" class="img-fluid"></p>
+                <p><img src="{{ asset('libraries/main/img/payments.png') }}" width="231" height="30" alt="Image" data-retina="true" class="img-fluid"></p>
             </div>
             <div class="col-lg-2 col-md-3 ml-md-auto">
                 <h3>About</h3>

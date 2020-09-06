@@ -7,11 +7,37 @@
 
                 <div class="col-6">
                     <ul id="top_links">
-                        <li><a href="#sign-in-dialog" id="access_link">Sign in</a></li>
-                        <li><a href="wishlist.html" id="wishlist_link">Wishlist</a>
+                        @auth
+                            <li>
+                                <div class="dropdown dropdown-mini">
+                                    <a href="#" data-toggle="dropdown" id="lang_link">{{ Auth::user()->first_name }}</a>
+                                    <div class="dropdown-menu">
+                                        <ul id="lang_menu">
+                                            <li><a href="wishlist.html">Wishlist</a>
+                                            <li><a href="#">Profile</a>
+                                            </li>
+                                            <li><a href="#">History</a>
+                                            </li>
+                                            <li><a href="#" onclick="Main.logoutGlobal(this)">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Dropdown access -->
+                            </li>
+                        @endauth
+                        @guest
+                            <li><a href="#sign-in-dialog" id="access_link">Sign in</a></li>
+                        @endguest
+
+
                         </li>
                         <li id="social_top">
-                            <a href="#0"><i class="icon-facebook"></i></a> <a href="#0"><i class="icon-twitter"></i></a> <a href="#0"><i class="icon-google"></i></a> <a href="#0"><i class="icon-instagramm"></i></a> <a href="#0"><i class="icon-vimeo"></i></a>
+                            <a href="#0"><i class="icon-facebook"></i></a>
+                            <a href="#0"><i class="icon-twitter"></i></a>
+                            <a href="#0"><i class="icon-google"></i></a>
+                            <a href="#0"><i class="icon-instagramm"></i></a>
+                            <a href="#0"><i class="icon-vimeo"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -33,7 +59,7 @@
                 <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                 <div class="main-menu">
                     <div id="header_menu">
-                        <img src="{{ asset('main/img/logo_sticky.png') }}" width="160" height="34" alt="City tours" data-retina="true">
+                        <img src="{{ asset('libraries/main/img/logo_sticky.png') }}" width="160" height="34" alt="City tours" data-retina="true">
                     </div>
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                     <ul>
@@ -240,17 +266,17 @@
                             <a href="#" data-toggle="dropdown" class="cart_bt"><i class="icon_bag_alt"></i><strong>3</strong></a>
                             <ul class="dropdown-menu" id="cart_items">
                                 <li>
-                                    <div class="image"><img src="{{ asset('main/img/thumb_cart_1.jpg') }}" alt="image"></div>
+                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_1.jpg') }}" alt="image"></div>
                                     <strong><a href="#">Louvre museum</a>1x $36.00 </strong>
                                     <a href="#" class="action"><i class="icon-trash"></i></a>
                                 </li>
                                 <li>
-                                    <div class="image"><img src="{{ asset('main/img/thumb_cart_2.jpg') }}" alt="image"></div>
+                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_2.jpg') }}" alt="image"></div>
                                     <strong><a href="#">Versailles tour</a>2x $36.00 </strong>
                                     <a href="#" class="action"><i class="icon-trash"></i></a>
                                 </li>
                                 <li>
-                                    <div class="image"><img src="{{ asset('main/img/thumb_cart_3.jpg') }}" alt="image"></div>
+                                    <div class="image"><img src="{{ asset('libraries/main/img/thumb_cart_3.jpg') }}" alt="image"></div>
                                     <strong><a href="#">Versailles tour</a>1x $36.00 </strong>
                                     <a href="#" class="action"><i class="icon-trash"></i></a>
                                 </li>
@@ -265,5 +291,8 @@
                 </ul>
             </nav>
         </div>
-    </div><!-- container -->
+    </div>
+    <form class="form-logout" method="post" action="{{ route('logout') }}" hidden>
+        @csrf
+    </form>
 </header>
