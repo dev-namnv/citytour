@@ -59,9 +59,6 @@
         @include('layouts.main.header')
         <!-- End Header -->
 
-        @include('layouts.main.secction')
-        <!-- End section -->
-
         @yield('content')
         <!-- End main -->
 

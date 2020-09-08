@@ -38,9 +38,6 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
     });
-
-    // Storage
-    Route::group(['prefix' => 'storage'], function () {
-        Route::get('/upload', 'StorageController@index');
-    });
 });
+
+// Main
