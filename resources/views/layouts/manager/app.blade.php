@@ -18,13 +18,13 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('libraries/admin/assets/img/favicon.ico') }}"/>
-    <link href="{{ asset('libraries/admin/assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
-    <script src="{{ asset('libraries/admin/assets/js/loader.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('libraries/manager/assets/img/favicon.ico') }}"/>
+    <link href="{{ asset('libraries/manager/assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('libraries/manager/assets/js/loader.js') }}"></script>
 
     <!-- Google web fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="{{ asset('libraries/admin/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('libraries/manager/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Extra css -->
     @yield('extra-css')
@@ -46,11 +46,7 @@
 
         <div class="main-content" id="content">
 
-            <div class="layout-px-spacing">
-
-                @yield('content')
-
-            </div>
+            @yield('content')
 
             @include('layouts.manager.footer')
 
@@ -62,13 +58,13 @@
     <script src="{{ asset('js/admin.js') }}"></script>
 
     <!-- Common js -->
-    <script src="{{ asset('libraries/admin/assets/js/app.js') }}"></script>
+    <script src="{{ asset('libraries/manager/assets/js/app.js') }}"></script>
     <script>
         $(document).ready(function() {
             App.init();
         });
     </script>
-    <script src="{{ asset('libraries/admin/assets/js/custom.js') }}"></script>
+    <script src="{{ asset('libraries/manager/assets/js/custom.js') }}"></script>
 
     <!-- Extra js -->
     @yield('extra-js')
