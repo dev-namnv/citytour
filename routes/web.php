@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/contact', 'HomeController@contact')->name('contact');
 
 // Authentication
 Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () {
