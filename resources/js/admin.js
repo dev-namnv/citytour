@@ -6,6 +6,9 @@ window.PerfectScrollbar = require('perfect-scrollbar/dist/perfect-scrollbar.min'
 
 // jQuery validate with Vietnamese
 require('jquery-validation/dist/localization/messages_vi.min')
+// require('highlight.js/lib/highlight')
+require('file-upload-with-preview/dist/file-upload-with-preview.min')
+require('jquery-blockui/jquery.blockUI')
 
 /*
 Code
