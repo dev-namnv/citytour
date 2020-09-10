@@ -132,7 +132,7 @@ body {
     color: #0e1726;
 }
 
-/*  Contact Content     */
+/*  sendContact Content     */
 
 .hd-contact-section { margin-bottom: 50px; }
 .hd-contact-section .hd-slide-header {
@@ -170,7 +170,7 @@ body {
 .hd-contact-section .community-help .media h5 {
     color: #1b55e2;
     font-weight: 800;
-     font-size: 17px; 
+     font-size: 17px;
     margin-bottom: 5px;
 }
 .hd-contact-section .community-help .media p {

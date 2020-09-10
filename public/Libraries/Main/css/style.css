@@ -18,7 +18,7 @@ Author URI: http://themeforest.net/user/Ansonika/
 - 2.3 Single tour page
 - 2.4 Cart - Payment - Confirmation
 - 2.5 About
-- 2.6 Contact us
+- 2.6 sendContact us
 - 2.7 Login / register
 - 2.8 Tour guide page
 - 2.9 Transfer
@@ -2365,7 +2365,7 @@ input.qty2 {
 	color: #F90;
 }
 
-/*-------- 2.6 Contact us --------*/
+/*-------- 2.6 sendContact us --------*/
 #map_contact {
 	width: 100%;
 	height: 450px;

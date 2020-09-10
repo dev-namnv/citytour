@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Mails\ContactRequest;
+use App\Jobs\sendContact;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,9 +28,5 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function contact()
-    {
-        return view('contact');
-    }
 
 }

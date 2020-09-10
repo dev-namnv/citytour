@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mails\ContactRequest;
+use App\Jobs\sendContact;
 use Illuminate\Http\Request;
 
 class MailController extends Controller
@@ -67,6 +68,7 @@ class MailController extends Controller
      */
     public function contact(ContactRequest $request)
     {
+        new sendContact($request->all());
         return redirect()->route('contact')->with('success',['messages'=>'Send Success !']);
     }
 

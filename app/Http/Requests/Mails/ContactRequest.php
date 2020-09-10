@@ -25,10 +25,11 @@ class ContactRequest extends FormRequest
     {
         return [
             'firstName' => 'required',
-            'lastName' => 'require',
+            'lastName' => 'required',
             'email' => 'required|email',
+            'title' => 'required|min:10',
             'phone' => 'required|regex:/^0([0-9]{9})$/',
-            'content' => 'required|minlength:20'
+            'content' => 'required|min:20'
         ];
     }
 }
