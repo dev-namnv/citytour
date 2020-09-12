@@ -15,24 +15,25 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('phone')->nullable();
+            $table->string('username')->nullable()->comment('Tên tài khoản');
+            $table->string('first_name')->comment('Tên');
+            $table->string('last_name')->comment('Họ và tên');
+            $table->string('email')->unique()->comment('Địa chỉ Email');
+            $table->string('phone')->nullable()->comment('Số điện thoại');
             $table->string('avatar')
+                ->comment('Avatar')
                 ->default('https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Favatar%2Fdefault.png?alt=media&token=a0cd433b-6f54-4229-9119-ff7820b481f7');
-            $table->date('birthday')->nullable();
-            $table->string('address')->nullable();
-            $table->string('city')->nullable();
-            $table->string('zipcode')->nullable();
-            $table->string('country')->nullable();
-            $table->integer('points')->default(0);
-            $table->json('google_map')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->boolean('role')->default(0)
-                ->comment('Role: 0. User, 1. Admin, 2. Partner');
-            $table->rememberToken();
+            $table->date('birthday')->nullable()->comment('Sinh nhật');
+            $table->string('address')->nullable()->comment('Địa chỉ');
+            $table->string('city')->nullable()->comment('Thành phố');
+            $table->string('zipcode')->nullable()->comment('Zip code');
+            $table->string('country')->nullable()->comment('Quốc gia');
+            $table->json('google_map')->nullable()->comment('Địa chỉ Google map');
+            $table->timestamp('email_verified_at')->nullable()->comment('Xác thực Email');
+            $table->string('password')->comment('Mật khẩu');
+            $table->boolean('role')->default(USER)
+                ->comment('Role: 0. User, 1. Admin, 2. Partner, 3. Employee');
+            $table->rememberToken()->comment('Ghi nhớ đăng nhập');
             $table->timestamps();
         });
     }
