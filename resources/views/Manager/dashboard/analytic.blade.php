@@ -3,13 +3,13 @@
 @section('title', 'Analytic')
 
 @section('extra-css')
-    <link href="{{ asset('libraries/admin/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('libraries/admin/assets/css/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('libraries/manager/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('libraries/manager/assets/css/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('libraries/admin/plugins/apex/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('libraries/admin/assets/js/dashboard/dash_2.js') }}"></script>
+    <script src="{{ asset('libraries/manager/plugins/apex/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('libraries/manager/assets/js/dashboard/dash_2.js') }}"></script>
 @endsection
 
 @section('content')
@@ -473,7 +473,7 @@
 
                         <div class="media">
                             <div class="w-img">
-                                <img src="{{ asset('libraries/admin/assets/img/profile-32.jpg') }}" alt="avatar">
+                                <img src="{{ asset('libraries/manager/assets/img/profile-32.jpg') }}" alt="avatar">
                             </div>
                             <div class="media-body">
                                 <h6>Jimmy Turner</h6>
@@ -551,7 +551,7 @@
 
                         <div class="media">
                             <div class="w-img">
-                                <img src="{{ asset('libraries/admin/assets/img/g-8.png') }}" alt="avatar">
+                                <img src="{{ asset('libraries/manager/assets/img/g-8.png') }}" alt="avatar">
                             </div>
                             <div class="media-body">
                                 <h6>Dev Summit - New York</h6>
@@ -562,10 +562,10 @@
                         <div class="card-bottom-section">
                             <h5>4 Members Going</h5>
                             <div class="img-group">
-                                <img src="{{ asset('libraries/admin/assets/img/profile-19.jpg') }}" alt="avatar">
-                                <img src="{{ asset('libraries/admin/assets/img/profile-6.jpg') }}" alt="avatar">
-                                <img src="{{ asset('libraries/admin/assets/img/profile-8.jpg') }}" alt="avatar">
-                                <img src="{{ asset('libraries/admin/assets/img/profile-3.jpg') }}" alt="avatar">
+                                <img src="{{ asset('libraries/manager/assets/img/profile-19.jpg') }}" alt="avatar">
+                                <img src="{{ asset('libraries/manager/assets/img/profile-6.jpg') }}" alt="avatar">
+                                <img src="{{ asset('libraries/manager/assets/img/profile-8.jpg') }}" alt="avatar">
+                                <img src="{{ asset('libraries/manager/assets/img/profile-3.jpg') }}" alt="avatar">
                             </div>
                             <a href="javascript:void(0);" class="btn">View Details</a>
                         </div>
