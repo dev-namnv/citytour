@@ -17,8 +17,11 @@ class CreatePartnersTable extends Migration
             $table->id();
             $table->string('name')->comment('Tên đối tác');
             $table->string('email')->comment('Địa chỉ Email');
-            $table->string('avatar')->nullable()->comment('Avatar');
+            $table->string('avatar')
+                ->default('https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Fpartner%2Fpartner.jpg?alt=media&token=6423b859-c718-4798-b2fb-10940eac7851')
+                ->comment('Avatar');
             $table->string('sku')->unique()->comment('Mã đối tác');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

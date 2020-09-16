@@ -17,6 +17,7 @@ class CreateArticleTagsTable extends Migration
             $table->id();
             $table->string('name')->comment('Tên tag');
             $table->string('slug')->unique()->comment('Slug');
+            $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1.Hiện thị');
             $table->timestamps();
         });
     }

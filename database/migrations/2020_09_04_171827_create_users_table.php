@@ -33,7 +33,9 @@ class CreateUsersTable extends Migration
             $table->string('password')->comment('Mật khẩu');
             $table->boolean('role')->default(USER)
                 ->comment('Role: 0. User, 1. Admin, 2. Partner, 3. Employee');
+            $table->boolean('status')->default(ACTIVE)->comment('Trạng thái: 0. Khóa, 1. Mở');
             $table->rememberToken()->comment('Ghi nhớ đăng nhập');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

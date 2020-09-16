@@ -31,8 +31,6 @@
     <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700" rel="stylesheet">
 
-    {{-- App js--}}
-
     <!-- COMMON CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="{{ asset('libraries/main/css/style.css') }}" rel="stylesheet">

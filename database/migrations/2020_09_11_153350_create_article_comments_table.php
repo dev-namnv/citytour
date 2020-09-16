@@ -19,10 +19,12 @@ class CreateArticleCommentsTable extends Migration
             $table->unsignedBigInteger('reply_for')->nullable()->comment('Trả lời bình luận');
             $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
             $table->unsignedBigInteger('user_id')->comment('ID người tạo');
+            $table->unsignedBigInteger('article_id')->comment('ID bài viết');
             $table->timestamps();
 
             // Foreign key
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('article_id')->references('id')->on('articles');
         });
     }
 

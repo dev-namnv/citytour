@@ -17,18 +17,19 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name')->comment('Tên sản phẩm');
             $table->string('slug')->unique()->comment('Slug');
+            $table->string('sku')->unique()->comment('Mã sản phẩm');
             $table->string('image')->comment('Ảnh đại diện');
-            $table->float('original_price')->nullable()->comment('Giá gốc');
-            $table->float('price')->comment('Giá bán');
+            $table->float('origin_price', 12, 3)->nullable()->comment('Giá gốc');
+            $table->float('price', 12, 3)->comment('Giá bán');
             $table->integer('quantity')->default(0)->comment('Số lượng');
             $table->text('intro')->comment('Giới thiệu');
             $table->text('description')->comment('Mô tả');
             $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
-            $table->unsignedBigInteger('user_id')->comment('Người tạo');
+            $table->unsignedBigInteger('partner_id')->comment('ID đối tác');
             $table->timestamps();
 
             // Foreign key
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('partner_id')->references('id')->on('partners');
         });
     }
 

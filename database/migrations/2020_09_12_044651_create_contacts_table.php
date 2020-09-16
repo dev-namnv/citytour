@@ -20,6 +20,7 @@ class CreateContactsTable extends Migration
             $table->string('email')->comment('Email');
             $table->text('message')->comment('Lời nhắn');
             $table->string('geoip')->comment('Mã quốc gia hoặc địa chỉ IP')->nullable();
+            $table->smallInteger('status')->default(TICKET_OPEN)->comment('Trạng thái liên hệ');
             $table->timestamps();
         });
     }

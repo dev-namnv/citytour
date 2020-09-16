@@ -21,7 +21,6 @@ class CreateArticlesTable extends Migration
             $table->text('content')->comment('Nội dung');
             $table->string('image')->comment('Ảnh đại diện');
             $table->unsignedBigInteger('user_id')->comment('ID tác giả');
-            $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
             $table->softDeletes();
             $table->timestamps();
 

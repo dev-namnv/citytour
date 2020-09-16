@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoiceDetailTable extends Migration
+class CreateInvoiceServiceDetail extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateInvoiceDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_detail', function (Blueprint $table) {
+        Schema::create('invoice_service_detail', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('type')->comment('Loại hóa đơn: 10. Dịch vụ, 20. Sản phẩm');
+            $table->unsignedBigInteger('invoice_id')->nullable()->comment('ID hóa đơn');
             $table->unsignedBigInteger('service_id')->nullable()->comment('ID dịch vụ');
-            $table->unsignedBigInteger('product_id')->nullable()->comment('ID sản phẩm');
+            $table->integer('count_adult')->comment('Số người lớn');
+            $table->integer('count_children')->comment('Số trẻ nhỏ');
             $table->timestamps();
 
             // Foreign key
+            $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->foreign('service_id')->references('id')->on('services');
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -33,6 +34,6 @@ class CreateInvoiceDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_detail');
+        Schema::dropIfExists('invoice_service_detail');
     }
 }

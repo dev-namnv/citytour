@@ -17,7 +17,7 @@ class CreateFacilitiesTable extends Migration
             $table->id();
             $table->string('name')->comment('Tên dịch vụ');
             $table->string('slug')->unique()->comment('Slug');
-            $table->string('icon')->comment('Biểu tưởng');
+            $table->string('icon')->unique()->comment('Biểu tưởng');
             $table->timestamps();
         });
     }

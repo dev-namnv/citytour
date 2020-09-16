@@ -21,9 +21,17 @@ class CreateServicesTable extends Migration
             $table->text('description')->comment('Mô tả');
             $table->text('content')->comment('Nội dung dịch vụ');
             $table->jsonb('schedule')->comment('Lịch trình');
+            $table->float('adult_price', 12, 3)->comment('Giá người lớn');
+            $table->float('children_price', 12, 3)->comment('Giá trẻ nhỏ');
             $table->smallInteger('type')
                 ->comment('Loại dịch vụ: 10. Tour, 20. Hotel, 30. Transfer, 40. Restaurant');
             $table->jsonb('google_map')->nullable()->comment('Google map');
+            $table->unsignedBigInteger('partner_id')->nullable()->comment('ID đối tác cung cấp');
+            $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Chặn, 1. Cho phép');
+            $table->softDeletes();
+
+            // Foreign key
+            $table->foreign('partner_id')->references('id')->on('partners');
             $table->timestamps();
         });
     }
