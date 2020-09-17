@@ -14,13 +14,13 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact');
+        return view('Contact.index');
     }
 
     public function store(ContactRequest $request)
     {
         try {
-            Mail::send('mailler.contact', $request->all(), function ($msg) use ($request){
+            Mail::send('Contact.layout_content', $request->all(), function ($msg) use ($request){
                 $msg->to(env('MAIL_USERNAME'), 'Admin')
                     ->from($request->email,$request->name)
                     ->setSubject($request->title);

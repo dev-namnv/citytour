@@ -1,17 +1,23 @@
 @extends('layouts.main.app')
 
-@section('title', 'sendContact')
+@section('title', __('pages.contact.title'))
 
 @section('content')
+    <section class="parallax-window" data-parallax="scroll" data-image-src="Libraries/Main/img/header_bg.jpg" data-natural-width="1400" data-natural-height="470">
+        <div class="parallax-content-1">
+            <div class="animated fadeInDown">
+                <h1>{!! __('pages.contact.section.title') !!}</h1>
+                <p>{!! __('pages.contact.section.desc') !!}</p>
+            </div>
+        </div>
+    </section>
     <main>
         <div id="position">
             <div class="container">
                 <ul>
                     <li><a href="#">Home</a>
                     </li>
-                    <li><a href="#">Category</a>
-                    </li>
-                    <li>Page active</li>
+                    <li>{!! __('pages.contact.title') !!}</li>
                 </ul>
             </div>
         </div>
@@ -21,9 +27,9 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form_title">
-                        <h3><strong><i class="icon-pencil"></i></strong>Fill the form below</h3>
+                        <h3><strong><i class="icon-pencil"></i></strong>{!! __('pages.contact.main.form-title') !!}</h3>
                         <p>
-                            Mussum ipsum cacilds, vidis litro abertis.
+                            {!! __('pages.contact.main.form-desc') !!}
                         </p>
                     </div>
                     <div class="step">
@@ -45,7 +51,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>First Name</label>
+                                        <label>{!! __('pages.contact.main.first-name') !!}</label>
                                         <input type="text" class="form-control" id="name_contact" name="firstName" placeholder="Enter Name">
                                         @error('firstName')
                                         <span class="invalid-feedback d-block" role="alert">
@@ -56,7 +62,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Last Name</label>
+                                        <label>{!! __('pages.contact.main.last-name') !!}</label>
                                         <input type="text" class="form-control" id="lastname_contact" name="lastName" placeholder="Enter Last Name">
                                         @error('lastName')
                                         <span class="invalid-feedback d-block" role="alert">
@@ -70,7 +76,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Email</label>
+                                        <label>{!! __('pages.contact.main.email') !!}</label>
                                         <input type="email" id="email_contact" name="email" class="form-control" placeholder="Enter Email">
                                         @error('email')
                                         <span class="invalid-feedback d-block" role="alert">
@@ -81,7 +87,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Phone</label>
+                                        <label>{!! __('pages.contact.main.phone') !!}</label>
                                         <input type="text" id="phone_contact" name="phone" class="form-control" placeholder="Enter Phone number">
                                         @error('phone')
                                         <span class="invalid-feedback d-block" role="alert">
@@ -94,7 +100,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Subject</label>
+                                        <label>{!! __('pages.contact.main.subject') !!}</label>
                                         <input id="message_subject" name="title" class="form-control" placeholder="Subject" />
                                         @error('title')
                                         <span class="invalid-feedback d-block" role="alert">
@@ -107,7 +113,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Message</label>
+                                        <label>{!! __('pages.contact.main.message') !!}</label>
                                         <textarea rows="5" id="message_contact" name="content" class="form-control" placeholder="Write your message" style="height:200px;"></textarea>
                                         @error('content')
                                         <span class="invalid-feedback d-block" role="alert">
@@ -117,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Send Mail</button>
+                            <button type="submit" class="btn btn-primary">{!! __('pages.contact.main.send') !!}</button>
                         {{Form::close()}}
                     </div>
                 </div>
@@ -126,12 +132,12 @@
                 <div class="col-md-4">
                     <div class="box_style_1">
                         <span class="tape"></span>
-                        <h4>Address <span><i class="icon-pin pull-right"></i></span></h4>
+                        <h4>{!! __('pages.contact.main.address') !!} <span><i class="icon-pin pull-right"></i></span></h4>
                         <p>
                             Place Charles de Gaulle, 75008 Paris
                         </p>
                         <hr>
-                        <h4>Help center <span><i class="icon-help pull-right"></i></span></h4>
+                        <h4>{!! __('pages.contact.main.help') !!} <span><i class="icon-help pull-right"></i></span></h4>
                         <p>
                             Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie.
                         </p>
@@ -143,7 +149,7 @@
                     </div>
                     <div class="box_style_4">
                         <i class="icon_set_1_icon-57"></i>
-                        <h4>Need <span>Help?</span></h4>
+                        <h4>{!! __('pages.contact.main.support') !!} <span>?</span></h4>
                         <a href="tel://004542344599" class="phone">+45 423 445 99</a>
                         <small>Monday to Friday 9.00am - 7.30pm</small>
                     </div>
@@ -154,28 +160,6 @@
         </div>
         <!-- End container -->
 
-        <div id="map_contact"></div>
-        <!-- end map-->
-        <div id="directions">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <form action="http://maps.google.com/maps" method="get" target="_blank">
-                            <div class="input-group">
-                                <input type="text" name="saddr" placeholder="Enter your starting point" class="form-control style-2" />
-                                <input type="hidden" name="daddr" value="New York, NY 11430" />
-                                <!-- Write here your end point -->
-                                <span class="input-group-btn">
-								<button class="btn" type="submit" value="Get directions" style="margin-left:0;">GET DIRECTIONS</button>
-								</span>
-                            </div>
-                            <!-- /input-group -->
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end directions-->
     </main>
     <!-- End main -->
 @endsection
