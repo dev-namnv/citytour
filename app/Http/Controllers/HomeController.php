@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Http\Requests\Mails\ContactRequest;
 use App\Jobs\sendContact;
 use Illuminate\Http\Request;
+=======
+>>>>>>> develop
 
 class HomeController extends Controller
 {

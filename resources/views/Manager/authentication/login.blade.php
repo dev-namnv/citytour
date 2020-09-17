@@ -9,17 +9,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Login Cover | {{ env('APP_NAME') }}</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('libraries/admin/assets/img/favicon.ico') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('libraries/manager/assets/img/favicon.ico') }}"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="{{ asset('libraries/admin/assets/css/plugins.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('libraries/admin/assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('libraries/manager/assets/css/plugins.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('libraries/manager/assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('libraries/admin/assets/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('libraries/admin/assets/css/forms/switches.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('libraries/manager/assets/css/forms/theme-checkbox-radio.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('libraries/manager/assets/css/forms/switches.css') }}">
     <style>
         input.is-invalid{
             border-bottom: 1px solid #e3342f !important;
@@ -111,6 +111,6 @@
 
 
 <script src="{{ asset('js/admin.js') }}"></script>
-<script src="{{ asset('libraries/admin/assets/js/authentication/form-1.js') }}"></script>
+<script src="{{ asset('libraries/manager/assets/js/authentication/form-1.js') }}"></script>
 </body>
 </html>
