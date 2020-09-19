@@ -1,16 +1,6 @@
 /* Import libraries */
-VueI18n = require('./vue-i18n-locales.generated');
-locale = document.getElementsByTagName("html")[0].getAttribute("lang");
-
-// Set lang js auto
-LANG = VueI18n.default[locale]
-
-// jQuery validate with Vietnamese
-if (locale === 'vi') {
-    require('jquery-validation/dist/localization/messages_vi.min')
-} else {
-    require('jquery-validation')
-}
+require('./validation')
+require('./toastr')
 
 // Main js
 Main = {
@@ -24,6 +14,15 @@ Main = {
                 },
                 password: {
                     required: true
+                }
+            },
+            messages: {
+                email: {
+                    required: getMessageValidation('required', {attribute: 'email'}),
+                    email: getMessageValidation('email', {attribute: 'email'})
+                },
+                password: {
+                    required: getMessageValidation('required', {attribute: 'password'})
                 }
             },
             invalidClass: 'is-invalid',
@@ -42,6 +41,12 @@ Main = {
                 email: {
                     required: true,
                     email: true
+                }
+            },
+            messages: {
+                email: {
+                    required: getMessageValidation('required', {attribute: 'email'}),
+                    email: getMessageValidation('email', {attribute: 'email'})
                 }
             },
             invalidClass: 'is-invalid',

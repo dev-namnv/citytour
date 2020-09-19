@@ -32,4 +32,10 @@ return [
             TYPE_PRODUCT => 'Hóa đơn sản phẩm'
         ]
     ],
+    'role' => [
+        USER => 'Người dùng',
+        ADMIN => 'Quản trị viên cao cấp',
+        PARTNER => 'Đối tác',
+        EMPLOYEE => 'Nhân viên'
+    ],
 ];

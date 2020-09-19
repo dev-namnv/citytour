@@ -91,5 +91,10 @@
     <!-- Extra js -->
     @yield('extra-js')
 
+    @if(session(TOASTR))
+        <script>
+            Toastr.show({!! session(TOASTR) !!})
+        </script>
+    @endif
 </body>
 </html>

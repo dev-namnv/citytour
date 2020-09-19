@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckManager
+class CheckPartner
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,10 @@ class CheckManager
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && (Auth::user()->role === ADMIN || Auth::user()->role === MANAGER)) {
+        // Allow ADMIN, PARTNER to access
+        if (Auth::check() && (Auth::user()->role === ADMIN || Auth::user()->role === PARTNER)) {
             return $next($request);
         }
-        return redirect()->route('authentication');
+        return abort(403, HTTP_403);
     }
 }

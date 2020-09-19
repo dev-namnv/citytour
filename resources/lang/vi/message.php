@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Message response
+ */
+
+return [
+
+];
