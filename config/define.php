@@ -38,3 +38,13 @@ define('SERVICE_TOUR', 10);
 define('SERVICE_HOTEL', 20);
 define('SERVICE_TRANSFER', 30);
 define('SERVICE_RESTAURANT', 40);
+
+// Toastr
+define('TOASTR', 'Toastr');
+define('TOASTR_SUCCESS', 'success');
+define('TOASTR_ERROR', 'error');
+define('TOASTR_INFO', 'info');
+define('TOASTR_WARNING', 'warning');
+
+// Http status
+define('HTTP_403', 'Không có quyền truy cập');
