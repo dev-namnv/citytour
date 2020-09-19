@@ -4,11 +4,22 @@ Require library
 require('./bootstrap')
 window.PerfectScrollbar = require('perfect-scrollbar/dist/perfect-scrollbar.min')
 
-// jQuery validate with Vietnamese
-require('jquery-validation/dist/localization/messages_vi.min')
 // require('highlight.js/lib/highlight')
 require('file-upload-with-preview/dist/file-upload-with-preview.min')
 require('jquery-blockui/jquery.blockUI')
+
+VueI18n = require('./vue-i18n-locales.generated');
+locale = document.getElementsByTagName("html")[0].getAttribute("lang");
+
+// Set lang js auto
+LANG = VueI18n.default[locale]
+
+// jQuery validate with Vietnamese
+if (locale === 'vi') {
+    require('jquery-validation/dist/localization/messages_vi.min')
+} else {
+    require('jquery-validation')
+}
 
 /*
 Code
