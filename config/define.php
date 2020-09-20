@@ -48,3 +48,13 @@ define('TOASTR_WARNING', 'warning');
 
 // Http status
 define('HTTP_403', 'Không có quyền truy cập');
+
+// Pagination service
+define('PAGINATION_TOUR', 50);
+define('PAGINATION_HOTEL', 50);
+define('PAGINATION_TRANSFER', 50);
+define('PAGINATION_RESTAURANT', 50);
+
+// Limit text tour
+define('TOUR_LIMIT_ADDRESS', 25);
+define('TOUR_LIMIT_DESC', 50);

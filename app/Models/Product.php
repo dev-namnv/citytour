@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Currency;
 use App\Scopes\ActiveScope;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +16,9 @@ class Product extends Model
      * @var string[]
      */
     protected $casts = [
-        'active' => 'boolean'
+        'active' => 'boolean',
+        'origin_price' => Currency::class,
+        'price' => Currency::class
     ];
 
     /**

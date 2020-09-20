@@ -49,8 +49,7 @@ class ServiceSeeder extends Seeder
 
         $facilities = DB::table('facilities')->get();
 
-        for ($i = 0; $i < 5; $i++) {
-            $has_partner = rand(0, 1);
+        for ($i = 0; $i < 50; $i++) {
             $name = 'Dịch vụ số ' . $i;
 
             $service = new Service;

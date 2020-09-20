@@ -41,6 +41,11 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
     });
+
+    // Tour
+    Route::group(['prefix' => 'tour'], function () {
+        Route::get('/', 'TourController@index')->name('tour-list');
+    });
 });
 
 // Main
