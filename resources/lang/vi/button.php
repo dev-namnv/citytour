@@ -14,5 +14,6 @@ return [
     'sign_in' => 'Đăng nhập',
     'sign_out' => 'Đăng xuất',
     'go_to_cart' => 'Giỏ hàng',
-    'checkout' => 'Thanh toán'
+    'checkout' => 'Thanh toán',
+    'manager' => 'Quản lý'
 ];

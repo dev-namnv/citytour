@@ -1,14 +1,12 @@
-/*
-Require library
- */
+/* Import libraries */
 require('./bootstrap')
+require('./toastr')
 window.PerfectScrollbar = require('perfect-scrollbar/dist/perfect-scrollbar.min')
 
-// jQuery validate with Vietnamese
-require('jquery-validation/dist/localization/messages_vi.min')
 // require('highlight.js/lib/highlight')
 require('file-upload-with-preview/dist/file-upload-with-preview.min')
 require('jquery-blockui/jquery.blockUI')
+require('./validation')
 
 /*
 Code
@@ -19,12 +17,19 @@ Admin = {
     loginValidate: () => {
         $('.form-login').validate({
             rules: {
-                email: {
-                    required: true,
-                    email: true
+                username: {
+                    required: true
                 },
                 password: {
                     required: true
+                }
+            },
+            messages: {
+                username: {
+                    required: getMessageValidation('required', {attribute: 'username'})
+                },
+                password: {
+                    required: getMessageValidation('required', {attribute: 'password'})
                 }
             },
             errorElement: 'span',
@@ -36,10 +41,32 @@ Admin = {
     // Logout global
     logoutGlobal: () => {
         $('.form-logout').submit()
+    },
+
+    // Forgot password validate
+    forgotPasswordValidate: () => {
+        $('.form-forgot-password').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                email: {
+                    required: getMessageValidation('required', {attribute: 'email'}),
+                    email: getMessageValidation('email', {attribute: 'email'})
+                }
+            },
+            errorElement: 'span',
+            errorClass: 'is-invalid invalid-feedback',
+            validClass: 'is-valid'
+        })
     }
 }
 
 // Run onload
 $(window).on('load', function () {
     Admin.loginValidate()
+    Admin.forgotPasswordValidate()
 })

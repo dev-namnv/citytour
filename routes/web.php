@@ -21,11 +21,14 @@ Route::resource('contact', 'ContactController');
 // Authentication
 Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () {
     Route::get('/', 'AuthenticationController@index')->name('authentication');
+    Route::post('/authenticate', 'AuthenticationController@authenticate')->name('authenticate');
+    Route::get('/forgot-password', 'AuthenticationController@forgot')->name('forgot-password');
+    Route::post('/recovery', 'AuthenticationController@recovery')->name('recovery');
     Route::get('/confirm', 'AuthenticationController@confirm')->name('confirm');
 });
 
 // Manager
-Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'manager'], function () {
+Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'employee'], function () {
     // Manager
     Route::get('/', function () {
         return redirect()->route('dashboard-analytic');

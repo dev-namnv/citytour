@@ -29,7 +29,9 @@
         "highlight.js": "^10.2.0",
         "jquery-blockui": "^2.7.0",
         "jquery-validation": "^1.19.2",
+        "jquery.easing": "^1.4.1",
         "perfect-scrollbar": "^1.5.0",
-        "react-scrollspy-nav": "^1.2.4"
+        "react-scrollspy-nav": "^1.2.4",
+        "toastr": "^2.1.4"
     }
 }

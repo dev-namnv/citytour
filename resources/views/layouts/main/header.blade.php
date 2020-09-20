@@ -16,6 +16,10 @@
                                     <a href="#" data-toggle="dropdown" id="lang_link">{{ Auth::user()->first_name }}</a>
                                     <div class="dropdown-menu">
                                         <ul id="lang_menu">
+                                            @if(Auth::user()->role !== USER)
+                                                <li><a href="{{ route('manager') }}">{{ __('button.manager') }}</a>
+                                                </li>
+                                            @endif
                                             <li><a href="#">{{ __('button.profile') }}</a>
                                             </li>
                                             <li><a href="#">{{ __('button.history') }}</a>

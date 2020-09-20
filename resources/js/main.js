@@ -1,5 +1,6 @@
 /* Import libraries */
-require('jquery-validation/dist/localization/messages_vi.min')
+require('./validation')
+require('./toastr')
 
 // Main js
 Main = {
@@ -13,6 +14,15 @@ Main = {
                 },
                 password: {
                     required: true
+                }
+            },
+            messages: {
+                email: {
+                    required: getMessageValidation('required', {attribute: 'email'}),
+                    email: getMessageValidation('email', {attribute: 'email'})
+                },
+                password: {
+                    required: getMessageValidation('required', {attribute: 'password'})
                 }
             },
             invalidClass: 'is-invalid',
@@ -31,6 +41,12 @@ Main = {
                 email: {
                     required: true,
                     email: true
+                }
+            },
+            messages: {
+                email: {
+                    required: getMessageValidation('required', {attribute: 'email'}),
+                    email: getMessageValidation('email', {attribute: 'email'})
                 }
             },
             invalidClass: 'is-invalid',
