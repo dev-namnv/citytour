@@ -40534,7 +40534,11 @@ getMessageValidation = function getMessageValidation(rule) {
   var message;
 
   if (options.attribute) {
-    message = validation.replace("{attribute}", LANG.validation.attributes[options.attribute]);
+    if (LANG.validation.attributes[options.attribute] === undefined) {
+      message = validation.replace("{attribute}", options.attribute);
+    } else {
+      message = validation.replace("{attribute}", LANG.validation.attributes[options.attribute]);
+    }
   }
 
   if (options.date) {
