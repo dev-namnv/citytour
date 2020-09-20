@@ -24,6 +24,10 @@ return [
             SERVICE_HOTEL => 'Hotel',
             SERVICE_TRANSFER => 'Transfer',
             SERVICE_RESTAURANT => 'Restaurant',
+        ],
+        'status' => [
+            ACTIVE => 'Đang mở',
+            NOT_ACTIVE => 'Ẩn'
         ]
     ],
     'invoice' => [

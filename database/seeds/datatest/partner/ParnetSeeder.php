@@ -23,6 +23,22 @@ class ParnetSeeder extends Seeder
                 'sku' => strtoupper(uniqid()),
             ]);
 
+            // Partner
+            $id_pa = DB::table('users')->insertGetId([
+                'username' => $faker->userName,
+                'first_name' => 'Quản lý ' . $name,
+                'last_name' => '',
+                'email' => $faker->email,
+                'role' => PARTNER,
+                'password' => Hash::make('partner')
+            ]);
+
+            // Create Partner staff record
+            DB::table('staffs')->insert([
+                'partner_id' => $id_partner,
+                'user_id' => $id_pa
+            ]);
+
             // Staff
             for ($j = 0; $j < 5; $j++) {
                 // Create user record
