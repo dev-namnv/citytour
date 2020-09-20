@@ -35,7 +35,7 @@
                     <div class="step">
 
                         <div id="message-contact"></div>
-                        {{Form::open(['url'=>route('contact.store'), 'method'=>'post', 'id'=>'contactform'])}}
+                        {{Form::open(['url'=>route('contact.store'), 'method'=>'post', 'class'=>'form-contact'])}}
                             <div class="row">
                                 @if(Session::has('success'))
                                     <div class="alert alert-success col-sm-12" role="alert">
@@ -52,7 +52,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>{!! __('pages.contact.main.first-name') !!}</label>
-                                        <input type="text" class="form-control" id="name_contact" name="firstName" placeholder="Enter Name">
+                                        <input type="text" class="form-control" id="first-name" name="firstName" placeholder="Enter Name">
                                         @error('firstName')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -63,7 +63,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>{!! __('pages.contact.main.last-name') !!}</label>
-                                        <input type="text" class="form-control" id="lastname_contact" name="lastName" placeholder="Enter Last Name">
+                                        <input type="text" class="form-control" id="last-name" name="lastName" placeholder="Enter Last Name">
                                         @error('lastName')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>{!! __('pages.contact.main.email') !!}</label>
-                                        <input type="email" id="email_contact" name="email" class="form-control" placeholder="Enter Email">
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
                                         @error('email')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -52063,12 +52063,47 @@ Main = {
       invalidClass: 'is-invalid',
       validClass: 'is-valid'
     });
+  },
+  formContactValidate: function formContactValidate() {
+    $('.form-contact').validate({
+      rules: {
+        firstName: {
+          required: true
+        },
+        lastName: {
+          required: true
+        },
+        email: {
+          required: true
+        }
+      },
+      messages: {
+        firstName: {
+          required: getMessageValidation('required', {
+            attribute: 'first_name'
+          })
+        },
+        lastName: {
+          required: getMessageValidation('required', {
+            attribute: 'last_name'
+          })
+        },
+        email: {
+          required: getMessageValidation('required', {
+            attribute: 'email'
+          })
+        }
+      },
+      invalidClass: 'is-invalid',
+      validClass: 'is-valid'
+    });
   }
 }; // Run function
 
 $(window).on('load', function () {
   Main.loginValidate();
   Main.forgotPasswordValidate();
+  Main.formContactValidate();
 });
 
 /***/ }),
@@ -52900,8 +52935,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\travelo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\travelo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\pro2016\travelo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\pro2016\travelo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -14,9 +14,9 @@ return [
         ]
     ],
     'contact' => [
-        'title' => 'Contact',
+        'title' => 'contact',
         'section' => [
-            'title' => 'Contact Us',
+            'title' => 'contact Us',
             'desc' => 'Do not hesitate, please contact us for support!',
         ],
         'main' => [

@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
-Route::resource('contact', 'ContactController');
 
 // Authentication
 Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () {
@@ -45,3 +44,4 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 });
 
 // Main
+Route::resource('contact', 'Main\ContactController');

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Main;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Mails\ContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
@@ -15,14 +16,14 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        return view('Contact.index');
+        return view('Main.contact.index');
     }
 
     public function store(ContactRequest $request)
     {
         try {
             //send mail to email admin
-            Mail::send('Contact.layout_content', $request->all(), function ($msg) use ($request){
+            Mail::send('Main.contact.layout_content', $request->all(), function ($msg) use ($request){
                 $msg->to(env('MAIL_USERNAME'), 'Admin')
                     ->from($request->email,$request->lastName)
                     ->setSubject($request->title);
