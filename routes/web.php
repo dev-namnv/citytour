@@ -52,3 +52,6 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 });
 
 // Main
+Route::group(['namespace' => 'Main'], function () {
+
+});
