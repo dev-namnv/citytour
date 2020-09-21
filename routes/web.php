@@ -46,6 +46,9 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     Route::group(['prefix' => 'tour'], function () {
         Route::get('/', 'TourController@index')->name('tour-list');
     });
+
+    // Articles
+    Route::resource('articles', 'ArticleController');
 });
 
 // Main

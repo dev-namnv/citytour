@@ -64,4 +64,11 @@ class User extends Authenticatable
     {
         return $this->partner[0];
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+
 }

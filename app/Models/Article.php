@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Scopes\ActiveScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Article extends Model
 {
@@ -37,5 +38,15 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany('App\Models\ArticleComment');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function  getContentLimitAttribute()
+    {
+        return Str::limit($this->content, ARTICLES_LIMIT_CONTENT );
     }
 }
