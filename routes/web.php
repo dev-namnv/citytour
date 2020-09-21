@@ -51,6 +51,9 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
     });
+
+    // Articles
+    Route::resource('articles', 'ArticleController');
 });
 
 // Main

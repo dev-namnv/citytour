@@ -74,4 +74,11 @@ class User extends Authenticatable
         $masterData = config('masterdata')['role'];
         return $masterData[$this->role];
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+
 }
