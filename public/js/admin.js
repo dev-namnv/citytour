@@ -40345,8 +40345,7 @@ module.exports = function(module) {
 /* Import libraries */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./toastr */ "./resources/js/toastr.js"); // require('./google-map')
-
+__webpack_require__(/*! ./toastr */ "./resources/js/toastr.js");
 
 window.PerfectScrollbar = __webpack_require__(/*! perfect-scrollbar/dist/perfect-scrollbar.min */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"); // require('highlight.js/lib/highlight')
 
@@ -40416,90 +40415,32 @@ Admin = {
       errorClass: 'is-invalid invalid-feedback',
       validClass: 'is-valid'
     });
-  },
-  // Validate create tour
-  tourCreateValidate: function tourCreateValidate() {
-    $('.form-service-create').validate({
-      rules: {
-        name: {
-          required: true,
-          minLength: 20,
-          maxLength: 255,
-          regex: /^[a-zA-Z0-9_\s&.-]*$/
-        },
-        slug: {
-          minLength: 20,
-          regex: /^[a-zA-Z0-9_.-]*$/
-        },
-        address: {
-          required: true,
-          regex: /^[a-zA-Z0-9_.-]*$/
-        }
-      },
-      messages: {
-        name: {
-          required: getMessageValidation('required', {
-            attribute: 'name'
-          }),
-          minLength: getMessageValidation('min', {
-            attribute: 'name',
-            min: 20,
-            type: 'string'
-          }),
-          maxLength: getMessageValidation('max', {
-            attribute: 'name',
-            max: 255,
-            type: 'string'
-          }),
-          regex: getMessageValidation('regex', {
-            attribute: 'name'
-          })
-        },
-        slug: {
-          minLength: getMessageValidation('min', {
-            attribute: 'slug',
-            min: 20,
-            type: 'string'
-          })
-        }
-      }
-    });
-  },
+  } // Article Store Validate
+  // storeArticleValidate: () => {
+  //     $('.form-article-create').validate({
+  //         rules: {
+  //             title: {
+  //                 required: true,
+  //                 minLength: 5,
+  //                 maxlength: 60
+  //             }
+  //         },
+  //         messages: {
+  //             title: {
+  //                 required: getMessageValidation('required', {attribute: 'title'}),
+  //             }
+  //         },
+  //         errorElement: 'span',
+  //         errorClass: 'is-invalid ',
+  //         validClass: 'is-valid'
+  //     })
+  // }
 
-  /**
-   * Tour action
-   * All tour action
-   */
-  tourSetActive: function tourSetActive(e) {
-    var tour_id = $(e).attr('tour-id');
-    axios.put('/api/manager/tour/set-active', {
-      tour_id: tour_id
-    }).then(function (_ref) {
-      var data = _ref.data;
-      var tourClass = $(".tour-status-".concat(data.id));
-      Toastr.show(data);
-
-      if (data.active) {
-        $(e).text('Khóa dịch vụ');
-        tourClass.text('Đang mở');
-        tourClass.removeClass('badge-danger');
-        tourClass.addClass('badge-primary');
-      } else {
-        $(e).text('Mở dịch vụ ');
-        tourClass.text('Ẩn');
-        tourClass.removeClass('badge-primary');
-        tourClass.addClass('badge-danger');
-      }
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  }
 }; // Run onload
 
 $(window).on('load', function () {
   Admin.loginValidate();
-  Admin.forgotPasswordValidate();
-  Admin.tourCreateValidate();
+  Admin.forgotPasswordValidate(); // Admin.storeArticleValidate()
 });
 
 /***/ }),
@@ -40598,67 +40539,58 @@ if (locale === 'vi') {
   __webpack_require__(/*! jquery-validation */ "./node_modules/jquery-validation/dist/jquery.validate.js");
 }
 
-OptionMessage = {
-  type: null,
-  attribute: null,
-  date: null,
-  min: null,
-  max: null,
-  format: null,
-  values: null,
-  value: null,
-  other: null
-};
-
 getMessageValidation = function getMessageValidation(rule) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : OptionMessage;
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    attribute: null,
+    date: null,
+    min: null,
+    max: null,
+    format: null,
+    values: null,
+    value: null,
+    other: null
+  };
   var validation = LANG.validation[rule];
+  var message;
 
-  if (options.type) {
-    validation = LANG.validation[rule][options.type];
+  if (options.attribute) {
+    if (LANG.validation.attributes[options.attribute] === undefined) {
+      message = validation.replace("{attribute}", options.attribute);
+    } else {
+      message = validation.replace("{attribute}", LANG.validation.attributes[options.attribute]);
+    }
   }
 
-  var message = validation;
-
-  if (options.attribute !== null) {
-    message = message.replace("{attribute}", LANG.validation.attributes[options.attribute]);
+  if (options.date) {
+    message = validation.replace("{date}", options.date);
   }
 
-  if (options.min !== null) {
-    message = message.replace("{min}", options.min);
+  if (options.min) {
+    message = validation.replace("{min}", options.min);
   }
 
-  if (options.max !== null) {
-    message = message.replace("{max}", options.max);
+  if (options.max) {
+    message = validation.replace("{max}", options.max);
   }
 
-  if (options.date !== null) {
-    message = message.replace("{date}", options.date);
+  if (options.format) {
+    message = validation.replace("{format}", options.format);
   }
 
-  if (options.format !== null) {
-    message = message.replace("{format}", options.format);
+  if (options.values) {
+    message = validation.replace("{values}", options.values);
   }
 
-  if (options.values !== null) {
-    message = message.replace("{values}", options.values);
+  if (options.value) {
+    message = validation.replace("{value}", options.value);
   }
 
-  if (options.value !== null) {
-    message = message.replace("{value}", options.value);
-  }
-
-  if (options.other !== null) {
-    message = message.replace("{other}", options.other);
+  if (options.other) {
+    message = validation.replace("{other}", options.other);
   }
 
   return message;
 };
-
-$.validator.addMethod("regex", function (value, element, regexp) {
-  var re = new RegExp(regexp);
-  return this.optional(element) || re.test(value);
-}, "Please check your input.");
 
 /***/ }),
 
@@ -40686,13 +40618,12 @@ __webpack_require__.r(__webpack_exports__);
       "sign_in": "Sign in",
       "sign_out": "Sign out",
       "go_to_cart": "Go to cart",
-      "checkout": "Check out",
-      "manager": "Manager"
+      "checkout": "Check out"
     },
     "info": {
       "hotline": "999.999.999.999",
       "opening": "Mon-Fri: 8.00am - 6.00pm",
-      "title": "Laravel"
+      "title": "Travelo"
     },
     "label": {
       "cart_total": "Total",
@@ -40828,41 +40759,7 @@ __webpack_require__.r(__webpack_exports__);
           "rule-name": "custom-message"
         }
       },
-      "attributes": {
-        "name": "name",
-        "username": "username",
-        "email": "email address",
-        "first_name": "first name",
-        "last_name": "last name",
-        "password": "password",
-        "password_confirmation": "password confirm",
-        "city": "city",
-        "country": "country",
-        "address": "address",
-        "phone": "phone number",
-        "mobile": "mobile",
-        "age": "age",
-        "sex": "sex",
-        "gender": "gender",
-        "year": "year",
-        "month": "month",
-        "day": "days",
-        "hour": "hours",
-        "minute": "minutes",
-        "second": "seconds",
-        "title": "title",
-        "content": "content",
-        "body": "body",
-        "description": "description",
-        "excerpt": "excerpt",
-        "date": "date",
-        "time": "time",
-        "subject": "subject",
-        "message": "message",
-        "available": "available",
-        "size": "size",
-        "slug": "slug"
-      }
+      "attributes": []
     }
   },
   "ja": {
@@ -41119,19 +41016,17 @@ __webpack_require__.r(__webpack_exports__);
       "sign_in": "Đăng nhập",
       "sign_out": "Đăng xuất",
       "go_to_cart": "Giỏ hàng",
-      "checkout": "Thanh toán",
-      "manager": "Quản lý"
+      "checkout": "Thanh toán"
     },
     "info": {
       "hotline": "999.999.999.999",
       "opening": "Thứ 2 - thứ 6: 8.00am - 6.00pm",
-      "title": "Laravel"
+      "title": "Travelo"
     },
     "label": {
       "cart_total": "Tổng",
       "search": "Tìm kiếm ..."
     },
-    "message": [],
     "pages": {
       "home": {
         "title": "Chào mừng bạn đến với Travelo",
@@ -41148,7 +41043,7 @@ __webpack_require__.r(__webpack_exports__);
     "passwords": {
       "reset": "Mật khẩu mới đã được cập nhật!",
       "sent": "Hướng dẫn cấp lại mật khẩu đã được gửi!",
-      "throttled": "Vui lòng đợi trước khi thử lại.",
+      "throttled": "Please wait before retrying.",
       "token": "Mã khôi phục mật khẩu không hợp lệ.",
       "user": "Không tìm thấy người dùng với địa chỉ email này."
     },
@@ -41405,8 +41300,7 @@ __webpack_require__.r(__webpack_exports__);
         "subject": "tiêu đề",
         "message": "lời nhắn",
         "available": "có sẵn",
-        "size": "kích thước",
-        "slug": "đường dẫn tĩnh"
+        "size": "kích thước"
       }
     }
   }
@@ -41421,7 +41315,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\travelo\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\travelo\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

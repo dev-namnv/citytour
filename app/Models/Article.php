@@ -2,16 +2,25 @@
 
 namespace App\Models;
 
-use App\Scopes\ActiveScope;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
+
 
 class Article extends Model
 {
     use SoftDeletes;
 
     protected $table = 'articles';
+
+    protected $fillable = [
+        'title',
+        'heading',
+        'slug',
+        'content',
+        'image',
+        'user_id'
+    ];
 
     /**
      * TODO: Convert data
@@ -21,14 +30,6 @@ class Article extends Model
     protected $casts = [
         'active' => 'boolean'
     ];
-
-    /**
-     * Add global scope in query
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new ActiveScope);
-    }
 
     /**
      * Eloquent article
@@ -53,13 +54,5 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function  getContentLimitAttribute()
-    {
-        return Str::limit($this->content, ARTICLES_LIMIT_CONTENT );
-    }
 
-    public function author()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
 }
