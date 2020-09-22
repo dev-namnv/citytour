@@ -53,10 +53,21 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     });
 
     // Articles
-    Route::resource('articles', 'ArticleController');
+    Route::group(['middleware' => 'admin', 'prefix' => 'articles'], function () {
+        Route::get('/', 'ArticleController@index')->name('articles.index');
+        Route::get('/create', 'ArticleController@create')->name('articles.create');
+        Route::post('/', 'ArticleController@store')->name('articles.store');
+        Route::get('/{id}/edit', 'ArticleController@edit')->name('articles.edit');
+        Route::match(['put', 'patch'],'/{id}', 'ArticleController@update')->name('articles.update');
+        Route::delete('/{id}', 'ArticleController@destroy')->name('articles.destroy');
+    });
+
 });
 
 // Main
 Route::group(['namespace' => 'Main'], function () {
-
+    Route::group(['prefix' => 'articles'], function () {
+       Route::get('/', 'ArticleController@list')->name('articles.list');
+       Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
+    });
 });
