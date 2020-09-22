@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DateTime;
 
 
 class Article extends Model
@@ -54,5 +55,19 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getReleaseDayAttribute()
+    {
+        return date_format(new DateTime($this->created_at), 'd M Y');
+    }
+
+    public function scopeRecentArticles($query)
+    {
+        return $query->orderBy('id', 'desc')->limit(3);
+    }
+
+    public function scopeFindBySlug($query, $slug)
+    {
+        return $query->where('slug', '=', $slug)->firstOrFail();
+    }
 
 }
