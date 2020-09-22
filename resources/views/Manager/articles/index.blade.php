@@ -49,9 +49,7 @@
                             <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Heading</th>
                                 <th>Slug</th>
-                                <th>Content</th>
                                 <th>Image</th>
                                 <th>User</th>
                                 <th class="text-center">Action</th>
@@ -61,28 +59,31 @@
                             @foreach($articles as $key => $article)
                             <tr>
                                 <td>{{$article->title}}</td>
-                                <td>{{$article->heading}}</td>
                                 <td>{{$article->slug}}</td>
-                                <td>{{$article->content_limit}}</td>
                                 <td>
                                     <img src="{{$article->image}}" alt="{{$article->title}}" class="img-thumbnail" width="200">
                                 </td>
                                 <td>{{$article->user->getFullname()}}</td>
 
                                 <td class="text-center">
-                                    <a href="{{route('articles.edit', $article->id)}}" class="btn btn-primary">Edit</a>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <div class="btn-group">
+                                        <a  href="{{route('articles.edit', $article->id)}}" class="btn btn-primary mr-2">Edit</a>
+                                        <form action="{{route('articles.destroy', $article->id)}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Salary</th>
+                                <th>Title</th>
+                                <th>Slug</th>
+                                <th>Image</th>
+                                <th>User</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </tfoot>

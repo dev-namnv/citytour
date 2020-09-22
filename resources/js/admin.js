@@ -62,11 +62,35 @@ Admin = {
             errorClass: 'is-invalid invalid-feedback',
             validClass: 'is-valid'
         })
-    }
+    },
+
+    // Article Store Validate
+    // storeArticleValidate: () => {
+    //     $('.form-article-create').validate({
+    //         rules: {
+    //             title: {
+    //                 required: true,
+    //                 minLength: 5,
+    //                 maxlength: 60
+    //             }
+    //         },
+    //         messages: {
+    //             title: {
+    //                 required: getMessageValidation('required', {attribute: 'title'}),
+    //             }
+    //         },
+    //         errorElement: 'span',
+    //         errorClass: 'is-invalid ',
+    //         validClass: 'is-valid'
+    //     })
+    // }
+
+
 }
 
 // Run onload
 $(window).on('load', function () {
     Admin.loginValidate()
     Admin.forgotPasswordValidate()
+    // Admin.storeArticleValidate()
 })

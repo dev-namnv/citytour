@@ -23,9 +23,6 @@ class CreateArticlesTable extends Migration
             $table->unsignedBigInteger('user_id')->comment('ID tác giả');
             $table->softDeletes();
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

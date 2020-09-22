@@ -40415,12 +40415,32 @@ Admin = {
       errorClass: 'is-invalid invalid-feedback',
       validClass: 'is-valid'
     });
-  }
+  } // Article Store Validate
+  // storeArticleValidate: () => {
+  //     $('.form-article-create').validate({
+  //         rules: {
+  //             title: {
+  //                 required: true,
+  //                 minLength: 5,
+  //                 maxlength: 60
+  //             }
+  //         },
+  //         messages: {
+  //             title: {
+  //                 required: getMessageValidation('required', {attribute: 'title'}),
+  //             }
+  //         },
+  //         errorElement: 'span',
+  //         errorClass: 'is-invalid ',
+  //         validClass: 'is-valid'
+  //     })
+  // }
+
 }; // Run onload
 
 $(window).on('load', function () {
   Admin.loginValidate();
-  Admin.forgotPasswordValidate();
+  Admin.forgotPasswordValidate(); // Admin.storeArticleValidate()
 });
 
 /***/ }),
@@ -41295,7 +41315,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\travelo\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\travelo\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })
