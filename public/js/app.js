@@ -52200,12 +52200,13 @@ __webpack_require__.r(__webpack_exports__);
       "sign_in": "Sign in",
       "sign_out": "Sign out",
       "go_to_cart": "Go to cart",
-      "checkout": "Check out"
+      "checkout": "Check out",
+      "manager": "Manager"
     },
     "info": {
       "hotline": "999.999.999.999",
       "opening": "Mon-Fri: 8.00am - 6.00pm",
-      "title": "Travelo"
+      "title": "Laravel"
     },
     "label": {
       "cart_total": "Total",
@@ -52218,6 +52219,27 @@ __webpack_require__.r(__webpack_exports__);
           "title": "Affordable Paris tours",
           "desc": "CITY TOURS / TOUR TICKETS / TOUR GUIDES"
         }
+      },
+      "article": {
+        "home": "Home",
+        "search": "Search",
+        "news": "News",
+        "categories": "Categories",
+        "recent_post": "Recent Post",
+        "tags": "Tags",
+        "read_more": "Read more",
+        "on": "On",
+        "in": "In",
+        "comments": "comments",
+        "posted_by": "Posted By",
+        "reply": "Reply",
+        "leave_a_comment": "Leave a comment",
+        "enter_name": "Enter name",
+        "enter_email": "Enter email",
+        "message": "Message",
+        "detail": "Detail",
+        "clear_form": "Clear form",
+        "post_comment": "Post comment"
       }
     },
     "pagination": {
@@ -52598,17 +52620,19 @@ __webpack_require__.r(__webpack_exports__);
       "sign_in": "Đăng nhập",
       "sign_out": "Đăng xuất",
       "go_to_cart": "Giỏ hàng",
-      "checkout": "Thanh toán"
+      "checkout": "Thanh toán",
+      "manager": "Quản lý"
     },
     "info": {
       "hotline": "999.999.999.999",
       "opening": "Thứ 2 - thứ 6: 8.00am - 6.00pm",
-      "title": "Travelo"
+      "title": "Laravel"
     },
     "label": {
       "cart_total": "Tổng",
       "search": "Tìm kiếm ..."
     },
+    "message": [],
     "pages": {
       "home": {
         "title": "Chào mừng bạn đến với Travelo",
@@ -52616,6 +52640,27 @@ __webpack_require__.r(__webpack_exports__);
           "title": "Tour du lịch Paris giá cả phải chăng",
           "desc": "TOUR TOUR THÀNH PHỐ / VÉ TOUR / HƯỚNG DẪN TOUR"
         }
+      },
+      "article": {
+        "home": "Trang chủ",
+        "search": "Tìm kiếm",
+        "news": "Tin tức",
+        "categories": "Danh mục bài viết",
+        "recent_post": "Bài viết gần đây",
+        "tags": "Thẻ",
+        "read_more": "Đọc thêm",
+        "on": "Đăng ngày",
+        "in": "Danh mục",
+        "comments": "bình luận",
+        "posted_by": "Đăng bởi",
+        "reply": "Trả lời",
+        "leave_a_comment": "Để lại bình luận",
+        "enter_name": "Nhập tên",
+        "enter_email": "Nhập email",
+        "message": "Lời nhắn",
+        "detail": "Chi tiết",
+        "clear_form": "Làm mới",
+        "post_comment": "Đăng bình luận"
       }
     },
     "pagination": {
@@ -52625,7 +52670,7 @@ __webpack_require__.r(__webpack_exports__);
     "passwords": {
       "reset": "Mật khẩu mới đã được cập nhật!",
       "sent": "Hướng dẫn cấp lại mật khẩu đã được gửi!",
-      "throttled": "Please wait before retrying.",
+      "throttled": "Vui lòng đợi trước khi thử lại.",
       "token": "Mã khôi phục mật khẩu không hợp lệ.",
       "user": "Không tìm thấy người dùng với địa chỉ email này."
     },
@@ -52882,7 +52927,9 @@ __webpack_require__.r(__webpack_exports__);
         "subject": "tiêu đề",
         "message": "lời nhắn",
         "available": "có sẵn",
-        "size": "kích thước"
+        "size": "kích thước",
+        "heading": "phần mở đầu",
+        "image": "ảnh"
       }
     }
   }

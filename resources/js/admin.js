@@ -98,6 +98,7 @@ Admin = {
     // Article Store Validate
     storeArticleValidate: () => {
         $('.form-article-create').validate({
+            ignore: [],
             rules: {
                 title: {
                     required: true,
@@ -112,23 +113,27 @@ Admin = {
                     minlength: 5
                 },
                 content: {
-                    required: true,
+                    required: function () {
+                        CKEDITOR.instances.articles_content_editor.updateElement();
+                    },
                     minlength: 5
                 }
             },
             messages: {
                 title: {
                     required: getMessageValidation('required', {attribute: 'title'}),
-                    // minlength: getMessageValidation('required', {attribute: 'title'}),
+                    minlength: getMessageValidation('min', {attribute: 'title', type: 'string', min: 5}),
                 },
                 image: {
                     required: getMessageValidation('required', {attribute: 'image'})
                 },
                 heading: {
-                    required: getMessageValidation('required', {attribute: 'heading'})
+                    required: getMessageValidation('required', {attribute: 'heading'}),
+                    minlength: getMessageValidation('min', {attribute: 'heading', type: 'string', min: 5}),
                 },
                 content: {
-                    required: getMessageValidation('required', {attribute: 'content'})
+                    required: getMessageValidation('required', {attribute: 'content'}),
+                    minlength: getMessageValidation('min', {attribute: 'content', type: 'string', min: 5}),
                 }
             },
             errorClass: 'is-invalid invalid-feedback',
