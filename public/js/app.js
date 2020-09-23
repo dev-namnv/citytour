@@ -52075,6 +52075,15 @@ Main = {
         },
         email: {
           required: true
+        },
+        phone: {
+          required: true
+        },
+        title: {
+          required: true
+        },
+        content: {
+          required: true
         }
       },
       messages: {
@@ -52091,6 +52100,21 @@ Main = {
         email: {
           required: getMessageValidation('required', {
             attribute: 'email'
+          })
+        },
+        phone: {
+          required: getMessageValidation('required', {
+            attribute: 'phone'
+          })
+        },
+        title: {
+          required: getMessageValidation('required', {
+            attribute: 'subject'
+          })
+        },
+        content: {
+          required: getMessageValidation('required', {
+            attribute: 'message'
           })
         }
       },

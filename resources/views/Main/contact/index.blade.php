@@ -150,8 +150,8 @@
                     <div class="box_style_4">
                         <i class="icon_set_1_icon-57"></i>
                         <h4>{!! __('pages.contact.main.support') !!} <span>?</span></h4>
-                        <a href="tel://004542344599" class="phone">+45 423 445 99</a>
-                        <small>Monday to Friday 9.00am - 7.30pm</small>
+                        <a href="tel://004542344599" class="phone">{{ __('info.hotline') }}</a>
+                        <small>{{ __('info.opening') }}</small>
                     </div>
                 </div>
                 <!-- End col-md-4 -->

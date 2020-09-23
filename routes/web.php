@@ -41,6 +41,10 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
     });
+    // Contact
+    Route::group(['prefix' => 'contacts'], function () {
+        Route::get('/', 'ContactController@index')->name('contacts');
+    });
 });
 
 // Main
