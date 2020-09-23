@@ -86,7 +86,7 @@
                                     <td>{{ $tour->rating }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-dark btn-sm">Open</button>
+                                            <a href="{{ route('tour-edit', ['id' => $tour->id]) }}" type="button" class="btn btn-dark btn-sm">Open</a>
                                             <button type="button"
                                                     class="btn btn-dark btn-sm dropdown-toggle dropdown-toggle-split"
                                                     id="dropdownMenuReference1" data-toggle="dropdown"

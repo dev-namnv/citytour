@@ -40345,7 +40345,8 @@ module.exports = function(module) {
 /* Import libraries */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./toastr */ "./resources/js/toastr.js");
+__webpack_require__(/*! ./toastr */ "./resources/js/toastr.js"); // require('./google-map')
+
 
 window.PerfectScrollbar = __webpack_require__(/*! perfect-scrollbar/dist/perfect-scrollbar.min */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"); // require('highlight.js/lib/highlight')
 
@@ -40415,12 +40416,54 @@ Admin = {
       errorClass: 'is-invalid invalid-feedback',
       validClass: 'is-valid'
     });
+  },
+  // Validate create tour
+  tourCreateValidate: function tourCreateValidate() {
+    $('.form-service-create').validate({
+      rules: {
+        name: {
+          required: true,
+          minLength: 20,
+          maxLength: 255,
+          regex: /^[a-zA-Z0-9_\s&.-]*$/
+        },
+        slug: {
+          minLength: 20,
+          regex: /^[a-zA-Z0-9_.-]*$/
+        },
+        address: {
+          required: true,
+          regex: /^[a-zA-Z0-9_.-]*$/
+        }
+      },
+      messages: {
+        name: {
+          required: getMessageValidation('required', {
+            attribute: 'name'
+          }),
+          minLength: getMessageValidation('min', {
+            attribute: 'name',
+            min: 20,
+            type: 'string'
+          }),
+          maxLength: getMessageValidation('max', {
+            attribute: 'name',
+            max: 255,
+            type: 'string'
+          }),
+          regex: getMessageValidation('regex', {
+            attribute: 'name'
+          })
+        }
+      }
+    });
   }
 }; // Run onload
 
 $(window).on('load', function () {
   Admin.loginValidate();
   Admin.forgotPasswordValidate();
+  Admin.tourCreateValidate();
 });
 
 /***/ }),
@@ -40519,50 +40562,58 @@ if (locale === 'vi') {
   __webpack_require__(/*! jquery-validation */ "./node_modules/jquery-validation/dist/jquery.validate.js");
 }
 
+OptionMessage = {
+  type: null,
+  attribute: null,
+  date: null,
+  min: null,
+  max: null,
+  format: null,
+  values: null,
+  value: null,
+  other: null
+};
+
 getMessageValidation = function getMessageValidation(rule) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
-    attribute: null,
-    date: null,
-    min: null,
-    max: null,
-    format: null,
-    values: null,
-    value: null,
-    other: null
-  };
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : OptionMessage;
   var validation = LANG.validation[rule];
-  var message;
 
-  if (options.attribute) {
-    message = validation.replace("{attribute}", LANG.validation.attributes[options.attribute]);
+  if (options.type) {
+    validation = LANG.validation[rule][options.type];
   }
 
-  if (options.date) {
-    message = validation.replace("{date}", options.date);
+  var message = validation;
+
+  if (options.attribute !== null) {
+    message = message.replace("{attribute}", LANG.validation.attributes[options.attribute]);
   }
 
-  if (options.min) {
-    message = validation.replace("{min}", options.min);
+  if (options.min !== null) {
+    message = message.replace("{min}", options.min);
   }
 
-  if (options.max) {
-    message = validation.replace("{max}", options.max);
+  if (options.max !== null) {
+    message = message.replace("{max}", options.max);
   }
 
-  if (options.format) {
-    message = validation.replace("{format}", options.format);
+  if (options.date !== null) {
+    message = message.replace("{date}", options.date);
   }
 
-  if (options.values) {
-    message = validation.replace("{values}", options.values);
+  if (options.format !== null) {
+    message = message.replace("{format}", options.format);
   }
 
-  if (options.value) {
-    message = validation.replace("{value}", options.value);
+  if (options.values !== null) {
+    message = message.replace("{values}", options.values);
   }
 
-  if (options.other) {
-    message = validation.replace("{other}", options.other);
+  if (options.value !== null) {
+    message = message.replace("{value}", options.value);
+  }
+
+  if (options.other !== null) {
+    message = message.replace("{other}", options.other);
   }
 
   return message;
