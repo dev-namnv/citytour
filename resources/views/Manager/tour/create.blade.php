@@ -24,6 +24,7 @@
                 </div>
                 <div class="widget-content widget-content-area">
                     <form class="form-service-create" method="post" action="{{ route('tour-store') }}">
+                        @csrf
                         <div class="form-row mb-4">
                             <div class="form-group col-md-6">
                                 <label for="inputName">Name</label>

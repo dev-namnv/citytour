@@ -90,8 +90,11 @@ Admin = {
                     minLength: getMessageValidation('min', {attribute: 'name', min: 20, type: 'string'}),
                     maxLength: getMessageValidation('max', {attribute: 'name', max: 255, type: 'string'}),
                     regex: getMessageValidation('regex', {attribute: 'name'})
+                },
+                slug: {
+                    minLength: getMessageValidation('min', {attribute: 'slug'})
                 }
-            }
+            },
         })
     }
 }
