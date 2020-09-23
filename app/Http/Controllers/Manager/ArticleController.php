@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Manager;
 
 
+use App\Helpers\ConvertSlugHelper;
 use App\Helpers\StorageS3Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Article\StoreArticle;
 use App\Http\Requests\Article\UpdateArticle;
 use App\Models\Article;
-use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -45,7 +45,7 @@ class ArticleController extends Controller
         $article = Article::create([
             'title' => $request->title,
             'heading' => $request->heading,
-            'slug' => Str::slug($request->title) . '-' . uniqid('', true),
+            'slug' => ConvertSlugHelper::convert_slug($request->title),
             'content' => $request->get('content'),
             'image' => $urlImage,
             'user_id' => auth()->id()
@@ -96,7 +96,7 @@ class ArticleController extends Controller
         ];
 
         if ($request->get('title') !== $article->title) {
-            $dataUpdate['slug'] = Str::slug($request->get('title')) . '-' . uniqid('', true);
+            $dataUpdate['slug'] = ConvertSlugHelper::convert_slug($request->get('title'));
         }
 
         if ($request->image) {
