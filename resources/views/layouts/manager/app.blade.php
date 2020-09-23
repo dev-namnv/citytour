@@ -26,6 +26,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link href="{{ asset('libraries/manager/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
 
+    {{--<!-- Google map api -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK2YgbtxirmtB2cSjonFB_9r5iHz7_1IQ&libraries=places" />--}}
+
     <!-- Extra css -->
     @yield('extra-css')
 
@@ -58,6 +61,9 @@
     <script>var BASE_URL = "{{ env('APP_URL') }}";</script>
     <!-- Admin js -->
     <script src="{{ asset('js/admin.js') }}"></script>
+
+    <!-- Google map api -->
+{{--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK2YgbtxirmtB2cSjonFB_9r5iHz7_1IQ&libraries=places" />--}}
 
     <!-- Common js -->
     <script src="{{ asset('libraries/manager/assets/js/app.js') }}"></script>
