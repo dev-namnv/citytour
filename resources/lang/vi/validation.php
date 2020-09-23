@@ -178,6 +178,7 @@ return [
         'message'               => 'lời nhắn',
         'available'             => 'có sẵn',
         'size'                  => 'kích thước',
-        'slug'                  => 'đường dẫn tĩnh'
+        'heading'               => 'phần mở đầu',
+        'image'                 => 'ảnh'
     ],
 ];

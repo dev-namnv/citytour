@@ -52174,11 +52174,6 @@ getMessageValidation = function getMessageValidation(rule) {
   return message;
 };
 
-$.validator.addMethod("regex", function (value, element, regexp) {
-  var re = new RegExp(regexp);
-  return this.optional(element) || re.test(value);
-}, "Please check your input.");
-
 /***/ }),
 
 /***/ "./resources/js/vue-i18n-locales.generated.js":
@@ -52224,6 +52219,27 @@ __webpack_require__.r(__webpack_exports__);
           "title": "Affordable Paris tours",
           "desc": "CITY TOURS / TOUR TICKETS / TOUR GUIDES"
         }
+      },
+      "article": {
+        "home": "Home",
+        "search": "Search",
+        "news": "News",
+        "categories": "Categories",
+        "recent_post": "Recent Post",
+        "tags": "Tags",
+        "read_more": "Read more",
+        "on": "On",
+        "in": "In",
+        "comments": "comments",
+        "posted_by": "Posted By",
+        "reply": "Reply",
+        "leave_a_comment": "Leave a comment",
+        "enter_name": "Enter name",
+        "enter_email": "Enter email",
+        "message": "Message",
+        "detail": "Detail",
+        "clear_form": "Clear form",
+        "post_comment": "Post comment"
       }
     },
     "pagination": {
@@ -52347,41 +52363,7 @@ __webpack_require__.r(__webpack_exports__);
           "rule-name": "custom-message"
         }
       },
-      "attributes": {
-        "name": "name",
-        "username": "username",
-        "email": "email address",
-        "first_name": "first name",
-        "last_name": "last name",
-        "password": "password",
-        "password_confirmation": "password confirm",
-        "city": "city",
-        "country": "country",
-        "address": "address",
-        "phone": "phone number",
-        "mobile": "mobile",
-        "age": "age",
-        "sex": "sex",
-        "gender": "gender",
-        "year": "year",
-        "month": "month",
-        "day": "days",
-        "hour": "hours",
-        "minute": "minutes",
-        "second": "seconds",
-        "title": "title",
-        "content": "content",
-        "body": "body",
-        "description": "description",
-        "excerpt": "excerpt",
-        "date": "date",
-        "time": "time",
-        "subject": "subject",
-        "message": "message",
-        "available": "available",
-        "size": "size",
-        "slug": "slug"
-      }
+      "attributes": []
     }
   },
   "ja": {
@@ -52658,6 +52640,27 @@ __webpack_require__.r(__webpack_exports__);
           "title": "Tour du lịch Paris giá cả phải chăng",
           "desc": "TOUR TOUR THÀNH PHỐ / VÉ TOUR / HƯỚNG DẪN TOUR"
         }
+      },
+      "article": {
+        "home": "Trang chủ",
+        "search": "Tìm kiếm",
+        "news": "Tin tức",
+        "categories": "Danh mục bài viết",
+        "recent_post": "Bài viết gần đây",
+        "tags": "Thẻ",
+        "read_more": "Đọc thêm",
+        "on": "Đăng ngày",
+        "in": "Danh mục",
+        "comments": "bình luận",
+        "posted_by": "Đăng bởi",
+        "reply": "Trả lời",
+        "leave_a_comment": "Để lại bình luận",
+        "enter_name": "Nhập tên",
+        "enter_email": "Nhập email",
+        "message": "Lời nhắn",
+        "detail": "Chi tiết",
+        "clear_form": "Làm mới",
+        "post_comment": "Đăng bình luận"
       }
     },
     "pagination": {
@@ -52925,7 +52928,8 @@ __webpack_require__.r(__webpack_exports__);
         "message": "lời nhắn",
         "available": "có sẵn",
         "size": "kích thước",
-        "slug": "đường dẫn tĩnh"
+        "heading": "phần mở đầu",
+        "image": "ảnh"
       }
     }
   }
