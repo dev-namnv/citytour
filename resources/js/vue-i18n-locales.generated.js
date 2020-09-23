@@ -13,12 +13,13 @@ export default {
             "sign_in": "Sign in",
             "sign_out": "Sign out",
             "go_to_cart": "Go to cart",
-            "checkout": "Check out"
+            "checkout": "Check out",
+            "manager": "Manager"
         },
         "info": {
             "hotline": "999.999.999.999",
             "opening": "Mon-Fri: 8.00am - 6.00pm",
-            "title": "Travelo"
+            "title": "Laravel"
         },
         "label": {
             "cart_total": "Total",
@@ -154,7 +155,41 @@ export default {
                     "rule-name": "custom-message"
                 }
             },
-            "attributes": []
+            "attributes": {
+                "name": "name",
+                "username": "username",
+                "email": "email address",
+                "first_name": "first name",
+                "last_name": "last name",
+                "password": "password",
+                "password_confirmation": "password confirm",
+                "city": "city",
+                "country": "country",
+                "address": "address",
+                "phone": "phone number",
+                "mobile": "mobile",
+                "age": "age",
+                "sex": "sex",
+                "gender": "gender",
+                "year": "year",
+                "month": "month",
+                "day": "days",
+                "hour": "hours",
+                "minute": "minutes",
+                "second": "seconds",
+                "title": "title",
+                "content": "content",
+                "body": "body",
+                "description": "description",
+                "excerpt": "excerpt",
+                "date": "date",
+                "time": "time",
+                "subject": "subject",
+                "message": "message",
+                "available": "available",
+                "size": "size",
+                "slug": "slug"
+            }
         }
     },
     "ja": {
@@ -411,17 +446,19 @@ export default {
             "sign_in": "Đăng nhập",
             "sign_out": "Đăng xuất",
             "go_to_cart": "Giỏ hàng",
-            "checkout": "Thanh toán"
+            "checkout": "Thanh toán",
+            "manager": "Quản lý"
         },
         "info": {
             "hotline": "999.999.999.999",
             "opening": "Thứ 2 - thứ 6: 8.00am - 6.00pm",
-            "title": "Travelo"
+            "title": "Laravel"
         },
         "label": {
             "cart_total": "Tổng",
             "search": "Tìm kiếm ..."
         },
+        "message": [],
         "pages": {
             "home": {
                 "title": "Chào mừng bạn đến với Travelo",
@@ -438,7 +475,7 @@ export default {
         "passwords": {
             "reset": "Mật khẩu mới đã được cập nhật!",
             "sent": "Hướng dẫn cấp lại mật khẩu đã được gửi!",
-            "throttled": "Please wait before retrying.",
+            "throttled": "Vui lòng đợi trước khi thử lại.",
             "token": "Mã khôi phục mật khẩu không hợp lệ.",
             "user": "Không tìm thấy người dùng với địa chỉ email này."
         },
@@ -695,7 +732,8 @@ export default {
                 "subject": "tiêu đề",
                 "message": "lời nhắn",
                 "available": "có sẵn",
-                "size": "kích thước"
+                "size": "kích thước",
+                "slug": "đường dẫn tĩnh"
             }
         }
     }
