@@ -29,4 +29,18 @@ class TourController extends Controller
 
         return view('manager.tour.list', compact('tours'));
     }
+
+    public function create()
+    {
+        return view('manager.tour.create');
+    }
+
+    public function store(Request $request)
+    {}
+
+    public function edit(Request $request)
+    {
+        $tour = Service::query()->withoutGlobalScopes()->findOrFail($request->id);
+        return view('manager.tour.edit', compact('tour'));
+    }
 }

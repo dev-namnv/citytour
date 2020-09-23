@@ -1,6 +1,7 @@
 /* Import libraries */
 require('./bootstrap')
 require('./toastr')
+// require('./google-map')
 window.PerfectScrollbar = require('perfect-scrollbar/dist/perfect-scrollbar.min')
 
 // require('highlight.js/lib/highlight')
@@ -62,6 +63,36 @@ Admin = {
             errorClass: 'is-invalid invalid-feedback',
             validClass: 'is-valid'
         })
+    },
+
+    // Validate create tour
+    tourCreateValidate: () => {
+        $('.form-service-create').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minLength: 20,
+                    maxLength: 255,
+                    regex: /^[a-zA-Z0-9_\s&.-]*$/
+                },
+                slug: {
+                    minLength: 20,
+                    regex: /^[a-zA-Z0-9_.-]*$/
+                },
+                address: {
+                    required: true,
+                    regex: /^[a-zA-Z0-9_.-]*$/
+                }
+            },
+            messages: {
+                name: {
+                    required: getMessageValidation('required', {attribute: 'name'}),
+                    minLength: getMessageValidation('min', {attribute: 'name', min: 20, type: 'string'}),
+                    maxLength: getMessageValidation('max', {attribute: 'name', max: 255, type: 'string'}),
+                    regex: getMessageValidation('regex', {attribute: 'name'})
+                }
+            }
+        })
     }
 }
 
@@ -69,4 +100,5 @@ Admin = {
 $(window).on('load', function () {
     Admin.loginValidate()
     Admin.forgotPasswordValidate()
+    Admin.tourCreateValidate()
 })
