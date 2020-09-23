@@ -18,8 +18,7 @@
              data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
-                <h1>Articles</h1>
-                <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+                <h1>{{ __('pages.article.news') }}</h1>
             </div>
         </div>
     </section>
@@ -27,11 +26,9 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="#">Home</a>
+                    <li><a href="/">{{ __('pages.article.home') }}</a>
                     </li>
-                    <li><a href="#">Category</a>
-                    </li>
-                    <li>Page active</li>
+                    <li>{{ __('pages.article.news') }}</li>
                 </ul>
             </div>
         </div>
@@ -43,7 +40,7 @@
 
                     <div class="widget">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" class="form-control" placeholder="{{ __('pages.article.search') }}...">
                             <span class="input-group-btn">
 						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
 						</span>
@@ -55,7 +52,7 @@
                     <hr>
 
                     <div class="widget" id="cat_blog">
-                        <h4>Categories</h4>
+                        <h4>{{ __('pages.article.categories') }}</h4>
                         <ul>
                             @foreach($article_categories as $key => $article_category)
                                 <li>
@@ -69,7 +66,7 @@
                     <hr>
 
                     <div class="widget">
-                        <h4>Recent post</h4>
+                        <h4>{{ __('pages.article.recent_post') }}</h4>
                         <ul class="recent_post">
                             @foreach($recent_articles as $key => $recent_article)
                                 <li>
@@ -84,7 +81,7 @@
                     <!-- End widget -->
                     <hr>
                     <div class="widget tags">
-                        <h4>Tags</h4>
+                        <h4>{{ __('pages.article.tags') }}</h4>
                         @foreach($article_tags as $key => $article_tag)
                             <a href="#">{{$article_tag->name}}</a>
                         @endforeach
@@ -106,11 +103,11 @@
                                 <div class="post_info clearfix">
                                     <div class="post-left">
                                         <ul>
-                                            <li><i class="icon-calendar-empty"></i> On
+                                            <li><i class="icon-calendar-empty"></i> {{ __('pages.article.on') }}
                                                 <span>{{$article->release_day}}</span>
                                             </li>
                                             <li>
-                                                <i class="icon-inbox-alt"></i> In
+                                                <i class="icon-inbox-alt"></i> {{ __('pages.article.in') }}
                                                 @foreach($article->categories->take(2) as $key => $category)
                                                     <a href="#{{$category->id}}">{{$category->name}}</a>,
                                                 @endforeach
@@ -120,7 +117,7 @@
 
                                             </li>
                                             <li>
-                                                <i class="icon-tags"></i> Tags:
+                                                <i class="icon-tags"></i> {{ __('pages.article.tags') }}:
                                                 @foreach($article->tags->take(3) as $key => $tag)
                                                     <a href="#">{{$tag->name}}</a>,
                                                 @endforeach
@@ -137,7 +134,7 @@
 
                                 <p>{{$article->heading}}</p>
                                 <a href="{{route('articles.detail', $article->slug)}}" class="btn_1"
-                                   title="{{$article->title}}">Read more</a>
+                                   title="{{$article->title}}">{{ __('pages.article.read_more') }}</a>
                             </div>
                             <!-- end post -->
                             <hr>
