@@ -52,14 +52,10 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
     });
 
-    // Articles
-    Route::group(['middleware' => 'admin', 'prefix' => 'articles'], function () {
-        Route::get('/', 'ArticleController@index')->name('articles.index');
-        Route::get('/create', 'ArticleController@create')->name('articles.create');
-        Route::post('/', 'ArticleController@store')->name('articles.store');
-        Route::get('/{id}/edit', 'ArticleController@edit')->name('articles.edit');
-        Route::match(['put', 'patch'],'/{id}', 'ArticleController@update')->name('articles.update');
-        Route::delete('/{id}', 'ArticleController@destroy')->name('articles.destroy');
+
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('articles', 'ArticleController')->except(['show']);
+        Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
     });
 
 });

@@ -2,6 +2,11 @@
 
 @section('extra-css')
     <link href="{{asset('libraries/manager/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css">
+    <style>
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
 @endsection
 
 @section('title', 'Articles Create')
