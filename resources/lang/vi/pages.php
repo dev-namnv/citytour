@@ -33,7 +33,9 @@ return [
         'message' => 'Lời nhắn',
         'detail' => 'Chi tiết',
         'clear_form' => 'Làm mới',
-        'post_comment' => 'Đăng bình luận'
+        'post_comment' => 'Đăng bình luận',
+        'active' => 'Hiển thị',
+        'not_active' => 'Ẩn',
     ],
 
 ];
