@@ -2,6 +2,11 @@
 
 @section('extra-css')
     <link href="{{asset('libraries/manager/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css">
+    <style>
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
 @endsection
 
 @section('title', 'Articles Edit')
@@ -73,7 +78,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                                <a href="{{url()->previous()}}" type="button" class="btn btn-secondary mt-3 ml-1">Go Back</a>
+                                <a href="{{route('articles.index')}}" type="button" class="btn btn-secondary mt-3 ml-1">Go Back</a>
                             </form>
                         </div>
                     </div>

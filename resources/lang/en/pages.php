@@ -33,6 +33,8 @@ return [
         'message' => 'Message',
         'detail' => 'Detail',
         'clear_form' => 'Clear form',
-        'post_comment' => 'Post comment'
+        'post_comment' => 'Post comment',
+        'active' => 'Active',
+        'not_active' => 'Not Active',
     ],
 ];
