@@ -16,6 +16,14 @@ return [
             TICKET_WAITING_FOR_PROGRESS => 'Đang chờ xử lý',
             TICKET_PROCESSING => 'Đang xử lý',
             TICKET_CLOSED => 'Ticket đã đóng'
+        ],
+        'color' => [
+            TICKET_OPEN => 'primary',
+            TICKET_ANSWERED => 'warning',
+            TICKET_CUSTOMER_REPLY => 'success',
+            TICKET_WAITING_FOR_PROGRESS => 'info',
+            TICKET_PROCESSING => 'danger',
+            TICKET_CLOSED => 'dark',
         ]
     ],
     'service' => [

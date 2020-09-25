@@ -4,18 +4,16 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mails\ContactRequest;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        return view('Manager.contacts.index');
+        $contacts = Contact::all();
+        return view('Manager.contacts.index',compact('contacts'));
     }
 
     /**
@@ -40,14 +38,15 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $contact = Contact::findOrFail($id);
+        $contact->status = 20;
+        $contact->save();
+        return view('Manager.contacts.show',compact('contact'));
     }
 
     /**

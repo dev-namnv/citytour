@@ -43,7 +43,8 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     });
     // Contact
     Route::group(['prefix' => 'contacts'], function () {
-        Route::get('/', 'ContactController@index')->name('contacts');
+        Route::get('/', 'ContactController@index')->name('contacts.index');
+        Route::get('/{id}', 'ContactController@show')->name('contacts.show');
     });
 });
 

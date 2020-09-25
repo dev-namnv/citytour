@@ -21,22 +21,23 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request)
     {
+
         try {
+            //create mail in database
+            Contact::create([
+                'subject' => $request->get('title'),
+                'full_name' => $request->get('firstName') . '.' . $request->get('lastName'),
+                'email' => $request->get('email'),
+                'message' => $request->get('content'),
+                'geoip' => $request->ip(),
+                'status' => 10,
+            ]);
             //send mail to email admin
             Mail::send('Main.contact.layout_content', $request->all(), function ($msg) use ($request){
                 $msg->to(env('MAIL_USERNAME'), 'Admin')
                     ->from($request->email,$request->lastName)
                     ->setSubject($request->title);
             });
-            //create mail in database
-            $modelContact = new Contact();
-            $modelContact->subject = $request->get('title');
-            $modelContact->full_name = $request->get('firstName') . '.' . $request->get('lastName');
-            $modelContact->email = $request->get('email');
-            $modelContact->message = $request->get('content');
-            $modelContact->geoip = $request->ip();
-            $modelContact->status = 10;
-            $modelContact->save();
         } catch (\Exception $e) {
             return redirect()->route('contact.index')->with('fails',[]);
         }
