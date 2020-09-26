@@ -32,6 +32,8 @@
     <!-- Extra css -->
     @yield('extra-css')
 
+    <!-- CKEditor 4 -->
+    <script src="https://cdn.ckeditor.com/4.15.0/standard-all/ckeditor.js"></script>
 </head>
 <body>
     @include('layouts.manager.loadscreen')

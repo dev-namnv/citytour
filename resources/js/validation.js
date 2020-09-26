@@ -62,3 +62,11 @@ getMessageValidation = (rule, options = OptionMessage) => {
     return message;
 }
 
+$.validator.addMethod(
+    "regex",
+    function(value, element, regexp) {
+        const re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    },
+    "Please check your input."
+);
