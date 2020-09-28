@@ -242,8 +242,7 @@
                                     <div class="col-lg-4">
                                         <h3>Pages</h3>
                                         <ul>
-                                            <li><a href="contact_us_1.html">Contact us 1</a></li>
-                                            <li><a href="contact_us_2.html">Contact us 2</a></li>
+                                            <li><a href="{{route('contact.index')}}">Contact us</a></li>
                                             <li><a href="blog_right_sidebar.html">Blog</a></li>
                                             <li><a href="blog.html">Blog left sidebar</a></li>
                                             <li><a href="login.html">Login</a></li>
