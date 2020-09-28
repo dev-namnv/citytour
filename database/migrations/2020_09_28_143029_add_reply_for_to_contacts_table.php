@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColumnReplyForInContacts extends Migration
+class AddReplyForToContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateColumnReplyForInContacts extends Migration
     public function up()
     {
         Schema::table('contacts', function (Blueprint $table) {
-            $table->integer('reply_for')->nullable()->after('id');
+            $table->unsignedBigInteger('reply_for')->nullable()->after('id');
         });
     }
 
