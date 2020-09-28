@@ -14,7 +14,10 @@ class ContactController extends Controller
 
     public function index(Request $request)
     {
-        $contacts = Contact::orderBy('id', 'desc')->get();
+        $contacts = Contact::query()
+            ->where('reply_for')
+            ->orderBy('id', 'desc')
+            ->get();
         return view('Manager.contacts.index',compact('contacts'));
     }
 
@@ -26,10 +29,9 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        $contact = Contact::findOrFail($id);
-//        $contact->status = TICKET_CLOSED;
-//        $contact->save();
-        return view('Manager.contacts.show',compact('contact'));
+        $contact = Contact::query()->findOrFail($id);
+        $contactReply = Contact::query()->where('reply_for','=',$id)->get();
+        return view('Manager.contacts.show',compact('contact','contactReply'));
     }
 
    public function reply(SendContactRequest $request)
@@ -51,6 +53,8 @@ class ContactController extends Controller
                    ->from(env('MAIL_USERNAME'), 'Admin')
                    ->setSubject($request->subject);
            });
+           //update status contact
+           Contact::query()->where('id',$request->get('reply_for'))->update(['status'=>TICKET_CLOSED]);
        } catch (\Exception $e) {
            return redirect()->route('contacts.show',$request->get('reply_for'))->with('fails',[]);
        }
