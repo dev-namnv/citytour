@@ -8,7 +8,7 @@ class Contact extends Model
 {
     protected $table = 'contacts';
     protected $fillable = [
-        'id','subject','full_name','email','message','geoip','status'
+        'id','reply_for','subject','full_name','email','message','geoip','status'
     ];
     /**
      * TODO: Convert data

@@ -101,8 +101,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>{!! __('pages.contact.main.subject') !!}</label>
-                                        <input id="message_subject" name="title" class="form-control" placeholder="Subject" />
-                                        @error('title')
+                                        <input id="message_subject" name="subject" class="form-control" placeholder="Subject" />
+                                        @error('subject')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -114,8 +114,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>{!! __('pages.contact.main.message') !!}</label>
-                                        <textarea rows="5" id="message_contact" name="content" class="form-control" placeholder="Write your message" style="height:200px;"></textarea>
-                                        @error('content')
+                                        <textarea rows="5" id="message_contact" name="messages" class="form-control" placeholder="Write your message" style="height:200px;"></textarea>
+                                        @error('message')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -62,6 +62,32 @@ Admin = {
             errorClass: 'is-invalid invalid-feedback',
             validClass: 'is-valid'
         })
+    },
+
+    formContactValidate: () => {
+        $('.form-contact').validate({
+            rules: {
+                subject: {
+                    required: true,
+                    minlength:10,
+                    maxlength:255,
+                },
+                messages: {
+                    required: true,
+                    minlength: 20,
+                },
+            },
+            messages: {
+                subject: {
+                    required: getMessageValidation('required', {attribute: 'subject'}),
+                },
+                messages: {
+                    required: getMessageValidation('required', {attribute: 'message'}),
+                },
+            },
+            invalidClass: 'is-invalid',
+            validClass: 'is-valid'
+        })
     }
 }
 
@@ -69,4 +95,5 @@ Admin = {
 $(window).on('load', function () {
     Admin.loginValidate()
     Admin.forgotPasswordValidate()
+    Admin.formContactValidate()
 })

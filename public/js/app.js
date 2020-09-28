@@ -52068,22 +52068,28 @@ Main = {
     $('.form-contact').validate({
       rules: {
         firstName: {
-          required: true
+          required: true,
+          maxlength: 100
         },
         lastName: {
-          required: true
+          required: true,
+          maxlength: 100
         },
         email: {
-          required: true
+          required: true,
+          maxlength: 100
         },
         phone: {
           required: true
         },
-        title: {
-          required: true
+        subject: {
+          required: true,
+          minlength: 10,
+          maxlength: 100
         },
-        content: {
-          required: true
+        messages: {
+          required: true,
+          minlength: 20
         }
       },
       messages: {
@@ -52107,12 +52113,12 @@ Main = {
             attribute: 'phone'
           })
         },
-        title: {
+        subject: {
           required: getMessageValidation('required', {
             attribute: 'subject'
           })
         },
-        content: {
+        messages: {
           required: getMessageValidation('required', {
             attribute: 'message'
           })

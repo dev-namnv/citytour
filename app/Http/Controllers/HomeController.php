@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Mails\ContactRequest;
+use App\Http\Requests\Contacts\SendContactRequest;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

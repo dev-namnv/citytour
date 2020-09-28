@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Mails\ContactRequest;
+use App\Http\Requests\Contacts\SendContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -19,24 +19,23 @@ class ContactController extends Controller
         return view('Main.contact.index');
     }
 
-    public function store(ContactRequest $request)
+    public function store(SendContactRequest $request)
     {
-
         try {
             //create mail in database
             Contact::create([
-                'subject' => $request->get('title'),
+                'subject' => $request->get('subject'),
                 'full_name' => $request->get('firstName') . '.' . $request->get('lastName'),
                 'email' => $request->get('email'),
-                'message' => $request->get('content'),
+                'message' => $request->get('messages'),
                 'geoip' => $request->ip(),
-                'status' => 10,
+                'status' => TICKET_OPEN,
             ]);
             //send mail to email admin
             Mail::send('Main.contact.layout_content', $request->all(), function ($msg) use ($request){
                 $msg->to(env('MAIL_USERNAME'), 'Admin')
                     ->from($request->email,$request->lastName)
-                    ->setSubject($request->title);
+                    ->setSubject($request->subject);
             });
         } catch (\Exception $e) {
             return redirect()->route('contact.index')->with('fails',[]);

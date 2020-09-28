@@ -57,12 +57,28 @@ Main = {
     formContactValidate: () => {
         $('.form-contact').validate({
             rules: {
-                firstName: {required: true},
-                lastName: {required: true},
-                email: {required: true},
+                firstName: {
+                    required: true,
+                    maxlength:100,
+                },
+                lastName: {
+                    required: true,
+                    maxlength:100,
+                },
+                email: {
+                    required: true,
+                    maxlength:100,
+                },
                 phone: {required: true},
-                title: {required: true},
-                content: {required: true},
+                subject: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 100,
+                },
+                messages: {
+                    required: true,
+                    minlength: 20,
+                },
             },
             messages: {
                 firstName: {
@@ -77,10 +93,10 @@ Main = {
                 phone: {
                     required: getMessageValidation('required', {attribute: 'phone'}),
                 },
-                title: {
+                subject: {
                     required: getMessageValidation('required', {attribute: 'subject'}),
                 },
-                content: {
+                messages: {
                     required: getMessageValidation('required', {attribute: 'message'}),
                 },
             },
