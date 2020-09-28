@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Mail;
 class ContactController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * return List Contacts
+     */
     public function index(Request $request)
     {
         $contacts = Contact::query()
@@ -25,7 +29,7 @@ class ContactController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * return Detail contact
      */
     public function show($id)
     {
@@ -34,6 +38,10 @@ class ContactController extends Controller
         return view('Manager.contacts.show',compact('contact','contactReply'));
     }
 
+    /**
+     * @param SendContactRequest $request
+     * return status reply
+     */
    public function reply(SendContactRequest $request)
    {
        try {
@@ -45,7 +53,7 @@ class ContactController extends Controller
                'email' => Auth::user()->email,
                'message' => $request->get('messages'),
                'geoip' => $request->ip(),
-               'status' => TICKET_CLOSED,
+               'status' => 0,
            ]);
            //send mail to email admin
            Mail::send('Main.contact.layout_content', $request->all(), function ($msg) use ($request){
@@ -54,11 +62,23 @@ class ContactController extends Controller
                    ->setSubject($request->subject);
            });
            //update status contact
-           Contact::query()->where('id',$request->get('reply_for'))->update(['status'=>TICKET_CLOSED]);
+           Contact::query()->where('id',$request->get('reply_for'))->update(['status'=>TICKET_ANSWERED]);
        } catch (\Exception $e) {
            return redirect()->route('contacts.show',$request->get('reply_for'))->with('fails',[]);
        }
        return redirect()->route('contacts.show',$request->get('reply_for'))->with('success',[]);
+   }
+
+    /**
+     * @param Request $request
+     * return contacts list
+     */
+   public function update($id, $status)
+   {
+       Contact::query()
+           ->where('id',$id)
+           ->update(['status'=>$status]);
+       return redirect()->route('contacts.index');
    }
 
 }

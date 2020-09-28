@@ -44,6 +44,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     // Contact
     Route::group(['prefix' => 'contacts'], function () {
         Route::get('/', 'ContactController@index')->name('contacts.index');
+        Route::get('/update-{id}-{status}', 'ContactController@update')->name('contacts.update');
         Route::get('/{id}', 'ContactController@show')->name('contacts.show');
         Route::post('/reply', 'ContactController@reply')->name('contacts.reply');
     });
