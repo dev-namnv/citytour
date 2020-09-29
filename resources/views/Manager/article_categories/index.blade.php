@@ -60,7 +60,7 @@
                                     <td>{{$article_category->name}}</td>
                                     <td>{{$article_category->slug}}</td>
                                     <td>
-                                        <span class="shadow-none badge {{ $article_category->active === ACTIVE ? 'badge-primary' : 'badge-danger' }}">
+                                        <span class="shadow-none badge {{ $article_category->active == ACTIVE ? 'badge-primary' : 'badge-danger' }}">
                                             {{ $article_category->getStatus() }}
                                         </span>
                                     </td>

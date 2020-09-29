@@ -7,8 +7,9 @@ use App\Helpers\ConvertSlugHelper;
 use App\Helpers\StorageS3Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Article\StoreArticle;
-use App\Http\Requests\Article\UpdateArticle;
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
 
 class ArticleController extends Controller
 {
@@ -19,7 +20,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('user')->orderBy('id', 'desc')->get();
+        $articles = Article::with('user')->orderBy('id', 'desc')->paginate(PAGINATION_ARTICLE);
         return view('Manager.articles.index', compact('articles'));
     }
 
@@ -30,7 +31,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('Manager.articles.create');
+        $article_categories = ArticleCategory::all();
+        return view('Manager.articles.create', compact(['article_categories']));
     }
 
     /**
@@ -52,6 +54,20 @@ class ArticleController extends Controller
         ]);
 
         if ($article) {
+            $tags = explode(',', $request->tags);
+            $tag_ids = [];
+
+            foreach ($tags as $key => $tag) {
+                $slugTag = ConvertSlugHelper::convert_slug($tag);
+                $newTag = ArticleTag::create([
+                    'name' => $tag,
+                    'slug' => $slugTag,
+                ]);
+                $tag_ids[$key] = $newTag->id;
+            }
+
+            $article->tags()->attach($tag_ids);
+            $article->categories()->attach($request->category_ids);
             return redirect()->route('articles.index');
         }
     }
@@ -76,7 +92,19 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
-        return view('Manager.articles.edit', compact('article'));
+        $article_categories = ArticleCategory::all();
+        $tags = [];
+        $category_ids = [];
+
+        foreach ($article->tags as $key => $tag) {
+            $tags[$key] = $tag->name;
+        }
+
+        foreach ($article->categories as $key => $category) {
+            $category_ids[$key] = $category->id;
+        }
+
+        return view('Manager.articles.edit', compact(['article', 'article_categories', 'tags', 'category_ids']));
     }
 
     /**
@@ -86,9 +114,28 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticle $request, $id)
+    public function update(StoreArticle $request, $id)
     {
         $article = Article::findOrFail($id);
+        $tags = explode(',', $request->tags);
+        $tag_ids = [];
+
+        foreach ($article->tags as $article_tag) {
+            $article_tag->delete();
+        }
+
+        foreach ($tags as $key => $tag) {
+            $slugTag = ConvertSlugHelper::convert_slug($tag);
+            $newTag = ArticleTag::create([
+                'name' => $tag,
+                'slug' => $slugTag,
+            ]);
+            $tag_ids[$key] = $newTag->id;
+        }
+
+        $article->tags()->sync($tag_ids);
+        $article->categories()->sync($request->get('category_ids'));
+
         $dataUpdate = [
             'title' => $request->get('title'),
             'heading' => $request->get('heading'),
@@ -117,6 +164,9 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
+        $article->categories()->detach();
+        $article->tags()->detach();
+        $article->comments()->delete();
         $article->delete();
         return redirect()->back();
     }

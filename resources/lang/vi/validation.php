@@ -179,6 +179,9 @@ return [
         'available'             => 'có sẵn',
         'size'                  => 'kích thước',
         'heading'               => 'phần mở đầu',
-        'image'                 => 'ảnh'
+        'image'                 => 'ảnh',
+        'tags'                  => 'thẻ',
+        'category'              => 'danh mục'
+
     ],
 ];

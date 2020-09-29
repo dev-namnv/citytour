@@ -52239,7 +52239,9 @@ __webpack_require__.r(__webpack_exports__);
         "message": "Message",
         "detail": "Detail",
         "clear_form": "Clear form",
-        "post_comment": "Post comment"
+        "post_comment": "Post comment",
+        "active": "Active",
+        "not_active": "Not Active"
       }
     },
     "pagination": {
@@ -52660,7 +52662,9 @@ __webpack_require__.r(__webpack_exports__);
         "message": "Lời nhắn",
         "detail": "Chi tiết",
         "clear_form": "Làm mới",
-        "post_comment": "Đăng bình luận"
+        "post_comment": "Đăng bình luận",
+        "active": "Hiển thị",
+        "not_active": "Ẩn"
       }
     },
     "pagination": {
@@ -52929,7 +52933,9 @@ __webpack_require__.r(__webpack_exports__);
         "available": "có sẵn",
         "size": "kích thước",
         "heading": "phần mở đầu",
-        "image": "ảnh"
+        "image": "ảnh",
+        "tags": "thẻ",
+        "category": "danh mục"
       }
     }
   }

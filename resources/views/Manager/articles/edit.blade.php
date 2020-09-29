@@ -2,11 +2,43 @@
 
 @section('extra-css')
     <link href="{{asset('libraries/manager/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{asset('libraries/manager/plugins/bootstrap-select/bootstrap-select.min.css')}}">
+    <link href="{{asset('libraries/manager/plugins/tagInput/tags-input.css')}}" rel="stylesheet" type="text/css">
     <style>
         .invalid-feedback {
             display: block;
         }
+        .tags-input-wrapper input {
+            margin: 0 auto;
+        }
     </style>
+@endsection
+
+@section('extra-js')
+    <script src="{{asset('libraries/manager/assets/js/scrollspyNav.js')}}"></script>
+    <script src="{{asset('libraries/manager/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('libraries/manager/plugins/tagInput/tags-input.js')}}"></script>
+    <script>
+        // Block Enter event
+        $(document).ready(function() {
+            $(window).keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+
+        var instance = new TagsInput({
+            selector: 'tags'
+        });
+
+        instance.addData(
+            $('#tags').val() !== "" ? $('#tags').val().split(',') : ""
+        )
+
+
+    </script>
 @endsection
 
 @section('title', 'Articles Edit')
@@ -44,6 +76,18 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label for="article_category" >Category</label>
+                                            <select name="category_ids[]" id="article_category"
+                                                    class="selectpicker @error('category_ids') is-invalid @enderror" multiple>
+                                                @foreach($article_categories as $key => $category)
+                                                    <option @if(in_array($category->id, old('category_ids', $category_ids))) selected @endif value="{{$category->id}}">{{$category->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('category_ids')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
@@ -53,8 +97,15 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-6">
+                                        <div class="form-group">
                                             <img src="{{$article->image}}" class="img-fluid" alt="" width="200">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tags">Tag</label>
+                                            <input type="text" name="tags" id="tags" class="@error('tags') is-invalid @enderror" data-ai="" value="{{ old('tags', implode(',', $tags))}}">
+                                            @error('tags')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
