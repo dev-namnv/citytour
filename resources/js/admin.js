@@ -117,7 +117,11 @@ Admin = {
                         CKEDITOR.instances.articles_content_editor.updateElement();
                     },
                     minlength: 5
-                }
+                },
+                tags: {
+                    required: true
+                },
+
             },
             messages: {
                 title: {
@@ -134,7 +138,11 @@ Admin = {
                 content: {
                     required: getMessageValidation('required', {attribute: 'content'}),
                     minlength: getMessageValidation('min', {attribute: 'content', type: 'string', min: 5}),
-                }
+                },
+                tags: {
+                    required: getMessageValidation('required', {attribute: 'tags'}),
+                },
+
             },
             errorClass: 'is-invalid invalid-feedback',
             validClass: 'is-valid',
@@ -161,7 +169,10 @@ Admin = {
                         CKEDITOR.instances.articles_content_editor.updateElement();
                     },
                     minlength: 5
-                }
+                },
+                tags: {
+                    required: true
+                },
             },
             messages: {
                 title: {
@@ -176,7 +187,10 @@ Admin = {
                 content: {
                     required: getMessageValidation('required', {attribute: 'content'}),
                     minlength: getMessageValidation('min', {attribute: 'content', type: 'string', min: 5}),
-                }
+                },
+                tags: {
+                    required: getMessageValidation('required', {attribute: 'tags'}),
+                },
             },
             errorClass: 'is-invalid invalid-feedback',
             validClass: 'is-valid',

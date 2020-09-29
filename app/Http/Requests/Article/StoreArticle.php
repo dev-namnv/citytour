@@ -23,11 +23,19 @@ class StoreArticle extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'title' => 'required|min:5|max:60|string',
             'heading' => 'required|min:5|string',
             'content' => 'required',
-            'image' => 'required|mimes:jpeg,bmp,png,jpg,gif,svg|max:2000'
+            'image' => 'required|mimes:jpeg,bmp,png,jpg,gif,svg|max:2000',
+            'category_ids' => 'required',
+            'tags' => 'required'
         ];
+
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+            $rules['image'] = 'mimes:jpeg,bmp,png,jpg,gif,svg|max:2000';
+        }
+
+        return $rules;
     }
 }

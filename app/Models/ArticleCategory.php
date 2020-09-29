@@ -16,9 +16,9 @@ class ArticleCategory extends Model
      *
      * @var string[]
      */
-//    protected $casts = [
-//        'active' => 'boolean'
-//    ];
+    protected $casts = [
+        'active' => 'boolean'
+    ];
 
     /**
      * Add global scope in query
@@ -32,5 +32,10 @@ class ArticleCategory extends Model
     {
         $masterData = config('masterdata')['active'];
         return $masterData[$this->active];
+    }
+
+    public function articles()
+    {
+        return $this->belongsToMany('App\Models\Article', 'relation_article_category', 'category_id', 'article_id');
     }
 }
