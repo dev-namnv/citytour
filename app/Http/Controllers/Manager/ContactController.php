@@ -7,6 +7,7 @@ use App\Http\Requests\Contacts\SendContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
@@ -19,7 +20,7 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         $contacts = Contact::query()
-            ->where('reply_for')
+            ->where('status','!=',0)
             ->orderBy('id', 'desc')
             ->get();
         return view('Manager.contacts.index',compact('contacts'));
@@ -64,8 +65,12 @@ class ContactController extends Controller
            //update status contact
            Contact::query()->where('id',$request->get('reply_for'))->update(['status'=>TICKET_ANSWERED]);
        } catch (\Exception $e) {
+           $message = ['status' => TOASTR_ERROR, 'content' => 'Thất bại','title'=>'Fails'];
+           session()->flash(TOASTR, json_encode($message));
            return redirect()->route('contacts.show',$request->get('reply_for'))->with('fails',[]);
        }
+       $message = ['status' => TOASTR_SUCCESS, 'content'=>'Thành công' ,'title' => 'Success'];
+       session()->flash(TOASTR, json_encode($message));
        return redirect()->route('contacts.show',$request->get('reply_for'))->with('success',[]);
    }
 

@@ -77,7 +77,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>{!! __('pages.contact.main.email') !!}</label>
-                                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+                                        <input type="email" name="email" class="form-control" placeholder="Enter Email">
                                         @error('email')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
