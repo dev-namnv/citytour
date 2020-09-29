@@ -43,33 +43,42 @@ class ArticleController extends Controller
      */
     public function store(StoreArticle $request)
     {
-        $urlImage = StorageS3Helper::getUrlAfterUpload('images/articles', $request->image);
-        $article = Article::create([
-            'title' => $request->title,
-            'heading' => $request->heading,
-            'slug' => ConvertSlugHelper::convert_slug($request->title),
-            'content' => $request->get('content'),
-            'image' => $urlImage,
-            'user_id' => auth()->id()
-        ]);
+        try {
+            $urlImage = StorageS3Helper::getUrlAfterUpload('images/articles', $request->image);
+            $article = Article::create([
+                'title' => $request->title,
+                'heading' => $request->heading,
+                'slug' => ConvertSlugHelper::convert_slug($request->title),
+                'content' => $request->get('content'),
+                'image' => $urlImage,
+                'user_id' => auth()->id()
+            ]);
 
-        if ($article) {
-            $tags = explode(',', $request->tags);
-            $tag_ids = [];
+            if ($article) {
+                $tags = explode(',', $request->tags);
+                $tag_ids = [];
 
-            foreach ($tags as $key => $tag) {
-                $slugTag = ConvertSlugHelper::convert_slug($tag);
-                $newTag = ArticleTag::create([
-                    'name' => $tag,
-                    'slug' => $slugTag,
-                ]);
-                $tag_ids[$key] = $newTag->id;
+                foreach ($tags as $key => $tag) {
+                    $slugTag = ConvertSlugHelper::convert_slug($tag);
+                    $newTag = ArticleTag::create([
+                        'name' => $tag,
+                        'slug' => $slugTag,
+                    ]);
+                    $tag_ids[$key] = $newTag->id;
+                }
+
+                $article->tags()->attach($tag_ids);
+                $article->categories()->attach($request->category_ids);
             }
-
-            $article->tags()->attach($tag_ids);
-            $article->categories()->attach($request->category_ids);
+        } catch (\Exception $e) {
+            $message = ['status' => TOASTR_ERROR, 'content' => 'Article Create Failed'];
+            session()->flash(TOASTR, json_encode($message));
             return redirect()->route('articles.index');
         }
+
+        $message = ['status' => TOASTR_SUCCESS, 'content' => 'Article Created Successfully'];
+        session()->flash(TOASTR, json_encode($message));
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -116,42 +125,51 @@ class ArticleController extends Controller
      */
     public function update(StoreArticle $request, $id)
     {
-        $article = Article::findOrFail($id);
-        $tags = explode(',', $request->tags);
-        $tag_ids = [];
+        try {
+            $article = Article::findOrFail($id);
+            $tags = explode(',', $request->tags);
+            $tag_ids = [];
 
-        foreach ($article->tags as $article_tag) {
-            $article_tag->delete();
+            foreach ($article->tags as $article_tag) {
+                $article_tag->delete();
+            }
+
+            foreach ($tags as $key => $tag) {
+                $slugTag = ConvertSlugHelper::convert_slug($tag);
+                $newTag = ArticleTag::create([
+                    'name' => $tag,
+                    'slug' => $slugTag,
+                ]);
+                $tag_ids[$key] = $newTag->id;
+            }
+
+            $article->tags()->sync($tag_ids);
+            $article->categories()->sync($request->get('category_ids'));
+
+            $dataUpdate = [
+                'title' => $request->get('title'),
+                'heading' => $request->get('heading'),
+                'content' => $request->get('content')
+            ];
+
+            if ($request->get('title') !== $article->title) {
+                $dataUpdate['slug'] = ConvertSlugHelper::convert_slug($request->get('title'));
+            }
+
+            if ($request->image) {
+                $dataUpdate['image'] = StorageS3Helper::getUrlAfterUpload('images/articles', $request->image);
+                StorageS3Helper::delete($article->image);
+            }
+
+            $article->update($dataUpdate);
+        } catch (\Exception $e) {
+            $message = ['status' => TOASTR_ERROR, 'content' => 'Article Update Failed'];
+            session()->flash(TOASTR, json_encode($message));
+            return redirect()->route('articles.index');
         }
 
-        foreach ($tags as $key => $tag) {
-            $slugTag = ConvertSlugHelper::convert_slug($tag);
-            $newTag = ArticleTag::create([
-                'name' => $tag,
-                'slug' => $slugTag,
-            ]);
-            $tag_ids[$key] = $newTag->id;
-        }
-
-        $article->tags()->sync($tag_ids);
-        $article->categories()->sync($request->get('category_ids'));
-
-        $dataUpdate = [
-            'title' => $request->get('title'),
-            'heading' => $request->get('heading'),
-            'content' => $request->get('content')
-        ];
-
-        if ($request->get('title') !== $article->title) {
-            $dataUpdate['slug'] = ConvertSlugHelper::convert_slug($request->get('title'));
-        }
-
-        if ($request->image) {
-            $dataUpdate['image'] = StorageS3Helper::getUrlAfterUpload('images/articles', $request->image);
-            StorageS3Helper::delete($article->image);
-        }
-
-        $article->update($dataUpdate);
+        $message = ['status' => TOASTR_SUCCESS, 'content' => 'Article Updated Successfully'];
+        session()->flash(TOASTR, json_encode($message));
         return redirect()->route('articles.index');
     }
 
@@ -163,11 +181,20 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::findOrFail($id);
-        $article->categories()->detach();
-        $article->tags()->detach();
-        $article->comments()->delete();
-        $article->delete();
+        try {
+            $article = Article::findOrFail($id);
+            $article->categories()->detach();
+            $article->tags()->detach();
+            $article->comments()->delete();
+            $article->delete();
+        } catch (\Exception $e) {
+            $message = ['status' => TOASTR_ERROR, 'content' => 'Article Delete Failed'];
+            session()->flash(TOASTR, json_encode($message));
+            return redirect()->back();
+        }
+
+        $message = ['status' => TOASTR_SUCCESS, 'content' => 'Article Deleted Successfully'];
+        session()->flash(TOASTR, json_encode($message));
         return redirect()->back();
     }
 }
