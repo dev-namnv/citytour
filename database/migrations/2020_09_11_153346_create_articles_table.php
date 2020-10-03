@@ -20,12 +20,10 @@ class CreateArticlesTable extends Migration
             $table->string('slug')->unique()->comment('Slug');
             $table->text('content')->comment('Nội dung');
             $table->string('image')->comment('Ảnh đại diện');
+            $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
             $table->unsignedBigInteger('user_id')->comment('ID tác giả');
             $table->softDeletes();
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -34,7 +34,8 @@ class InvoiceSeeder extends Seeder
                 'email' => $faker->email,
                 'message' => $faker->realText(),
                 'payment_type' => CREDIT_CARD,
-                'payment_method' => $faker->creditCardNumber,
+                'payment_status' => rand(0, 1),
+                'status' => rand(0, 1),
                 'user_id' => $user_id
             ]);
 
@@ -51,8 +52,7 @@ class InvoiceSeeder extends Seeder
                 if ($type_invoice === TYPE_SERVICE) {
                     $service_id = DB::table('services')->inRandomOrder()->first('id')->id;
                     DB::table('invoice_service_detail')->insert([
-                        'count_adult' => rand(1, 4),
-                        'count_children' => rand(0, 3),
+                        'amount_of_people' => rand(1, 4),
                         'service_id' => $service_id,
                         'invoice_id' => $id
                     ]);

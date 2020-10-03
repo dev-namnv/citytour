@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         $faker = \Faker\Factory::create('vi_VN');
 
         // Admin
-        $admin_id = DB::table('users')->insertGetId([
+        DB::table('users')->insertGetId([
             'username' => 'admin',
             'first_name' => 'Admin',
             'last_name' => $faker->lastName,
@@ -29,6 +29,22 @@ class UserSeeder extends Seeder
             'zipcode' => $faker->postcode,
             'country' => $faker->country,
             'role' => ADMIN
+        ]);
+
+        // Editor
+        DB::table('users')->insert([
+            'username' => 'editor',
+            'first_name' => 'Editor',
+            'last_name' => $faker->lastName,
+            'email' => 'editor@gmail.com',
+            'phone' => $faker->phoneNumber,
+            'birthday' => $faker->date(),
+            'address' => $faker->address,
+            'password' => Hash::make('editor'),
+            'city' => $faker->city,
+            'zipcode' => $faker->postcode,
+            'country' => $faker->country,
+            'role' => EDITOR
         ]);
 
         // User
@@ -45,18 +61,6 @@ class UserSeeder extends Seeder
             'zipcode' => $faker->postcode,
             'country' => $faker->country,
             'role' => USER
-        ]);
-
-        $travelo_id = DB::table('partners')->insertGetId([
-            'name' => 'Cty TNHH City Tours',
-            'email' => 'info@citytour.asia',
-            'avatar' => 'https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Flogo%2Flogo.png?alt=media&token=84fac77c-887d-4823-9a6b-9a66113393d9',
-            'sku' => 'city-tour'
-        ]);
-
-        DB::table('staffs')->insert([
-            'partner_id' => $travelo_id,
-            'user_id' => $admin_id
         ]);
     }
 }

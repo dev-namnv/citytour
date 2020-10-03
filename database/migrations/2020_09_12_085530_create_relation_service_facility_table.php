@@ -18,10 +18,6 @@ class CreateRelationServiceFacilityTable extends Migration
             $table->unsignedBigInteger('service_id')->comment('ID dịch vụ');
             $table->unsignedBigInteger('facility_id')->comment('ID cơ sở vật chất');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('service_id')->references('id')->on('services');
-            $table->foreign('facility_id')->references('id')->on('facilities');
         });
     }
 

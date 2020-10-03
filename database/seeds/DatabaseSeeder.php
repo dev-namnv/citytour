@@ -22,11 +22,9 @@ class DatabaseSeeder extends Seeder
         // Contact
         $this->call(ContactSeeder::class);
 
-        // Partner
-        $this->call(ParnetSeeder::class);
-
         // Service
         $this->call(FacilitySeeder::class);
+        $this->call(ServiceCategorySeeder::class);
         $this->call(ServiceSeeder::class);
 
         // Product

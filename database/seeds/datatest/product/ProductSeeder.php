@@ -25,11 +25,10 @@ class ProductSeeder extends Seeder
                 'image' => 'https://via.placeholder.com/950x375?text=Product ' . $i,
                 'origin_price' => $origin_price,
                 'price' => $origin_price - $origin_price/rand(1, 10),
-                'quantity' => rand(0, 1000),
+                'stocks' => rand(0, 1000),
                 'intro' => $faker->realText(),
                 'description' => $faker->realText(),
                 'active' => rand(0, 1),
-                'partner_id' => DB::table('partners')->inRandomOrder()->first('id')->id ?? 1,
             ]);
 
             // Product reviews

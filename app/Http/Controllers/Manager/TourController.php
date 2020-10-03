@@ -15,12 +15,7 @@ class TourController extends Controller
     public function index()
     {
         // Get all record type is tour and without global scope
-        $tours = Service::query()->withoutGlobalScopes()->paginate(PAGINATION_TOUR);
-
-        // Filter service if is Partner or Employee
-        if (Auth::user()->role === PARTNER || Auth::user()->role === EMPLOYEE) {
-            $tours = Service::ownershipServices()->tours()->paginate(PAGINATION_TOUR);
-        }
+        $tours = Service::query()->withoutGlobalScopes()->tours()->paginate(PAGINATION_TOUR);
 
         // Convert data
         foreach ($tours as $tour) {
