@@ -8,6 +8,10 @@ class InvoiceService extends Model
 {
     protected $table = 'invoice_service_detail';
 
+    protected $fillable = [
+        'invoice_id', 'service_id', 'amount_of_people'
+    ];
+
     /**
      * Eloquent invoice service
      */

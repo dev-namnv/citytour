@@ -8,6 +8,10 @@ class InvoiceProduct extends Model
 {
     protected $table = 'invoice_product_detail';
 
+    protected $fillable = [
+        'invoice_id', 'product_id', 'quantity'
+    ];
+
     /**
      * Eloquent invoice product
      */

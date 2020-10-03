@@ -18,10 +18,6 @@ class CreateRelationArticleTagTable extends Migration
             $table->unsignedBigInteger('article_id')->comment('ID bài viết');
             $table->unsignedBigInteger('tag_id')->comment('ID tag');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('article_id')->references('id')->on('articles');
-            $table->foreign('tag_id')->references('id')->on('article_tags');
         });
     }
 

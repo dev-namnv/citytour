@@ -28,14 +28,11 @@ class CreateInvoicesTable extends Migration
             $table->string('email')->comment('Địa chỉ Email');
             $table->string('message')->nullable()->comment('Lời nhắn');
 
+            $table->boolean('status')->default(PAYMENT_ORDERED)->comment('Trạng thái đơn hàng');
             $table->string('payment_type')->comment('Hình thức thanh toán');
-            $table->string('payment_method')
-                ->comment('Số tài khoản, số thẻ ....');
-//            $table->boolean('status');
+            $table->string('payment_status')
+                ->comment('Trạng thái thanh toán: 0. Chưa thanh toán, 1. Đã thanh toán');
             $table->unsignedBigInteger('user_id')->nullable()->comment('ID tài khoản');
-
-            // Foreign key
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

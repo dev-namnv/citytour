@@ -21,10 +21,6 @@ class CreateProductReviewsTable extends Migration
             $table->unsignedBigInteger('user_id')->comment('ID người tạo');
             $table->unsignedBigInteger('product_id')->comment('ID sản phẩm');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

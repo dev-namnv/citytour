@@ -18,10 +18,6 @@ class CreateWishlistServiceTable extends Migration
             $table->unsignedBigInteger('service_id')->comment('ID dịch vụ')->nullable();
             $table->unsignedBigInteger('user_id')->comment('ID người dùng');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('service_id')->references('id')->on('services');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

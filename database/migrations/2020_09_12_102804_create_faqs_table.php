@@ -18,6 +18,7 @@ class CreateFaqsTable extends Migration
             $table->string('title')->comment('Tiêu đề');
             $table->string('heading')->comment('Phần mở đầu');
             $table->text('content')->comment('Nội dung');
+            $table->integer('sort_order')->default(0)->comment('Thứ tự sắp xếp');
             $table->timestamps();
         });
     }

@@ -18,10 +18,6 @@ class CreateRelationArticleCategoryTable extends Migration
             $table->unsignedBigInteger('article_id')->comment('ID bài viết');
             $table->unsignedBigInteger('category_id')->comment('ID chuyên mục');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('article_id')->references('id')->on('articles');
-            $table->foreign('category_id')->references('id')->on('article_categories');
         });
     }
 

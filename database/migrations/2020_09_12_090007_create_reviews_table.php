@@ -21,10 +21,6 @@ class CreateReviewsTable extends Migration
             $table->unsignedBigInteger('user_id')->comment('ID người tạo');
             $table->unsignedBigInteger('service_id')->comment('ID dịch vụ');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 
