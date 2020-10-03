@@ -34,12 +34,19 @@ return [
         'type' => [
             TYPE_SERVICE => 'Hóa đơn dịch vụ',
             TYPE_PRODUCT => 'Hóa đơn sản phẩm'
+        ],
+        'status' => [
+            PAYMENT_ORDERED => 'Đã đặt hàng',
+            PAYMENT_CONFIRMED => 'Đã xác thực'
+        ],
+        'payment_status' => [
+            PAYMENT_PAID => 'Đã thanh toán',
+            PAYMENT_UNPAID => 'Chưa thanh toán'
         ]
     ],
     'role' => [
-        USER => 'Người dùng',
-        ADMIN => 'Quản trị viên cao cấp',
-        PARTNER => 'Đối tác',
-        EMPLOYEE => 'Nhân viên'
+        USER => 'Người dùng thông thường',
+        ADMIN => 'Quản trị viên',
+        EDITOR => 'Biên tập viên'
     ],
 ];

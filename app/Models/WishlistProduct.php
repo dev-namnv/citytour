@@ -8,6 +8,10 @@ class WishlistProduct extends Model
 {
     protected $table = 'wishlist_product';
 
+    protected $fillable = [
+        'product_id', 'user_id'
+    ];
+
     /**
      * Eloquent wishlist product
      */

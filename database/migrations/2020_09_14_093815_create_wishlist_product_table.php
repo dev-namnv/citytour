@@ -18,10 +18,6 @@ class CreateWishlistProductTable extends Migration
             $table->unsignedBigInteger('product_id')->comment('ID sản phẩm')->nullable();
             $table->unsignedBigInteger('user_id')->comment('ID người dùng');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

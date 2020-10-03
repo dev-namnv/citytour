@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckPartner
+class CheckEditor
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class CheckPartner
      */
     public function handle($request, Closure $next)
     {
-        // Allow ADMIN, PARTNER to access
-        if (Auth::check() && (Auth::user()->role === ADMIN || Auth::user()->role === PARTNER)) {
+        // Allow ADMIN, EDITOR access
+        if (Auth::check() && (Auth::user()->role === ADMIN || Auth::user()->role === EDITOR)) {
             return $next($request);
         }
         return abort(403, HTTP_403);

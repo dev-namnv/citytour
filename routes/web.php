@@ -27,7 +27,7 @@ Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () 
 });
 
 // Manager
-Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'employee'], function () {
+Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'editor'], function () {
     // Manager
     Route::get('/', function () {
         return redirect()->route('dashboard-analytic');

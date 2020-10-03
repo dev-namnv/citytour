@@ -35,18 +35,12 @@
                 ]
             },
             "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
-                },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sInfo": "Hiện thị trang _PAGE_ của {{ $tours->lastPage() }} trang",
                 "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-                "sLengthMenu": "Results :  _MENU_",
+                "sSearchPlaceholder": "Tìm kiếm ...",
+                "sLengthMenu": "Kết quả :  _MENU_",
             },
-            "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
+            paging: false
         });
     </script>
 @endsection
@@ -62,23 +56,25 @@
                         <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                             <thead>
                             <tr>
+                                <th>STT</th>
                                 <th>Tour</th>
                                 <th>Địa chỉ</th>
-                                <th>Giá người lớn</th>
-                                <th>Giá trẻ nhỏ</th>
+                                <th>Giá hiện tại</th>
+                                <th>Danh mục</th>
                                 <th>Trạng thái</th>
                                 <th>Đánh giá</th>
                                 <th>Tùy chọn</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($tours as $tour)
+                            @foreach($tours as $key => $tour)
                                 <tr>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $tour->name }}</td>
                                     <td>{{ $tour->address }}</td>
-                                    <td>{{ $tour->adult_price }}</td>
-                                    <td>{{ $tour->children_price }}</td>
-                                    <td class="text-center">
+                                    <td>{{ $tour->getCurrentPrice() }}</td>
+                                    <td>{{ $tour->category->name }}</td>
+                                    <td class="">
                                         <span class="shadow-none badge {{ $tour->active ? 'badge-primary' : 'badge-danger' }}">
                                             {{ $tour->getStatus() }}
                                         </span>
@@ -113,14 +109,12 @@
                             @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div>
-                        {{ $tours->links() }}
+                        <div class="float-right">
+                            {{ $tours->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 @endsection

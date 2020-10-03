@@ -8,6 +8,10 @@ class ServiceLog extends Model
 {
     protected $table = 'service_logs';
 
+    protected $fillable = [
+        'service_id', 'user_id'
+    ];
+
     /**
      * Relation service log
      */

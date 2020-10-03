@@ -60,11 +60,10 @@ class ServiceSeeder extends Seeder
             $service->description = $faker->realText();
             $service->content = $faker->realText();
             $service->schedule = $schedule;
-            $service->adult_price = rand(10000, 10000000);
-            $service->children_price = rand(10000, 10000000);
-            $service->type = rand(1, 4) * 10;
+            $service->price = rand(10000, 10000000);
+            $service->type = SERVICE_TOUR;
+            $service->service_category_id = DB::table('service_categories')->inRandomOrder()->first('id')->id;
             $service->active = rand(1, 0);
-            $service->partner_id = DB::table('partners')->inRandomOrder()->first()->id ?? 1;
 
             $service->save();
 
