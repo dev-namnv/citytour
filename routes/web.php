@@ -65,5 +65,9 @@ Route::group(['namespace' => 'Main'], function () {
     Route::group(['prefix' => 'news'], function () {
        Route::get('/', 'ArticleController@list')->name('articles.list');
        Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
+       });
+    Route::group(['prefix' => 'main'], function () {
+       Route::get('profile', 'ClientController@index');
+       Route::post('edit-profile/{id}', 'ClientController@editProfile')->name('edit-profile');
     });
 });
