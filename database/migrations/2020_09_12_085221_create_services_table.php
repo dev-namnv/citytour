@@ -18,6 +18,8 @@ class CreateServicesTable extends Migration
             $table->string('name')->comment('Tên dịch vụ');
             $table->string('slug')->unique()->comment('Slug');
             $table->string('address')->comment('Địa chỉ');
+            $table->string('thumbnail')->comment('Hình thu nhỏ');
+            $table->string('banner')->comment('Banner');
             $table->text('description')->comment('Mô tả');
             $table->text('content')->comment('Nội dung dịch vụ');
             $table->jsonb('schedule')->comment('Lịch trình');
