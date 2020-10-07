@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Manager;
 
 use App\Helpers\ReviewHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class TourController extends Controller
@@ -33,7 +31,7 @@ class TourController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+
     }
 
     public function edit(Request $request)

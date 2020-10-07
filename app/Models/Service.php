@@ -15,6 +15,8 @@ class Service extends Model
         'name',
         'slug',
         'address',
+        'thumbnail',
+        'banner',
         'description',
         'content',
         'schedule',

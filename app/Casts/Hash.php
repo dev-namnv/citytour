@@ -36,7 +36,7 @@ class Hash implements CastsInboundAttributes
     public function set($model, $key, $value, $attributes)
     {
         return is_null($this->algorithm)
-            ? bcrypt($value)
-            : hash($this->algorithm, $value);
+            ? bcrypt((string)$value)
+            : hash($this->algorithm, (string)$value);
     }
 }
