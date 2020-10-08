@@ -18,6 +18,7 @@ class ArticleCategorySeeder extends Seeder
             DB::table('article_categories')->insertGetId([
                 'name' => $name,
                 'slug' => Str::slug($name) . '-' . rand(1, 100),
+                'sort_order' => rand(0, 20),
                 'active' => rand(0, 1)
             ]);
         }

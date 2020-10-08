@@ -21,6 +21,7 @@ class CreateSlidersTable extends Migration
             $table->string('description')->comment('Giới thiệu');
             $table->string('button')->nullable()->comment('Button');
             $table->text('frame')->nullable()->comment('Frame');
+            $table->integer('sort_order')->default(0)->comment('Thứ tự sắp xếp');
             $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
             $table->timestamps();
         });

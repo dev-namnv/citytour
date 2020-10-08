@@ -17,13 +17,8 @@ class CreateInvoiceServiceDetail extends Migration
             $table->id();
             $table->unsignedBigInteger('invoice_id')->nullable()->comment('ID hóa đơn');
             $table->unsignedBigInteger('service_id')->nullable()->comment('ID dịch vụ');
-            $table->integer('count_adult')->comment('Số người lớn');
-            $table->integer('count_children')->comment('Số trẻ nhỏ');
+            $table->integer('amount_of_people')->comment('Tổng số người');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('invoice_id')->references('id')->on('invoices');
-            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 

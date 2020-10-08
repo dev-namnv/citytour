@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Scopes\ActiveScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,13 +13,26 @@ class User extends Authenticatable
 
     use SoftDeletes;
 
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'phone',
+        'avatar',
+        'birthday',
+        'address',
+        'city',
+        'zipcode',
+        'country',
+        'google_map',
+        'status'
     ];
 
     /**
@@ -43,6 +55,11 @@ class User extends Authenticatable
     ];
 
     /**
+     * @var mixed
+     */
+    private $role;
+
+    /**
      * Get full name
      *
      * @return string
@@ -52,17 +69,10 @@ class User extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
-    /**
-     * Eloquent staff partner
-     */
-    public function partner()
+    public function getRole()
     {
-        return $this->belongsToMany('App\Models\Partner', 'staffs', 'user_id', 'partner_id');
-    }
-
-    public function getPartner()
-    {
-        return $this->partner[0];
+        $masterData = config('masterdata')['role'];
+        return $masterData[$this->role];
     }
 
     public function articles()

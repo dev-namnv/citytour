@@ -6,11 +6,27 @@ use App\Casts\Currency;
 use App\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 class Service extends Model
 {
     protected $table = 'services';
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'address',
+        'thumbnail',
+        'banner',
+        'description',
+        'content',
+        'schedule',
+        'origin_price',
+        'price',
+        'type',
+        'google_map',
+        'active',
+        'service_category_id'
+    ];
 
     use SoftDeletes;
 
@@ -23,16 +39,19 @@ class Service extends Model
         'schedule' => Json::class,
         'google_map' => Json::class,
         'active' => 'boolean',
-        'adult_price' => Currency::class,
-        'children_price' => Currency::class
+        'origin_price' => Currency::class,
+        'price' => Currency::class
     ];
 
     /**
-     * Ownership scope
+     * Get sale & convert into current
      */
-    public function scopeOwnershipServices($query)
+    public function getCurrentPrice()
     {
-        return $query->where('partner_id', '=', Auth::user()->getPartner()->id);
+        if (!$this->price) {
+            return $this->origin_price;
+        }
+        return $this->price;
     }
 
     /**
@@ -76,14 +95,15 @@ class Service extends Model
         return $this->hasMany('App\Models\Album');
     }
 
-    public function partner()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Partner');
+        return $this->belongsTo('App\Models\ServiceCategory', 'service_category_id', 'id', 'service_categories');
     }
 
     /**
      * TODO: Convert data
      *
+     * @return mixed
      * @var integer string
      */
     public function getServiceType()

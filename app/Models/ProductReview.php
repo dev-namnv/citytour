@@ -9,6 +9,10 @@ class ProductReview extends Model
 {
     protected $table = 'product_reviews';
 
+    protected $fillable = [
+        'content', 'star', 'active', 'user_id'
+    ];
+
     /**
      * Add active scope in query
      */
