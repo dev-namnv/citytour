@@ -75,7 +75,7 @@
                                     <td>{{ $tour->getCurrentPrice() }}</td>
                                     <td>{{ $tour->category->name }}</td>
                                     <td class="">
-                                        <span class="shadow-none badge {{ $tour->active ? 'badge-primary' : 'badge-danger' }}">
+                                        <span class="tour-status-{{$tour->id}} shadow-none badge {{ $tour->active ? 'badge-primary' : 'badge-danger' }}">
                                             {{ $tour->getStatus() }}
                                         </span>
                                     </td>
@@ -97,9 +97,7 @@
                                                 </svg>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <a class="dropdown-item" href="javascript:void(0)" tour-id="{{ $tour->id }}" onclick="Admin.tourSetActive(this)">@if($tour->active) Khóa dịch vụ @else Mở dịch vụ @endif</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#">Separated link</a>
                                             </div>
