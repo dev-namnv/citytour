@@ -39,4 +39,31 @@ class TourController extends Controller
         $tour = Service::query()->withoutGlobalScopes()->findOrFail($request->id);
         return view('manager.tour.edit', compact('tour'));
     }
+
+    public function setActive(Request $request)
+    {
+        try {
+            $tour = Service::query()->withoutGlobalScopes()->findOrFail($request->tour_id);
+            if ($tour->active) {
+                $tour->active = NOT_ACTIVE;
+            } else {
+                $tour->active = ACTIVE;
+            }
+            $response = [
+                'status' => TOASTR_INFO,
+                'content' => 'Cập nhật trạng thái thành công',
+                'id' => $tour->id,
+                'active' => $tour->active
+            ];
+
+            $tour->save();
+        } catch (\Exception $exception) {
+            $response = [
+                'status' => TOASTR_ERROR,
+                'content' => 'Cập nhật trạng thái không thành công'
+            ];
+        }
+
+        return response($response);
+    }
 }
