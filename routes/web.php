@@ -40,6 +40,8 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         })->name('dashboard');
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
+        Route::get('/user_profile', 'DashboardController@profile')->name('user_profile');
+        Route::get('profile-detail/{id}', 'DashboardController@detailProfile')->name('profile-detail');
     });
 
     // Tour
