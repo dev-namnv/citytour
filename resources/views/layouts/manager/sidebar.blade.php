@@ -413,10 +413,7 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="users" data-parent="#accordionExample">
                     <li>
-                        <a href="user_profile.html"> Profile </a>
-                    </li>
-                    <li>
-                        <a href="user_account_setting.html"> Account Settings </a>
+                        <a href="{{route('user_profile')}}"> Profile </a>
                     </li>
                 </ul>
             </li>

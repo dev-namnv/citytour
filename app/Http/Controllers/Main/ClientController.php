@@ -25,11 +25,8 @@ class ClientController extends Controller
         $user->zipcode = $request->zipcode;
         $user->country = $request->country;
         $urlImage = StorageS3Helper::getUrlAfterUpload('images/avatar', $request->image);
-        dd($urlImage);
         $user->avatar = $urlImage;
         $user->save();
-
-
         return redirect()->back();
     }
 }
