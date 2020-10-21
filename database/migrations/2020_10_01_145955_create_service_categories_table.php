@@ -15,8 +15,10 @@ class CreateServiceCategoriesTable extends Migration
     {
         Schema::create('service_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('Tên chuyên mục');
+            $table->string('name')->comment('Tên danh mục');
             $table->string('slug')->unique()->comment('Slug');
+            $table->string('icon')->comment('Icon danh mục dịch vụ');
+            $table->text('description')->nullable()->comment('Mô tả danh mục');
             $table->integer('sort_order')->default(0)->comment('Thứ tự sắp xếp');
             $table->timestamps();
         });
