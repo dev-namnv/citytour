@@ -92,7 +92,7 @@ Admin = {
                     regex: getMessageValidation('regex', {attribute: 'name'})
                 },
                 slug: {
-                    minLength: getMessageValidation('min', {attribute: 'slug'})
+                    minLength: getMessageValidation('min', {attribute: 'slug', min: 20, type: 'string'})
                 }
             },
         })
@@ -224,6 +224,34 @@ Admin = {
         })
     },
 
+
+    },
+
+    /**
+     * Tour action
+     * All tour action
+     */
+    tourSetActive: (e) => {
+        const tour_id = $(e).attr('tour-id')
+
+        axios.put('/api/manager/tour/set-active', {tour_id: tour_id})
+            .then(({data}) => {
+                const tourClass = $(`.tour-status-${data.id}`)
+                Toastr.show(data)
+                if (data.active) {
+                    $(e).text('Khóa dịch vụ')
+                    tourClass.text('Đang mở')
+                    tourClass.removeClass('badge-danger')
+                    tourClass.addClass('badge-primary')
+                } else {
+                    $(e).text('Mở dịch vụ ')
+                    tourClass.text('Ẩn')
+                    tourClass.removeClass('badge-primary')
+                    tourClass.addClass('badge-danger')
+                }
+            })
+            .catch(err => console.log(err))
+    }
 
 }
 

@@ -40454,8 +40454,44 @@ Admin = {
           regex: getMessageValidation('regex', {
             attribute: 'name'
           })
+        },
+        slug: {
+          minLength: getMessageValidation('min', {
+            attribute: 'slug',
+            min: 20,
+            type: 'string'
+          })
         }
       }
+    });
+  },
+
+  /**
+   * Tour action
+   * All tour action
+   */
+  tourSetActive: function tourSetActive(e) {
+    var tour_id = $(e).attr('tour-id');
+    axios.put('/api/manager/tour/set-active', {
+      tour_id: tour_id
+    }).then(function (_ref) {
+      var data = _ref.data;
+      var tourClass = $(".tour-status-".concat(data.id));
+      Toastr.show(data);
+
+      if (data.active) {
+        $(e).text('Khóa dịch vụ');
+        tourClass.text('Đang mở');
+        tourClass.removeClass('badge-danger');
+        tourClass.addClass('badge-primary');
+      } else {
+        $(e).text('Mở dịch vụ ');
+        tourClass.text('Ẩn');
+        tourClass.removeClass('badge-primary');
+        tourClass.addClass('badge-danger');
+      }
+    })["catch"](function (err) {
+      return console.log(err);
     });
   },
   // Article Store Validate
@@ -40799,6 +40835,11 @@ getMessageValidation = function getMessageValidation(rule) {
   return message;
 };
 
+$.validator.addMethod("regex", function (value, element, regexp) {
+  var re = new RegExp(regexp);
+  return this.optional(element) || re.test(value);
+}, "Please check your input.");
+
 /***/ }),
 
 /***/ "./resources/js/vue-i18n-locales.generated.js":
@@ -40990,7 +41031,41 @@ __webpack_require__.r(__webpack_exports__);
           "rule-name": "custom-message"
         }
       },
-      "attributes": []
+      "attributes": {
+        "name": "name",
+        "username": "username",
+        "email": "email address",
+        "first_name": "first name",
+        "last_name": "last name",
+        "password": "password",
+        "password_confirmation": "password confirm",
+        "city": "city",
+        "country": "country",
+        "address": "address",
+        "phone": "phone number",
+        "mobile": "mobile",
+        "age": "age",
+        "sex": "sex",
+        "gender": "gender",
+        "year": "year",
+        "month": "month",
+        "day": "days",
+        "hour": "hours",
+        "minute": "minutes",
+        "second": "seconds",
+        "title": "title",
+        "content": "content",
+        "body": "body",
+        "description": "description",
+        "excerpt": "excerpt",
+        "date": "date",
+        "time": "time",
+        "subject": "subject",
+        "message": "message",
+        "available": "available",
+        "size": "size",
+        "slug": "slug"
+      }
     }
   },
   "ja": {
@@ -41560,7 +41635,8 @@ __webpack_require__.r(__webpack_exports__);
         "heading": "phần mở đầu",
         "image": "ảnh",
         "tags": "thẻ",
-        "category": "danh mục"
+        "category": "danh mục",
+        "slug": "đường dẫn tĩnh"
       }
     }
   }

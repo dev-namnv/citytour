@@ -52174,6 +52174,11 @@ getMessageValidation = function getMessageValidation(rule) {
   return message;
 };
 
+$.validator.addMethod("regex", function (value, element, regexp) {
+  var re = new RegExp(regexp);
+  return this.optional(element) || re.test(value);
+}, "Please check your input.");
+
 /***/ }),
 
 /***/ "./resources/js/vue-i18n-locales.generated.js":
@@ -52365,7 +52370,41 @@ __webpack_require__.r(__webpack_exports__);
           "rule-name": "custom-message"
         }
       },
-      "attributes": []
+      "attributes": {
+        "name": "name",
+        "username": "username",
+        "email": "email address",
+        "first_name": "first name",
+        "last_name": "last name",
+        "password": "password",
+        "password_confirmation": "password confirm",
+        "city": "city",
+        "country": "country",
+        "address": "address",
+        "phone": "phone number",
+        "mobile": "mobile",
+        "age": "age",
+        "sex": "sex",
+        "gender": "gender",
+        "year": "year",
+        "month": "month",
+        "day": "days",
+        "hour": "hours",
+        "minute": "minutes",
+        "second": "seconds",
+        "title": "title",
+        "content": "content",
+        "body": "body",
+        "description": "description",
+        "excerpt": "excerpt",
+        "date": "date",
+        "time": "time",
+        "subject": "subject",
+        "message": "message",
+        "available": "available",
+        "size": "size",
+        "slug": "slug"
+      }
     }
   },
   "ja": {
@@ -52932,6 +52971,7 @@ __webpack_require__.r(__webpack_exports__);
         "message": "lời nhắn",
         "available": "có sẵn",
         "size": "kích thước",
+        "slug": "đường dẫn tĩnh",
         "heading": "phần mở đầu",
         "image": "ảnh",
         "tags": "thẻ",

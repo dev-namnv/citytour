@@ -64,6 +64,8 @@ class ServiceSeeder extends Seeder
             $service->type = SERVICE_TOUR;
             $service->service_category_id = DB::table('service_categories')->inRandomOrder()->first('id')->id;
             $service->active = rand(1, 0);
+            $service->thumbnail = 'https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Fservice%2Ftour_box_1.jpg?alt=media&token=748ac3ed-cd51-470c-8e27-e95088a39d3e';
+            $service->banner = 'https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Fservice%2Fsingle_tour_bg_1.jpg?alt=media&token=5c48c1f1-fecc-4f1f-9ab2-fb4982ae1594';
 
             $service->save();
 

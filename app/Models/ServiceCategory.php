@@ -9,7 +9,7 @@ class ServiceCategory extends Model
     protected $table = 'service_categories';
 
     protected $fillable = [
-        'name', 'slug', 'sort_order'
+        'name', 'slug', 'icon', 'sort_order'
     ];
 
     /**

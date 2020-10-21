@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'manager', 'namespace' => 'Manager'], function () {
+    Route::group(['prefix' => 'tour'], function () {
+       Route::put('set-active', 'TourController@setActive')->name('tour-set-active');
+    });
+});
+

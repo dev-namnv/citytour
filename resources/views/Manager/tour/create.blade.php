@@ -4,15 +4,31 @@
 
 @section('extra-css')
     <link href="{{ asset('libraries/manager/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('libraries/manager/assets/css/forms/switches.css') }}">
 @endsection
 
 @section('extra-js')
     <script src="{{ asset('libraries/manager/assets/js/scrollspyNav.js') }}"></script>
+    <script>
+        CKEDITOR.replace('service_desc_editor', {
+            extraPlugins: ['easyimage'],
+            removePlugins: 'image',
+            cloudServices_tokenUrl: 'https://73727.cke-cs.com/token/dev/a19a88823af692f3cade293c34caa258c0615e44972466b8891f7647319f',
+            cloudServices_uploadUrl: 'https://73727.cke-cs.com/easyimage/upload/'
+        });
+
+        CKEDITOR.replace('service_content_editor', {
+            extraPlugins: ['easyimage'],
+            removePlugins: 'image',
+            cloudServices_tokenUrl: 'https://73727.cke-cs.com/token/dev/a19a88823af692f3cade293c34caa258c0615e44972466b8891f7647319f',
+            cloudServices_uploadUrl: 'https://73727.cke-cs.com/easyimage/upload/'
+        });
+    </script>
 @endsection
 
 @section('content')
-
-    <div class="row mt-lg-3" style="width: 100%">
+<div class="container-fluid">
+    <div class="row mt-lg-3">
         <div id="flFormsGrid" class="col-lg-12 layout-spacing">
             <div class="statbox widget box box-shadow">
                 <div class="widget-header">
@@ -28,63 +44,76 @@
                         <div class="form-row mb-4">
                             <div class="form-group col-md-6">
                                 <label for="inputName">Name</label>
-                                <input type="text" class="form-control" id="inputName"
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputName"
                                        value="{{ old('name') }}" placeholder="Tên Tour">
+                                @error('name')
+                                    <span id="password-error" class="is-invalid invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPassword4">Slug</label>
-                                <input type="text" class="form-control" id="inputPassword4"
+                                <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" id="inputPassword4"
                                        value="{{ old('slug') }}" placeholder="Đường dẫn URL">
+                                @error('slug')
+                                    <span id="password-error" class="is-invalid invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group mb-4">
                             <label for="pac-input">Address</label>
-                            <input type="text" class="form-control" id="pac-input"
+                            <input type="text" name="address" class="form-control" id="pac-input"
                                    value="{{ old('address') }}" placeholder="số 5 Phạm Văn Đồng ...">
+                            @error('address')
+                                <span id="password-error" class="is-invalid invalid-feedback">{{ $message }}</span>
+                            @enderror
                             <div id="map"></div>
                         </div>
-                        {{--<div class="form-group mb-4">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2"
-                                   placeholder="Apartment, studio, or floor">
-                        </div>--}}
-                        <div class="form-row mb-4">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
-                            </div>
+                        <div class="form-group">
+                            <label for="service_desc_editor">Description</label>
+                            <textarea class="@error('description') is-invalid @enderror" name="description" id="service_desc_editor" rows="10" cols="80">
+                                {{old('description')}}
+                            </textarea>
+                            @error('description')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="service_content_editor">Content</label>
+                            <textarea class="@error('content') is-invalid @enderror" name="content" id="service_content_editor" rows="10" cols="80">
+                                {{old('content')}}
+                            </textarea>
+                            @error('content')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <div class="form-check pl-0">
                                 <div class="custom-control custom-checkbox checkbox-info">
-                                    <input type="checkbox" class="custom-control-input" id="gridCheck">
-                                    <label class="custom-control-label" for="gridCheck">Check me out</label>
+                                    <input type="checkbox" checked class="custom-control-input" id="gridCheck">
+                                    <label class="custom-control-label" for="gridCheck">Active</label>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+                        <button type="submit" class="btn btn-primary mt-3">Create</button>
                     </form>
-
-                    <div class="code-section-container">
-
-                        <button class="btn toggle-code-snippet"><span>Code</span></button>
-
-                        <div class="code-section text-left">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<script>
+    CKEDITOR.replace('service_desc_editor', {
+        extraPlugins: ['easyimage'],
+        removePlugins: 'image',
+        cloudServices_tokenUrl: 'https://73727.cke-cs.com/token/dev/a19a88823af692f3cade293c34caa258c0615e44972466b8891f7647319f',
+        cloudServices_uploadUrl: 'https://73727.cke-cs.com/easyimage/upload/'
+    });
+
+    CKEDITOR.replace('service_content_editor', {
+        extraPlugins: ['easyimage'],
+        removePlugins: 'image',
+        cloudServices_tokenUrl: 'https://73727.cke-cs.com/token/dev/a19a88823af692f3cade293c34caa258c0615e44972466b8891f7647319f',
+        cloudServices_uploadUrl: 'https://73727.cke-cs.com/easyimage/upload/'
+    });
+</script>
 @endsection
