@@ -49,7 +49,7 @@
                                         <form action="{{route('articles.destroy', $article->id)}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-danger">Delete</button>
+                                            <button class="btn btn-danger" onclick="return confirm('Bạn có thực sự muốn xóa không?')">Delete</button>
                                         </form>
                                     </div>
                                 </td>
