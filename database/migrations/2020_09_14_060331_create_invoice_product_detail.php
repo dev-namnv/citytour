@@ -19,10 +19,6 @@ class CreateInvoiceProductDetail extends Migration
             $table->unsignedBigInteger('product_id')->nullable()->comment('ID sản phẩm');
             $table->integer('quantity')->comment('Số lượng');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('invoice_id')->references('id')->on('invoices');
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

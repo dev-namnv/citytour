@@ -2,12 +2,26 @@
 
 namespace App\Models;
 
+use App\Casts\Currency;
 use App\Scopes\ActiveScope;
+use App\Scopes\StockScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     protected $table = 'products';
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'image',
+        'origin_price',
+        'price',
+        'stocks',
+        'intro',
+        'description',
+        'active'
+    ];
 
     /**
      * TODO: Convert data
@@ -15,7 +29,9 @@ class Product extends Model
      * @var string[]
      */
     protected $casts = [
-        'active' => 'boolean'
+        'active' => 'boolean',
+        'origin_price' => Currency::class,
+        'price' => Currency::class
     ];
 
     /**
@@ -35,6 +51,7 @@ class Product extends Model
     protected static function booted()
     {
         static::addGlobalScope(new ActiveScope);
+        static::addGlobalScope(new StockScope);
     }
 
     /**
@@ -48,10 +65,5 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany('App\Models\ProductReview');
-    }
-
-    public function partner()
-    {
-        return $this->belongsTo('App\Models\Partner', 'partner_id', 'id');
     }
 }

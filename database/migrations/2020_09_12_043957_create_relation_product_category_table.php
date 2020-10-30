@@ -18,10 +18,6 @@ class CreateRelationProductCategoryTable extends Migration
             $table->unsignedBigInteger('product_id')->comment('ID sản phẩm');
             $table->unsignedBigInteger('category_id')->comment('ID danh mục');
             $table->timestamps();
-
-            // Foreign key
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('category_id')->references('id')->on('product_categories');
         });
     }
 

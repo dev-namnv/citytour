@@ -17,7 +17,7 @@ class Json implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-        return $value;
+        return json_decode($value, true);
     }
 
     /**
@@ -31,6 +31,6 @@ class Json implements CastsAttributes
      */
     public function set($model, $key, $value, $attributes)
     {
-        return $value;
+        return json_encode($value);
     }
 }

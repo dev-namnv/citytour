@@ -49,8 +49,7 @@ class ServiceSeeder extends Seeder
 
         $facilities = DB::table('facilities')->get();
 
-        for ($i = 0; $i < 5; $i++) {
-            $has_partner = rand(0, 1);
+        for ($i = 0; $i < 50; $i++) {
             $name = 'Dịch vụ số ' . $i;
 
             $service = new Service;
@@ -61,11 +60,12 @@ class ServiceSeeder extends Seeder
             $service->description = $faker->realText();
             $service->content = $faker->realText();
             $service->schedule = $schedule;
-            $service->adult_price = rand(10000, 10000000);
-            $service->children_price = rand(10000, 10000000);
-            $service->type = rand(1, 4) * 10;
+            $service->price = rand(10000, 10000000);
+            $service->type = SERVICE_TOUR;
+            $service->service_category_id = DB::table('service_categories')->inRandomOrder()->first('id')->id;
             $service->active = rand(1, 0);
-            $service->partner_id = DB::table('partners')->inRandomOrder()->first()->id ?? 1;
+            $service->thumbnail = 'https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Fservice%2Ftour_box_1.jpg?alt=media&token=748ac3ed-cd51-470c-8e27-e95088a39d3e';
+            $service->banner = 'https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Fservice%2Fsingle_tour_bg_1.jpg?alt=media&token=5c48c1f1-fecc-4f1f-9ab2-fb4982ae1594';
 
             $service->save();
 

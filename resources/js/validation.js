@@ -13,7 +13,8 @@ if (locale === 'vi') {
     require('jquery-validation')
 }
 
-getMessageValidation = (rule, options = {
+OptionMessage = {
+    type: null,
     attribute: null,
     date: null,
     min: null,
@@ -22,35 +23,50 @@ getMessageValidation = (rule, options = {
     values: null,
     value: null,
     other: null
-}) => {
-    const validation = LANG.validation[rule];
-    let message;
+}
 
-    if (options.attribute) {
-        message = validation.replace("{attribute}", LANG.validation.attributes[options.attribute]);
+getMessageValidation = (rule, options = OptionMessage) => {
+    let validation = LANG.validation[rule];
+
+    if (options.type) {
+       validation = LANG.validation[rule][options.type];
     }
-    if (options.date) {
-        message = validation.replace("{date}", options.date)
+
+    let message = validation;
+
+    if (options.attribute !== null) {
+        message = message.replace("{attribute}", LANG.validation.attributes[options.attribute]);
     }
-    if (options.min) {
-        message = validation.replace("{min}", options.min)
+    if (options.min !== null) {
+        message = message.replace("{min}", options.min)
     }
-    if (options.max) {
-        message = validation.replace("{max}", options.max)
+    if (options.max !== null) {
+        message = message.replace("{max}", options.max)
     }
-    if (options.format) {
-        message = validation.replace("{format}", options.format)
+    if (options.date !== null) {
+        message = message.replace("{date}", options.date)
     }
-    if (options.values) {
-        message = validation.replace("{values}", options.values)
+    if (options.format !== null) {
+        message = message.replace("{format}", options.format)
     }
-    if (options.value) {
-        message = validation.replace("{value}", options.value)
+    if (options.values !== null) {
+        message = message.replace("{values}", options.values)
     }
-    if (options.other) {
-        message = validation.replace("{other}", options.other)
+    if (options.value !== null) {
+        message = message.replace("{value}", options.value)
+    }
+    if (options.other !== null) {
+        message = message.replace("{other}", options.other)
     }
 
     return message;
 }
 
+$.validator.addMethod(
+    "regex",
+    function(value, element, regexp) {
+        const re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    },
+    "Please check your input."
+);

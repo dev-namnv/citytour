@@ -9,6 +9,10 @@ class ProductCategory extends Model
 {
     protected $table = 'product_categories';
 
+    protected $fillable = [
+        'name', 'slug', 'active'
+    ];
+
     /**
      * TODO: Convert data
      *

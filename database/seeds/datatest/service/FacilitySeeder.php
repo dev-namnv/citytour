@@ -13,6 +13,8 @@ class FacilitySeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create('vi_VN');
+
         $facilities = [
             0 => ['name' => 'Museum', 'icon' => 'icon_set_1_icon-4'],
             1 => ['name' => 'Accessibility', 'icon' => 'icon_set_1_icon-13'],
@@ -34,7 +36,8 @@ class FacilitySeeder extends Seeder
             DB::table('facilities')->insert([
                 'name' => $item['name'],
                 'slug' => Str::slug($item['name']),
-                'icon' => $item['icon']
+                'icon' => $item['icon'],
+                'description' => $faker->realText(50)
             ]);
         }
     }

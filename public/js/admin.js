@@ -40415,42 +40415,12 @@ Admin = {
       errorClass: 'is-invalid invalid-feedback',
       validClass: 'is-valid'
     });
-  },
-  formContactValidate: function formContactValidate() {
-    $('.form-contact').validate({
-      rules: {
-        subject: {
-          required: true,
-          minlength: 10,
-          maxlength: 255
-        },
-        messages: {
-          required: true,
-          minlength: 20
-        }
-      },
-      messages: {
-        subject: {
-          required: getMessageValidation('required', {
-            attribute: 'subject'
-          })
-        },
-        messages: {
-          required: getMessageValidation('required', {
-            attribute: 'message'
-          })
-        }
-      },
-      invalidClass: 'is-invalid',
-      validClass: 'is-valid'
-    });
   }
 }; // Run onload
 
 $(window).on('load', function () {
   Admin.loginValidate();
   Admin.forgotPasswordValidate();
-  Admin.formContactValidate();
 });
 
 /***/ }),
@@ -40765,7 +40735,41 @@ __webpack_require__.r(__webpack_exports__);
           "rule-name": "custom-message"
         }
       },
-      "attributes": []
+      "attributes": {
+        "name": "name",
+        "username": "username",
+        "email": "email address",
+        "first_name": "first name",
+        "last_name": "last name",
+        "password": "password",
+        "password_confirmation": "password confirm",
+        "city": "city",
+        "country": "country",
+        "address": "address",
+        "phone": "phone number",
+        "mobile": "mobile",
+        "age": "age",
+        "sex": "sex",
+        "gender": "gender",
+        "year": "year",
+        "month": "month",
+        "day": "days",
+        "hour": "hours",
+        "minute": "minutes",
+        "second": "seconds",
+        "title": "title",
+        "content": "content",
+        "body": "body",
+        "description": "description",
+        "excerpt": "excerpt",
+        "date": "date",
+        "time": "time",
+        "subject": "subject",
+        "message": "message",
+        "available": "available",
+        "size": "size",
+        "slug": "slug"
+      }
     }
   },
   "ja": {
@@ -41022,17 +41026,19 @@ __webpack_require__.r(__webpack_exports__);
       "sign_in": "Đăng nhập",
       "sign_out": "Đăng xuất",
       "go_to_cart": "Giỏ hàng",
-      "checkout": "Thanh toán"
+      "checkout": "Thanh toán",
+      "manager": "Quản lý"
     },
     "info": {
       "hotline": "999.999.999.999",
       "opening": "Thứ 2 - thứ 6: 8.00am - 6.00pm",
-      "title": "Travelo"
+      "title": "Laravel"
     },
     "label": {
       "cart_total": "Tổng",
       "search": "Tìm kiếm ..."
     },
+    "message": [],
     "pages": {
       "home": {
         "title": "Chào mừng bạn đến với Travelo",
@@ -41049,7 +41055,7 @@ __webpack_require__.r(__webpack_exports__);
     "passwords": {
       "reset": "Mật khẩu mới đã được cập nhật!",
       "sent": "Hướng dẫn cấp lại mật khẩu đã được gửi!",
-      "throttled": "Please wait before retrying.",
+      "throttled": "Vui lòng đợi trước khi thử lại.",
       "token": "Mã khôi phục mật khẩu không hợp lệ.",
       "user": "Không tìm thấy người dùng với địa chỉ email này."
     },
@@ -41306,7 +41312,8 @@ __webpack_require__.r(__webpack_exports__);
         "subject": "tiêu đề",
         "message": "lời nhắn",
         "available": "có sẵn",
-        "size": "kích thước"
+        "size": "kích thước",
+        "slug": "đường dẫn tĩnh"
       }
     }
   }
@@ -41321,7 +41328,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\pro2016\travelo\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\travelo\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })

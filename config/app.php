@@ -234,6 +234,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
+        'StorageS3Helper' => App\Helper\StorageS3Helper::class,
     ],
 
 ];

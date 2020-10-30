@@ -27,7 +27,7 @@ Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () 
 });
 
 // Manager
-Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'employee'], function () {
+Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'editor'], function () {
     // Manager
     Route::get('/', function () {
         return redirect()->route('dashboard-analytic');
@@ -41,6 +41,16 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
     });
+
+    // Tour
+    Route::group(['prefix' => 'tour'], function () {
+        Route::get('/', 'TourController@index')->name('tour-list');
+        Route::get('/create', 'TourController@create')->name('tour-create');
+        Route::post('/store', 'TourController@store')->name('tour-store');
+        Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
+        Route::post('/update', 'TourController@update')->name('tour-update');
+        Route::post('/delete', 'TourController@delete')->name('tour-delete');
+    });
     // Contact
     Route::group(['prefix' => 'contacts'], function () {
         Route::get('/', 'ContactController@index')->name('contacts.index');
@@ -52,3 +62,6 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 
 // Main
 Route::resource('contact', 'Main\ContactController');
+Route::group(['namespace' => 'Main'], function () {
+
+});

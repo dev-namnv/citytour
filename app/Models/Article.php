@@ -22,6 +22,14 @@ class Article extends Model
     ];
 
     /**
+     * Add global scope in query
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new ActiveScope);
+    }
+
+    /**
      * Eloquent article
      */
     public function categories()
@@ -37,5 +45,10 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany('App\Models\ArticleComment');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 }
