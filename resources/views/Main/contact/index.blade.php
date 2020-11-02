@@ -145,16 +145,10 @@
                             Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie.
                         </p>
                         <ul id="contact-info">
-                            <li>+ 61 (2) 8093 3400 / + 61 (2) 8093 3402</li>
+                            <li>{{ __('info.hotline') }}</li>
                             <li><a href="#">info@domain.com</a>
                             </li>
                         </ul>
-                    </div>
-                    <div class="box_style_4">
-                        <i class="icon_set_1_icon-57"></i>
-                        <h4>{!! __('pages.contact.main.support') !!} <span>?</span></h4>
-                        <a href="tel://004542344599" class="phone">{{ __('info.hotline') }}</a>
-                        <small>{{ __('info.opening') }}</small>
                     </div>
                 </div>
                 <!-- End col-md-4 -->
