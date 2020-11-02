@@ -52224,6 +52224,29 @@ __webpack_require__.r(__webpack_exports__);
           "title": "Affordable Paris tours",
           "desc": "CITY TOURS / TOUR TICKETS / TOUR GUIDES"
         }
+      },
+      "article": {
+        "home": "Home",
+        "search": "Search",
+        "news": "News",
+        "categories": "Categories",
+        "recent_post": "Recent Post",
+        "tags": "Tags",
+        "read_more": "Read more",
+        "on": "On",
+        "in": "In",
+        "comments": "comments",
+        "posted_by": "Posted By",
+        "reply": "Reply",
+        "leave_a_comment": "Leave a comment",
+        "enter_name": "Enter name",
+        "enter_email": "Enter email",
+        "message": "Message",
+        "detail": "Detail",
+        "clear_form": "Clear form",
+        "post_comment": "Post comment",
+        "active": "Active",
+        "not_active": "Not Active"
       }
     },
     "pagination": {
@@ -52658,6 +52681,29 @@ __webpack_require__.r(__webpack_exports__);
           "title": "Tour du lịch Paris giá cả phải chăng",
           "desc": "TOUR TOUR THÀNH PHỐ / VÉ TOUR / HƯỚNG DẪN TOUR"
         }
+      },
+      "article": {
+        "home": "Trang chủ",
+        "search": "Tìm kiếm",
+        "news": "Tin tức",
+        "categories": "Danh mục bài viết",
+        "recent_post": "Bài viết gần đây",
+        "tags": "Thẻ",
+        "read_more": "Đọc thêm",
+        "on": "Đăng ngày",
+        "in": "Danh mục",
+        "comments": "bình luận",
+        "posted_by": "Đăng bởi",
+        "reply": "Trả lời",
+        "leave_a_comment": "Để lại bình luận",
+        "enter_name": "Nhập tên",
+        "enter_email": "Nhập email",
+        "message": "Lời nhắn",
+        "detail": "Chi tiết",
+        "clear_form": "Làm mới",
+        "post_comment": "Đăng bình luận",
+        "active": "Hiển thị",
+        "not_active": "Ẩn"
       }
     },
     "pagination": {
@@ -52925,7 +52971,11 @@ __webpack_require__.r(__webpack_exports__);
         "message": "lời nhắn",
         "available": "có sẵn",
         "size": "kích thước",
-        "slug": "đường dẫn tĩnh"
+        "slug": "đường dẫn tĩnh",
+        "heading": "phần mở đầu",
+        "image": "ảnh",
+        "tags": "thẻ",
+        "category": "danh mục"
       }
     }
   }
@@ -52951,8 +53001,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\travelo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\travelo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\travelo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\travelo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

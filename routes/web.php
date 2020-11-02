@@ -51,9 +51,19 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
     });
+
+
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('articles', 'ArticleController')->except(['show']);
+        Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
+    });
+
 });
 
 // Main
 Route::group(['namespace' => 'Main'], function () {
-
+    Route::group(['prefix' => 'news'], function () {
+       Route::get('/', 'ArticleController@list')->name('articles.list');
+       Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
+    });
 });

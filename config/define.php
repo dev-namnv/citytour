@@ -59,7 +59,10 @@ define('PAGINATION_TOUR', 10);
 define('PAGINATION_HOTEL', 10);
 define('PAGINATION_TRANSFER', 10);
 define('PAGINATION_RESTAURANT', 10);
-
+define('PAGINATION_ARTICLE', 10);
 // Limit text tour
 define('TOUR_LIMIT_ADDRESS', 45);
 define('TOUR_LIMIT_DESC', 50);
+
+// Articles
+define('ARTICLES_LIMIT_CONTENT', 20);
