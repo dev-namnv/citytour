@@ -61,7 +61,6 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 });
 
 // Main
-Route::resource('contact', 'Main\ContactController');
 Route::group(['namespace' => 'Main'], function () {
-
+    Route::resource('contact', 'ContactController');
 });

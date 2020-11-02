@@ -27,15 +27,18 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form_title">
-                        <h3><strong><i class="icon-pencil"></i></strong>{!! __('pages.contact.main.form-title') !!}</h3>
+                        <h3>
+                            <strong><i class="icon-pencil"></i></strong>
+                            {!! __('pages.contact.main.form-title') !!}
+                        </h3>
                         <p>
                             {!! __('pages.contact.main.form-desc') !!}
                         </p>
                     </div>
                     <div class="step">
-
                         <div id="message-contact"></div>
-                        {{Form::open(['url'=>route('contact.store'), 'method'=>'post', 'class'=>'form-contact'])}}
+                        <form action="{{ route('contact.store') }}" method="POST" class="form-contact">
+                            @csrf
                             <div class="row">
                                 @if(Session::has('success'))
                                     <div class="alert alert-success col-sm-12" role="alert">
@@ -124,7 +127,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">{!! __('pages.contact.main.send') !!}</button>
-                        {{Form::close()}}
+                        </form>
                     </div>
                 </div>
                 <!-- End col-md-8 -->
