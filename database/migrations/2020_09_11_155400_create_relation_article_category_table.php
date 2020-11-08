@@ -17,7 +17,6 @@ class CreateRelationArticleCategoryTable extends Migration
             $table->id();
             $table->unsignedBigInteger('article_id')->comment('ID bài viết');
             $table->unsignedBigInteger('category_id')->comment('ID chuyên mục');
-            $table->timestamps();
         });
     }
 

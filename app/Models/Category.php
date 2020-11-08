@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceCategory extends Model
+class Category extends Model
 {
-    protected $table = 'service_categories';
+    protected $table = 'categories';
 
     protected $fillable = [
-        'name', 'slug', 'icon', 'sort_order'
+        'name', 'icon', 'description', 'sort_order'
     ];
 
     /**
@@ -24,8 +24,8 @@ class ServiceCategory extends Model
     /**
      * Relation
      */
-    public function services()
+    public function tours()
     {
-        return $this->hasMany('App\Models\Service');
+        return $this->hasMany('App\Models\Tour');
     }
 }

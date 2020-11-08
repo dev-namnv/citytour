@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWishlistProductTable extends Migration
+class CreateTourLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateWishlistProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('wishlist_product', function (Blueprint $table) {
+        Schema::create('tour_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id')->comment('ID sản phẩm')->nullable();
+            $table->unsignedBigInteger('tour_id')->comment('ID tour');
             $table->unsignedBigInteger('user_id')->comment('ID người dùng');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateWishlistProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wishlist_product');
+        Schema::dropIfExists('service_logs');
     }
 }
