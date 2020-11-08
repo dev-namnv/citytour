@@ -23,13 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactSeeder::class);
 
         // Service
-        $this->call(FacilitySeeder::class);
-        $this->call(ServiceCategorySeeder::class);
         $this->call(ServiceSeeder::class);
-
-        // Product
-        $this->call(ProductCategorySeeder::class);
-        $this->call(ProductSeeder::class);
+        $this->call(Category::class);
+        $this->call(TourSeeder::class);
 
         // Invoice
         $this->call(InvoiceSeeder::class);

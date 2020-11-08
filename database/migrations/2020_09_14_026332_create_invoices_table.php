@@ -15,13 +15,11 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('type')->comment('Loại hóa đơn: 10. Service, 20. Product');
             $table->string('name')->comment('Tên hóa đơn');
             $table->string('sku')->unique()->comment('Mã hóa đơn');
 
             $table->float('sub_cost', 12, 3)->comment('Giá trị đơn hàng');
             $table->float('vat_cost', 12, 3)->comment('Thuế VAT');
-            $table->float('ship_cost', 12, 3)->comment('Phí ship')->nullable();
             $table->float('total_cost', 12, 3)->comment('Tổng giá trị');
 
             $table->string('address')->comment('Địa chỉ');

@@ -33,18 +33,18 @@ class UserSeeder extends Seeder
 
         // Editor
         DB::table('users')->insert([
-            'username' => 'editor',
-            'first_name' => 'Editor',
+            'username' => 'guide',
+            'first_name' => 'Guide',
             'last_name' => $faker->lastName,
-            'email' => 'editor@gmail.com',
+            'email' => 'guide@gmail.com',
             'phone' => $faker->phoneNumber,
             'birthday' => $faker->date(),
             'address' => $faker->address,
-            'password' => Hash::make('editor'),
+            'password' => Hash::make('guide'),
             'city' => $faker->city,
             'zipcode' => $faker->postcode,
             'country' => $faker->country,
-            'role' => EDITOR
+            'role' => GUIDE
         ]);
 
         // User

@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ServiceCategorySeeder extends Seeder
+class Category extends Seeder
 {
     /**
      * Run the database seeds.
@@ -28,7 +28,7 @@ class ServiceCategorySeeder extends Seeder
 
         foreach ($icons as $icon) {
             $name = $faker->name;
-            DB::table('service_categories')->insert([
+            DB::table('categories')->insert([
                 'name' => $icon['name'],
                 'slug' => Str::slug($name),
                 'icon' => $icon['icon'],

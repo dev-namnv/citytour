@@ -62,6 +62,9 @@
                                 <th>Giá hiện tại</th>
                                 <th>Danh mục</th>
                                 <th>Trạng thái</th>
+                                @if(Auth::user()->role === ADMIN)
+                                    <th>Trạng thái</th>
+                                @endif
                                 <th>Đánh giá</th>
                                 <th>Tùy chọn</th>
                             </tr>
@@ -79,6 +82,13 @@
                                             {{ $tour->getStatus() }}
                                         </span>
                                     </td>
+                                    @if(Auth::user()->role === ADMIN)
+                                        <td class="">
+                                        <span class="tour-status-{{$tour->id}} shadow-none badge {{ $tour->deleted_at ? 'badge-danger' : 'badge-primary' }}">
+                                            {{ $tour->getStatusDelete() }}
+                                        </span>
+                                        </td>
+                                    @endif
                                     <td>{{ $tour->rating }}</td>
                                     <td>
                                         <div class="btn-group">

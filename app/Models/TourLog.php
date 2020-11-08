@@ -4,20 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceLog extends Model
+class TourLog extends Model
 {
     protected $table = 'service_logs';
 
     protected $fillable = [
-        'service_id', 'user_id'
+        'tour_id', 'user_id'
     ];
 
     /**
      * Relation service log
      */
-    public function service()
+    public function tour()
     {
-        return $this->belongsTo('App\Models\Service');
+        return $this->belongsTo('App\Models\Tour');
     }
 
     public function user()

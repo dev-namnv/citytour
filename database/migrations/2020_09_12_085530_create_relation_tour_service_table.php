@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRelationServiceFacilityTable extends Migration
+class CreateRelationTourServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRelationServiceFacilityTable extends Migration
      */
     public function up()
     {
-        Schema::create('relation_service_facility', function (Blueprint $table) {
+        Schema::create('relation_tour_service', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tour_id')->comment('ID tour');
             $table->unsignedBigInteger('service_id')->comment('ID dịch vụ');
-            $table->unsignedBigInteger('facility_id')->comment('ID cơ sở vật chất');
-            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateRelationServiceFacilityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relation_service_facility');
+        Schema::dropIfExists('relation_tour_service');
     }
 }

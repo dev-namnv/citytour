@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class FacilitySeeder extends Seeder
+class ServiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class FacilitySeeder extends Seeder
     {
         $faker = \Faker\Factory::create('vi_VN');
 
-        $facilities = [
+        $services = [
             0 => ['name' => 'Museum', 'icon' => 'icon_set_1_icon-4'],
             1 => ['name' => 'Accessibility', 'icon' => 'icon_set_1_icon-13'],
             2 => ['name' => 'Pet allowed', 'icon' => 'icon_set_1_icon-22'],
@@ -32,8 +32,8 @@ class FacilitySeeder extends Seeder
             13 => ['name' => 'No smoking area', 'icon' => 'icon_set_1_icon-47']
         ];
 
-        foreach ($facilities as $item) {
-            DB::table('facilities')->insert([
+        foreach ($services as $item) {
+            DB::table('services')->insert([
                 'name' => $item['name'],
                 'slug' => Str::slug($item['name']),
                 'icon' => $item['icon'],

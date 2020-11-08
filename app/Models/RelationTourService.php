@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RelationServiceFacility extends Model
+class RelationTourService extends Model
 {
     protected $table = 'relation_service_facility';
 
     protected $fillable = [
-        'service_id', 'facility_id'
+        'tour_id', 'service_id'
     ];
 }

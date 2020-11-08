@@ -18,8 +18,9 @@ class ArticleTagSeeder extends Seeder
         for ($i = 0; $i < 200; $i++) {
             $name = 'Tag ' . $i;
             DB::table('article_tags')->insert([
-               'name' => $name,
-               'slug' => Str::slug($name) . '-' . rand(9, 9999)
+                'name' => $name,
+                'slug' => Str::slug($name) . '-' . rand(9, 9999),
+                'active' => rand(0, 1)
             ]);
         }
     }
