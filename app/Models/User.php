@@ -31,8 +31,7 @@ class User extends Authenticatable
         'city',
         'zipcode',
         'country',
-        'google_map',
-        'status'
+        'google_map'
     ];
 
     /**
@@ -85,4 +84,8 @@ class User extends Authenticatable
         return $this->hasOne(ArticleComment::class, 'user_id');
     }
 
+    public function wishlists()
+    {
+        return $this->belongsToMany('App\Models\Wishlist', 'wishlists', 'user_id', 'tour_id');
+    }
 }

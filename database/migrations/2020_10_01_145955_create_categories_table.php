@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFacilitiesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateFacilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('facilities', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('Tên dịch vụ');
+            $table->string('name')->comment('Tên danh mục');
             $table->string('slug')->unique()->comment('Slug');
-            $table->string('icon')->unique()->comment('Biểu tưởng');
-            $table->text('description')->comment('Mô tả');
+            $table->string('icon')->comment('Icon danh mục dịch vụ');
+            $table->text('description')->nullable()->comment('Mô tả danh mục');
+            $table->integer('sort_order')->default(0)->comment('Thứ tự sắp xếp');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateFacilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('facilities');
+        Schema::dropIfExists('categories');
     }
 }

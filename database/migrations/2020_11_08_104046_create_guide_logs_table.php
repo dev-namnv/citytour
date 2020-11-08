@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceLogsTable extends Migration
+class CreateGuideLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateServiceLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_logs', function (Blueprint $table) {
+        Schema::create('guide_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id')->comment('ID service');
-            $table->unsignedBigInteger('user_id')->comment('ID user');
+            $table->unsignedBigInteger('user_id')->comment('ID hướng dẫn viên');
+            $table->timestamp('busy_time')->comment('Thời gian hướng dẫn viên đang bận, không thể nhận tour');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateServiceLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_logs');
+        Schema::dropIfExists('guide_logs');
     }
 }

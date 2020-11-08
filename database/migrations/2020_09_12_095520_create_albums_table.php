@@ -17,7 +17,7 @@ class CreateAlbumsTable extends Migration
             $table->id();
             $table->string('image')->comment('Ảnh album');
             $table->integer('sort_order')->default(0)->comment('Thứ tự sắp xếp');
-            $table->unsignedBigInteger('service_id')->comment('ID dịch vụ');
+            $table->unsignedBigInteger('tour_id')->comment('ID tour');
             $table->timestamps();
         });
     }

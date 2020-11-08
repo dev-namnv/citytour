@@ -18,23 +18,13 @@ return [
             TICKET_CLOSED => 'Ticket đã đóng'
         ]
     ],
-    'service' => [
-        'type' => [
-            SERVICE_TOUR => 'Tour',
-            SERVICE_HOTEL => 'Hotel',
-            SERVICE_TRANSFER => 'Transfer',
-            SERVICE_RESTAURANT => 'Restaurant',
-        ],
+    'tour' => [
         'status' => [
             ACTIVE => 'Đang mở',
             NOT_ACTIVE => 'Ẩn'
         ]
     ],
     'invoice' => [
-        'type' => [
-            TYPE_SERVICE => 'Hóa đơn dịch vụ',
-            TYPE_PRODUCT => 'Hóa đơn sản phẩm'
-        ],
         'status' => [
             PAYMENT_ORDERED => 'Đã đặt hàng',
             PAYMENT_CONFIRMED => 'Đã xác thực'
@@ -47,6 +37,6 @@ return [
     'role' => [
         USER => 'Người dùng thông thường',
         ADMIN => 'Quản trị viên',
-        EDITOR => 'Biên tập viên'
+        GUIDE => 'Hướng dẫn viên'
     ],
 ];

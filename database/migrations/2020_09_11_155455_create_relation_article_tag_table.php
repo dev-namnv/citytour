@@ -17,7 +17,6 @@ class CreateRelationArticleTagTable extends Migration
             $table->id();
             $table->unsignedBigInteger('article_id')->comment('ID bài viết');
             $table->unsignedBigInteger('tag_id')->comment('ID tag');
-            $table->timestamps();
         });
     }
 
