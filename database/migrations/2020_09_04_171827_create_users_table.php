@@ -31,9 +31,10 @@ class CreateUsersTable extends Migration
             $table->json('google_map')->nullable()->comment('Địa chỉ Google map');
             $table->timestamp('email_verified_at')->nullable()->comment('Xác thực Email');
             $table->string('password')->comment('Mật khẩu');
-            $table->boolean('role')->default(USER)
-                ->comment('Role: 0. User, 1. Admin, 2. Guide');
+            $table->string('role')->default(USER)
+                ->comment('Role: User, Admin, Guide');
             $table->boolean('status')->default(ACTIVE)->comment('Trạng thái: 0. Khóa, 1. Mở');
+            $table->integer('behavior_score')->default(BEHAVIOR_SCORE_DEFAULT)->comment('Điểm hành vi (dành cho Guide');
             $table->rememberToken()->comment('Ghi nhớ đăng nhập');
             $table->softDeletes();
             $table->timestamps();

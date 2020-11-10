@@ -20,7 +20,6 @@ class TourSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++) {
             $name = 'Tour số ' . $i;
-
             $tour = new Tour;
 
             $tour->name = $name;
@@ -33,11 +32,28 @@ class TourSeeder extends Seeder
             $tour->adult_price = rand(100000, 10000000);
             $tour->child_price = rand(100000, 10000000);
             $tour->active = rand(1, 0);
+            $tour->user_id = DB::table('users')->where('role', '=', GUIDE)->inRandomOrder()->first('id')->id;
             $tour->category_id = DB::table('categories')->inRandomOrder()->first('id')->id;
 
             $tour->save();
 
             $id = $tour->id;
+
+            // Schedule
+            for ($m = 0; $m < 5; $m++) {
+                DB::table('schedules')->insert([
+                    'description' => $faker->realText(),
+                    'tour_id' => $id
+                ]);
+            }
+
+            // Batch
+            for ($n = 1; $n < 13; $n++) {
+                DB::table('batches')->insert([
+                    'batch' => '2020-0'.$n.'-0'.$n,
+                    'tour_id' => $id
+                ]);
+            }
 
             // Relation service facilities
             foreach ($services as $service) {

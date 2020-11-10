@@ -86,6 +86,6 @@ class User extends Authenticatable
 
     public function wishlists()
     {
-        return $this->belongsToMany('App\Models\Wishlist', 'wishlists', 'user_id', 'tour_id');
+        return $this->belongsToMany('App\Models\Tour', 'wishlists', 'user_id', 'tour_id');
     }
 }

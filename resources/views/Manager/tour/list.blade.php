@@ -63,7 +63,7 @@
                                 <th>Danh mục</th>
                                 <th>Trạng thái</th>
                                 @if(Auth::user()->role === ADMIN)
-                                    <th>Trạng thái</th>
+                                    <th>Xác thực</th>
                                 @endif
                                 <th>Đánh giá</th>
                                 <th>Tùy chọn</th>

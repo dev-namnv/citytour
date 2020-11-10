@@ -4,9 +4,9 @@
  */
 
 // Roles
-define('ADMIN', 1);
-define('USER', 0);
-define('GUIDE', 2);
+define('ADMIN', 'CITY_TOUR_CODE_2XD5IW0MA');
+define('USER', 'CITY_TOUR_CODE_9IU7HN5YB');
+define('GUIDE', 'CITY_TOUR_CODE_0JE8HIX4A');
 
 // Active
 define('ACTIVE', 1);
@@ -56,3 +56,12 @@ define('TOUR_LIMIT_DESC', 50);
 
 // Articles
 define('ARTICLES_LIMIT_CONTENT', 20);
+
+// User
+define('BEHAVIOR_SCORE_DEFAULT', 1000);
+define('BEHAVIOR_SCORE_DANGER', 300);
+define('BEHAVIOR_SCORE_BLOCK', 0);
+
+// Publish
+define('PUBLISH', 1);
+define('NOT_PUBLISH', 1);
