@@ -20,6 +20,7 @@ class CheckGuide
         if (Auth::check() && (Auth::user()->role === ADMIN || Auth::user()->role === GUIDE)) {
             return $next($request);
         }
+
         return abort(403, HTTP_403);
     }
 }
