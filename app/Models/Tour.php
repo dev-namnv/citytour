@@ -84,6 +84,21 @@ class Tour extends Model
         return $this->belongsTo('App\Models\Category', 'category_id', 'id', 'categories');
     }
 
+    public function batches()
+    {
+        return $this->hasMany('App\Models\Batch');
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany('App\Models\Schedule');
+    }
+
+    public function guide()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     /**
      * TODO: Convert data
      *
