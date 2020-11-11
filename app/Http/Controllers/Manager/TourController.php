@@ -71,4 +71,24 @@ class TourController extends Controller
 
         return response($response);
     }
+
+    public function confirm()
+    {
+        if (Auth::user()->role === GUIDE) {
+            $tours = Tour::query()->withoutGlobalScopes()
+                ->with('category','guide')
+                ->where('user_id',Auth::id())
+                ->where('publish',0)
+                ->orderBy('created_at','DESC')
+                ->paginate(PAGINATION_TOUR);
+        } else {
+            $tours = Tour::query()->withoutGlobalScopes()
+                ->with('category','guide')
+                ->where('active',0)
+                ->orderBy('created_at','DESC')
+                ->paginate(PAGINATION_TOUR);
+        }
+        return view('Manager.tour.confirm', compact('tours'));
+    }
+
 }

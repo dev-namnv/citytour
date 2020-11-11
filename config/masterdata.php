@@ -15,13 +15,17 @@ return [
             TICKET_CUSTOMER_REPLY => 'Khách hàng đã phản hồi',
             TICKET_WAITING_FOR_PROGRESS => 'Đang chờ xử lý',
             TICKET_PROCESSING => 'Đang xử lý',
-            TICKET_CLOSED => 'Ticket đã đóng'
+            TICKET_CLOSED => 'Ticket đã đóng',
         ]
     ],
     'tour' => [
         'status' => [
-            ACTIVE => 'Đang mở',
-            NOT_ACTIVE => 'Ẩn'
+            ACTIVE => 'Public',
+            NOT_ACTIVE => 'Private',
+        ],
+        'color' => [
+            ACTIVE => 'success',
+            NOT_ACTIVE => 'default',
         ]
     ],
     'invoice' => [

@@ -225,8 +225,6 @@ Admin = {
     },
 
 
-    },
-
     /**
      * Tour action
      * All tour action
@@ -251,7 +249,29 @@ Admin = {
                 }
             })
             .catch(err => console.log(err))
-    }
+    },
+
+    /**
+     * Tour action
+     * All tour action
+     */
+    tourConfirmActive: (e) => {
+        const tour_id = $(e).attr('tour-id')
+
+        axios.put('/api/manager/tour/set-active', {tour_id: tour_id})
+            .then(({data}) => {
+                const tourClass = $(`.tour-status-${data.id}`)
+                Toastr.show(data)
+                if (data.active) {
+                    $(e).text('Private')
+                    tourClass.html('<div class="t-dot bg-success" data-toggle="tooltip" data-placement="top" data-original-title="Public"></div>')
+                } else {
+                    $(e).text('Public')
+                    tourClass.html('<div class="t-dot bg-default" data-toggle="tooltip" data-placement="top" data-original-title="Private"></div>')
+                }
+            })
+            .catch(err => console.log(err))
+    },
 
 }
 

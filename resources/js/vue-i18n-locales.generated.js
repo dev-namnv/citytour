@@ -782,9 +782,9 @@ export default {
                 "heading": "phần mở đầu",
                 "image": "ảnh",
                 "tags": "thẻ",
-                "category": "danh mục"
+                "category": "danh mục",
                 "size": "kích thước",
-                "slug": "đường dẫn tĩnh"
+                "slug": "đường dẫn tĩnh",
             }
         }
     }

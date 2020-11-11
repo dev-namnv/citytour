@@ -52190,6 +52190,10 @@ $.validator.addMethod("regex", function (value, element, regexp) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var _attributes;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   "en": {
     "auth": {
@@ -52938,7 +52942,7 @@ __webpack_require__.r(__webpack_exports__);
           "rule-name": "custom-message"
         }
       },
-      "attributes": {
+      "attributes": (_attributes = {
         "name": "tên",
         "username": "tên đăng nhập",
         "email": "email",
@@ -52971,12 +52975,11 @@ __webpack_require__.r(__webpack_exports__);
         "message": "lời nhắn",
         "available": "có sẵn",
         "size": "kích thước",
-        "slug": "đường dẫn tĩnh",
         "heading": "phần mở đầu",
         "image": "ảnh",
         "tags": "thẻ",
         "category": "danh mục"
-      }
+      }, _defineProperty(_attributes, "size", "kích thước"), _defineProperty(_attributes, "slug", "đường dẫn tĩnh"), _attributes)
     }
   }
 });

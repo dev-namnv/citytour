@@ -52,6 +52,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
+        Route::get('/confirm', 'TourController@confirm')->name('tour-confirm');
     });
 
 

@@ -7,6 +7,7 @@ use App\Casts\Json;
 use App\Scopes\ActiveScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Tour extends Model
 {
@@ -23,8 +24,10 @@ class Tour extends Model
         'adult_price',
         'child_price',
         'google_map',
+        'publish',
         'active',
-        'category_id'
+        'category_id',
+        'user_id',
     ];
 
     use SoftDeletes;
@@ -96,7 +99,7 @@ class Tour extends Model
 
     public function guide()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','user_id');
     }
 
     /**
@@ -114,5 +117,11 @@ class Tour extends Model
     public function getStatusDelete()
     {
         return $this->deleted_at === null ? 'Hoạt động' : 'Đã xóa';
+    }
+
+    public function getColor()
+    {
+        $masterData = config('masterdata')['tour'];
+        return $masterData['color'][$this->active];
     }
 }

@@ -40465,35 +40465,6 @@ Admin = {
       }
     });
   },
-
-  /**
-   * Tour action
-   * All tour action
-   */
-  tourSetActive: function tourSetActive(e) {
-    var tour_id = $(e).attr('tour-id');
-    axios.put('/api/manager/tour/set-active', {
-      tour_id: tour_id
-    }).then(function (_ref) {
-      var data = _ref.data;
-      var tourClass = $(".tour-status-".concat(data.id));
-      Toastr.show(data);
-
-      if (data.active) {
-        $(e).text('Khóa dịch vụ');
-        tourClass.text('Đang mở');
-        tourClass.removeClass('badge-danger');
-        tourClass.addClass('badge-primary');
-      } else {
-        $(e).text('Mở dịch vụ ');
-        tourClass.text('Ẩn');
-        tourClass.removeClass('badge-primary');
-        tourClass.addClass('badge-danger');
-      }
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
   // Article Store Validate
   storeArticleValidate: function storeArticleValidate() {
     $('.form-article-create').validate({
@@ -40669,6 +40640,60 @@ Admin = {
       errorClass: 'is-invalid invalid-feedback',
       validClass: 'is-valid',
       errorElement: 'span'
+    });
+  },
+
+  /**
+   * Tour action
+   * All tour action
+   */
+  tourSetActive: function tourSetActive(e) {
+    var tour_id = $(e).attr('tour-id');
+    axios.put('/api/manager/tour/set-active', {
+      tour_id: tour_id
+    }).then(function (_ref) {
+      var data = _ref.data;
+      var tourClass = $(".tour-status-".concat(data.id));
+      Toastr.show(data);
+
+      if (data.active) {
+        $(e).text('Khóa dịch vụ');
+        tourClass.text('Đang mở');
+        tourClass.removeClass('badge-danger');
+        tourClass.addClass('badge-primary');
+      } else {
+        $(e).text('Mở dịch vụ ');
+        tourClass.text('Ẩn');
+        tourClass.removeClass('badge-primary');
+        tourClass.addClass('badge-danger');
+      }
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  },
+
+  /**
+   * Tour action
+   * All tour action
+   */
+  tourConfirmActive: function tourConfirmActive(e) {
+    var tour_id = $(e).attr('tour-id');
+    axios.put('/api/manager/tour/set-active', {
+      tour_id: tour_id
+    }).then(function (_ref2) {
+      var data = _ref2.data;
+      var tourClass = $(".tour-status-".concat(data.id));
+      Toastr.show(data);
+
+      if (data.active) {
+        $(e).text('Private');
+        tourClass.html('<div class="t-dot bg-success" data-toggle="tooltip" data-placement="top" data-original-title="Public"></div>');
+      } else {
+        $(e).text('Public');
+        tourClass.html('<div class="t-dot bg-default" data-toggle="tooltip" data-placement="top" data-original-title="Private"></div>');
+      }
+    })["catch"](function (err) {
+      return console.log(err);
     });
   }
 }; // Run onload
@@ -40851,6 +40876,10 @@ $.validator.addMethod("regex", function (value, element, regexp) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var _attributes;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   "en": {
     "auth": {
@@ -41599,7 +41628,7 @@ __webpack_require__.r(__webpack_exports__);
           "rule-name": "custom-message"
         }
       },
-      "attributes": {
+      "attributes": (_attributes = {
         "name": "tên",
         "username": "tên đăng nhập",
         "email": "email",
@@ -41635,9 +41664,8 @@ __webpack_require__.r(__webpack_exports__);
         "heading": "phần mở đầu",
         "image": "ảnh",
         "tags": "thẻ",
-        "category": "danh mục",
-        "slug": "đường dẫn tĩnh"
-      }
+        "category": "danh mục"
+      }, _defineProperty(_attributes, "size", "kích thước"), _defineProperty(_attributes, "slug", "đường dẫn tĩnh"), _attributes)
     }
   }
 });
