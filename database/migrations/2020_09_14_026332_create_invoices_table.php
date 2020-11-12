@@ -18,8 +18,9 @@ class CreateInvoicesTable extends Migration
             $table->string('name')->comment('Tên hóa đơn');
             $table->string('sku')->unique()->comment('Mã hóa đơn');
 
+            $table->float('deposit_cost', 12, 3)->comment('Chi phí đặt cọc');
             $table->float('sub_cost', 12, 3)->comment('Giá trị đơn hàng');
-            $table->float('vat_cost', 12, 3)->comment('Thuế VAT');
+            $table->float('vat_cost', 12, 3)->default(0)->comment('Thuế VAT');
             $table->float('total_cost', 12, 3)->comment('Tổng giá trị');
 
             $table->string('address')->comment('Địa chỉ');
@@ -30,6 +31,8 @@ class CreateInvoicesTable extends Migration
             $table->string('payment_type')->comment('Hình thức thanh toán');
             $table->string('payment_status')
                 ->comment('Trạng thái thanh toán: 0. Chưa thanh toán, 1. Đã thanh toán');
+            $table->unsignedBigInteger('tour_id')->comment('ID tour');
+            $table->unsignedBigInteger('guide_id')->comment('ID hướng dẫn viên');
             $table->unsignedBigInteger('user_id')->nullable()->comment('ID tài khoản');
             $table->timestamps();
         });

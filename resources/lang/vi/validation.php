@@ -183,5 +183,6 @@ return [
         'tags'                  => 'thẻ',
         'category'              => 'danh mục'
 
+        'slug'                  => 'đường dẫn tĩnh'
     ],
 ];
