@@ -42,7 +42,7 @@ define('TOASTR_INFO', 'info');
 define('TOASTR_WARNING', 'warning');
 
 // Http status
-define('HTTP_403', 'Không có quyền truy cập');
+define('HTTP_ERROR_403', 'Không có quyền truy cập');
 
 // Pagination service
 define('PAGINATION_TOUR', 10);
@@ -64,4 +64,4 @@ define('BEHAVIOR_SCORE_BLOCK', 0);
 
 // Publish
 define('PUBLISH', 1);
-define('NOT_PUBLISH', 1);
+define('NOT_PUBLISH', 0);

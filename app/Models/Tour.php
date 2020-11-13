@@ -5,8 +5,10 @@ namespace App\Models;
 use App\Casts\Currency;
 use App\Casts\Json;
 use App\Scopes\ActiveScope;
+use App\Scopes\PublishScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Tour extends Model
 {
@@ -35,6 +37,18 @@ class Tour extends Model
     protected static function booted()
     {
         static::addGlobalScope(new ActiveScope);
+        static::addGlobalScope(new PublishScope);
+    }
+
+    /**
+     * Scope a query to only include popular users.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfGuide($query)
+    {
+        return $query->where('user_id', '=', Auth::id());
     }
 
     /**
@@ -45,6 +59,7 @@ class Tour extends Model
     protected $casts = [
         'google_map' => Json::class,
         'active' => 'boolean',
+        'publish' => 'boolean',
         'adult_price' => Currency::class,
         'child_price' => Currency::class
     ];
@@ -55,7 +70,7 @@ class Tour extends Model
     public function getCurrentPrice()
     {
         if (!$this->price) {
-            return $this->origin_price;
+            return $this->adult_price;
         }
         return $this->price;
     }
@@ -105,14 +120,20 @@ class Tour extends Model
      * @return mixed
      * @var integer string
      */
-    public function getStatus()
+    public function getStatusActive()
     {
         $masterData = config('masterdata')['tour'];
-        return $masterData['status'][$this->active];
+        return $masterData['active'][$this->active];
     }
 
     public function getStatusDelete()
     {
         return $this->deleted_at === null ? 'Hoạt động' : 'Đã xóa';
+    }
+
+    public function getStatusPublish()
+    {
+        $masterData = config('masterdata')['tour'];
+        return $masterData['publish'][$this->publish];
     }
 }
