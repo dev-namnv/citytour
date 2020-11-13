@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Scopes\ActiveScope;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DateTime;
@@ -31,14 +31,6 @@ class Article extends Model
     protected $casts = [
         'active' => 'boolean'
     ];
-
-    /**
-     * Add global scope in query
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new ActiveScope);
-    }
 
     /**
      * Eloquent article

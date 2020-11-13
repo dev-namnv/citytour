@@ -52,7 +52,11 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
-        Route::get('/confirm', 'TourController@confirm')->name('tour-confirm');
+        Route::get('/{id}', 'TourController@detail')->name('tour-detail');
+
+        Route::put('set-active', 'TourController@setActive')->name('tour-set-active');
+        Route::put('set-publish', 'TourController@setPublish')->name('tour-set-publish');
+        Route::delete('/{id}/delete', 'TourController@delete')->name('tour-delete');
     });
 
 

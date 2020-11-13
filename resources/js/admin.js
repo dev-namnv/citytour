@@ -225,6 +225,8 @@ Admin = {
     },
 
 
+    },
+
     /**
      * Tour action
      * All tour action
@@ -232,42 +234,47 @@ Admin = {
     tourSetActive: (e) => {
         const tour_id = $(e).attr('tour-id')
 
-        axios.put('/api/manager/tour/set-active', {tour_id: tour_id})
-            .then(({data}) => {
-                const tourClass = $(`.tour-status-${data.id}`)
+        axios.put('/manager/tour/set-active', {tour_id: tour_id})
+            .then(({data, status}) => {
                 Toastr.show(data)
-                if (data.active) {
-                    $(e).text('Khóa dịch vụ')
-                    tourClass.text('Đang mở')
-                    tourClass.removeClass('badge-danger')
-                    tourClass.addClass('badge-primary')
-                } else {
-                    $(e).text('Mở dịch vụ ')
-                    tourClass.text('Ẩn')
-                    tourClass.removeClass('badge-primary')
-                    tourClass.addClass('badge-danger')
+                if (status === 200 && data.active) {
+                    $(`#tour-row-${tour_id}`).fadeOut()
                 }
             })
             .catch(err => console.log(err))
     },
 
-    /**
-     * Tour action
-     * All tour action
-     */
-    tourConfirmActive: (e) => {
+    tourDelete: (e, id) => {
+        const tour_id = $(e).attr('tour-id')
+        console.log('Delete')
+
+        axios.delete(`/manager/tour/${id}/delete`)
+            .then((response) => {
+                if (response.status === 200) {
+                    $(`#tour-row-${id}`).fadeOut()
+                }
+                Toast.show(response.data)
+            })
+            .catch(err => console.log(err))
+    },
+
+    tourSetPublish: (e) => {
         const tour_id = $(e).attr('tour-id')
 
-        axios.put('/api/manager/tour/set-active', {tour_id: tour_id})
+        axios.put('/manager/tour/set-publish', {id: tour_id})
             .then(({data}) => {
                 const tourClass = $(`.tour-status-${data.id}`)
                 Toastr.show(data)
-                if (data.active) {
-                    $(e).text('Private')
-                    tourClass.html('<div class="t-dot bg-success" data-toggle="tooltip" data-placement="top" data-original-title="Public"></div>')
+                if (data.publish) {
+                    $(e).text('Ẩn')
+                    tourClass.text('Công khai')
+                    tourClass.removeClass('badge-danger')
+                    tourClass.addClass('badge-primary')
                 } else {
-                    $(e).text('Public')
-                    tourClass.html('<div class="t-dot bg-default" data-toggle="tooltip" data-placement="top" data-original-title="Private"></div>')
+                    $(e).text('Công khai')
+                    tourClass.text('Ẩn')
+                    tourClass.removeClass('badge-primary')
+                    tourClass.addClass('badge-danger')
                 }
             })
             .catch(err => console.log(err))

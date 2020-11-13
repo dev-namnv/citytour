@@ -19,7 +19,7 @@ export default {
         "info": {
             "hotline": "999.999.999.999",
             "opening": "Mon-Fri: 8.00am - 6.00pm",
-            "title": "Laravel"
+            "title": "City Tours"
         },
         "label": {
             "cart_total": "Total",
@@ -475,7 +475,7 @@ export default {
         "info": {
             "hotline": "999.999.999.999",
             "opening": "Thứ 2 - thứ 6: 8.00am - 6.00pm",
-            "title": "Laravel"
+            "title": "City Tours"
         },
         "label": {
             "cart_total": "Tổng",
@@ -783,8 +783,7 @@ export default {
                 "image": "ảnh",
                 "tags": "thẻ",
                 "category": "danh mục",
-                "size": "kích thước",
-                "slug": "đường dẫn tĩnh",
+                "slug": "đường dẫn tĩnh"
             }
         }
     }
