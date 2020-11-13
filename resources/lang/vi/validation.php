@@ -181,8 +181,7 @@ return [
         'heading'               => 'phần mở đầu',
         'image'                 => 'ảnh',
         'tags'                  => 'thẻ',
-        'category'              => 'danh mục'
-
+        'category'              => 'danh mục',
         'slug'                  => 'đường dẫn tĩnh'
     ],
 ];

@@ -19,9 +19,13 @@ return [
         ]
     ],
     'tour' => [
-        'status' => [
-            ACTIVE => 'Đang mở',
-            NOT_ACTIVE => 'Ẩn'
+        'active' => [
+            ACTIVE => 'Đã xác thực',
+            NOT_ACTIVE => 'Chưa xác thực'
+        ],
+        'publish' => [
+            PUBLISH => 'Công khai',
+            NOT_PUBLISH => 'Ẩn'
         ]
     ],
     'invoice' => [

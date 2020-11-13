@@ -21,6 +21,6 @@ class CheckGuide
             return $next($request);
         }
 
-        return abort(403, HTTP_403);
+        return abort(403, HTTP_ERROR_403);
     }
 }

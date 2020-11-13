@@ -22,6 +22,7 @@ class InvoiceSeeder extends Seeder
             $id = DB::table('invoices')->insertGetId([
                 'name' => 'Hóa đơn số ' . $i,
                 'sku' => strtoupper(uniqid()),
+                'deposit_cost' => $cost/3,
                 'sub_cost' => $cost,
                 'vat_cost' => $vat_cost,
                 'total_cost' => $cost + $vat_cost,
@@ -31,7 +32,9 @@ class InvoiceSeeder extends Seeder
                 'payment_type' => CREDIT_CARD,
                 'payment_status' => rand(0, 1),
                 'status' => rand(0, 1),
-                'user_id' => $user_id
+                'user_id' => $user_id,
+                'tour_id' => DB::table('tours')->inRandomOrder()->first('id')->id,
+                'guide_id' => DB::table('users')->where('role', '=', GUIDE)->inRandomOrder()->first('id')->id
             ]);
 
             // User logs
