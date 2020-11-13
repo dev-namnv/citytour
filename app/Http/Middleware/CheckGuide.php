@@ -16,8 +16,11 @@ class CheckGuide
      */
     public function handle($request, Closure $next)
     {
+        if (!Auth::check()) {
+            return redirect()->route('authentication');
+        }
         // Allow ADMIN, EDITOR access
-        if (Auth::check() && (Auth::user()->role === ADMIN || Auth::user()->role === GUIDE)) {
+        if (Auth::user()->role === ADMIN || Auth::user()->role === GUIDE) {
             return $next($request);
         }
 
