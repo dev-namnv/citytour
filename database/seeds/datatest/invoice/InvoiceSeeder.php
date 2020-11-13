@@ -15,14 +15,16 @@ class InvoiceSeeder extends Seeder
         $faker = \Faker\Factory::create('vi_VN');
 
         for ($i = 0; $i < 50; $i++) {
-            $user_id = DB::table('users')->inRandomOrder()->first('id')->id;
+            $tour = DB::table('tours')->inRandomOrder()->first(['id','user_id']);
+            $user = DB::table('users')->inRandomOrder()->first(['id']);
             $cost = rand(100000, 100000000);
             $vat_cost = $cost/rand(10, 15);
+            $deposit_cost = $cost/30 + $vat_cost;
 
             $id = DB::table('invoices')->insertGetId([
                 'name' => 'Hóa đơn số ' . $i,
                 'sku' => strtoupper(uniqid()),
-                'deposit_cost' => $cost/3,
+                'deposit_cost' => $deposit_cost,
                 'sub_cost' => $cost,
                 'vat_cost' => $vat_cost,
                 'total_cost' => $cost + $vat_cost,
@@ -32,16 +34,16 @@ class InvoiceSeeder extends Seeder
                 'payment_type' => CREDIT_CARD,
                 'payment_status' => rand(0, 1),
                 'status' => rand(0, 1),
-                'user_id' => $user_id,
-                'tour_id' => DB::table('tours')->inRandomOrder()->first('id')->id,
-                'guide_id' => DB::table('users')->where('role', '=', GUIDE)->inRandomOrder()->first('id')->id
+                'user_id' => $user->id,
+                'guide_id' => $tour->user_id,
+                'tour_id' => $tour->id,
             ]);
 
             // User logs
             DB::table('user_logs')->insert([
                 'title' => 'Thanh toán đơn hàng số ' . $i,
                 'points' => ($cost + $vat_cost)/10,
-                'user_id' => $user_id
+                'user_id' => $tour->user_id,
             ]);
 
             // Invoice detail
@@ -56,8 +58,8 @@ class InvoiceSeeder extends Seeder
                 ]);
 
                 DB::table('tour_logs')->insert([
-                    'tour_id' => $service_id,
-                    'user_id' => $user_id
+                    'tour_id' => $tour->id,
+                    'user_id' => $tour->user_id,
                 ]);
             }
         }

@@ -59,6 +59,11 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::delete('/{id}/delete', 'TourController@delete')->name('tour-delete');
     });
 
+    // INvoices
+    Route::group(['prefix' => 'invoices'], function () {
+        Route::get('/', 'InvoiceController@index')->name('invoice-index');
+    });
+
 
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('articles', 'ArticleController')->except(['show']);

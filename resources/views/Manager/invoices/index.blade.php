@@ -1,5 +1,5 @@
 @extends('layouts.manager.app')
-@section('title', 'Tour - Confirm')
+@section('title', 'Invoices')
 
 @section('extra-css')
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
@@ -36,35 +36,35 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($tours as $key =>$tour)
+                            @foreach($invoices as $key => $invoice)
                                 <tr>
-                                    <td>{{$tour->name}}</td>
+                                    <td>{{$invoice->name}}</td>
                                     <td>
-                                        <img src="{{$tour->thumbnail}}" alt="{{$tour->name}}" width="80"/>
+                                        <img src="{{$invoice->tour->thumbnail}}" alt="{{$invoice->tour->name}}" width="80"/>
                                     </td>
-                                    <td>{{$tour->address}}</td>
-                                    <td>{{$tour->category->name}}</td>
+                                    <td>{{$invoice->address}}</td>
+                                    <td>dddd</td>
                                     <td>
                                         <span class="d-block">Người lớn:</span>
-                                        <span class="text-danger">{{ $tour->adult_price }}</span>
+                                        <span class="text-danger">{{ $invoice->invoice_detail->adult_count }}</span>
                                         <br/>
                                         <span class="d-block">Trẻ em:</span>
-                                        <span class="text-danger">{{ $tour->adult_price }}</span>
+                                        <span class="text-danger">{{ $invoice->invoice_detail->child_count }}</span>
                                     </td>
                                     <td>
-                                        <a href="#">{{ $tour->guide->first_name . ' ' .$tour->guide->last_name }}</a>
+{{--                                        <a href="#">{{ $invoice->guide->first_name . ' ' .$invoice->guide->last_name }}</a>--}}
                                     </td>
-                                    <td class="tour-status-{{ $tour->id }}">
-                                        <div class="t-dot bg-{{$tour->getColor()}}" data-toggle="tooltip" data-placement="top" data-original-title="{{$tour->getStatus()}}"></div>
+                                    <td class="tour-status-{{ $invoice->id }}">
+{{--                                        <div class="t-dot bg-{{$invoice->getColor()}}" data-toggle="tooltip" data-placement="top" data-original-title="{{$invoice->getStatus()}}"></div>--}}
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{route('tour-edit',$tour->id)}}" class="btn btn-sm">Open</a>
+                                            <a href="{{route('tour-edit',$invoice->id)}}" class="btn btn-sm">Open</a>
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
-                                                <a class="dropdown-item" href="#active" tour-id="{{ $tour->id }}" onclick="Admin.tourConfirmActive(this)">{{ $tour->active == 0 ?  'Public':'Private' }}</a>
+                                                <a class="dropdown-item" href="#active" tour-id="{{ $invoice->id }}" >{{ $invoice->active == 0 ?  'Public':'Private' }}</a>
                                             </div>
                                         </div>
                                     </td>
@@ -72,7 +72,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{$tours->links()}}
+                        {{$invoices->links()}}
                     </div>
                 </div>
             </div>

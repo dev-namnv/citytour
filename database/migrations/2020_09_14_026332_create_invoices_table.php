@@ -34,6 +34,7 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('tour_id')->comment('ID tour');
             $table->unsignedBigInteger('guide_id')->comment('ID hướng dẫn viên');
             $table->unsignedBigInteger('user_id')->nullable()->comment('ID tài khoản');
+            $table->date('start_date')->comment('Ngày khởi hành');
             $table->timestamps();
         });
     }
