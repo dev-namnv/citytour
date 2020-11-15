@@ -27,7 +27,7 @@ Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () 
 });
 
 // Manager
-Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'editor'], function () {
+Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'guide'], function () {
     // Manager
     Route::get('/', function () {
         return redirect()->route('dashboard-analytic');
@@ -40,6 +40,8 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         })->name('dashboard');
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
+        Route::get('/user_profile', 'DashboardController@profile')->name('user_profile');
+        Route::get('profile-detail/{id}', 'DashboardController@detailProfile')->name('profile-detail');
     });
 
     // Tour
@@ -50,17 +52,34 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
+        Route::get('/{id}', 'TourController@detail')->name('tour-detail');
+
+        Route::put('set-active', 'TourController@setActive')->name('tour-set-active');
+        Route::put('set-publish', 'TourController@setPublish')->name('tour-set-publish');
+        Route::delete('/{id}/delete', 'TourController@delete')->name('tour-delete');
     });
-    // Contact
-    Route::group(['prefix' => 'contacts'], function () {
-        Route::get('/', 'ContactController@index')->name('contacts.index');
-        Route::get('/update-{id}-{status}', 'ContactController@update')->name('contacts.update');
-        Route::get('/{id}', 'ContactController@show')->name('contacts.show');
-        Route::post('/reply', 'ContactController@reply')->name('contacts.reply');
+
+    // INvoices
+    Route::group(['prefix' => 'invoices'], function () {
+        Route::get('/', 'InvoiceController@index')->name('invoice-index');
     });
+
+
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('articles', 'ArticleController')->except(['show']);
+        Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
+    });
+
 });
 
 // Main
 Route::group(['namespace' => 'Main'], function () {
-    Route::resource('contact', 'ContactController');
+    Route::group(['prefix' => 'news'], function () {
+       Route::get('/', 'ArticleController@list')->name('articles.list');
+       Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
+       });
+    Route::group(['prefix' => 'main'], function () {
+       Route::get('profile', 'ClientController@index');
+       Route::post('edit-profile/{id}', 'ClientController@editProfile')->name('edit-profile');
+    });
 });

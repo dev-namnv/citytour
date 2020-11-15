@@ -17,9 +17,10 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->text('content')->nullable()->comment('Nội dung đánh giá');
             $table->smallInteger('star')->default(STAR_DEFAULT)->comment('Sao đánh giá');
+            $table->unsignedBigInteger('reply_for')->nullable()->comment('Phản hồi cho review');
             $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
             $table->unsignedBigInteger('user_id')->comment('ID người tạo');
-            $table->unsignedBigInteger('service_id')->comment('ID dịch vụ');
+            $table->unsignedBigInteger('tour_id')->comment('ID tour');
             $table->timestamps();
         });
     }

@@ -26,35 +26,40 @@ return [
             TICKET_CLOSED => 'dark',
         ]
     ],
-    'service' => [
-        'type' => [
-            SERVICE_TOUR => 'Tour',
-            SERVICE_HOTEL => 'Hotel',
-            SERVICE_TRANSFER => 'Transfer',
-            SERVICE_RESTAURANT => 'Restaurant',
+    'tour' => [
+        'active' => [
+            ACTIVE => 'Đã xác thực',
+            NOT_ACTIVE => 'Chưa xác thực'
         ],
-        'status' => [
-            ACTIVE => 'Đang mở',
-            NOT_ACTIVE => 'Ẩn'
+        'publish' => [
+            PUBLISH => 'Công khai',
+            NOT_PUBLISH => 'Ẩn'
         ]
     ],
     'invoice' => [
-        'type' => [
-            TYPE_SERVICE => 'Hóa đơn dịch vụ',
-            TYPE_PRODUCT => 'Hóa đơn sản phẩm'
-        ],
         'status' => [
-            PAYMENT_ORDERED => 'Đã đặt hàng',
-            PAYMENT_CONFIRMED => 'Đã xác thực'
+            INVOICE_NEW => 'Đã tiếp nhận',
+            INVOICE_CONFIRM => 'Đã xác nhận',
+            INVOICE_HAS_PAID => 'Đã thanh toán',
+            INVOICE_IN_PROGRESS => 'Đang diễn ra',
+            INVOICE_COMPLETE => 'Đã hoàn thành',
+            INVOICE_COMPLETE_CONFIRM => 'Xác nhận hoàn thành',
+            INVOICE_SUCCESS => 'Hoàn tất',
         ],
-        'payment_status' => [
-            PAYMENT_PAID => 'Đã thanh toán',
-            PAYMENT_UNPAID => 'Chưa thanh toán'
+        'color' => [
+            INVOICE_NEW => 'bg-light',
+            INVOICE_CONFIRM => 'bg-info',
+            INVOICE_HAS_PAID => 'bg-primary',
+            INVOICE_IN_PROGRESS => 'bg-secondary',
+            INVOICE_COMPLETE => 'bg-danger',
+            INVOICE_COMPLETE_CONFIRM => 'bg-warning',
+            INVOICE_SUCCESS => 'bg-success',
+
         ]
     ],
     'role' => [
         USER => 'Người dùng thông thường',
         ADMIN => 'Quản trị viên',
-        EDITOR => 'Biên tập viên'
+        GUIDE => 'Hướng dẫn viên'
     ],
 ];

@@ -10,11 +10,10 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $fillable = [
-        'type',
         'name',
         'sub_cost',
+        'deposit_cost',
         'vat_cost',
-        'ship_cost',
         'total_cost',
         'address',
         'email',
@@ -22,7 +21,10 @@ class Invoice extends Model
         'status',
         'payment_type',
         'payment_status',
-        'user_id'
+        'tour_id',
+        'guide_id',
+        'user_id',
+        'start_date',
     ];
 
     /**
@@ -31,11 +33,6 @@ class Invoice extends Model
      * @return mixed
      * @var integer string
      */
-    public function getType()
-    {
-        $masterData = config('masterdata')['invoice'];
-        return $masterData['type'][$this->type];
-    }
 
     public function getStatus()
     {
@@ -43,10 +40,10 @@ class Invoice extends Model
         return $masterData['status'][$this->status];
     }
 
-    public function getPaymentStatus()
+    public function getColor()
     {
         $masterData = config('masterdata')['invoice'];
-        return $masterData['status'][$this->payment_status];
+        return$masterData['color'][$this->status];
     }
 
     /**
@@ -57,25 +54,25 @@ class Invoice extends Model
     protected $casts = [
         'sub_cost' => Currency::class,
         'vat_cost' => Currency::class,
-        'ship_cost' => Currency::class,
         'total_cost' => Currency::class
     ];
 
     /**
      * Eloquent invoice
      */
-    public function service_detail()
+    public function invoice_detail()
     {
-        return $this->hasMany('App\Models\InvoiceService');
+        return $this->hasOne('App\Models\InvoiceDetail');
     }
 
-    public function product_detail()
-    {
-        return $this->hasMany('App\Models\InvoiceProduct');
-    }
 
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function tour()
+    {
+        return $this->belongsTo('App\Models\Tour','tour_id');
     }
 }

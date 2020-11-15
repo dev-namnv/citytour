@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'manager', 'namespace' => 'Manager'], function () {
     Route::group(['prefix' => 'tour'], function () {
-       Route::put('set-active', 'TourController@setActive')->name('tour-set-active');
+
     });
 });
 

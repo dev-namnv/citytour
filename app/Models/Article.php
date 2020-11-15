@@ -2,15 +2,26 @@
 
 namespace App\Models;
 
-use App\Scopes\ActiveScope;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DateTime;
+
 
 class Article extends Model
 {
     use SoftDeletes;
 
     protected $table = 'articles';
+
+    protected $fillable = [
+        'title',
+        'heading',
+        'slug',
+        'content',
+        'image',
+        'user_id'
+    ];
 
     /**
      * TODO: Convert data
@@ -20,14 +31,6 @@ class Article extends Model
     protected $casts = [
         'active' => 'boolean'
     ];
-
-    /**
-     * Add global scope in query
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new ActiveScope);
-    }
 
     /**
      * Eloquent article
@@ -47,8 +50,24 @@ class Article extends Model
         return $this->hasMany('App\Models\ArticleComment');
     }
 
-    public function author()
+    public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
+
+    public function getReleaseDayAttribute()
+    {
+        return date_format(new DateTime($this->created_at), 'd M Y');
+    }
+
+    public function scopeRecentArticles($query)
+    {
+        return $query->orderBy('id', 'desc')->limit(3);
+    }
+
+    public function scopeFindBySlug($query, $slug)
+    {
+        return $query->where('slug', '=', $slug)->firstOrFail();
+    }
+
 }

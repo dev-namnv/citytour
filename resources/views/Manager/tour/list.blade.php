@@ -61,28 +61,40 @@
                                 <th>Địa chỉ</th>
                                 <th>Giá hiện tại</th>
                                 <th>Danh mục</th>
-                                <th>Trạng thái</th>
+                                @if(Auth::user()->role === ADMIN)
+                                    <th>Xác thực</th>
+                                @else
+                                    <th>Công khai</th>
+                                @endif
                                 <th>Đánh giá</th>
                                 <th>Tùy chọn</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($tours as $key => $tour)
-                                <tr>
+                                <tr id="tour-row-{{$tour->id}}">
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $tour->name }}</td>
                                     <td>{{ $tour->address }}</td>
                                     <td>{{ $tour->getCurrentPrice() }}</td>
                                     <td>{{ $tour->category->name }}</td>
-                                    <td class="">
-                                        <span class="tour-status-{{$tour->id}} shadow-none badge {{ $tour->active ? 'badge-primary' : 'badge-danger' }}">
-                                            {{ $tour->getStatus() }}
-                                        </span>
-                                    </td>
+                                    @if(Auth::user()->role === ADMIN)
+                                        <td class="">
+                                            <span class="tour-status-{{$tour->id}} shadow-none badge {{ $tour->active ? 'badge-primary' : 'badge-danger' }}">
+                                                {{ $tour->getStatusActive() }}
+                                            </span>
+                                        </td>
+                                    @else
+                                        <td class="">
+                                            <span class="tour-status-{{$tour->id}} shadow-none badge {{ $tour->publish ? 'badge-primary' : 'badge-danger' }}">
+                                                {{ $tour->getStatusPublish() }}
+                                            </span>
+                                        </td>
+                                    @endif
                                     <td>{{ $tour->rating }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ route('tour-edit', ['id' => $tour->id]) }}" type="button" class="btn btn-dark btn-sm">Open</a>
+                                            <a href="{{ route('tour-detail', ['id' => $tour->id]) }}" type="button" class="btn btn-dark btn-sm">Open</a>
                                             <button type="button"
                                                     class="btn btn-dark btn-sm dropdown-toggle dropdown-toggle-split"
                                                     id="dropdownMenuReference1" data-toggle="dropdown"
@@ -97,9 +109,13 @@
                                                 </svg>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
-                                                <a class="dropdown-item" href="javascript:void(0)" tour-id="{{ $tour->id }}" onclick="Admin.tourSetActive(this)">@if($tour->active) Khóa dịch vụ @else Mở dịch vụ @endif</a>
+                                                @if(Auth::user()->role === ADMIN)
+                                                    <a class="dropdown-item" href="javascript:void(0)" tour-id="{{ $tour->id }}" onclick="Admin.tourSetActive(this)">@if($tour->active) Khóa dịch vụ @else Active dịch vụ @endif</a>
+                                                @else
+                                                    <a class="dropdown-item" href="javascript:void(0)" tour-id="{{ $tour->id }}" onclick="Admin.tourSetPublish(this)">@if($tour->active) Ẩn @else Công khai @endif</a>
+                                                @endif
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Separated link</a>
+                                                <a class="dropdown-item" href="javascript:void(0)" tour-id="{{ $tour->id }}" onclick="confirm('Xác thực xóa Tour') && Admin.tourDelete(this, {{ $tour->id }})">Xóa tour</a>
                                             </div>
                                         </div>
                                     </td>

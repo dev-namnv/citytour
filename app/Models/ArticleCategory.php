@@ -9,6 +9,8 @@ class ArticleCategory extends Model
 {
     protected $table = 'article_categories';
 
+    protected $fillable = ['name', 'slug', 'active'];
+
     /**
      * TODO: Convert data
      *
@@ -24,5 +26,16 @@ class ArticleCategory extends Model
     protected static function booted()
     {
         static::addGlobalScope(new ActiveScope);
+    }
+
+    public function getStatus()
+    {
+        $masterData = config('masterdata')['active'];
+        return $masterData[$this->active];
+    }
+
+    public function articles()
+    {
+        return $this->belongsToMany('App\Models\Article', 'relation_article_category', 'category_id', 'article_id');
     }
 }

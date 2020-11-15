@@ -17,8 +17,8 @@ class CreateArticleCategoriesTable extends Migration
             $table->id();
             $table->string('name')->comment('Tên chuyên mục');
             $table->string('slug')->unique()->comment('Slug');
-            $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
             $table->integer('sort_order')->default(0)->comment('Thứ tự sắp xếp');
+            $table->boolean('active')->default(ACTIVE)->comment('Trạng thái: 0. Ẩn, 1. Hiện thị');
             $table->timestamps();
         });
     }

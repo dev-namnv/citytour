@@ -20,6 +20,6 @@ class Administrator
         if (Auth::check() && Auth::user()->role === ADMIN) {
             return $next($request);
         }
-        return abort(403, HTTP_403);
+        return abort(403, HTTP_ERROR_403);
     }
 }

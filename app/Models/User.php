@@ -31,8 +31,7 @@ class User extends Authenticatable
         'city',
         'zipcode',
         'country',
-        'google_map',
-        'status'
+        'google_map'
     ];
 
     /**
@@ -73,5 +72,20 @@ class User extends Authenticatable
     {
         $masterData = config('masterdata')['role'];
         return $masterData[$this->role];
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasOne(ArticleComment::class, 'user_id');
+    }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany('App\Models\Tour', 'wishlists', 'user_id', 'tour_id');
     }
 }

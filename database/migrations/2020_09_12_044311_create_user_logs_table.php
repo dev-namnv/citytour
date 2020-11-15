@@ -16,8 +16,6 @@ class CreateUserLogsTable extends Migration
         Schema::create('user_logs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->comment('Tiêu đề log');
-            $table->smallInteger('type')
-                ->comment('Loại hoạt động của tài khoản: 10. Dịch vụ, 20. Sản phẩm');
             $table->integer('points')->comment('Điểm số');
             $table->unsignedBigInteger('user_id')->comment('ID người dùng');
             $table->timestamps();

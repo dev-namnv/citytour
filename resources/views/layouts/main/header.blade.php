@@ -325,4 +325,5 @@
     <form class="form-logout" method="post" action="{{ route('logout') }}" hidden>
         @csrf
     </form>
+
 </header>
