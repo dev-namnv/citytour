@@ -29,10 +29,13 @@ define('TICKET_PROCESSING', 50);
 define('TICKET_CLOSED', 60);
 
 // Invoice
-define('PAYMENT_PAID', 1);
-define('PAYMENT_UNPAID', 0);
-define('PAYMENT_ORDERED', 0);
-define('PAYMENT_CONFIRMED', 1);
+define('INVOICE_NEW', 0);
+define('INVOICE_CONFIRM', 1);
+define('INVOICE_HAS_PAID', 2);
+define('INVOICE_IN_PROGRESS', 3);
+define('INVOICE_COMPLETE', 4);
+define('INVOICE_COMPLETE_CONFIRM', 5);
+define('INVOICE_SUCCESS', 6);
 
 // Toastr
 define('TOASTR', 'Toastr');

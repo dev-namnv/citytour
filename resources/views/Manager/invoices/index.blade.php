@@ -25,12 +25,11 @@
                         <table class="table table-hover non-hover" style="width:100%">
                             <thead>
                             <tr class="text-center">
-                                <th>Tên</th>
-                                <th>Thumb</th>
-                                <th>Địa Chỉ</th>
-                                <th>Danh Mục</th>
-                                <th>Giá/Người</th>
-                                <th>HDV</th>
+                                <th>Tên tour</th>
+                                <th>Thumbnail</th>
+                                <th>Tên khách hàng</th>
+                                <th>Địa chỉ khách hàng</th>
+                                <th>Số người </th>
                                 <th>Trạng Thái</th>
                                 <th>Hành Động</th>
                             </tr>
@@ -38,24 +37,26 @@
                             <tbody>
                             @foreach($invoices as $key => $invoice)
                                 <tr>
-                                    <td>{{$invoice->name}}</td>
                                     <td>
-                                        <img src="{{$invoice->tour->thumbnail}}" alt="{{$invoice->tour->name}}" width="80"/>
+                                        <p>{{$invoice->invoice_detail->name}}</p>
+                                        <span class="small">{{$invoice->sku}}</span>
                                     </td>
-                                    <td>{{$invoice->address}}</td>
-                                    <td>dddd</td>
+                                    <td>
+                                        <img src="{{$invoice->invoice_detail->thumbnail}}" alt="{{$invoice->invoice_detail->name}}" width="80"/>
+                                    </td>
+                                    <td>{{ $invoice->customer_name }}</td>
+                                    <td>{{ $invoice->customer_address }}</td>
                                     <td>
                                         <span class="d-block">Người lớn:</span>
-                                        <span class="text-danger">{{ $invoice->invoice_detail->adult_count }}</span>
+                                        <span class="text-danger">{{ $invoice->adult_count }}</span>
                                         <br/>
                                         <span class="d-block">Trẻ em:</span>
-                                        <span class="text-danger">{{ $invoice->invoice_detail->child_count }}</span>
+                                        <span class="text-danger">{{ $invoice->child_count }}</span>
                                     </td>
                                     <td>
-{{--                                        <a href="#">{{ $invoice->guide->first_name . ' ' .$invoice->guide->last_name }}</a>--}}
-                                    </td>
-                                    <td class="tour-status-{{ $invoice->id }}">
-{{--                                        <div class="t-dot bg-{{$invoice->getColor()}}" data-toggle="tooltip" data-placement="top" data-original-title="{{$invoice->getStatus()}}"></div>--}}
+                                         <span class="tour-status-{{ $invoice->id }} rounded p-1 {{ $invoice->getColor() }}">
+                                                {{ $invoice->getStatus() }}
+                                        </span>
                                     </td>
                                     <td>
                                         <div class="btn-group">

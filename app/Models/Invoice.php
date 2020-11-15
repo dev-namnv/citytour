@@ -40,10 +40,10 @@ class Invoice extends Model
         return $masterData['status'][$this->status];
     }
 
-    public function getPaymentStatus()
+    public function getColor()
     {
         $masterData = config('masterdata')['invoice'];
-        return $masterData['status'][$this->payment_status];
+        return$masterData['color'][$this->status];
     }
 
     /**

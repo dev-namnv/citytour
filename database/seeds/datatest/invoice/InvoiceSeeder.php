@@ -15,25 +15,31 @@ class InvoiceSeeder extends Seeder
         $faker = \Faker\Factory::create('vi_VN');
 
         for ($i = 0; $i < 50; $i++) {
-            $tour = DB::table('tours')->inRandomOrder()->first(['id','user_id']);
+            $tour = DB::table('tours')->inRandomOrder()->first();
             $user = DB::table('users')->inRandomOrder()->first(['id']);
             $cost = rand(100000, 100000000);
             $vat_cost = $cost/rand(10, 15);
             $deposit_cost = $cost/30 + $vat_cost;
-
+            $start_date = ['2020-10-12','2020-10-23','2020-11-01','2020-11-04','2020-11-10'];
             $id = DB::table('invoices')->insertGetId([
-                'name' => 'Hóa đơn số ' . $i,
                 'sku' => strtoupper(uniqid()),
-                'deposit_cost' => $deposit_cost,
+
+                'start_date' => $start_date[array_rand($start_date)],
+                'adult_count' => rand(1, 5),
+                'child_count' => rand(0, 3),
                 'sub_cost' => $cost,
                 'vat_cost' => $vat_cost,
                 'total_cost' => $cost + $vat_cost,
-                'address' => $faker->address,
-                'email' => $faker->email,
-                'message' => $faker->realText(),
                 'payment_type' => CREDIT_CARD,
-                'payment_status' => rand(0, 1),
-                'status' => rand(0, 1),
+                'deposit_cost' => $deposit_cost,
+
+                'customer_name' => $faker->name,
+                'customer_address' => $faker->address,
+                'customer_email' => $faker->email,
+                'customer_phone' => $faker->phoneNumber,
+                'customer_message' => $faker->realText(),
+                'status' => rand(0, 6),
+
                 'user_id' => $user->id,
                 'guide_id' => $tour->user_id,
                 'tour_id' => $tour->id,
@@ -48,13 +54,15 @@ class InvoiceSeeder extends Seeder
 
             // Invoice detail
             for ($j = 0; $j < 5; $j++) {
-                $service_id = DB::table('tours')->inRandomOrder()->first('id')->id;
+                $schedules = DB::table('schedules')->where('tour_id',$tour->id)->get('description');
                 DB::table('invoice_detail')->insert([
                     'invoice_id' => $id,
-                    'adult_count' => rand(1, 5),
-                    'child_count' => rand(0, 3),
-                    'adult_price' => rand(100000, 100000000),
-                    'child_price' => rand(10000, 10000000)
+                    'name' => $tour->name,
+                    'address' => $tour->address,
+                    'thumbnail' => $tour->thumbnail,
+                    'adult_price' => $tour->adult_price,
+                    'child_price' => $tour->child_price,
+                    'schedule' => json_encode($schedules),
                 ]);
 
                 DB::table('tour_logs')->insert([
