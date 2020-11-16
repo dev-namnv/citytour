@@ -231,12 +231,20 @@ Admin = {
      */
     tourSetActive: (e) => {
         const tour_id = $(e).attr('tour-id')
-
+        const tourClass = $(`.tour-status-${data.id}`)
         axios.put('/manager/tour/set-active', {tour_id: tour_id})
             .then(({data, status}) => {
                 Toastr.show(data)
-                if (status === 200 && data.active) {
-                    $(`#tour-row-${tour_id}`).fadeOut()
+                if (data.publish) {
+                    $(e).text('Active')
+                    tourClass.text('Đã xác thực')
+                    tourClass.removeClass('badge-danger')
+                    tourClass.addClass('badge-primary')
+                } else {
+                    $(e).text('Un active')
+                    tourClass.text('Chưa xác thực')
+                    tourClass.removeClass('badge-primary')
+                    tourClass.addClass('badge-danger')
                 }
             })
             .catch(err => console.log(err))

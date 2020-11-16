@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Main;
 
 use App\Helper\StorageS3Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Main\User\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ClientController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-        return view('layouts/main/profile');
+        return view('Main.profile.show');
     }
-    public function editProfile(Request $request, $id)
+
+    public function editProfile(ProfileRequest $request)
     {
-        $user = User::find($id);
+        $user = User::findOrFail(Auth::id());
+
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->phone = $request->phone;
@@ -24,8 +28,12 @@ class ClientController extends Controller
         $user->city = $request->city;
         $user->zipcode = $request->zipcode;
         $user->country = $request->country;
-        $urlImage = StorageS3Helper::getUrlAfterUpload('images/avatar', $request->image);
-        $user->avatar = $urlImage;
+
+        if ($request->hasFile('avatar')) {
+            $urlImage = StorageS3Helper::getUrlAfterUpload('images/avatar', $request->avatar);
+            $user->avatar = $urlImage;
+        }
+
         $user->save();
         return redirect()->back();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helpers\BreadcrumbHelper;
 use App\Helpers\ReviewHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Tour;
@@ -12,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -43,7 +45,8 @@ class TourController extends Controller
             $tour->rating = ReviewHelper::rating($tour->reviews);
         }
 
-        return view('manager.tour.list', compact('tours'));
+        $breadcrumbs = [new BreadcrumbHelper('Tour', \route('tour-list'))];
+        return view('manager.tour.list', compact('tours', 'breadcrumbs'));
     }
 
     /**

@@ -16,8 +16,11 @@ class Administrator
      */
     public function handle($request, Closure $next)
     {
+        if (!Auth::check()) {
+            return redirect()->route('authentication');
+        }
         // Only allow ADMIN access
-        if (Auth::check() && Auth::user()->role === ADMIN) {
+        if (Auth::user()->role === ADMIN) {
             return $next($request);
         }
         return abort(403, HTTP_ERROR_403);

@@ -56,6 +56,7 @@
         <!-- Header -->
         @include('layouts.main.header')
         <!-- End Header -->
+
         @yield('content')
         <!-- End main -->
 
