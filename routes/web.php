@@ -68,6 +68,10 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('articles', 'ArticleController')->except(['show']);
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
+        //Contact
+        Route::resource('contacts','ContactController');
+        Route::post('/contacts/reply', 'ContactController@reply')->name('contacts.reply');
+        Route::get('/update-{id}-{status}', 'ContactController@update')->name('contacts.update');
     });
 
 });
@@ -78,8 +82,14 @@ Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'ArticleController@list')->name('articles.list');
        Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
        });
+
     Route::group(['prefix' => 'main'], function () {
        Route::get('profile', 'ClientController@index');
        Route::post('edit-profile/{id}', 'ClientController@editProfile')->name('edit-profile');
+    });
+
+    Route::group(['prefix' => 'contact'], function () {
+       Route::get('/', 'ContactController@index')->name('contact.index');
+       Route::post('/', 'ContactController@store')->name('contact.store');
     });
 });

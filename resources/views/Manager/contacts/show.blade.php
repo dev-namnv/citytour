@@ -108,7 +108,8 @@
 
                 <!-- FormReply -->
                 <div class="widget-content widget-content-area br-6 collapse multi-collapse" id="collapseReply">
-                    {{Form::open(['url'=>route('contacts.reply'),'method'=>'POST','class'=>'form-contact'])}}
+                    <form action="{{ route('contacts.reply') }}" method="POST" class="form-contact">
+                        @csrf
                         <input type="hidden" name="reply_for" value="{!! $contact->id !!}">
                         <input type="hidden" name="email" value="{!! $contact->email !!}">
                         <input type="hidden" name="name" value="{!! $contact->full_name !!}">
@@ -121,7 +122,7 @@
                             <textarea name="messages" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    {{Form::close()}}
+                    </form>
                 </div>
             </div>
 

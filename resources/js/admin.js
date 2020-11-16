@@ -225,8 +225,6 @@ Admin = {
     },
 
 
-    },
-
     /**
      * Tour action
      * All tour action
@@ -280,6 +278,33 @@ Admin = {
             .catch(err => console.log(err))
     },
 
+    formContactValidate: () => {
+        $('.form-contact').validate({
+            rules: {
+                subject: {
+                    required: true,
+                    minlength:10,
+                    maxlength:255,
+                },
+                messages: {
+                    required: true,
+                    minlength: 20,
+                },
+            },
+            messages: {
+                subject: {
+                    required: getMessageValidation('required', {attribute: 'subject'}),
+                },
+                messages: {
+                    required: getMessageValidation('required', {attribute: 'message'}),
+                },
+            },
+            invalidClass: 'is-invalid',
+            validClass: 'is-valid'
+        })
+    },
+
+
 }
 
 // Run onload
@@ -290,4 +315,5 @@ $(window).on('load', function () {
     Admin.storeArticleValidate()
     Admin.updateArticleValidate()
     Admin.storeArticleCategoryValidate()
+    Admin.formContactValidate()
 })
