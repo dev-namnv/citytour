@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ArticleTagSeeder::class);
         $this->call(ArticleSeeder::class);
 
-        // contact
+        // Contact
         $this->call(ContactSeeder::class);
 
         // Service
