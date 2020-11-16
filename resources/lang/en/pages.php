@@ -37,4 +37,27 @@ return [
         'active' => 'Active',
         'not_active' => 'Not Active',
     ],
+
+    'contact' => [
+        'title' => 'contact',
+        'section' => [
+            'title' => 'contact Us',
+            'desc' => 'Do not hesitate, please contact us for support!',
+        ],
+        'main' => [
+            'form-title' => 'Form contact us',
+            'form-desc' => 'Please complete the information below.',
+            'first-name' => 'First Name',
+            'last-name' => 'Last Name',
+            'email' => 'Email',
+            'phone' => 'Phone',
+            'subject' => 'Subject',
+            'message' => 'Message',
+            'send' => 'Send Mail',
+            'address' => 'Address',
+            'help' => 'Help center',
+            'support' => 'Support',
+        ]
+    ],
+
 ];

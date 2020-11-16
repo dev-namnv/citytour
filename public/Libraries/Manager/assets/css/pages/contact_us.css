@@ -3,7 +3,7 @@
 #basic_map1 { width: 100%; height: 757px;}
 
 
-/*  Contact Section Header     */
+/*  sendContact Section Header     */
 
 .cu-contact-section .cu-section-header {
     position: absolute;
@@ -26,7 +26,7 @@
     letter-spacing: 1px;
 }
 
-/* 	Contact Content 	*/
+/* 	sendContact Content 	*/
 
 .cu-contact-section {
     position: relative;

@@ -25,8 +25,10 @@ class Tour extends Model
         'adult_price',
         'child_price',
         'google_map',
+        'publish',
         'active',
-        'category_id'
+        'category_id',
+        'user_id',
     ];
 
     use SoftDeletes;
@@ -111,7 +113,7 @@ class Tour extends Model
 
     public function guide()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','user_id');
     }
 
     /**

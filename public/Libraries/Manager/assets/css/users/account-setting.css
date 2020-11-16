@@ -5,7 +5,7 @@
     padding-bottom: 25px;
 }
 .form-control {
-    padding: 8px 8px;   
+    padding: 8px 8px;
 }
 
 .blockui-growl-message {
@@ -19,7 +19,7 @@
 .blockui-growl-message i {
     font-size: 20px;
 }
-.general-info .info h6, .about .info h5, 
+.general-info .info h6, .about .info h5,
 .work-platforms .info h5, .contact .info h5,.social .info h5,
 .skill .info h5, .edu-experience .info h5, .work-experience .info h5 {
     color: #3b3f5c;
@@ -68,8 +68,8 @@
     border-radius: 6px;
 }
 .general-info .info .dropify-wrapper .dropify-preview {
-    background-color: #FFF; 
-    padding: 0; 
+    background-color: #FFF;
+    padding: 0;
 }
 .general-info .info .dropify-wrapper .dropify-clear {
     font-size: 16px;
@@ -139,7 +139,7 @@
 }
 
 /*
-    Contact
+    sendContact
 */
 
 .contact {
@@ -225,7 +225,7 @@
     padding: 3px 8px;
     border-radius: 5px;
     color: #1b55e2;
-    border: 1px solid #e0e6ed; 
+    border: 1px solid #e0e6ed;
 }
 .skill .custom-progress.top-right .range-count  {
     text-align: right;
