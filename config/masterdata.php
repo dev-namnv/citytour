@@ -1,4 +1,4 @@
-<?php
+    <?php
 /*
  * Convert data to master data
  */
@@ -16,6 +16,14 @@ return [
             TICKET_WAITING_FOR_PROGRESS => 'Đang chờ xử lý',
             TICKET_PROCESSING => 'Đang xử lý',
             TICKET_CLOSED => 'Ticket đã đóng'
+        ],
+        'color' => [
+            TICKET_OPEN => 'primary',
+            TICKET_ANSWERED => 'warning',
+            TICKET_CUSTOMER_REPLY => 'success',
+            TICKET_WAITING_FOR_PROGRESS => 'info',
+            TICKET_PROCESSING => 'danger',
+            TICKET_CLOSED => 'dark',
         ]
     ],
     'tour' => [
@@ -30,12 +38,23 @@ return [
     ],
     'invoice' => [
         'status' => [
-            PAYMENT_ORDERED => 'Đã đặt hàng',
-            PAYMENT_CONFIRMED => 'Đã xác thực'
+            INVOICE_NEW => 'Đã tiếp nhận',
+            INVOICE_CONFIRM => 'Đã xác nhận',
+            INVOICE_HAS_PAID => 'Đã thanh toán',
+            INVOICE_IN_PROGRESS => 'Đang diễn ra',
+            INVOICE_COMPLETE => 'Đã hoàn thành',
+            INVOICE_COMPLETE_CONFIRM => 'Xác nhận hoàn thành',
+            INVOICE_SUCCESS => 'Hoàn tất',
         ],
-        'payment_status' => [
-            PAYMENT_PAID => 'Đã thanh toán',
-            PAYMENT_UNPAID => 'Chưa thanh toán'
+        'color' => [
+            INVOICE_NEW => 'bg-light',
+            INVOICE_CONFIRM => 'bg-info',
+            INVOICE_HAS_PAID => 'bg-primary',
+            INVOICE_IN_PROGRESS => 'bg-secondary',
+            INVOICE_COMPLETE => 'bg-danger',
+            INVOICE_COMPLETE_CONFIRM => 'bg-warning',
+            INVOICE_SUCCESS => 'bg-success',
+
         ]
     ],
     'role' => [

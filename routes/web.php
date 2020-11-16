@@ -77,4 +77,9 @@ Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'UserController@index')->name('profile');
        Route::post('update', 'UserController@editProfile')->name('profile.edit');
     });
+
+    Route::group(['prefix' => 'contact'], function () {
+       Route::get('/', 'ContactController@index')->name('contact.index');
+       Route::post('/', 'ContactController@store')->name('contact.store');
+    });
 });

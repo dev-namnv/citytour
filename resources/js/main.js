@@ -52,6 +52,57 @@ Main = {
             invalidClass: 'is-invalid',
             validClass: 'is-valid'
         })
+    },
+
+    formContactValidate: () => {
+        $('.form-contact').validate({
+            rules: {
+                firstName: {
+                    required: true,
+                    maxlength:100,
+                },
+                lastName: {
+                    required: true,
+                    maxlength:100,
+                },
+                email: {
+                    required: true,
+                    maxlength:100,
+                },
+                phone: {required: true},
+                subject: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 100,
+                },
+                messages: {
+                    required: true,
+                    minlength: 20,
+                },
+            },
+            messages: {
+                firstName: {
+                    required: getMessageValidation('required', {attribute: 'first_name'}),
+                },
+                lastName: {
+                    required: getMessageValidation('required', {attribute: 'last_name'}),
+                },
+                email: {
+                    required: getMessageValidation('required', {attribute: 'email'}),
+                },
+                phone: {
+                    required: getMessageValidation('required', {attribute: 'phone'}),
+                },
+                subject: {
+                    required: getMessageValidation('required', {attribute: 'subject'}),
+                },
+                messages: {
+                    required: getMessageValidation('required', {attribute: 'message'}),
+                },
+            },
+            invalidClass: 'is-invalid',
+            validClass: 'is-valid'
+        })
     }
 }
 
@@ -59,4 +110,5 @@ Main = {
 $(window).on('load', () => {
     Main.loginValidate()
     Main.forgotPasswordValidate()
+    Main.formContactValidate()
 })

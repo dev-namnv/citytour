@@ -16,10 +16,12 @@ class CreateInvoiceDetailTable extends Migration
         Schema::create('invoice_detail', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id')->comment('ID hóa đơn');
-            $table->smallInteger('adult_count')->comment('Số lượng người lớn');
-            $table->smallInteger('child_count')->comment('Số lượng trẻ em');
+            $table->string('name')->comment('tên tour');
+            $table->string('address')->comment('địa chỉ tour');
+            $table->string('thumbnail')->comment('ảnh thumbnail');
             $table->float('adult_price', 12, 3)->comment('Giá người lớn');
             $table->float('child_price', 12, 3)->comment('Giá trẻ em');
+            $table->text('schedule')->comment('lịch trình (json)');
         });
     }
 

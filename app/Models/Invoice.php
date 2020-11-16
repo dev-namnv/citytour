@@ -12,6 +12,7 @@ class Invoice extends Model
     protected $fillable = [
         'name',
         'sub_cost',
+        'deposit_cost',
         'vat_cost',
         'total_cost',
         'address',
@@ -19,7 +20,11 @@ class Invoice extends Model
         'message',
         'status',
         'payment_type',
-        'payment_status'
+        'payment_status',
+        'tour_id',
+        'guide_id',
+        'user_id',
+        'start_date',
     ];
 
     /**
@@ -35,10 +40,10 @@ class Invoice extends Model
         return $masterData['status'][$this->status];
     }
 
-    public function getPaymentStatus()
+    public function getColor()
     {
         $masterData = config('masterdata')['invoice'];
-        return $masterData['status'][$this->payment_status];
+        return$masterData['color'][$this->status];
     }
 
     /**
@@ -64,5 +69,10 @@ class Invoice extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function tour()
+    {
+        return $this->belongsTo('App\Models\Tour','tour_id');
     }
 }

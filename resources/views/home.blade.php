@@ -12,6 +12,35 @@
     </section>
 
     <main>
+        <div id="search_container_2">
+            <div id="search_2">
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="tours">
+                        <form>
+                            <div class="row no-gutters custom-search-input-2">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Where..." id="autocomplete">
+                                        <i class="icon_pin_alt"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <input class="form-control date-pick" type="text" name="dates" placeholder="When..">
+                                        <i class="icon_calendar"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <input type="submit" class="btn_search" value="Search">
+                                </div>
+                            </div>
+                            <!-- /row -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End search_container -->
         <div class="container margin_60">
 
             <div class="main_title">

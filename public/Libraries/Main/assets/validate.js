@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
 
 		$("#message-newsletter_2").slideUp(750,function() {
 		$('#message-newsletter_2').hide();
-		
+
 		$('#submit-newsletter_2')
 			.after('<i class="icon-spin4 animate-spin loader"></i>')
 			.attr('disabled','disabled');
@@ -46,7 +46,7 @@ jQuery(document).ready(function(){
  		$('#submit-contact')
 			.after('<i class="icon-spin4 animate-spin loader"></i>')
 			.attr('disabled','disabled');
-			
+
 		$.post(action, {
 			name_contact: $('#name_contact').val(),
 			lastname_contact: $('#lastname_contact').val(),
@@ -71,7 +71,7 @@ jQuery(document).ready(function(){
 
 	});
 		});
-		
+
 /// Jquery validate review tour
 jQuery(document).ready(function(){
 
@@ -81,7 +81,7 @@ jQuery(document).ready(function(){
 
 		$("#message-review").slideUp(750,function() {
 		$('#message-review').hide();
-		
+
 		$('#submit-review')
 			.after('<i class="icon-spin4 animate-spin loader"></i>')
 			.attr('disabled','disabled');
@@ -98,7 +98,7 @@ jQuery(document).ready(function(){
 			review_text: $('#review_text').val(),
 			verify_review: $('#verify_review').val()
 		},
-		
+
 			function(data){
 				document.getElementById('message-review').innerHTML = data;
 				$('#message-review').slideDown('slow');
@@ -117,7 +117,7 @@ jQuery(document).ready(function(){
 
 });
 
-// Jquery validate review hotel
+// Jquery validate review hotels
 jQuery(document).ready(function(){
 
 	$('#review_hotel').submit(function(){
@@ -126,7 +126,7 @@ jQuery(document).ready(function(){
 
 		$("#message-review").slideUp(750,function() {
 		$('#message-review').hide();
-		
+
 		$('#submit-review')
 			.after('<i class="icon-spin4 animate-spin loader"></i>')
 			.attr('disabled','disabled');
@@ -144,7 +144,7 @@ jQuery(document).ready(function(){
 			review_text: $('#review_text').val(),
 			verify_review: $('#verify_review').val()
 		},
-		
+
 			function(data){
 				document.getElementById('message-review').innerHTML = data;
 				$('#message-review').slideDown('slow');
@@ -171,7 +171,7 @@ jQuery(document).ready(function(){
 
 		$("#message-review").slideUp(750,function() {
 		$('#message-review').hide();
-		
+
 		$('#submit-review')
 			.after('<i class="icon-spin4 animate-spin loader"></i>')
 			.attr('disabled','disabled');
@@ -188,7 +188,7 @@ jQuery(document).ready(function(){
 			review_text: $('#review_text').val(),
 			verify_review: $('#verify_review').val()
 		},
-		
+
 			function(data){
 				document.getElementById('message-review').innerHTML = data;
 				$('#message-review').slideDown('slow');
@@ -215,7 +215,7 @@ jQuery(document).ready(function(){
 
 		$("#message-review").slideUp(750,function() {
 		$('#message-review').hide();
-		
+
 		$('#submit-review')
 			.after('<i class="icon-spin4 animate-spin loader"></i>')
 			.attr('disabled','disabled');
@@ -232,7 +232,7 @@ jQuery(document).ready(function(){
 			review_text: $('#review_text').val(),
 			verify_review: $('#verify_review').val()
 		},
-		
+
 			function(data){
 				document.getElementById('message-review').innerHTML = data;
 				$('#message-review').slideDown('slow');
