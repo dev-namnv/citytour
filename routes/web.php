@@ -73,8 +73,8 @@ Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'ArticleController@list')->name('articles.list');
        Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
        });
-    Route::group(['prefix' => 'main'], function () {
-       Route::get('profile', 'ClientController@index');
-       Route::post('edit-profile/{id}', 'ClientController@editProfile')->name('edit-profile');
+    Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
+       Route::get('/', 'UserController@index')->name('profile');
+       Route::post('update', 'UserController@editProfile')->name('profile.edit');
     });
 });

@@ -11,7 +11,8 @@ return [
         'section' => [
             'title' => 'Tour du lịch Paris giá cả phải chăng',
             'desc' => 'TOUR TOUR THÀNH PHỐ / VÉ TOUR / HƯỚNG DẪN TOUR'
-        ]
+        ],
+        'name' => 'Trang chủ'
     ],
 
     'article' => [
@@ -38,4 +39,24 @@ return [
         'not_active' => 'Ẩn',
     ],
 
+    'user' => [
+        'profile' => [
+            'label' => [
+                'name' => 'Thông tin cá nhân',
+                'booking' => 'Đặt trước',
+                'wishlist' => 'Yêu thích',
+                'settings' => 'Cài đặt',
+                'profile' => 'Hồ sơ cá nhân',
+                'first_name' => 'Tên',
+                'last_name' => 'Họ và tên đệm',
+                'phone' => 'Số điện thoại',
+                'birthday' => 'Ngày sinh',
+                'address' => 'Địa chỉ',
+                'city' => 'Thành phố',
+                'zipcode' => 'Zip code',
+                'country' => 'Quốc gia',
+            ],
+            'desc' => 'Cập nhật thông tin cá nhân của bạn'
+        ],
+    ]
 ];

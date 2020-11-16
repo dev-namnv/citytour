@@ -40480,6 +40480,7 @@ Admin = {
    */
   tourSetActive: function tourSetActive(e) {
     var tour_id = $(e).attr('tour-id');
+    var tourClass = $(".tour-status-".concat(data.id));
     axios.put('/manager/tour/set-active', {
       tour_id: tour_id
     }).then(function (_ref) {
@@ -40487,8 +40488,16 @@ Admin = {
           status = _ref.status;
       Toastr.show(data);
 
-      if (status === 200 && data.active) {
-        $("#tour-row-".concat(tour_id)).fadeOut();
+      if (data.publish) {
+        $(e).text('Active');
+        tourClass.text('Đã xác thực');
+        tourClass.removeClass('badge-danger');
+        tourClass.addClass('badge-primary');
+      } else {
+        $(e).text('Un active');
+        tourClass.text('Chưa xác thực');
+        tourClass.removeClass('badge-primary');
+        tourClass.addClass('badge-danger');
       }
     })["catch"](function (err) {
       return console.log(err);
