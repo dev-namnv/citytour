@@ -31,6 +31,7 @@ class InvoiceSeeder extends Seeder
                 'vat_cost' => $vat_cost,
                 'total_cost' => $cost + $vat_cost,
                 'payment_type' => CREDIT_CARD,
+                'payment_code' => strtoupper(uniqid()),
                 'deposit_cost' => $deposit_cost,
 
                 'customer_name' => $faker->name,

@@ -10,7 +10,7 @@ class Review extends Model
     protected $table = 'reviews';
 
     protected $fillable = [
-        'content', 'star', 'active', 'user_id', 'service_id'
+        'content', 'star', 'active', 'user_id', 'tour_id'
     ];
 
     /**

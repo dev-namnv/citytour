@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Helper\StorageS3Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Main\User\ProfileRequest;
+use App\Http\Requests\User\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

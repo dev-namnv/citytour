@@ -24,6 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->float('vat_cost', 12, 3)->default(0)->comment('Thuế VAT');
             $table->float('total_cost', 12, 3)->comment('Tổng giá trị');
             $table->string('payment_type')->comment('Hình thức thanh toán');
+            $table->string('payment_code')->comment('Mã thanh toán app');
             $table->float('deposit_cost', 12, 3)->comment('Chi phí đặt cọc (đã trả)');
 
             $table->string('customer_name')->comment('Tên khách hàng');

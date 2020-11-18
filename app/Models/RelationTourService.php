@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RelationTourService extends Model
 {
-    protected $table = 'relation_service_facility';
+    protected $table = 'relation_tour_service';
 
     protected $fillable = [
         'tour_id', 'service_id'

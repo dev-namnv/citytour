@@ -13,7 +13,7 @@ class Service extends Model
     ];
 
     /**
-     * Eloquent facility
+     * Eloquent service
      */
     public function tours()
     {

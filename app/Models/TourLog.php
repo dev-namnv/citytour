@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TourLog extends Model
 {
-    protected $table = 'service_logs';
+    protected $table = 'tour_logs';
 
     protected $fillable = [
         'tour_id', 'user_id'
