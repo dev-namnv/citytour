@@ -54,7 +54,8 @@ class Invoice extends Model
     protected $casts = [
         'sub_cost' => Currency::class,
         'vat_cost' => Currency::class,
-        'total_cost' => Currency::class
+        'total_cost' => Currency::class,
+        'deposit_cost' => Currency::class
     ];
 
     /**
@@ -65,14 +66,18 @@ class Invoice extends Model
         return $this->hasOne('App\Models\InvoiceDetail');
     }
 
-
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function tour()
     {
         return $this->belongsTo('App\Models\Tour','tour_id');
+    }
+
+    public function guide()
+    {
+        return $this->belongsTo('App\Models\User', 'guide_id');
     }
 }

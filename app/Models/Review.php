@@ -29,7 +29,7 @@ class Review extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function service()
+    public function tour()
     {
         return $this->belongsTo('App\Models\Tour');
     }

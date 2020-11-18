@@ -16,7 +16,7 @@ class CreateTourLogsTable extends Migration
         Schema::create('tour_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tour_id')->comment('ID tour');
-            $table->unsignedBigInteger('user_id')->comment('ID người dùng');
+            $table->unsignedBigInteger('user_id')->nullable()->comment('ID người dùng');
             $table->timestamps();
         });
     }
