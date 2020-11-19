@@ -59,6 +59,12 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::delete('/{id}/delete', 'TourController@delete')->name('tour-delete');
     });
 
+    // Invoices
+    Route::group(['prefix' => 'invoices'], function () {
+        Route::get('/', 'InvoiceController@index')->name('invoice-index');
+        Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
+    });
+
 
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('articles', 'ArticleController')->except(['show']);
@@ -73,6 +79,7 @@ Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'ArticleController@list')->name('articles.list');
        Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
        });
+
     Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
        Route::get('/', 'UserController@index')->name('profile');
        Route::post('update', 'UserController@editProfile')->name('profile.edit');

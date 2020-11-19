@@ -47,18 +47,6 @@ class Invoice extends Model
     }
 
     /**
-     * TODO: Convert data
-     *
-     * @var string[]
-     */
-    protected $casts = [
-        'sub_cost' => Currency::class,
-        'vat_cost' => Currency::class,
-        'total_cost' => Currency::class,
-        'deposit_cost' => Currency::class
-    ];
-
-    /**
      * Eloquent invoice
      */
     public function invoice_detail()
@@ -68,16 +56,16 @@ class Invoice extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\Models\User','user_id');
+    }
+
+    public function guide()
+    {
+        return $this->belongsTo('App\Models\User','guide_id');
     }
 
     public function tour()
     {
         return $this->belongsTo('App\Models\Tour','tour_id');
-    }
-
-    public function guide()
-    {
-        return $this->belongsTo('App\Models\User', 'guide_id');
     }
 }

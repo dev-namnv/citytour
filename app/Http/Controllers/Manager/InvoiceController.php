@@ -29,4 +29,12 @@ class InvoiceController extends Controller
         return view('Manager.invoices.index', compact('invoices'));
     }
 
+    public function show(Request $request)
+    {
+        $invoice = Invoice::query()->where('sku',$request->sku)
+            ->with('invoice_detail','guide','user')
+            ->firstOrFail();
+//        dd($invoice);
+        return view('Manager.invoices.show',compact('invoice'));
+    }
 }
