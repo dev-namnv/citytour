@@ -1,13 +1,7 @@
 /* Import libraries */
 require('./bootstrap')
-require('./toastr')
-// require('./google-map')
-window.PerfectScrollbar = require('perfect-scrollbar/dist/perfect-scrollbar.min')
-
-// require('highlight.js/lib/highlight')
-require('file-upload-with-preview/dist/file-upload-with-preview.min')
-require('jquery-blockui/jquery.blockUI')
 require('./validation')
+require('./toastr')
 
 /*
 Code
@@ -316,7 +310,7 @@ Admin = {
 }
 
 // Run onload
-$(window).on('load', function () {
+$(document).ready(function () {
     Admin.loginValidate()
     Admin.forgotPasswordValidate()
     Admin.tourCreateValidate()
@@ -325,3 +319,8 @@ $(window).on('load', function () {
     Admin.storeArticleCategoryValidate()
     Admin.formContactValidate()
 })
+
+$(document).ready(function(){
+    $('.dropdown-toggle').dropdown()
+    $('.dropdown-toggle-split').dropdown()
+});
