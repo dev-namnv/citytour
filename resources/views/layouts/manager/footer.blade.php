@@ -1,8 +1,20 @@
-<div class="footer-wrapper">
-    <div class="footer-section f-section-1">
-        <p class="">Copyright © 2020 <a target="_blank" href="https://designreset.com/">DesignReset</a>, All rights reserved.</p>
+<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+    <!--begin::Container-->
+    <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <!--begin::Copyright-->
+        <div class="text-dark order-2 order-md-1">
+            <span class="text-muted font-weight-bold mr-2">{{ date('Y') }}©</span>
+            <a href="/" target="_blank"
+               class="text-dark-75 text-hover-primary">City Tour</a>
+        </div>
+        <!--end::Copyright-->
+        <!--begin::Nav-->
+        <div class="nav nav-dark">
+            <a href="/" target="_blank" class="nav-link pl-0 pr-5">About</a>
+            <a href="/" target="_blank" class="nav-link pl-0 pr-5">Team</a>
+            <a href="/" target="_blank" class="nav-link pl-0 pr-0">Contact</a>
+        </div>
+        <!--end::Nav-->
     </div>
-    <div class="footer-section f-section-2">
-        <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
-    </div>
+    <!--end::Container-->
 </div>
