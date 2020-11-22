@@ -46,6 +46,9 @@ define('TOASTR_WARNING', 'warning');
 
 // Http status
 define('HTTP_ERROR_403', 'Không có quyền truy cập');
+define('HTTP_ERROR_404', 'Đường dẫn có thể bị lỗi');
+define('HTTP_ERROR_400', 'Request không hợp lệ');
+define('HTTP_ERROR_500', 'Có lỗi không xác định xảy ra');
 
 // Pagination service
 define('PAGINATION_TOUR', 10);
@@ -68,3 +71,6 @@ define('BEHAVIOR_SCORE_BLOCK', 0);
 // Publish
 define('PUBLISH', 1);
 define('NOT_PUBLISH', 0);
+
+// Slug
+define('REGEX_SLUG', '/^[^<>]*$/');

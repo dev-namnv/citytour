@@ -27,8 +27,7 @@ class Tour extends Model
         'google_map',
         'publish',
         'active',
-        'category_id',
-        'user_id',
+        'category_id'
     ];
 
     use SoftDeletes;
@@ -98,7 +97,7 @@ class Tour extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category', 'category_id', 'id', 'categories');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
 
     public function batches()
@@ -113,7 +112,7 @@ class Tour extends Model
 
     public function guide()
     {
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     /**
