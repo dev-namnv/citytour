@@ -95,10 +95,11 @@ Route::group(['namespace' => 'Main'], function () {
  * API
  */
 Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
-    // Manager tour
     Route::group(['prefix' => 'tour'], function () {
         Route::get('list', 'TourController@list');
         Route::get('{slug}', 'TourController@findBySlug');
+
+        // Manager tour
         Route::middleware(['guide'])->group(function () {
             Route::get('manager', 'TourController@manager');
             Route::post('store', 'TourController@store');
