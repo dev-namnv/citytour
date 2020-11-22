@@ -75,6 +75,10 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 
 // Main
 Route::group(['namespace' => 'Main'], function () {
+    Route::group(['prefix' => 'tours'], function () {
+        Route::get('{param?}','TourController@index')->name('Main.tour.index');
+        Route::get('/show/{slug}','TourController@show')->name('Main.tour.show');
+    });
     Route::group(['prefix' => 'news'], function () {
        Route::get('/', 'ArticleController@list')->name('articles.list');
        Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
