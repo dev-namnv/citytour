@@ -16,7 +16,6 @@ class Tour extends Model
 
     protected $fillable = [
         'name',
-        'slug',
         'address',
         'description',
         'thumbnail',
@@ -26,7 +25,6 @@ class Tour extends Model
         'child_price',
         'google_map',
         'publish',
-        'active',
         'category_id'
     ];
 
@@ -63,6 +61,10 @@ class Tour extends Model
         'publish' => 'boolean',
         'adult_price' => Currency::class,
         'child_price' => Currency::class
+    ];
+
+    protected $hidden = [
+//        'active', 'publish', 'deleted_at', 'user_id', 'category_id'
     ];
 
     /**
