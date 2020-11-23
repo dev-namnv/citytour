@@ -105,14 +105,14 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
         Route::get('{slug}', 'TourController@findBySlug');
 
         // Manager tour
-        Route::middleware(['guide'])->group(function () {
-            Route::get('manager', 'TourController@manager');
+        Route::group(['prefix' => 'manager', 'middleware' => 'guide'], function () {
+            Route::get('list', 'TourController@manager');
             Route::post('store', 'TourController@store');
             Route::get('{id}/get', 'TourController@findById');
-            Route::put('/{id}/update', 'TourController@update');
-            Route::patch('/{id}/active', 'TourController@setActive');
-            Route::patch('/{id}/publish', 'TourController@setPublish');
-            Route::delete('/{id}/delete', 'TourController@delete');
+            Route::put('{id}/update', 'TourController@update');
+            Route::patch('{id}/active', 'TourController@setActive');
+            Route::patch('{id}/publish', 'TourController@setPublish');
+            Route::delete('{id}/delete', 'TourController@delete');
         });
     });
 

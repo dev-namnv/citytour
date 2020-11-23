@@ -6,7 +6,6 @@ use App\Helpers\ConvertSlugHelper;
 use App\Helpers\ReviewHelper;
 use App\Helpers\StorageS3Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tour\UpdateTourRequest;
 use App\Models\Tour;
 use App\Scopes\ActiveScope;
 use App\Scopes\PublishScope;
@@ -17,7 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class TourController extends Controller
 {
@@ -29,22 +27,18 @@ class TourController extends Controller
      */
     public function list(Request $request)
     {
-        $params = $request->only(['page', 'active', 'publish']);
-        $docs = Tour::query()->orderBy('created_at', 'desc');
-
-        foreach ($params as $key => $param) {
-            if (is_bool($param) && $key) {
-                $docs = $docs->where($key, '=', $param);
-            }
+        $limit = PAGINATION_TOUR;
+        if ($request->has('limit') && (int)$request->limit > 0 && (int)$request->limit <= 50) {
+            $limit = (int)$request->limit;
         }
 
+        $docs = Tour::query()->orderBy('created_at', 'desc');
         $tours = $docs
             ->with('schedules', 'batches', 'category', 'guide', 'reviews.user')
-            ->paginate(PAGINATION_TOUR);
+            ->paginate($limit);
 
         // Convert data
         foreach ($tours as $tour) {
-            $tour->address = Str::limit($tour->address, TOUR_LIMIT_ADDRESS);
             $tour->rating = ReviewHelper::rating($tour->reviews);
         }
 
@@ -60,6 +54,11 @@ class TourController extends Controller
      */
     protected function manager(Request $request)
     {
+        $limit = PAGINATION_TOUR;
+        if ($request->has('limit') && (int)$request->limit > 0 && (int)$request->limit <= 50) {
+            $limit = (int)$request->limit;
+        }
+
         $params = $request->only(['page', 'active', 'publish']);
         if (Auth::user()->role === ADMIN) { // Nếu là ADMIN đăng nhập
             $docs = Tour::query()
@@ -80,11 +79,10 @@ class TourController extends Controller
 
         $tours = $docs
             ->with('schedules', 'batches', 'category', 'guide', 'reviews.user')
-            ->paginate(PAGINATION_TOUR);
+            ->paginate($limit);
 
         // Convert data
         foreach ($tours as $tour) {
-            $tour->address = Str::limit($tour->address, TOUR_LIMIT_ADDRESS);
             $tour->rating = ReviewHelper::rating($tour->reviews);
         }
 
@@ -150,14 +148,13 @@ class TourController extends Controller
      * Edit information tour
      * Middleware: GUIDE & ofGuide
      *
-     * @param UpdateTourRequest $request
+     * @param Request $request
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    protected function update(UpdateTourRequest $request)
+    protected function update(Request $request, $id)
     {
         $this->middleware('guide');
         try {
-            $request->except(['active', 'deleted_at', 'slug', 'user_id', 'created_at', 'updated_at']);
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|min:20|max:255',
                 'address' => 'required|string|min:10|max:255',
@@ -178,19 +175,29 @@ class TourController extends Controller
                 return response()->json(["error" => $validator->errors()], 400);
             }
 
+            $data = $request->only([
+                'name',
+                'address',
+                'description',
+                'content',
+                'adult_price',
+                'child_price',
+                'google_map',
+                'publish',
+                'category_id'
+            ]);
+
             $tour = Tour::query()
-                ->withoutGlobalScope(PublishScope::class)
-                ->ofGuide()
-                ->find($request->id);
+                ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
+                ->find($id);
 
             if ($request->hasFile('thumbnail')) {
-                $request->thumbnail = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/thumbnail', $request->file('thumbnail'));
+                $data['thumbnail'] = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/thumbnail', $request->file('thumbnail'));
             }
             if ($request->hasFile('banner')) {
-                $request->banner = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/banner', $request->file('banner'));
+                $data['banner'] = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/banner', $request->file('banner'));
             }
-
-            $tour->save();
+            $tour->update($data);
 
             return $tour ? response($tour) : response(['error' => 'Không tìm thấy Tour'], 404);
         } catch (\Exception $exception) {
@@ -202,17 +209,17 @@ class TourController extends Controller
      * Set active tour
      * Middleware: ADMIN
      *
-     * @param Request $request
+     * @param $id
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    protected function setActive(Request $request)
+    protected function setActive($id)
     {
         $this->middleware('admin');
         try {
             $tour = Tour::query()
                 ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
                 ->ofGuide()
-                ->find($request->id);
+                ->find($id);
             $tour->active = !$tour->active;
             $response = [
                 'title' => $tour->active ? 'Activated' : 'Deactivate',
@@ -233,20 +240,20 @@ class TourController extends Controller
      * Set publish tour: GUIDE
      * Middleware: GUIDE & ofGuide
      *
-     * @param Request $request
+     * @param $id
      * @return JsonResponse|Response
      */
-    protected function setPublish(Request $request)
+    protected function setPublish($id)
     {
         $this->middleware('guide');
         try {
             $tour = Tour::query()->withoutGlobalScope(PublishScope::class)
                 ->ofGuide()
-                ->find($request->id);
+                ->find($id);
             $tour->publish = !$tour->publish;
             $response = [
-                'title' => $tour->active ? 'Published' : 'Unpublished',
-                'message' => $tour->active ? 'Đã công khai Tour' : 'Đã ẩn Tour',
+                'title' => $tour->publish ? 'Published' : 'Unpublished',
+                'message' => $tour->publish ? 'Đã công khai Tour' : 'Đã ẩn Tour',
                 'id' => $tour->id,
                 'publish' => $tour->publish
             ];
@@ -262,22 +269,21 @@ class TourController extends Controller
      * Delete tour: ADMIN, GUIDE
      * Middleware: ADMIN | (GUIDE & ofGuide)
      *
-     * @param Request $request
+     * @param $id
      * @return ResponseFactory|JsonResponse|Response
      */
-    protected function delete(Request $request)
+    protected function delete($id)
     {
         $this->middleware('guide');
         try {
+            $check = Tour::query()
+                ->withoutGlobalScopes([ActiveScope::class,PublishScope::class]);
             if(Auth::user()->role === ADMIN) {
-                $check = Tour::query()
-                    ->withoutGlobalScope(ActiveScope::class)
-                    ->find($request->id);
+                $check = $check->find($id);
             } else {
-                $check = Tour::query()
-                    ->ofGuide()
-                    ->find($request->id);
+                $check = $check->ofGuide()->find($id);
             }
+
             if ($check) {
                 $check->delete();
             }
@@ -292,12 +298,12 @@ class TourController extends Controller
     /**
      * Get detail tour by Slug
      *
-     * @param Request $request
+     * @param $slug
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    public function findBySlug(Request $request)
+    public function findBySlug($slug)
     {
-        $tour = Tour::query()->where('slug', $request->slug)
+        $tour = Tour::query()->where('slug', $slug)
             ->with('category', 'guide', 'services', 'batches', 'reviews.user')
             ->first();
         return $tour ? response()->json($tour) : response(['message' => 'Không tìm thấy Tour'], 404);
@@ -306,21 +312,17 @@ class TourController extends Controller
     /**
      * Get detail tour by ID
      *
-     * @param Request $request
+     * @param $id
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    public function findById(Request $request)
+    public function findById($id)
     {
-        if (Auth::user()->role === ADMIN) { // Nếu là ADMIN đăng nhập
-            $doc = Tour::query()
-                ->withoutGlobalScopes([ActiveScope::class, PublishScope::class]);
-        } else { // Nếu là GUIDE đăng nhập
-            $doc = Tour::query()
-                ->withoutGlobalScope(PublishScope::class)
-                ->ofGuide();
+        $doc = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class]);
+        if (Auth::user()->role === GUIDE) { // Nếu là GUIDE đăng nhập
+            $doc = $doc->ofGuide();
         }
 
-        $tour = $doc->with('category', 'guide', 'services', 'batches', 'reviews.user')->find($request->id);
+        $tour = $doc->with('category', 'guide', 'services', 'batches', 'reviews.user')->find($id);
         return $tour ? response()->json($tour) : response(['message' => 'Không tìm thấy Tour'], 404);
     }
 }
