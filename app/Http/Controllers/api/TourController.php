@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class TourController extends Controller
 {
@@ -152,7 +151,7 @@ class TourController extends Controller
      * @param Request $request
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    protected function update(Request $request)
+    protected function update(Request $request, $id)
     {
         $this->middleware('guide');
         try {
@@ -176,24 +175,29 @@ class TourController extends Controller
                 return response()->json(["error" => $validator->errors()], 400);
             }
 
-            $data = $request->only(['content']);
+            $data = $request->only([
+                'name',
+                'address',
+                'description',
+                'content',
+                'adult_price',
+                'child_price',
+                'google_map',
+                'publish',
+                'category_id'
+            ]);
 
             $tour = Tour::query()
-                ->withoutGlobalScope(PublishScope::class)
-                ->ofGuide()
-                ->find($request->id);
+                ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
+                ->find($id);
 
             if ($request->hasFile('thumbnail')) {
-                $request->thumbnail = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/thumbnail', $request->file('thumbnail'));
+                $data['thumbnail'] = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/thumbnail', $request->file('thumbnail'));
             }
             if ($request->hasFile('banner')) {
-                $request->banner = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/banner', $request->file('banner'));
+                $data['banner'] = StorageS3Helper::getUrlAfterUpload('tours/'.$tour->slug.'/banner', $request->file('banner'));
             }
-            if ($data['content']) {
-                $tour->content = $data['content'];
-            }
-
-            $tour->save();
+            $tour->update($data);
 
             return $tour ? response($tour) : response(['error' => 'Không tìm thấy Tour'], 404);
         } catch (\Exception $exception) {
@@ -205,17 +209,17 @@ class TourController extends Controller
      * Set active tour
      * Middleware: ADMIN
      *
-     * @param Request $request
+     * @param $id
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    protected function setActive(Request $request)
+    protected function setActive($id)
     {
         $this->middleware('admin');
         try {
             $tour = Tour::query()
                 ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
                 ->ofGuide()
-                ->find($request->id);
+                ->find($id);
             $tour->active = !$tour->active;
             $response = [
                 'title' => $tour->active ? 'Activated' : 'Deactivate',
@@ -236,16 +240,16 @@ class TourController extends Controller
      * Set publish tour: GUIDE
      * Middleware: GUIDE & ofGuide
      *
-     * @param Request $request
+     * @param $id
      * @return JsonResponse|Response
      */
-    protected function setPublish(Request $request)
+    protected function setPublish($id)
     {
         $this->middleware('guide');
         try {
             $tour = Tour::query()->withoutGlobalScope(PublishScope::class)
                 ->ofGuide()
-                ->find($request->id);
+                ->find($id);
             $tour->publish = !$tour->publish;
             $response = [
                 'title' => $tour->publish ? 'Published' : 'Unpublished',
@@ -265,19 +269,19 @@ class TourController extends Controller
      * Delete tour: ADMIN, GUIDE
      * Middleware: ADMIN | (GUIDE & ofGuide)
      *
-     * @param Request $request
+     * @param $id
      * @return ResponseFactory|JsonResponse|Response
      */
-    protected function delete(Request $request)
+    protected function delete($id)
     {
         $this->middleware('guide');
         try {
             $check = Tour::query()
                 ->withoutGlobalScopes([ActiveScope::class,PublishScope::class]);
             if(Auth::user()->role === ADMIN) {
-                $check = $check->find($request->id);
+                $check = $check->find($id);
             } else {
-                $check = $check->ofGuide()->find($request->id);
+                $check = $check->ofGuide()->find($id);
             }
 
             if ($check) {
@@ -294,12 +298,12 @@ class TourController extends Controller
     /**
      * Get detail tour by Slug
      *
-     * @param Request $request
+     * @param $slug
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    public function findBySlug(Request $request)
+    public function findBySlug($slug)
     {
-        $tour = Tour::query()->where('slug', $request->slug)
+        $tour = Tour::query()->where('slug', $slug)
             ->with('category', 'guide', 'services', 'batches', 'reviews.user')
             ->first();
         return $tour ? response()->json($tour) : response(['message' => 'Không tìm thấy Tour'], 404);
@@ -308,17 +312,17 @@ class TourController extends Controller
     /**
      * Get detail tour by ID
      *
-     * @param Request $request
+     * @param $id
      * @return Application|ResponseFactory|JsonResponse|Response
      */
-    public function findById(Request $request)
+    public function findById($id)
     {
         $doc = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class]);
         if (Auth::user()->role === GUIDE) { // Nếu là GUIDE đăng nhập
             $doc = $doc->ofGuide();
         }
 
-        $tour = $doc->with('category', 'guide', 'services', 'batches', 'reviews.user')->find($request->id);
+        $tour = $doc->with('category', 'guide', 'services', 'batches', 'reviews.user')->find($id);
         return $tour ? response()->json($tour) : response(['message' => 'Không tìm thấy Tour'], 404);
     }
 }
