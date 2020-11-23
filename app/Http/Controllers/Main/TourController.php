@@ -12,13 +12,15 @@ class TourController extends Controller
 
     public function index($param = 'lists')
     {
-        $tours = Tour::query()->with('category','services')
+        $tours = Tour::query()->with('category','reviews')
+            ->with(['batches' => function ($q) {
+                $q->select()->where('batch','>',date('Y-m-d'));
+            }])
             ->paginate(PAGINATION_TOUR);
         $categories = Category::query()->get();
         if ($param == 'list-grid') {
             return view('Main.tour.list-grid', compact('tours','categories'));
         }
-//        dd($tours);
         return view('Main.tour.list', compact('tours','categories'));
     }
 

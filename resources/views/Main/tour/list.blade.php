@@ -44,20 +44,11 @@
         </div>
         <!-- Position -->
 
-        <div class="collapse" id="collapseMap">
-            <div id="map" class="map"></div>
-        </div>
-        <!-- End Map -->
-
 
         <div class="container margin_60">
 
             <div class="row">
                 <aside class="col-lg-3">
-                    <p>
-                        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                    </p>
-
                     <div class="box_style_cat">
                         <ul id="cat_nav">
                             <li>
@@ -72,14 +63,14 @@
                     </div>
 
                     <div id="filters_col">
-                        <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
+                        <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Lọc</a>
                         <div class="collapse show" id="collapseFilters">
                             <div class="filter_type">
-                                <h6>Price</h6>
+                                <h6>Giá</h6>
                                 <input type="text" id="range" name="range" value="">
                             </div>
                             <div class="filter_type">
-                                <h6>Rating</h6>
+                                <h6>Đánh giá</h6>
                                 <ul>
                                     <li>
                                         <label>
@@ -119,29 +110,15 @@
                                 </ul>
                             </div>
                             <div class="filter_type">
-                                <h6>Facility</h6>
-                                <ul>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Pet allowed
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Groups allowed
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Tour guides
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Access for disabled
-                                        </label>
-                                    </li>
-                                </ul>
+                                <h6>Khởi hành</h6>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter_type text-center">
+                                <button class="btn btn-field col-12 bold">Cập nhật</button>
                             </div>
                         </div>
                         <!--End collapse -->
@@ -190,8 +167,6 @@
                         <div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.{!! ++$index !!}s">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4">
-                                    <div class="ribbon_3 popular"><span>{!! __('POPULAR') !!}</span>
-                                    </div>
                                     <div class="wishlist">
                                         <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">{!! __('Add to wishlist') !!}</span></span></a>
                                     </div>
@@ -204,38 +179,29 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="tour_list_desc">
                                         <div class="rating">
-                                            <i class="icon-smile voted"></i>
-                                            <i class="icon-smile  voted"></i>
-                                            <i class="icon-smile  voted"></i>
-                                            <i class="icon-smile  voted"></i>
-                                            <i class="icon-smile"></i>
-                                            <small>(75)</small>
+                                            @for($i = 0; $i<5; $i++)
+                                                @if($i <= round($tour->reviews->avg('star')))
+                                                    <i class="icon-smile voted"></i>
+                                                @else
+                                                    <i class="icon-smile"></i>
+                                                @endif
+                                            @endfor
+                                            <small>{{ $tour->reviews->count() }}</small>
                                         </div>
                                         <h3><strong>{!! $tour->name !!}</strong> tour</h3>
                                         <p>{!! substr($tour->description,0,125).'....' !!}</p>
                                         <ul class="add_info">
                                             <li>
                                                 <div class="tooltip_styled tooltip-effect-4">
-                                                    <span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-                                                    <div class="tooltip-content">
-                                                        <h4>Schedule</h4>
-{{--                                                        @foreach(json_decode($tour->schedule) as $schedule)--}}
-{{--                                                            <p>--}}
-{{--                                                                <strong>{!! $schedule->name !!}</strong>--}}
-{{--                                                                {!! $schedule->time !!}--}}
-{{--                                                            </p>--}}
-{{--                                                        @endforeach--}}
-                                                    </div>
+                                                        Khởi hành:
                                                 </div>
                                             </li>
-                                            @foreach($tour->services as $serveice)
+                                            @foreach($tour->batches as $batch)
                                                 <li>
                                                     <div class="tooltip_styled tooltip-effect-4">
-                                                        <span class="tooltip-item"><i class="{!! $serveice->icon !!}"></i></span>
-                                                        <div class="tooltip-content">
-                                                            <h4>{!! $serveice->name !!}</h4> {!! $serveice->description !!}
-                                                            <br>
-                                                        </div>
+                                                        <span class="tooltip-item">
+                                                            {{ $batch->batch }}
+                                                        </span>
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -244,8 +210,8 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2">
                                     <div class="price_list">
-                                        <div class="price small">
-                                            {!! $tour->getCurrentPrice() !!}
+                                        <div class="price">
+                                            <p style="font-size: 50%">{!! $tour->getCurrentPrice() !!}</p>
                                             <small>*Per person</small>
                                             <p>
                                                 <a href="{{route('Main.tour.show',['slug'=> $tour->slug])}}" class="btn_1">Details</a>

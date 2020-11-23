@@ -44,19 +44,10 @@
         </div>
         <!-- Position -->
 
-        <div class="collapse" id="collapseMap">
-            <div id="map" class="map"></div>
-        </div>
-        <!-- End Map -->
-
-
         <div class="container margin_60">
 
             <div class="row">
                 <aside class="col-lg-3">
-                    <p>
-                        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                    </p>
 
                     <div class="box_style_cat">
                         <ul id="cat_nav">
@@ -72,14 +63,14 @@
                     </div>
 
                     <div id="filters_col">
-                        <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
+                        <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Lọc</a>
                         <div class="collapse show" id="collapseFilters">
                             <div class="filter_type">
-                                <h6>Price</h6>
+                                <h6>Giá</h6>
                                 <input type="text" id="range" name="range" value="">
                             </div>
                             <div class="filter_type">
-                                <h6>Rating</h6>
+                                <h6>Đánh giá</h6>
                                 <ul>
                                     <li>
                                         <label>
@@ -119,29 +110,15 @@
                                 </ul>
                             </div>
                             <div class="filter_type">
-                                <h6>Facility</h6>
-                                <ul>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Pet allowed
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Groups allowed
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Tour guides
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="checkbox">Access for disabled
-                                        </label>
-                                    </li>
-                                </ul>
+                                <h6>Khởi hành</h6>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter_type text-center">
+                                <button class="btn btn-field col-12 bold">Cập nhật</button>
                             </div>
                         </div>
                         <!--End collapse -->
@@ -190,8 +167,6 @@
                         <div class="row">
                             <div class="col-md-6 wow zoomIn" data-wow-delay="0.{!! $i !!}s">
                                 <div class="tour_container">
-                                    <div class="ribbon_3 popular"><span>Popular</span>
-                                    </div>
                                     <div class="img_container">
                                         <a href="{{route('Main.tour.show',['slug'=> $tours[$i]->slug])}}">
                                             <img src="{!! $tours[$i]->thumbnail !!}" width="800" height="533" class="img-fluid" alt="Image">
@@ -203,14 +178,31 @@
                                         </a>
                                     </div>
                                     <div class="tour_title">
-                                        <h3><strong>Arc Triomphe</strong> tour</h3>
-                                        <div class="rating">
-                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
+                                        <h3><strong>{{ $tours[$i]->name }}</strong></h3>
+                                        <ul class="add_info">
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    Khởi hành:
+                                                </div>
+                                            </li>
+                                            @foreach($tours[$i]->batches as $batch)
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item">
+                                                            {{ $batch->batch }}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <div class="rating mt-3">
+                                            Đánh giá ({{ $tours[$i]->reviews->count() }}) : {{ round($tours[$i]->reviews->avg('star'),1) }} / 5
                                         </div>
                                         <!-- end rating -->
                                         <div class="wishlist">
                                             <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                                         </div>
+
                                         <!-- End wish list-->
                                     </div>
                                 </div>
@@ -220,8 +212,6 @@
 
                             <div class="col-md-6 wow zoomIn" data-wow-delay="0.{!! $i++ !!}s">
                                 <div class="tour_container">
-                                    <div class="ribbon_3 popular"><span>Popular</span>
-                                    </div>
                                     <div class="img_container">
                                         <a href="{{route('Main.tour.show',['slug'=> $tours[$i]->slug])}}">
                                             <img src="{!! $tours[$i]->thumbnail !!}" width="800" height="533" class="img-fluid" alt="Image">
@@ -233,9 +223,25 @@
                                         </a>
                                     </div>
                                     <div class="tour_title">
-                                        <h3><strong>Notredame</strong> tour</h3>
-                                        <div class="rating">
-                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
+                                        <h3><strong>{{ $tours[$i]->name }}</strong></h3>
+                                        <ul class="add_info">
+                                            <li>
+                                                <div class="tooltip_styled tooltip-effect-4">
+                                                    Khởi hành:
+                                                </div>
+                                            </li>
+                                            @foreach($tours[$i]->batches as $batch)
+                                                <li>
+                                                    <div class="tooltip_styled tooltip-effect-4">
+                                                        <span class="tooltip-item">
+                                                            {{ $batch->batch }}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <div class="rating mt-3">
+                                            Đánh giá ({{ $tours[$i]->reviews->count() }}) : {{ round($tours[$i]->reviews->avg('star'),1) }} / 5
                                         </div>
                                         <!-- end rating -->
                                         <div class="wishlist">
