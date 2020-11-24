@@ -54,8 +54,8 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
         Route::get('/{id}', 'TourController@detail')->name('tour-detail');
 
-        Route::put('set-active', 'TourController@setActive')->name('tour-set-active');
-        Route::put('set-publish', 'TourController@setPublish')->name('tour-set-publish');
+        Route::patch('/{id}/set-active', 'TourController@setActive')->name('tour-set-active');
+        Route::patch('/{id}/set-publish', 'TourController@setPublish')->name('tour-set-publish');
         Route::delete('/{id}/delete', 'TourController@delete')->name('tour-delete');
     });
 
@@ -94,4 +94,26 @@ Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'ContactController@index')->name('contact.index');
        Route::post('/', 'ContactController@store')->name('contact.store');
     });
+});
+
+/**
+ * API
+ */
+Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
+    Route::group(['prefix' => 'tour'], function () {
+        Route::get('list', 'TourController@list');
+        Route::get('{slug}', 'TourController@findBySlug');
+
+        // Manager tour
+        Route::group(['prefix' => 'manager', 'middleware' => 'guide'], function () {
+            Route::get('list', 'TourController@manager');
+            Route::post('store', 'TourController@store');
+            Route::get('{id}/get', 'TourController@findById');
+            Route::put('{id}/update', 'TourController@update');
+            Route::patch('{id}/active', 'TourController@setActive');
+            Route::patch('{id}/publish', 'TourController@setPublish');
+            Route::delete('{id}/delete', 'TourController@delete');
+        });
+    });
+
 });
