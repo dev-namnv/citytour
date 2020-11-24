@@ -18,7 +18,6 @@ class TourController extends Controller
         if ($param == 'list-grid') {
             return view('Main.tour.list-grid', compact('tours','categories'));
         }
-//        dd($tours);
         return view('Main.tour.list', compact('tours','categories'));
     }
 
@@ -27,7 +26,6 @@ class TourController extends Controller
         $tour = Tour::query()->with('album','reviews','category','schedules','batches')
             ->where('slug',$slug)
             ->first();
-//        dd($service->schedule);
         return view('Main.tour.detail', compact('tour'));
     }
 

@@ -27,39 +27,6 @@
     </style>
 @endsection
 
-@section('extra-js')
-    <script src="{{asset('Libraries/Main/js/jquery.sliderPro.min.js')}}"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function ($) {
-            $('#Img_carousel').sliderPro({
-                width: 960,
-                height: 500,
-                fade: true,
-                arrows: true,
-                buttons: false,
-                fullScreen: false,
-                smallSize: 500,
-                startSlide: 0,
-                mediumSize: 1000,
-                largeSize: 3000,
-                thumbnailArrows: true,
-                autoplay: false
-            });
-        });
-    </script>
-
-    <!-- Date and time pickers -->
-    <script>
-        $('input.date-pick').datepicker('setDate', 'today');
-        $('input.time-pick').timepicker({
-            minuteStep: 15,
-            showInpunts: false
-        })
-    </script>
-
-
-@endsection
 
 @section('content')
 
@@ -72,12 +39,13 @@
                         <span>{{ $tour->address }}</span>
                         <div class="rating">
                             @for($i=1; $i<=5; $i++)
-                                @if($i <= $tour->reviews->avg('star'))
+                                @if($i <= round($tour->reviews->avg('star')))
                                     <i class="icon-smile voted"></i>
                                 @else
                                     <i class="icon-smile"></i>
                                 @endif
                             @endfor
+                        ({{ round($tour->reviews->avg('star'),1) }})
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -163,10 +131,8 @@
                                     <hr/>
                                 @endforeach
                             @else
-                            <div class="row">
                                 <h4><strong>Đi trong ngày</strong></h4>
                                 {{ $tour->schedules->first()->description }}
-                            </div>
                            @endif
                         </div>
                     </div>
@@ -174,23 +140,27 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <h3>Reviews </h3>
-                            <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                            @if(Auth::user())
+                                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                            @endif
                         </div>
                         <div class="col-lg-9">
-                            <div id="general_rating">{{ $tour->reviews->count() }} Reviews
+                            <div class="text-right" id="general_rating">
+                                <p>{{ $tour->reviews->count() }} Reviews</p>
                                 <div class="rating">
                                     @for($i=1; $i<=5; $i++)
-                                        @if($i <= $tour->reviews->avg('star'))
+                                        @if($i <= round($tour->reviews->avg('star')))
                                             <i class="icon-smile voted"></i>
                                         @else
                                             <i class="icon-smile"></i>
                                         @endif
                                     @endfor
                                 </div>
+                                ({{ round($tour->reviews->avg('star'),1) }})
                             </div>
                             <!-- End general_rating -->
-                            <hr>
-                            @foreach($tour->reviews as $review)
+                            @foreach($tour->reviews as $key => $review)
+                                @break($key == 5)
                                 <div class="review_strip_single">
                                     <img src="{{ $review->user->avatar }}" alt="Image" class="rounded-circle">
                                     <small> {{ $review->created_at }}</small>
@@ -198,7 +168,7 @@
                                     <p>
                                         "{{ $review->content }}"
                                     </p>
-                                    <div class="rating">
+                                    <span class="rating">
                                         @for($i=1; $i<=5; $i++)
                                             @if($i <= $review->star)
                                                 <i class="icon-smile voted"></i>
@@ -206,7 +176,7 @@
                                                 <i class="icon-smile"></i>
                                             @endif
                                         @endfor
-                                    </div>
+                                    </span>
                                 </div>
                                 <!-- End review strip -->
                             @endforeach
@@ -217,90 +187,96 @@
 
                 <aside class="col-lg-4">
                     <div class="box_style_1 expose">
-                        <h3 class="inner">- Booking -</h3>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <span>Khởi hành : </span>
+                        <form action="" method="get">
+                            <h3 class="inner">- Booking -</h3>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span>Khởi hành : </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <select class="form-control">
-                                        <option value="0">01/11/2020</option>
-                                        <option value="0">03/11/2020</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <span>Nơi khởi hành : </span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <b>Hà Nội</b>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <span>Số chỗ còn nhận : </span>
-                            </div>
-                            <div class="col-sm-6">
-                                <b>5 </b>
-                            </div>
-                        </div>
-                        <hr/>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Người lớn</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="1" id="adults" class="qty2 form-control" name="quantity">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option value="0">01/11/2020</option>
+                                            <option value="0">03/11/2020</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Trẻ em</label>
-                                    <div class="numbers-row">
-                                        <input type="text" value="0" id="children" class="qty2 form-control" name="quantity">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span>Nơi khởi hành : </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <b>Hà Nội</b>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <span>Số chỗ còn nhận : </span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <b>5 </b>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Người lớn</label>
+                                        <div class="numbers-row">
+                                            <input type="text" value="0" id="adults" class="qty2 form-control bg-white" readonly name="adult_quantity">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Trẻ em</label>
+                                        <div class="numbers-row">
+                                            <input type="text" value="0" id="children" class="qty2 form-control bg-white" readonly name="children_quantity">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                        <table class="table table_summary">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    Người lớn
-                                </td>
-                                <td class="text-right">
-                                    2
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Trẻ em
-                                </td>
-                                <td class="text-right">
-                                    0
-                                </td>
-                            </tr>
-                            <tr class="total">
-                                <td>
-                                    Tổng tiền
-                                </td>
-                                <td class="text-right">
-                                    999.999.999 đ
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <a class="btn_full" href="cart.html">Đặt ngay</a>
-                        <a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Yêu thích</a>
+                            <br>
+                            <table class="table table_summary">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        Người lớn
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="text-danger">{{ $tour->adult_price }}</span>
+                                         x
+                                        <span class="person-adult">0</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Trẻ em
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="text-danger">{{ $tour->child_price }}</span>
+                                         x
+                                        <span class="person-child">0</span>
+                                    </td>
+                                </tr>
+                                <tr class="total">
+                                    <td>
+                                        Tổng tiền
+                                    </td>
+                                    <td class="text-right" id="total-price">
+                                        0 đ
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn_full">Đặt ngay</button>
+                            <a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Yêu thích</a>
+                        </form>
                     </div>
                     <!--/box_style_1 -->
 
@@ -324,170 +300,94 @@
 
     <div id="toTop"></div><!-- Back to top button -->
 
-    <!-- Search Menu -->
-    <div class="search-overlay-menu">
-        <span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-        <form role="search" id="searchform" method="get">
-            <input value="" name="q" type="search" placeholder="Search..." />
-            <button type="submit"><i class="icon_set_1_icon-78"></i>
-            </button>
-        </form>
-    </div><!-- End Search Menu -->
-
-    <!-- Sign In Popup -->
-    <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-        <div class="small-dialog-header">
-            <h3>Sign In</h3>
-        </div>
-        <form>
-            <div class="sign-in-wrapper">
-                <a href="#0" class="social_bt facebook">Login with Facebook</a>
-                <a href="#0" class="social_bt google">Login with Google</a>
-                <div class="divider"><span>Or</span></div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control" name="email" id="email">
-                    <i class="icon_mail_alt"></i>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" name="password" id="password" value="">
-                    <i class="icon_lock_alt"></i>
-                </div>
-                <div class="clearfix add_bottom_15">
-                    <div class="checkboxes float-left">
-                        <input id="remember-me" type="checkbox" name="check">
-                        <label for="remember-me">Remember Me</label>
-                    </div>
-                    <div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
-                </div>
-                <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-                <div class="text-center">
-                    Don’t have an account? <a href="javascript:void(0);">Sign up</a>
-                </div>
-                <div id="forgot_pw">
-                    <div class="form-group">
-                        <label>Please confirm login email below</label>
-                        <input type="email" class="form-control" name="email_forgot" id="email_forgot">
-                        <i class="icon_mail_alt"></i>
-                    </div>
-                    <p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
-                    <div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
-                </div>
-            </div>
-        </form>
-        <!--form -->
-    </div>
-    <!-- /Sign In Popup -->
 
     <!-- Modal Review -->
-    <div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myReviewLabel">Write your review</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div id="message-review">
+    @if(Auth::user())
+        <div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myReviewLabel">Viết đánh giá</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
-                    <form method="post" action="assets/review_tour.php" name="review_tour" id="review_tour">
-                        <input name="tour_name" id="tour_name" type="hidden" value="Paris Arch de Triomphe Tour">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input name="name_review" id="name_review" type="text" placeholder="Your name" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input name="lastname_review" id="lastname_review" type="text" placeholder="Your last name" class="form-control">
-                                </div>
-                            </div>
+                    <div class="modal-body">
+                        <div id="message-review">
                         </div>
-                        <!-- End row -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input name="email_review" id="email_review" type="email" placeholder="Your email" class="form-control">
+                        <form method="post" action="assets/review_tour.php" name="review_tour" id="review_tour">
+                            <input name="tour_name" id="tour_name" type="hidden" value="Paris Arch de Triomphe Tour">
+                            <h4>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Chất lượng dịch vụ</label>
+                                        <select class="form-control" name="star" id="position_review">
+                                            <option value="1">1 Sao</option>
+                                            <option value="2">2 Sao</option>
+                                            <option value="3">3 Sao</option>
+                                            <option value="4">4 Sao</option>
+                                            <option value="5">5 Sao</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- End row -->
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Position</label>
-                                    <select class="form-control" name="position_review" id="position_review">
-                                        <option value="">Please review</option>
-                                        <option value="Low">Low</option>
-                                        <option value="Sufficient">Sufficient</option>
-                                        <option value="Good">Good</option>
-                                        <option value="Excellent">Excellent</option>
-                                        <option value="Superb">Super</option>
-                                        <option value="Not rated">I don't know</option>
-                                    </select>
-                                </div>
+                            <!-- End row -->
+                            <div class="form-group">
+                                <textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Nội dung"></textarea>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tourist guide</label>
-                                    <select class="form-control" name="guide_review" id="guide_review">
-                                        <option value="">Please review</option>
-                                        <option value="Low">Low</option>
-                                        <option value="Sufficient">Sufficient</option>
-                                        <option value="Good">Good</option>
-                                        <option value="Excellent">Excellent</option>
-                                        <option value="Superb">Super</option>
-                                        <option value="Not rated">I don't know</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End row -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Price</label>
-                                    <select class="form-control" name="price_review" id="price_review">
-                                        <option value="">Please review</option>
-                                        <option value="Low">Low</option>
-                                        <option value="Sufficient">Sufficient</option>
-                                        <option value="Good">Good</option>
-                                        <option value="Excellent">Excellent</option>
-                                        <option value="Superb">Super</option>
-                                        <option value="Not rated">I don't know</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Quality</label>
-                                    <select class="form-control" name="quality_review" id="quality_review">
-                                        <option value="">Please review</option>
-                                        <option value="Low">Low</option>
-                                        <option value="Sufficient">Sufficient</option>
-                                        <option value="Good">Good</option>
-                                        <option value="Excellent">Excellent</option>
-                                        <option value="Superb">Super</option>
-                                        <option value="Not rated">I don't know</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End row -->
-                        <div class="form-group">
-                            <textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Write your review"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="verify_review" class=" form-control" placeholder="Are you human? 3 + 1 =">
-                        </div>
-                        <input type="submit" value="Submit" class="btn_1" id="submit-review">
-                    </form>
+                            <input type="submit" value="Submit" class="btn_1" id="submit-review">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     <!-- End modal review -->
 @endsection
+
+@section('extra-js')
+    <script src="{{asset('Libraries/Main/js/jquery.sliderPro.min.js')}}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            $('#Img_carousel').sliderPro({
+                width: 960,
+                height: 500,
+                fade: true,
+                arrows: true,
+                buttons: false,
+                fullScreen: false,
+                smallSize: 500,
+                startSlide: 0,
+                mediumSize: 1000,
+                largeSize: 3000,
+                thumbnailArrows: true,
+                autoplay: false
+            });
+        });
+    </script>
+
+    <!-- Date and time pickers -->
+    <script>
+        $('input.date-pick').datepicker('setDate', 'today');
+        $('input.time-pick').timepicker({
+            minuteStep: 15,
+            showInpunts: false
+        })
+    </script>
+
+    <script>
+        $('.numbers-row').on('click',function () {
+            let adult_price = parseFloat({{ $tour->adult_price->getAmount() }}) ;
+            let child_price = {{ $tour->child_price->getAmount() }};
+            let adults = $('input#adults').val()
+            let children = $('input#children').val()
+            let total_price = (adult_price * adults) + (child_price * children);
+            $('.person-adult').text(adults)
+            $('.person-child').text(children)
+            $('#total-price').text(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(total_price))
+        })
+    </script>
+
+@endsection
+
