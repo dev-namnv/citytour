@@ -24,11 +24,11 @@ class TourController extends Controller
 
     public function show($slug)
     {
-        $service = Tour::query()->with('album','reviews')
+        $tour = Tour::query()->with('album','reviews','category')
             ->where('slug',$slug)
             ->first();
 //        dd($service->schedule);
-        return view('Main.tour.detail', compact('service'));
+        return view('Main.tour.detail', compact('tour'));
     }
 
 }

@@ -63,19 +63,27 @@
 
 @section('content')
 
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{ $service->banner }}" data-natural-width="1400" data-natural-height="470">
+    <section class="parallax-window" data-parallax="scroll" data-image-src="{{ $tour->banner }}" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-2">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        <h1>{{$service->name}}</h1>
-                        <span>{{ $service->address }}</span>
-                        <span class="rating"><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small></span>
+                        <h1>{{$tour->name}}</h1>
+                        <span>{{ $tour->address }}</span>
+                        <div class="rating">
+                            @for($i=1; $i<=5; $i++)
+                                @if($i <= $tour->reviews->avg('star'))
+                                    <i class="icon-smile voted"></i>
+                                @else
+                                    <i class="icon-smile"></i>
+                                @endif
+                            @endfor
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div id="price_single_main">
-                            <span>{{ $service->getCurrentPrice() }}</span>
-                            <i>/per person </i>
+                            <span>{{ $tour->getCurrentPrice() }}</span>
+                            <i>/người </i>
                         </div>
                     </div>
                 </div>
@@ -87,11 +95,11 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="#">Home</a>
+                    <li><a href="#">Trang chủ</a>
                     </li>
-                    <li><a href="#">Category</a>
+                    <li><a href="#">{{ $tour->category->name }}</a>
                     </li>
-                    <li>Page active</li>
+                    <li>{{ $tour->name }}</li>
                 </ul>
             </div>
         </div>
@@ -108,7 +116,7 @@
                 <div class="col-lg-8" id="single_tour_desc">
                     <div id="single_tour_feat">
                         <ul>
-{{--                            @foreach($service->facilities as $facility)--}}
+{{--                            @foreach($tour->facilities as $facility)--}}
 {{--                                <li>--}}
 {{--                                    <i class="{{ $facility->icon }}"></i>--}}
 {{--                                    {{ $facility->name }}--}}
@@ -122,14 +130,14 @@
 
                     <div id="Img_carousel" class="slider-pro">
                         <div class="sp-slides">
-                            @foreach($service->album as $image)
+                            @foreach($tour->album as $image)
                             <div class="sp-slide">
                                 <img alt="Image" class="sp-image" src="{{asset('Libraries/Main/css/images/blank.gif')}}" data-src="{{ $image->image }}" data-small="{{ $image->image }}" data-medium="{{ $image->image }}" data-large="{{ $image->image }}" data-retina="{{ $image->image }}">
                             </div>
                             @endforeach
                         </div>
                         <div class="sp-thumbnails">
-                            @foreach($service->album as $thumbnail)
+                            @foreach($tour->album as $thumbnail)
                                 <img alt="Image" class="sp-thumbnail" src="{{ $thumbnail->image }}">
                             @endforeach
                         </div>
@@ -142,7 +150,7 @@
                             <h3>Description</h3>
                         </div>
                         <div class="col-lg-9">
-                            {{ $service->description }}
+                            {{ $tour->description }}
                             <!-- End row  -->
                         </div>
                     </div>
@@ -317,10 +325,10 @@
                             <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
                         </div>
                         <div class="col-lg-9">
-                            <div id="general_rating">{{ $service->reviews->count() }} Reviews
+                            <div id="general_rating">{{ $tour->reviews->count() }} Reviews
                                 <div class="rating">
                                     @for($i=1; $i<=5; $i++)
-                                        @if($i <= $service->reviews->avg('star'))
+                                        @if($i <= $tour->reviews->avg('star'))
                                             <i class="icon-smile voted"></i>
                                         @else
                                             <i class="icon-smile"></i>
@@ -330,7 +338,7 @@
                             </div>
                             <!-- End general_rating -->
                             <hr>
-                            @foreach($service->reviews as $review)
+                            @foreach($tour->reviews as $review)
                                 <div class="review_strip_single">
                                     <img src="{{ $review->user->avatar }}" alt="Image" class="rounded-circle">
                                     <small> {{ $review->created_at }}</small>
