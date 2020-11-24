@@ -179,6 +179,13 @@
                                     </div>
                                     <div class="tour_title">
                                         <h3><strong>{{ $tours[$i]->name }}</strong></h3>
+                                        <div class="add_info">
+                                            <div class="tooltip-item">
+                                                Tour <span>
+                                                    {{ $tours[$i]->schedules->count() == 1 ? 'trong' : $tours[$i]->schedules->count() }}
+                                                </span> ngày
+                                            </div>
+                                        </div>
                                         <ul class="add_info">
                                             <li>
                                                 <div class="tooltip_styled tooltip-effect-4">
@@ -224,6 +231,13 @@
                                     </div>
                                     <div class="tour_title">
                                         <h3><strong>{{ $tours[$i]->name }}</strong></h3>
+                                        <div class="add_info">
+                                            <div class="tooltip-item">
+                                                Tour <span>
+                                                    {{ $tours[$i]->schedules->count() == 1 ? 'trong' : $tours[$i]->schedules->count() }}
+                                                </span> ngày
+                                            </div>
+                                        </div>
                                         <ul class="add_info">
                                             <li>
                                                 <div class="tooltip_styled tooltip-effect-4">
