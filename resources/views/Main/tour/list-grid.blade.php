@@ -34,11 +34,11 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="#">Home</a>
+                    <li><a href="#">Trang chủ</a>
                     </li>
                     <li><a href="#">Tours</a>
                     </li>
-                    <li>All</li>
+                    <li>Tất cả</li>
                 </ul>
             </div>
         </div>
