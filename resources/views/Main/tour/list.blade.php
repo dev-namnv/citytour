@@ -19,11 +19,11 @@
 @endsection
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('Libraries/Main/img/home_bg_1.jpg')}}" data-natural-width="1400" data-natural-height="470">
+    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('Libraries/Main/img/slides_bg/banner-tours.png')}}" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
-                <h1>Paris tours</h1>
-                <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+                <h1>Tours Du lịch</h1>
+                <p>Bạn chỉ việc đặt lịch. Mọi thứ để chúng tôi lo.</p>
             </div>
         </div>
     </section>
