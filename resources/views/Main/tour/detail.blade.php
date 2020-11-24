@@ -95,9 +95,11 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="#">Trang chủ</a>
+                    <li>
+                        <a href="#">Trang chủ</a>
                     </li>
-                    <li><a href="#">{{ $tour->category->name }}</a>
+                    <li>
+                        <a href="#">{{ $tour->category->name }}</a>
                     </li>
                     <li>{{ $tour->name }}</li>
                 </ul>
@@ -106,27 +108,19 @@
         <!-- End Position -->
 
 
-        <div class="collapse" id="collapseMap">
-            <div id="map" class="map"></div>
-        </div>
-        <!-- End Map -->
-
         <div class="container margin_60">
             <div class="row">
                 <div class="col-lg-8" id="single_tour_desc">
-                    <div id="single_tour_feat">
-                        <ul>
+{{--                    <div id="single_tour_feat">--}}
+{{--                        <ul>--}}
 {{--                            @foreach($tour->facilities as $facility)--}}
 {{--                                <li>--}}
 {{--                                    <i class="{{ $facility->icon }}"></i>--}}
 {{--                                    {{ $facility->name }}--}}
 {{--                                </li>--}}
 {{--                            @endforeach--}}
-                        </ul>
-                    </div>
-
-                    <p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                    </p><!-- Map button for tablets/mobiles -->
+{{--                        </ul>--}}
+{{--                    </div>--}}
 
                     <div id="Img_carousel" class="slider-pro">
                         <div class="sp-slides">
@@ -147,7 +141,7 @@
 
                     <div class="row">
                         <div class="col-lg-3">
-                            <h3>Description</h3>
+                            <h3>Mô tả</h3>
                         </div>
                         <div class="col-lg-9">
                             {{ $tour->description }}
@@ -157,165 +151,23 @@
                     <hr>
                     <div class="row">
                         <div class="col-lg-3">
-                            <h3>Schedule</h3>
+                            <h3>Lịch trình</h3>
                         </div>
                         <div class="col-lg-9">
-
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th colspan="2">
-                                            1st March to 31st October
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            Monday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Tuesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Wednesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Thursday
-                                        </td>
-                                        <td>
-                                            <span class="label label-danger">Closed</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Friday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Saturday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Sunday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong><em>Last Admission</em></strong>
-                                        </td>
-                                        <td>
-                                            <strong>17.00</strong>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                           @if(count($tour->schedules) > 1)
+                                @foreach($tour->schedules as $key => $schedule)
+                                    <div class="row">
+                                        <h4><strong>Ngày {{ $key + 1 }}</strong></h4>
+                                        {{ $schedule->description }}
+                                    </div>
+                                    <hr/>
+                                @endforeach
+                            @else
+                            <div class="row">
+                                <h4><strong>Đi trong ngày</strong></h4>
+                                {{ $tour->schedules->first()->description }}
                             </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th colspan="2">
-                                            1st November to 28th February
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            Monday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Tuesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Wednesday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Thursday
-                                        </td>
-                                        <td>
-                                            <span class="label label-danger">Closed</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Friday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Saturday
-                                        </td>
-                                        <td>
-                                            09.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Sunday
-                                        </td>
-                                        <td>
-                                            10.00 - 17.30
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong><em>Last Admission</em></strong>
-                                        </td>
-                                        <td>
-                                            <strong>17.00</strong>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                           @endif
                         </div>
                     </div>
                     <hr>
@@ -364,9 +216,6 @@
                 <!--End  single_tour_desc-->
 
                 <aside class="col-lg-4">
-                    <p class="d-none d-xl-block d-lg-block d-xl-none">
-                        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                    </p>
                     <div class="box_style_1 expose">
                         <h3 class="inner">- Booking -</h3>
                         <div class="row">
@@ -455,13 +304,13 @@
                     </div>
                     <!--/box_style_1 -->
 
-                    <div class="box_style_4">
-                        <a href="tel://004542344599" class="phone">
-                            <i class="icon_set_1_icon-90"></i>
-                            <h4>Liên hệ trực tiếp</h4>
-                            +45 423 445 99
-                        </a>
-                    </div>
+{{--                    <div class="box_style_4">--}}
+{{--                        <a href="tel://004542344599" class="phone">--}}
+{{--                            <i class="icon_set_1_icon-90"></i>--}}
+{{--                            <h4>Liên hệ trực tiếp</h4>--}}
+{{--                            +45 423 445 99--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
                 </aside>
             </div>

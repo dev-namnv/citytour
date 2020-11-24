@@ -24,7 +24,7 @@ class TourController extends Controller
 
     public function show($slug)
     {
-        $tour = Tour::query()->with('album','reviews','category')
+        $tour = Tour::query()->with('album','reviews','category','schedules','batches')
             ->where('slug',$slug)
             ->first();
 //        dd($service->schedule);
