@@ -190,6 +190,13 @@
                                         </div>
                                         <h3><strong>{!! $tour->name !!}</strong> tour</h3>
                                         <p>{!! substr($tour->description,0,125).'....' !!}</p>
+                                        <div class="add_info">
+                                            <div class="tooltip-item">
+                                                Tour <span>
+                                                    {{ $tour->schedules->count() == 1 ? 'trong' : $tour->schedules->count() }}
+                                                </span> ngày
+                                            </div>
+                                        </div>
                                         <ul class="add_info">
                                             <li>
                                                 <div class="tooltip_styled tooltip-effect-4">
@@ -217,7 +224,6 @@
                                                 <a href="{{route('Main.tour.show',['slug'=> $tour->slug])}}" class="btn_1">Details</a>
                                             </p>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

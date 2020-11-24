@@ -12,7 +12,7 @@ class TourController extends Controller
 
     public function index($param = 'lists')
     {
-        $tours = Tour::query()->with('category','reviews')
+        $tours = Tour::query()->with('category','reviews','schedules')
             ->with(['batches' => function ($q) {
                 $q->select()->where('batch','>',date('Y-m-d'));
             }])
