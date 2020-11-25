@@ -18,7 +18,7 @@ class SlideSeeder extends Seeder
             DB::table('sliders')->insert([
                 'title' => $faker->title,
                 'heading' => $faker->text(15),
-                'image' => 'https://via.placeholder.com/1450x750?text=SLide ' . $i,
+                'image' => 'http://lorempixel.com/1450/750/city/',
                 'description' => $faker->realText(),
                 'active' => rand(0, 1)
             ]);
