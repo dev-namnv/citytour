@@ -94,6 +94,10 @@ Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'ContactController@index')->name('contact.index');
        Route::post('/', 'ContactController@store')->name('contact.store');
     });
+
+    Route::group(['prefix' => 'guide'], function() {
+        Route::get('/{guide_id}/detail', 'GuideController@detail')->name('guide.detail');
+    });
 });
 
 /**

@@ -88,4 +88,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Tour', 'wishlists', 'user_id', 'tour_id');
     }
+
+    public function tours()
+    {
+        return $this->hasMany('App\Models\Tour');
+    }
+
 }
