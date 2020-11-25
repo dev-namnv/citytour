@@ -53,14 +53,17 @@
                     .then(res => {
                         if (res.status === 200) {
                             const labelActive = $(`#js-label-active-${id}`)
+                            const buttonActive = $(`#js-active-button-${id}`)
                             if (res.data.active) {
                                 labelActive.removeClass(' label-light-light-danger')
                                 labelActive.addClass('label-light-primary')
                                 labelActive.text('Activated')
+                                buttonActive.text('Deactivate')
                             } else {
                                 labelActive.removeClass('label-light-primary')
                                 labelActive.addClass(' label-light-light-danger')
                                 labelActive.text('Not activated')
+                                buttonActive.text('Active')
                             }
                         }
                         showNotify(res)
@@ -251,7 +254,7 @@
 \t                                    <li class="navi-item">
 \t                                        <a href="javascript:void(0)" onclick="setActive(${row.id})" class="navi-link js-btn-active">
 \t                                            <span class="navi-icon"><i class="la la-print"></i></span>
-\t                                            <span class="navi-text publish-status">${!row.active ? 'Active' : 'Deactivate'}</span>
+\t                                            <span class="navi-text" id="js-active-button-${row.id}">${!row.active ? 'Active' : 'Deactivate'}</span>
 \t                                        </a>
 \t                                    </li>
 \t                                </ul>
@@ -467,14 +470,17 @@
                     .then(res => {
                         if (res.status === 200) {
                             const labelPublish = $(`#js-label-publish-${id}`)
+                            const buttonPublish = $(`#js-publish-button-${id}`)
                             if (res.data.publish) {
                                 labelPublish.removeClass(' label-light-light-danger')
                                 labelPublish.addClass('label-light-primary')
                                 labelPublish.text('Published')
+                                buttonPublish.text('Un publish')
                             } else {
                                 labelPublish.removeClass('label-light-primary')
                                 labelPublish.addClass(' label-light-light-danger')
                                 labelPublish.text('Unpublished')
+                                buttonPublish.text('Publish')
                             }
                         }
                         showNotify(res)
@@ -649,7 +655,7 @@
 \t                                    <li class="navi-item">
 \t                                        <a href="javascript:void(0)" onclick="setPublish(${row.id})" class="navi-link js-btn-publish">
 \t                                            <span class="navi-icon"><i class="la la-print"></i></span>
-\t                                            <span class="navi-text publish-status">${!row.publish ? 'Publish' : 'Un publish'}</span>
+\t                                            <span class="navi-text" id="js-publish-button-${row.id}">${!row.publish ? 'Publish' : 'Un publish'}</span>
 \t                                        </a>
 \t                                    </li>
 \t                                </ul>
