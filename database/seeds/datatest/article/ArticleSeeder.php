@@ -22,7 +22,7 @@ class ArticleSeeder extends Seeder
                 'heading' => $name,
                 'slug' => Str::slug($name) . '-' . rand(99, 9999),
                 'content' => $faker->text(),
-                'image' => 'https://via.placeholder.com/950x375?text='. $name,
+                'image' => 'http://lorempixel.com/950/375/city/',
                 'user_id' => DB::table('users')->inRandomOrder()->first('id')->id
             ]);
 

@@ -74,11 +74,8 @@
 
     <script>var BASE_URL = "{{ env('APP_URL') }}";</script>
 
-    <!-- Admin js -->
-    <script src="{{ asset('js/admin.js') }}"></script>
-    <script src="{{ asset('Libraries/Main/js/jquery.validate.js') }}" async></script>
-
-    <script>var KTAppSettings = {
+    <script>
+        var KTAppSettings = {
             "breakpoints": {
                 "sm": 576,
                 "md": 768,
@@ -151,5 +148,7 @@
             Toastr.show({!! session(TOASTR) !!})
         </script>
     @endif
+
+    @yield('lasted-js')
 </body>
 </html>

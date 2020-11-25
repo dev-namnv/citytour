@@ -47,7 +47,7 @@ class Tour extends Model
      */
     public function scopeOfGuide($query)
     {
-        return $query->where('user_id', '=', Auth::id());
+        return $query->where('guide_id', '=', Auth::id());
     }
 
     /**
@@ -114,7 +114,7 @@ class Tour extends Model
 
     public function guide()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'guide_id');
     }
 
     /**

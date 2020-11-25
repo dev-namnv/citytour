@@ -26,13 +26,13 @@ class TourSeeder extends Seeder
             $tour->slug = Str::slug($name) . '-' . rand(9, 999);
             $tour->address = $faker->address;
             $tour->description = $faker->realText();
-            $tour->thumbnail = 'https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Fservice%2Ftour_box_1.jpg?alt=media&token=748ac3ed-cd51-470c-8e27-e95088a39d3e';
-            $tour->banner = 'https://firebasestorage.googleapis.com/v0/b/travelo-4e9da.appspot.com/o/images%2Fservice%2Fsingle_tour_bg_1.jpg?alt=media&token=5c48c1f1-fecc-4f1f-9ab2-fb4982ae1594';
+            $tour->thumbnail = 'http://lorempixel.com/800/533/city/';
+            $tour->banner = 'http://lorempixel.com/1400/470/city/';
             $tour->content = $faker->realText();
             $tour->adult_price = rand(100000, 10000000);
             $tour->child_price = rand(100000, 10000000);
             $tour->active = rand(1, 0);
-            $tour->user_id = DB::table('users')->where('role', '=', GUIDE)->inRandomOrder()->first('id')->id;
+            $tour->guide_id = DB::table('users')->where('role', '=', GUIDE)->inRandomOrder()->first('id')->id;
             $tour->category_id = DB::table('categories')->inRandomOrder()->first('id')->id;
 
             $tour->save();
@@ -66,7 +66,7 @@ class TourSeeder extends Seeder
             // Albums image
             for ($j = 0; $j < 10; $j++) {
                 DB::table('albums')->insert([
-                    'image' => 'https://via.placeholder.com/950x375?text=Album ' . $j,
+                    'image' => 'http://lorempixel.com/950/375/city/',
                     'sort_order' => $j,
                     'tour_id' => $id
                 ]);

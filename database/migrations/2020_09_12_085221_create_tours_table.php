@@ -28,7 +28,7 @@ class CreateToursTable extends Migration
             $table->boolean('publish')->default(PUBLISH)->comment('Trạng thái công khai: 0. Công khai, 1. Ẩn');
             $table->boolean('active')->default(NOT_ACTIVE)->comment('Trạng thái: 0. Chặn, 1. Cho phép');
             $table->unsignedBigInteger('category_id')->comment('ID danh mục tour');
-            $table->unsignedBigInteger('user_id')->comment('ID hướng dẫn viên');
+            $table->unsignedBigInteger('guide_id')->comment('ID hướng dẫn viên');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -46,7 +46,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 
     // Tour
     Route::group(['prefix' => 'tour'], function () {
-        Route::get('/', 'TourController@index')->name('tour-list');
+        Route::get('/', 'TourController@list')->name('tour-list');
         Route::get('/create', 'TourController@create')->name('tour-create');
         Route::post('/store', 'TourController@store')->name('tour-store');
         Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
