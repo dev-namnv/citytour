@@ -71,6 +71,9 @@
                         <li class="submenu">
                             <a href="{{ route('home') }}" class="show-submenu">Trang chủ</a>
                         </li>
+                        <li class="submenu">
+                            <a href="{{ route('Main.tour.index') }}" class="show-submenu">Tours</a>
+                        </li>
                     </ul>
                 </div><!-- End main-menu -->
                 <ul id="top_tools">
