@@ -13,8 +13,9 @@
 @endsection
 
 @section('content')
-    <div class="layout-px-spacing">
-        <div class="invoice-container bg-white mt-3">
+    <div class="container">
+
+        <div class="invoice-container bg-white p-3">
             <div class="invoice-inbox">
 
                 <div class="content-section">
@@ -76,10 +77,10 @@
                                         </td>
                                         <td class="text-right">
                                             <span class="d-block">Người lớn:</span>
-                                            <span class="text-danger">{{ number_format($invoice->invoice_detail->adult_price * $invoice->adult_count) }}</span>
+                                            <span class="text-danger">{{ number_format($invoice->invoice_detail->adult_price->getAmount() * $invoice->adult_count) }}</span>
                                             <br/>
                                             <span class="d-block">Trẻ em:</span>
-                                            <span class="text-danger">{{ number_format($invoice->invoice_detail->child_price * $invoice->child_count) }}</span>
+                                            <span class="text-danger">{{ number_format($invoice->invoice_detail->child_price->getAmount() * $invoice->child_count) }}</span>
                                         </td>
                                         <td class="text-right">{{ $invoice->start_date }}</td>
                                     </tr>
@@ -118,19 +119,19 @@
                                         <p class="">Tổng: </p>
                                     </div>
                                     <div class="col-sm-4 col-5">
-                                        <p class="">{{ number_format($invoice->sub_cost) }} đ</p>
+                                        <p class="">{{ $invoice->sub_cost }}</p>
                                     </div>
                                     <div class="col-sm-8 col-7">
                                         <p class="">VAT: </p>
                                     </div>
                                     <div class="col-sm-4 col-5">
-                                        <p class="">{{ number_format($invoice->vat_cost) }} đ</p>
+                                        <p class="">{{ $invoice->vat_cost }}</p>
                                     </div>
                                     <div class="col-sm-8 col-7 grand-total-title">
                                         <h4 class="">Tổng thanh toán : </h4>
                                     </div>
                                     <div class="col-sm-4 col-5 grand-total-amount">
-                                        <h4 class="text-danger">{{ number_format($invoice->total_cost) }} đ</h4>
+                                        <h4 class="text-danger">{{ $invoice->total_cost }}</h4>
                                     </div>
                                     <div class="col-sm-8 col-7">
                                         <p class=" discount-rate">Đã thanh toán :
@@ -138,7 +139,7 @@
                                         </p>
                                     </div>
                                     <div class="col-sm-4 col-5">
-                                        <p class="">{{ number_format($invoice->deposit_cost) }} đ</p>
+                                        <p class="">{{ $invoice->deposit_cost }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -146,19 +147,10 @@
                     </div>
                     <hr/>
                     <p>Chú ý:
-                        <span>Quý khách hàng sẽ thanh toán <i class="text-danger">{{ number_format($invoice->total_cost - $invoice->deposit_cost) }} đ</i> (tương đương 70% số tiền còn lại) cho Hướng dẫn viên trước khi chuyến du lịch diễn ra.</span>
+                        <span>Quý khách hàng sẽ thanh toán <i class="text-danger">{{ number_format($invoice->total_cost->getAmount() - $invoice->deposit_cost->getAmount()) }} đ</i> (tương đương 70% số tiền còn lại) cho Hướng dẫn viên trước khi chuyến du lịch diễn ra.</span>
                     </p>
                     <span>Được tạo bởi user: {{ $invoice->user->username }}</span>
                     <p>Lịch trình có thể xem tại: <a href="#" class="text-primary">Lịch Trình</a></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="inv--thankYou">
-                <div class="row">
-                    <div class="col-sm-12 col-12">
-                        <p class="">Thank you for doing Business with us.</p>
-                    </div>
                 </div>
             </div>
 

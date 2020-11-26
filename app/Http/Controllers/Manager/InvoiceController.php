@@ -34,7 +34,6 @@ class InvoiceController extends Controller
         $invoice = Invoice::query()->where('sku',$request->sku)
             ->with('invoice_detail','guide','user')
             ->firstOrFail();
-//        dd($invoice);
         return view('Manager.invoices.show',compact('invoice'));
     }
 }

@@ -60,7 +60,7 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{route('tour-edit',$invoice->id)}}" class="btn btn-sm btn-light">Open</a>
+                                            <a href="{{route('invoice-show',$invoice->sku)}}" class="btn btn-sm btn-light">Open</a>
                                         </div>
                                     </td>
                                 </tr>
