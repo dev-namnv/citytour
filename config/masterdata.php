@@ -18,12 +18,12 @@ return [
             TICKET_CLOSED => 'Ticket đã đóng'
         ],
         'color' => [
-            TICKET_OPEN => 'primary',
-            TICKET_ANSWERED => 'warning',
-            TICKET_CUSTOMER_REPLY => 'success',
-            TICKET_WAITING_FOR_PROGRESS => 'info',
-            TICKET_PROCESSING => 'danger',
-            TICKET_CLOSED => 'dark',
+            TICKET_OPEN => 'bg-primary',
+            TICKET_ANSWERED => 'bg-warning',
+            TICKET_CUSTOMER_REPLY => 'bg-success',
+            TICKET_WAITING_FOR_PROGRESS => 'bg-info',
+            TICKET_PROCESSING => 'bg-danger',
+            TICKET_CLOSED => 'bg-secondary',
         ]
     ],
     'tour' => [

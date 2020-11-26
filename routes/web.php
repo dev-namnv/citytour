@@ -69,6 +69,10 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('articles', 'ArticleController')->except(['show']);
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
+        //Contacts
+        Route::resource('contacts','ContactController');
+        Route::post('/contacts/reply', 'ContactController@reply')->name('contacts.reply');
+        Route::get('/update-{id}-{status}', 'ContactController@update')->name('contacts.update');
     });
 
 });
