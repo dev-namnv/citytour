@@ -298,19 +298,16 @@
                 };
 
                 const initSubDatatable = function(id) {
-                    var el = $('#kt_datatable_sub');
-                    var datatable = el.KTDatatable({
+                    const el = $('#kt_datatable_sub');
+                    const datatable = el.KTDatatable({
                         data: {
                             type: 'remote',
                             source: {
                                 read: {
-                                    url: BASE_URL + `/api_v1/tour/${id}/schedules`
+                                    url: BASE_URL + `/api_v1/tour/manager/${id}/schedules`,
+                                    method: 'GET'
                                 },
-                            },
-                            pageSize: 10,
-                            serverPaging: true,
-                            serverFiltering: false,
-                            serverSorting: true,
+                            }
                         },
 
                         // layout definition
@@ -321,53 +318,39 @@
                             footer: false,
                         },
 
-                        search: {
-                            input: el.find('#kt_datatable_search_query_2'),
-                            key: 'generalSearch'
-                        },
-
-                        sortable: true,
-
                         // columns definition
-                        columns: [{
-                            field: 'image',
-                            title: '#',
-                            sortable: false,
-                            autoHide: false,
-                            template: function (row) {
-                                return `<div class="d-flex align-items-center">
-                                            <div class="symbol symbol-40 flex-shrink-0">
-                                                <div class="symbol-label" style="background-image:url(${row.image})"></div>
-                                            </div>
-                                        </div>`
+                        columns: [
+                            {
+                                field: 'image',
+                                title: 'Ảnh',
+                                sortable: false,
+                                width: 40,
+                                autoHide: false,
+                                template: function (row) {
+                                    return `<div class="d-flex align-items-center">
+                                                <div class="symbol symbol-40 flex-shrink-0">
+                                                    <div class="symbol-label" style="background-image:url(${row.image || ''})"></div>
+                                                </div>
+                                            </div>`
+                                }
+                            }, {
+                                field: 'description',
+                                title: 'Mô tả',
+                                sortable: false,
+                                autoHide: false,
+                                template: function(row) {
+                                    return `<span>${row.description}</span>`;
+                                },
                             }
-                        }, {
-                            field: 'description',
-                            title: 'Mô tả',
-                            sortable: false,
-                            autoHide: false,
-                            template: function(row) {
-                                return `<span>${row.description.length > 30 ? `${row.description.length.substr(0, 30)}...` : row.description}</span>`;
-                            },
-                        }],
+                        ],
                     });
 
                     const modal = datatable.closest('.modal');
 
-                    $('#kt_datatable_search_status_2').on('change', function() {
-                        datatable.search($(this).val().toLowerCase(), 'Status');
-                    });
-
-                    $('#kt_datatable_search_type_2').on('change', function() {
-                        datatable.search($(this).val().toLowerCase(), 'Type');
-                    });
-
-                    $('#kt_datatable_search_status_2, #kt_datatable_search_type_2').selectpicker();
-
                     // fix datatable layout after modal shown
                     datatable.hide();
                     modal.on('shown.bs.modal', function() {
-                        var modalContent = $(this).find('.modal-content');
+                        const modalContent = $(this).find('.modal-content');
                         datatable.spinnerCallback(true, modalContent);
                         datatable.spinnerCallback(false, modalContent);
                     }).on('hidden.bs.modal', function() {
@@ -710,19 +693,16 @@
                 };
 
                 const initSubDatatable = function(id) {
-                    var el = $('#kt_datatable_sub');
-                    var datatable = el.KTDatatable({
+                    const el = $('#kt_datatable_sub');
+                    const datatable = el.KTDatatable({
                         data: {
                             type: 'remote',
                             source: {
                                 read: {
-                                    url: BASE_URL + `/api_v1/tour/${id}/schedules`
+                                    url: BASE_URL + `/api_v1/tour/manager/${id}/schedules`,
+                                    method: 'GET'
                                 },
-                            },
-                            pageSize: 10,
-                            serverPaging: true,
-                            serverFiltering: false,
-                            serverSorting: true,
+                            }
                         },
 
                         // layout definition
@@ -733,53 +713,39 @@
                             footer: false,
                         },
 
-                        search: {
-                            input: el.find('#kt_datatable_search_query_2'),
-                            key: 'generalSearch'
-                        },
-
-                        sortable: true,
-
                         // columns definition
-                        columns: [{
-                            field: 'image',
-                            title: '#',
-                            sortable: false,
-                            autoHide: false,
-                            template: function (row) {
-                                return `<div class="d-flex align-items-center">
-                                            <div class="symbol symbol-40 flex-shrink-0">
-                                                <div class="symbol-label" style="background-image:url(${row.image})"></div>
-                                            </div>
-                                        </div>`
+                        columns: [
+                            {
+                                field: 'image',
+                                title: 'Ảnh',
+                                sortable: false,
+                                width: 40,
+                                autoHide: false,
+                                template: function (row) {
+                                    return `<div class="d-flex align-items-center">
+                                                <div class="symbol symbol-40 flex-shrink-0">
+                                                    <div class="symbol-label" style="background-image:url(${row.image || ''})"></div>
+                                                </div>
+                                            </div>`
+                                }
+                            }, {
+                                field: 'description',
+                                title: 'Mô tả',
+                                sortable: false,
+                                autoHide: false,
+                                template: function(row) {
+                                    return `<span>${row.description}</span>`;
+                                },
                             }
-                        }, {
-                            field: 'description',
-                            title: 'Mô tả',
-                            sortable: false,
-                            autoHide: false,
-                            template: function(row) {
-                                return `<span>${row.description.length > 30 ? `${row.description.length.substr(0, 30)}...` : row.description}</span>`;
-                            },
-                        }],
+                        ],
                     });
 
                     const modal = datatable.closest('.modal');
 
-                    $('#kt_datatable_search_status_2').on('change', function() {
-                        datatable.search($(this).val().toLowerCase(), 'Status');
-                    });
-
-                    $('#kt_datatable_search_type_2').on('change', function() {
-                        datatable.search($(this).val().toLowerCase(), 'Type');
-                    });
-
-                    $('#kt_datatable_search_status_2, #kt_datatable_search_type_2').selectpicker();
-
                     // fix datatable layout after modal shown
                     datatable.hide();
                     modal.on('shown.bs.modal', function() {
-                        var modalContent = $(this).find('.modal-content');
+                        const modalContent = $(this).find('.modal-content');
                         datatable.spinnerCallback(true, modalContent);
                         datatable.spinnerCallback(false, modalContent);
                     }).on('hidden.bs.modal', function() {
@@ -1038,3 +1004,4 @@
         <!--end::Card-->
     </div>
 @endsection
+

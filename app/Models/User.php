@@ -40,7 +40,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'role'
     ];
 
     /**
@@ -53,10 +53,6 @@ class User extends Authenticatable
         'active' => 'boolean'
     ];
 
-    /**
-     * @var mixed
-     */
-    private $role;
 
     /**
      * Get full name
