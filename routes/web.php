@@ -40,8 +40,6 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         })->name('dashboard');
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
-        Route::get('/user_profile', 'DashboardController@profile')->name('user_profile');
-        Route::get('profile-detail/{id}', 'DashboardController@detailProfile')->name('profile-detail');
     });
 
     // Tour
@@ -65,7 +63,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
     });
 
-
+    // Article
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('articles', 'ArticleController')->except(['show']);
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
@@ -75,6 +73,18 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/update-{id}-{status}', 'ContactController@update')->name('contacts.update');
     });
 
+    // Profile
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('/', function () {
+            return redirect()->route('account.overview');
+        })->name('account');
+        Route::get('overview', 'AccountController@overview')->name('account.overview');
+        Route::get('personal-information', 'AccountController@personalInformation')->name('account.personal-information');
+        Route::post('update', 'AccountController@updateInformation')->name('account.update');
+        Route::get('account-information', 'AccountController@accountInformation')->name('account.account-information');
+        Route::get('change-password', 'AccountController@changePassword')->name('account.change-password');
+        Route::get('email-setting', 'AccountController@emailSetting')->name('account.email-setting');
+    });
 });
 
 // Main
@@ -121,6 +131,7 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
             Route::patch('{id}/active', 'TourController@setActive');
             Route::patch('{id}/publish', 'TourController@setPublish');
             Route::delete('{id}/delete', 'TourController@delete');
+            Route::get('{id}/schedules', 'TourController@schedules');
         });
     });
 

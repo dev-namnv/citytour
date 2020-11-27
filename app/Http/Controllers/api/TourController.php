@@ -6,6 +6,7 @@ use App\Helpers\ConvertSlugHelper;
 use App\Helpers\ReviewHelper;
 use App\Helpers\StorageS3Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Schedule;
 use App\Models\Tour;
 use App\Scopes\ActiveScope;
 use App\Scopes\PublishScope;
@@ -354,5 +355,11 @@ class TourController extends Controller
 
         $tour = $doc->with('category', 'guide', 'services', 'batches', 'reviews.user')->find($id);
         return $tour ? response()->json($tour) : response(['message' => 'Không tìm thấy Tour'], 404);
+    }
+
+    public function schedules($id)
+    {
+        $schedules = Schedule::query()->where('tour_id', '=', $id)->get();
+        return response()->json($schedules);
     }
 }
