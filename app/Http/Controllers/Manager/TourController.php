@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class TourController extends Controller
 {
@@ -25,6 +26,11 @@ class TourController extends Controller
     public function create()
     {
         return view('manager.tour.create');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 
     /**
