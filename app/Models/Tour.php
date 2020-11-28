@@ -25,7 +25,8 @@ class Tour extends Model
         'child_price',
         'google_map',
         'publish',
-        'category_id'
+        'category_id',
+        'note',
     ];
 
     use SoftDeletes;

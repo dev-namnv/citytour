@@ -51,7 +51,7 @@
                     <div class="col-md-4">
                         <div id="price_single_main">
                             <span>{{ $tour->getCurrentPrice() }}</span>
-                            <i>/người </i>
+                            <i>/người lớn</i>
                         </div>
                     </div>
                 </div>
@@ -136,6 +136,18 @@
                            @endif
                         </div>
                     </div>
+                    @if(!empty($tour->note))
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3>Chú ý</h3>
+                            </div>
+                            <div class="col-lg-9">
+                            {{ $tour->note }}
+                            <!-- End row  -->
+                            </div>
+                        </div>
+                    @endif
                     <hr>
                     <div class="row">
                         <div class="col-lg-3">
@@ -162,7 +174,7 @@
                             @foreach($tour->reviews as $key => $review)
                                 @break($key == 5)
                                 <div class="review_strip_single">
-                                    <img src="{{ $review->user->avatar }}" alt="Image" class="rounded-circle">
+                                    <img src="{{ $review->user->avatar }}" alt="Image" width="60" class="rounded-circle">
                                     <small> {{ $review->created_at }}</small>
                                     <h4>{{ $review->user->last_name }}</h4>
                                     <p>
@@ -188,6 +200,7 @@
                 <aside class="col-lg-4">
                     <div class="box_style_1 expose">
                         <form action="" method="get">
+                            @csrf
                             <h3 class="inner">- Booking -</h3>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -197,29 +210,20 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <select class="form-control">
-                                            <option value="0">01/11/2020</option>
-                                            <option value="0">03/11/2020</option>
+                                        <select name="start_date" class="form-control">
+                                            @foreach($tour->batches as $batch)
+                                                <option value="{{ $batch->batch }}">{{ $batch->batch }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <span>Nơi khởi hành : </span>
-                                    </div>
+                                    <span>Số hành khách hiện tại : </span>
                                 </div>
                                 <div class="col-sm-6">
-                                    <b>Hà Nội</b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span>Số chỗ còn nhận : </span>
-                                </div>
-                                <div class="col-sm-6">
-                                    <b>5 </b>
+                                    <b id="customer_total">{{ $customer_total }}</b>
                                 </div>
                             </div>
                             <hr/>
@@ -386,6 +390,22 @@
             $('.person-adult').text(adults)
             $('.person-child').text(children)
             $('#total-price').text(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(total_price))
+        })
+
+        $(`select[name='start_date']`).change(function (){
+            let tour_id = {{ $tour->id }};
+            let start_date = $(this).val();
+            let customer_total = document.querySelector('#customer_total');
+            $.ajax({
+                url: `{{ route('api-customer-total') }}`,
+                method: "GET",
+                data: {
+                    tour_id: tour_id,
+                    start_date: start_date,
+                }
+            }).done(function (res) {
+                customer_total.textContent = res.customer_total;
+            })
         })
     </script>
 
