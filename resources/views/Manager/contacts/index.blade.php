@@ -5,7 +5,34 @@
     <div class="container bg-white">
 
         <div class="row layout-top-spacing">
+            <div class="widget-content widget-content-area br-6 ml-3">
+                <ul class="nav">
+                    <li class="nav-item m-3 {{ config('masterdata')['contact']['color'][10] }}">
+                        <a class="nav-link text-white" href="?status=10">{{ config('masterdata')['contact']['status'][10] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['contact']['color'][20] }}">
+                        <a class="nav-link text-white" href="?status=20">{{ config('masterdata')['contact']['status'][20] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['contact']['color'][30] }}">
+                        <a class="nav-link text-white" href="?status=30">{{ config('masterdata')['contact']['status'][30] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['contact']['color'][40] }}">
+                        <a class="nav-link text-white" href="?status=40">{{ config('masterdata')['contact']['status'][40] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['contact']['color'][50] }}">
+                        <a class="nav-link text-white" href="?status=50">{{ config('masterdata')['contact']['status'][50] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['contact']['color'][60] }}">
+                        <a class="nav-link" href="?status=60">{{ config('masterdata')['contact']['status'][60] }}</a>
+                    </li>
+                    <li class="nav-item m-3">
+                        <a class="nav-link text-dark" href="{{ route('contacts.index') }}">Tất cả</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
                     <div class="table-responsive mb-4 mt-4">
