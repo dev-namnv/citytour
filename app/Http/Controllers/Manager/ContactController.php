@@ -19,8 +19,9 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
+        $status = $request->has('status') ? [$request->status] : array_keys(config('masterdata')['contact']['status']);
         $contacts = Contact::query()
-            ->where('status','!=',0)
+            ->whereIn('status',$status)
             ->orderBy('id', 'desc')
             ->get();
         return view('Manager.contacts.index',compact('contacts'));
