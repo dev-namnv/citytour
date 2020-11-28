@@ -74,3 +74,6 @@ define('NOT_PUBLISH', 0);
 
 // Slug
 define('REGEX_SLUG', '/^[^<>]*$/');
+
+// Cart
+define('CART', 'TOUR_CART');

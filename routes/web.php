@@ -112,6 +112,16 @@ Route::group(['namespace' => 'Main'], function () {
     Route::group(['prefix' => 'guide'], function() {
         Route::get('/{guide_id}/detail', 'GuideController@detail')->name('guide.detail');
     });
+
+    Route::group(['prefix' => 'cart'], function () {
+        Route::get('all', 'CartController@all')->name('cart.all');
+        Route::post('{id}/{date}/add', 'CartController@add')->name('cart.add');
+    });
+
+    Route::group(['prefix' => 'checkout'], function () {
+        Route::get('{id}/overview', 'CheckoutController@overview')->name('checkout.overview');
+        Route::get('{id}/detail', 'CheckoutController@detail')->name('checkout.detail');
+    });
 });
 
 /**

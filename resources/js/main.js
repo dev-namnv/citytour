@@ -1,6 +1,7 @@
 /* Import libraries */
 require('./validation')
 require('./toastr')
+window.PerfectScrollbar = require('perfect-scrollbar/dist/perfect-scrollbar')
 
 // Main js
 Main = {
@@ -103,6 +104,17 @@ Main = {
             invalidClass: 'is-invalid',
             validClass: 'is-valid'
         })
+    },
+
+    addToCart: (id) => {
+        const date = $('#js-tour-batch').val()
+        axios.post(`${BASE_URL}/cart/${id}/${date}/add`)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 }
 

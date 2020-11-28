@@ -210,7 +210,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <select name="start_date" class="form-control">
+                                        <select name="start_date" class="form-control" id="js-tour-batch">
                                             @foreach($tour->batches as $batch)
                                                 <option value="{{ $batch->batch }}">{{ $batch->batch }}</option>
                                             @endforeach
@@ -278,7 +278,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <button class="btn_full">Đặt ngay</button>
+                            <a class="btn_full" onclick="Main.addToCart({{ $tour->id }})" href="{{ route('checkout.overview', ['id' => $tour->id]) }}">Đặt ngay</a>
                             <a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Yêu thích</a>
                         </form>
                     </div>
