@@ -47,10 +47,10 @@ return [
             INVOICE_SUCCESS => 'Hoàn tất',
         ],
         'color' => [
-            INVOICE_NEW => 'bg-light',
+            INVOICE_NEW => 'bg-dark-o-80 text-white',
             INVOICE_CONFIRM => 'bg-info',
             INVOICE_HAS_PAID => 'bg-primary',
-            INVOICE_IN_PROGRESS => 'bg-secondary',
+            INVOICE_IN_PROGRESS => 'bg-secondary text-dark',
             INVOICE_COMPLETE => 'bg-danger',
             INVOICE_COMPLETE_CONFIRM => 'bg-warning',
             INVOICE_SUCCESS => 'bg-success',
