@@ -219,7 +219,7 @@
                                     <div class="price_list">
                                         <div class="price">
                                             <p style="font-size: 50%">{!! $tour->getCurrentPrice() !!}</p>
-                                            <small>*Per person</small>
+                                            <small>*Người lớn</small>
                                             <p>
                                                 <a href="{{route('Main.tour.show',['slug'=> $tour->slug])}}" class="btn_1">Details</a>
                                             </p>
