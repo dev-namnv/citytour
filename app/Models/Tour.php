@@ -97,7 +97,7 @@ class Tour extends Model
         return $this->hasMany('App\Models\Review');
     }
 
-    public function album()
+    public function albums()
     {
         return $this->hasMany('App\Models\Album');
     }
