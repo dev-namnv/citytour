@@ -189,7 +189,6 @@
                                             <small>{{ $tour->reviews->count() }}</small>
                                         </div>
                                         <h3><strong>{!! $tour->name !!}</strong> tour</h3>
-                                        <p>{!! substr($tour->description,0,125).'....' !!}</p>
                                         <div class="add_info">
                                             <div class="tooltip-item">
                                                 Tour <span>
