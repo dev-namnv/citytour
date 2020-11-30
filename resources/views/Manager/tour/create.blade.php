@@ -170,10 +170,10 @@
                 <div id="tab2" class="container tab-pane fade"><br>
                     <h3>Lịch trình chuyến đi</h3>
                     <div class="row" id="schedule">
-                        <div class="col-xl-10 ml-auto">
+                        <div class="col-xl-12 ml-auto">
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Ngày 1<span class="text-danger">*</span></label>
-                                <div class="col-lg-8 col-xl-8">
+                                <div class="col-lg-10 col-xl-10">
 {{--                                <textarea class="form-control form-control-lg form-control-solid" id="schedule1" name="schedule[]" required data-label="Lịch trình">--}}
 {{--                                </textarea>--}}
                                     {!! Form::textarea('schedule[]','',['id'=>'schedule1','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Lịch trình','required']) !!}
@@ -267,10 +267,10 @@
         function addSchedule() {
             let index = $(`#schedule`).children().length + 1;
             $(`#schedule`).append(`
-                <div class="col-xl-10 ml-auto">
+                <div class="col-xl-12 ml-auto">
                     <div class="form-group row fv-plugins-icon-container">
                         <label class="col-xl-2 col-lg-2 col-form-label">Ngày ${index}</label>
-                        <div class="col-lg-8 col-xl-8">
+                        <div class="col-lg-10 col-xl-10">
                             <div class="bg-danger text-danger col-lg-12 col-xl-12 mb-0" onclick="$(this).parent().remove();">//</div>
                             <textarea class="form-control form-control-lg form-control-solid" id="schedule${index}" name="schedule[]" required data-label="Lịch Trình">
                             </textarea>

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Tour;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TourCreateRequest extends FormRequest
+class TourUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,16 @@ class TourCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'tour_name' => 'required|min:10|max:255',
-            'tour_address' => 'required|min:10|max:255',
-            'thumbnail' => 'required|mimes:png,jpg,jpeg|max:5000',
-            'banner' => 'required|mimes:png,jpg,jpeg|max:5000',
+            'name' => 'required|min:10|max:255',
+            'address' => 'required|min:10|max:255',
+            'thumbnail' => 'mimes:png,jpg,jpeg|max:5000',
+            'banner' => 'mimes:png,jpg,jpeg|max:5000',
             'slide.*' => 'mimes:png,jpg,jpeg|max:5000',
-            'price_adult' => 'required|numeric|min:0|max:20000000',
-            'price_child' => 'required|numeric|min:0|max:20000000',
-            'tour_category' => 'required|numeric',
-            'tour_description' => 'required',
-            'tour_note' => 'required',
+            'adult_price' => 'required|numeric|min:0|max:20000000',
+            'child_price' => 'required|numeric|min:0|max:20000000',
+            'category_id' => 'required|numeric',
+            'description' => 'required',
+            'note' => 'required',
             'schedule.*' => 'required',
             'batches.*' => 'required|date|after:now',
         ];

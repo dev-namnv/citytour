@@ -47,7 +47,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/', 'TourController@list')->name('tour-list');
         Route::get('/create', 'TourController@create')->name('tour-create');
         Route::post('/store', 'TourController@store')->name('tour-store');
-        Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
+        Route::get('/edit/{slug}', 'TourController@edit')->name('tour-edit');
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
         Route::get('/{id}', 'TourController@detail')->name('tour-detail');
