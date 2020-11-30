@@ -22,7 +22,7 @@
                                             @endif
                                             <li><a href="#">{{ __('button.profile') }}</a>
                                             </li>
-                                            <li><a href="#">{{ __('button.history') }}</a>
+                                            <li><a href="{{route('Main.history')}}">Lịch sử</a>
                                             </li>
                                             <li><a href="#" onclick="Main.logoutGlobal(this)">{{ __('button.sign_out') }}</a>
                                             </li>

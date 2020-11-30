@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TourController extends Controller
 {
@@ -39,5 +39,14 @@ class TourController extends Controller
         $customer_total = $invoices->sum('adult_count') + $invoices->sum('child_count');
         return view('Main.tour.detail', compact('tour','customer_total'));
     }
+
+    public function history()
+    {
+        $user_id = auth()->user()->id;
+        $invoices = Invoice::where('user_id', '=', $user_id)->orderBy('id', 'desc')->get();
+        return view('Main.tour.history', compact(['invoices']));
+    }
+
+
 
 }

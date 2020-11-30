@@ -26,6 +26,5 @@ class GuideController extends Controller
         }
 
         return view("Main.guide.detail", compact(['guide', 'chunkReviews']));
-
     }
 }
