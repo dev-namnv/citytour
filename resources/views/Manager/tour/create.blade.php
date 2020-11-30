@@ -174,8 +174,9 @@
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Ngày 1<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-                                <textarea class="form-control form-control-lg form-control-solid" id="schedule1" name="schedule[]" required data-label="Lịch trình">
-                                </textarea>
+{{--                                <textarea class="form-control form-control-lg form-control-solid" id="schedule1" name="schedule[]" required data-label="Lịch trình">--}}
+{{--                                </textarea>--}}
+                                    {!! Form::textarea('schedule[]','',['id'=>'schedule1','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Lịch trình','required']) !!}
                                 </div>
                             </div>
                         </div>
@@ -201,7 +202,8 @@
                         <div class="col-xl-10 ml-auto">
                             <div class="form-group row m-3 fv-plugins-icon-container">
                                 <div class="col-lg-3 col-xl-3">
-                                    <input class="form-control" name="batches[]" type="date" id="example-date-input" required data-label="Ngày khởi hành">
+{{--                                    <input class="form-control" name="batches[]" type="date" id="example-date-input" required data-label="Ngày khởi hành">--}}
+                                    {!! Form::date('batches[]','',['id'=>'example-date-input','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ngày khởi hành','required']) !!}
                                 </div>
                             </div>
                         </div>
