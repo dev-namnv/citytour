@@ -112,7 +112,7 @@
                             <h3>Mô tả</h3>
                         </div>
                         <div class="col-lg-9">
-                            {{ $tour->description }}
+                            {!! $tour->description !!}
                             <!-- End row  -->
                         </div>
                     </div>
@@ -126,14 +126,14 @@
                                 @foreach($tour->schedules as $key => $schedule)
                                     <div class="row">
                                         <h4><strong>Ngày {{ $key + 1 }}</strong></h4>
-                                        {{ $schedule->description }}
+                                        {!! $schedule->description !!}
                                     </div>
                                     <hr/>
                                 @endforeach
                             @else
                                 <h4><strong>Đi trong ngày</strong></h4>
-                                {{ $tour->schedules->first()->description }}
-                           @endif
+                                {!! $tour->schedules->first()->description !!}
+                            @endif
                         </div>
                     </div>
                     @if(!empty($tour->note))
@@ -143,7 +143,7 @@
                                 <h3>Chú ý</h3>
                             </div>
                             <div class="col-lg-9">
-                            {{ $tour->note }}
+                            {!! $tour->note !!}
                             <!-- End row  -->
                             </div>
                         </div>
