@@ -9,6 +9,15 @@
 
 @section('content')
     <div class="container bg-white pt-2 pb-5">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#tab1">Tour</a>
@@ -22,67 +31,72 @@
         </ul>
 
         <!-- Tab panes -->
-        <form action="{{ route('tour-store') }}" method="post" enctype="multipart/form-data" id="formAddTour">
-            @csrf
+{{--        <form action="{{ route('tour-store') }}" method="post" enctype="multipart/form-data" id="formAddTour" >--}}
+        {{ Form::open(['method'=>'POST','url'=>route('tour-store'),'files'=>true,'id'=>'formAddTour']) }}
             <div class="tab-content">
                 <div id="tab1" class="container tab-pane active"><br>
                     <div class="row">
                         <div class="col-xl-10 ml-auto">
                             <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Tên tour</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Tên tour<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-                                    <input class="form-control form-control-lg form-control-solid" name="tour_name"
-                                           type="text" placeholder="Tên tour">
+{{--                                    <input class="form-control form-control-lg form-control-solid" name="tour_name"--}}
+{{--                                           type="text" data-label="Tên tour" placeholder="Tên tour" required>--}}
+                                    {!! Form::text('tour_name','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Tên tour','placeholder'=>'Tên tour','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
                             </div>
                             <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Địa chỉ</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Địa chỉ<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-                                    <input class="form-control form-control-lg form-control-solid" name="tour_address"
-                                           type="text" placeholder="Địa chỉ">
+{{--                                    <input class="form-control form-control-lg form-control-solid" name="tour_address"--}}
+{{--                                           type="text" placeholder="Địa chỉ" data-label="Địa chỉ" required>--}}
+                                    {!! Form::text('tour_address','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Địa chỉ','placeholder'=>'Địa chỉ','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Ảnh thu nhỏ (800x533)</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Ảnh thu nhỏ (800x533)<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputThumb" name="thumbnail" accept=".png, .jpg, .jpeg">
+                                        <input type="file" class="custom-file-input" id="inputThumb" name="thumbnail" placeholder="thumbnail" data-label="thumbnail" accept=".png, .jpg, .jpeg" required>
                                         <label class="custom-file-label" for="inputThumb" aria-describedby="inputGroupFileAddon">Choose image</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Ảnh bìa (1450x750)</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Ảnh bìa (1450x750)<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="Banner" name="banner" accept=".png, .jpg, .jpeg">
+                                        <input type="file" class="custom-file-input" id="Banner" name="banner" accept=".png, .jpg, .jpeg" placeholder="banner" data-label="banner" required>
                                         <label class="custom-file-label" for="Banner" aria-describedby="inputGroupFileAddon">Choose image</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Giá người lớn</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Giá người lớn<span class="text-danger">*</span></label>
                                 <div class="col-lg-3 col-xl-3">
-                                    <input class="form-control form-control-lg form-control-solid" name="price_adult"
-                                           type="number" min="0" placeholder="Giá người lớn">
+{{--                                    <input class="form-control form-control-lg form-control-solid" name="price_adult"--}}
+{{--                                           type="number" min="0" placeholder="Giá người lớn" data-label="Giá người lớn" required>--}}
+                                    {!! Form::text('price_adult','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Giá người lớn','placeholder'=>'Giá người lớn','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
-                                <label class="col-xl-2 col-lg-2 col-form-label text-right">Giá trẻ em</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label text-right">Giá trẻ em<span class="text-danger">*</span></label>
                                 <div class="col-lg-3 col-xl-3">
-                                    <input class="form-control form-control-lg form-control-solid" name="price_child"
-                                           type="number" min="0" placeholder="Giá trẻ em">
+{{--                                    <input class="form-control form-control-lg form-control-solid" name="price_child"--}}
+{{--                                           type="number" min="0" placeholder="Giá trẻ em" data-label="Giá trẻ em" required>--}}
+                                    {!! Form::text('price_child','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Giá trẻ em','placeholder'=>'Giá trẻ em','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
                             </div>
                             <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Danh mục</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Danh mục<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-                                    <select class="form-control bg-light" name="tour_category">
-                                        <option selected value="">Danh mục</option>
-                                        <option value="cate_1">demo1</option>
-                                        <option value="cate_2">demo2</option>
+                                    <select class="form-control bg-light" name="tour_category" required data-label="Danh mục">
+                                        <option value="">Danh mục</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                        @endforeach
                                     </select>
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
@@ -91,22 +105,25 @@
                                 <label class="col-xl-2 col-lg-2 col-form-label">Trạng thái hiển thị</label>
                                 <!-- Default checked -->
                                 <div class="col-lg-8 col-xl-8 custom-control custom-switch">
-                                    <input type="checkbox" name="publish" data-toggle="switchbutton" checked data-size="sm">
+{{--                                    <input type="checkbox" name="publish" data-toggle="switchbutton" checked data-size="sm">--}}
+                                    {!! Form::checkbox('publish','1',true,['data-toggle'=>'switchbutton','data-size'=>'sm']) !!}
                                 </div>
                             </div>
                             <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Mô tả</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Mô tả<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-                                <textarea class="form-control form-control-lg form-control-solid" id="description" name="tour_description">
-                                </textarea>
+{{--                                <textarea class="form-control form-control-lg form-control-solid" id="description" name="tour_description" required data-label="Mô tả">--}}
+{{--                                </textarea>--}}
+                                    {!! Form::textarea('tour_description','',['id'=>'description','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Mô tả','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
                             </div>
                             <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Ghi chú</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Ghi chú<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-                                <textarea class="form-control form-control-lg form-control-solid" id="note" name="tour_note">
-                                </textarea>
+{{--                                <textarea class="form-control form-control-lg form-control-solid" id="note" name="tour_note" required data-label="Ghi chú">--}}
+{{--                                </textarea>--}}
+                                    {!! Form::textarea('tour_note','',['id'=>'note','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ghi chú','required']) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -155,10 +172,11 @@
                     <div class="row" id="schedule">
                         <div class="col-xl-10 ml-auto">
                             <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-xl-2 col-lg-2 col-form-label">Ngày 1</label>
+                                <label class="col-xl-2 col-lg-2 col-form-label">Ngày 1<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-                                <textarea class="form-control form-control-lg form-control-solid" id="schedule1" name="schedule[]">
-                                </textarea>
+{{--                                <textarea class="form-control form-control-lg form-control-solid" id="schedule1" name="schedule[]" required data-label="Lịch trình">--}}
+{{--                                </textarea>--}}
+                                    {!! Form::textarea('schedule[]','',['id'=>'schedule1','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Lịch trình','required']) !!}
                                 </div>
                             </div>
                         </div>
@@ -179,12 +197,13 @@
                     </div>
                 </div>
                 <div id="tab3" class="container tab-pane fade"><br>
-                    <h3>Ngày khởi hành</h3>
+                    <h3>Ngày khởi hành<span class="text-danger">*</span></h3>
                     <div class="row" id="batches">
                         <div class="col-xl-10 ml-auto">
                             <div class="form-group row m-3 fv-plugins-icon-container">
                                 <div class="col-lg-3 col-xl-3">
-                                    <input class="form-control" name="batches[]" type="date" id="example-date-input">
+{{--                                    <input class="form-control" name="batches[]" type="date" id="example-date-input" required data-label="Ngày khởi hành">--}}
+                                    {!! Form::date('batches[]','',['id'=>'example-date-input','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ngày khởi hành','required']) !!}
                                 </div>
                             </div>
                         </div>
@@ -196,12 +215,18 @@
                     </div>
                     <div class="row col-4 float-right">
                         <div class="col-lg-auto">
-                            <button class="btn btn-info" id="submit">Hoàn thành</button>
+                            <button class="btn btn-info" type="submit" id="submit">Hoàn thành</button>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-6"></div>
+                    <div class="row">
+                        <div class="col-xl-10 ml-auto text-center error_message">
+                            <!--//-->
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        {{ Form::close() }}
     </div>
 @endsection
 
@@ -212,14 +237,17 @@
     <script>
         $(document).ready(function() {
             $('#description').summernote({
+                placeholder: 'Mô tả',
                 tabsize: 2,
                 height: 250,
             });
             $('#note').summernote({
+                placeholder: 'Ghi chú',
                 tabsize: 2,
                 height: 180,
             });
             $('#schedule1').summernote({
+                placeholder: 'Lịch trình',
                 tabsize: 2,
                 height: 200,
             });
@@ -243,7 +271,8 @@
                     <div class="form-group row fv-plugins-icon-container">
                         <label class="col-xl-2 col-lg-2 col-form-label">Ngày ${index}</label>
                         <div class="col-lg-8 col-xl-8">
-                            <textarea class="form-control form-control-lg form-control-solid" id="schedule${index}" name="schedule[]">
+                            <div class="bg-danger text-danger col-lg-12 col-xl-12 mb-0" onclick="$(this).parent().remove();">//</div>
+                            <textarea class="form-control form-control-lg form-control-solid" id="schedule${index}" name="schedule[]" required data-label="Lịch Trình">
                             </textarea>
                         </div>
                     </div>
@@ -259,18 +288,23 @@
             $(`#batches`).children().append(`
                 <div class="form-group row m-3 fv-plugins-icon-container">
                     <div class="col-lg-3 col-xl-3">
-                        <input class="form-control" name="batches[]" type="date" id="example-date-input">
+                        <div class="bg-danger text-danger col-lg-12 col-xl-12 mb-0 small" onclick="$(this).parent().parent().remove();">--</div>
+                        <input class="form-control" name="batches[]" type="date" id="example-date-input" required data-label="Ngày khởi hành">
                     </div>
                 </div>
             `)
         }
 
         $(`#submit`).on('click',function (){
-            setTimeout(function (){
-                $('#submit').parent().html(`
-                <img width="100" height="40" style="border: #0a6aa1 1px solid; border-radius: 2px" src="https://media.giphy.com/media/hTOsxwPaV59LoEtNq4/giphy.gif"/>
-            `)
-            },200)
+            $(`.error_message`).text('');
+            $(`input[required],select[required],textarea[required]`).each(function (){
+                let label = $(this).data('label') ?? 'TextArea';
+                if ($(this).val() == ''){
+                    $(`.error_message`).append(`
+                        <p class="alert-danger d-inline-block">${label} không được để trống.</p><br/>
+                    `)
+                }
+            })
         })
 
     </script>

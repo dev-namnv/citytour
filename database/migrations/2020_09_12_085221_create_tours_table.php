@@ -21,7 +21,6 @@ class CreateToursTable extends Migration
             $table->text('description')->comment('Mô tả');
             $table->string('thumbnail')->comment('Hình thu nhỏ');
             $table->string('banner')->comment('Banner');
-            $table->text('content')->comment('Nội dung dịch vụ');
             $table->float('adult_price', 12, 3)->nullable()->comment('Giá người lớn');
             $table->float('child_price', 12, 3)->comment('Giá trẻ em');
             $table->jsonb('google_map')->nullable()->comment('Google map');

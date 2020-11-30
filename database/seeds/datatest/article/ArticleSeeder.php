@@ -15,7 +15,7 @@ class ArticleSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('vi_VN');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $name = 'Bài viết số ' . $i;
             $id = DB::table('articles')->insertGetId([
                 'title' => $name,
