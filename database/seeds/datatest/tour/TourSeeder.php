@@ -28,7 +28,6 @@ class TourSeeder extends Seeder
             $tour->description = $faker->realText();
             $tour->thumbnail = 'http://lorempixel.com/800/533/city/';
             $tour->banner = 'http://lorempixel.com/1400/470/city/';
-            $tour->content = $faker->realText();
             $tour->adult_price = rand(100000, 10000000);
             $tour->child_price = rand(100000, 10000000);
             $tour->active = rand(1, 0);

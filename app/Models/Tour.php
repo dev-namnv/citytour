@@ -16,16 +16,21 @@ class Tour extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'address',
         'description',
         'thumbnail',
         'banner',
-        'content',
         'adult_price',
         'child_price',
         'google_map',
         'publish',
-        'category_id'
+        'active',
+        'category_id',
+        'guide_id',
+        'user_id',
+        'note',
+        'deleted_at',
     ];
 
     use SoftDeletes;
