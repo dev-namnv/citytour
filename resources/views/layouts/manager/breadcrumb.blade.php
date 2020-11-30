@@ -1,14 +1,17 @@
-<nav class="breadcrumb-one" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Bảng điều khiển</a></li>
-        @if(!empty($breadcrumbs))
-            @foreach($breadcrumbs as $bread)
-                @if(request()->getRequestUri() === '/'.Route::current()->uri())
-                    <li class="breadcrumb-item active" aria-current="page"><span>{{ $bread->name }}</span></li>
-                @else
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{ $bread->path }}">{{ $bread->name }}</a></li>
-                @endif
-            @endforeach
-        @endif
-    </ol>
-</nav>
+<div class="d-flex align-items-center flex-wrap mr-1">
+    <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+        <span></span>
+    </button>
+    <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <h5 class="text-dark font-weight-bold my-1 mr-5">{{ !empty($breadcrumbs) ? end($breadcrumbs)->name : 'Dashboard' }}</h5>
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+            @if(!empty($breadcrumbs))
+                @foreach($breadcrumbs as $bread)
+                    <li class="breadcrumb-item">
+                        <a href="{{ $bread->path }}" class="text-muted">{{ $bread->name }}</a>
+                    </li>
+                @endforeach
+            @endif
+        </ul>
+    </div>
+</div>

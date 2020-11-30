@@ -8,7 +8,6 @@
 
 @section('extra-js')
     <script src="{{ asset('Libraries/Manager/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
 @endsection
 
 @section('content')

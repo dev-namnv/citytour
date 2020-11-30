@@ -140,14 +140,10 @@
     <script src="{{ asset('Libraries/Manager/js/scripts.bundle.js') }}"></script>
     <!--end::Global Theme Bundle-->
 
+    <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
+
     <!-- Extra js -->
     @yield('extra-js')
-
-    @if(session(TOASTR))
-        <script>
-            Toastr.show({!! session(TOASTR) !!})
-        </script>
-    @endif
 
     @yield('lasted-js')
 </body>

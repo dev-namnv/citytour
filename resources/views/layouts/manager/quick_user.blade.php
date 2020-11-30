@@ -1,7 +1,7 @@
 <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
     <!--begin::Header-->
     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-        <h3 class="font-weight-bold m-0">User Profile
+        <h3 class="font-weight-bold m-0">Thông tin cá nhân
             <small class="text-muted font-size-sm ml-2">12 messages</small></h3>
         <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
             <i class="ki ki-close icon-xs text-muted"></i>
@@ -13,12 +13,12 @@
         <!--begin::Header-->
         <div class="d-flex align-items-center mt-5">
             <div class="symbol symbol-100 mr-5">
-                <div class="symbol-label" style="background-image:url('{{ asset('Libraries/Manager/media/users/300_21.jpg') }}')"></div>
+                <div class="symbol-label" style="background-image:url('{{ Auth::user()->avatar }}')"></div>
                 <i class="symbol-badge bg-success"></i>
             </div>
             <div class="d-flex flex-column">
-                <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
-                <div class="text-muted mt-1">Application Developer</div>
+                <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->getFullName() }}</a>
+                <div class="text-muted mt-1">{{ Auth::user()->getRole() }}</div>
                 <div class="navi mt-2">
                     <a href="#" class="navi-item">
                         <span class="navi-link p-0 pb-2">
@@ -39,10 +39,11 @@
                                     <!--end::Svg Icon-->
                                 </span>
                             </span>
-                            <span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
+                            <span class="navi-text text-muted text-hover-primary">{{ Auth::user()->email }}</span>
                         </span>
                     </a>
-                    <a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
+                    <a href="#" onclick="document.getElementById('js-form-logout').submit()" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 js-btn-logout">Đăng xuất</a>
+                    <form action="{{ route('logout') }}" id="js-form-logout" method="post" hidden>@csrf</form>
                 </div>
             </div>
         </div>
@@ -53,7 +54,7 @@
         <!--begin::Nav-->
         <div class="navi navi-spacer-x-0 p-0">
             <!--begin::Item-->
-            <a href="custom/apps/user/profile-1/personal-information.html" class="navi-item">
+            <a href="{{ route('account.personal-information') }}" class="navi-item">
                 <div class="navi-link">
                     <div class="symbol symbol-40 bg-light mr-3">
                         <div class="symbol-label">
@@ -75,9 +76,9 @@
                         </div>
                     </div>
                     <div class="navi-text">
-                        <div class="font-weight-bold">My Profile</div>
-                        <div class="text-muted">Account settings and more
-                            <span class="label label-light-danger label-inline font-weight-bold">update</span></div>
+                        <div class="font-weight-bold">Thông tin của tôi</div>
+                        <div class="text-muted">Cài đặt tài khoản
+                            <span class="label label-light-danger label-inline font-weight-bold">cập nhật</span></div>
                     </div>
                 </div>
             </a>
@@ -141,8 +142,8 @@
                         </div>
                     </div>
                     <div class="navi-text">
-                        <div class="font-weight-bold">My Activities</div>
-                        <div class="text-muted">Logs and notifications</div>
+                        <div class="font-weight-bold">Hoạt động của tôi</div>
+                        <div class="text-muted">Nhật ký và thông báo</div>
                     </div>
                 </div>
             </a>
@@ -186,7 +187,7 @@
         <!--begin::Notifications-->
         <div>
             <!--begin:Heading-->
-            <h5 class="mb-5">Recent Notifications</h5>
+            <h5 class="mb-5">Thông báo gần đây</h5>
             <!--end:Heading-->
             <!--begin::Item-->
             <div class="d-flex align-items-center bg-light-warning rounded p-5 gutter-b">
