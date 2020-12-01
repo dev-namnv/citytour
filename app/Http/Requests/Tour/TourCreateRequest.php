@@ -25,7 +25,7 @@ class TourCreateRequest extends FormRequest
     {
         return [
             'tour_name' => 'required|min:10|max:255',
-            'tour_address' => 'required|min:10|max:255',
+            'tour_address' => 'required|max:255',
             'thumbnail' => 'required|mimes:png,jpg,jpeg|max:5000',
             'banner' => 'required|mimes:png,jpg,jpeg|max:5000',
             'slide.*' => 'mimes:png,jpg,jpeg|max:5000',
