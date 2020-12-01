@@ -21,6 +21,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::with('user')->orderBy('id', 'desc')->paginate(PAGINATION_ARTICLE);
+//        dd($articles[0]->tags->pluck('id'));
         return view('Manager.articles.index', compact('articles'));
     }
 
@@ -55,13 +56,13 @@ class ArticleController extends Controller
             ]);
 
             if ($article) {
-                $tags = explode(',', $request->tags);
+                $tags = json_decode($request->tags);
                 $tag_ids = [];
 
                 foreach ($tags as $key => $tag) {
-                    $slugTag = ConvertSlugHelper::convert_slug($tag);
+                    $slugTag = ConvertSlugHelper::convert_slug($tag->value);
                     $newTag = ArticleTag::create([
-                        'name' => $tag,
+                        'name' => $tag->value,
                         'slug' => $slugTag,
                     ]);
                     $tag_ids[$key] = $newTag->id;
@@ -70,15 +71,12 @@ class ArticleController extends Controller
                 $article->tags()->attach($tag_ids);
                 $article->categories()->attach($request->category_ids);
             }
+
+            return redirect()->route('articles.index')->with('flash_message', 'Tạo bài viết thành công')->with('status', 'success');
         } catch (\Exception $e) {
-            $message = ['status' => TOASTR_ERROR, 'content' => 'Article Create Failed'];
-            session()->flash(TOASTR, json_encode($message));
-            return redirect()->route('articles.index');
+            return redirect()->route('articles.index')->with('flash_message', 'lỗi khi tạo bài viết')->with('status', 'danger');
         }
 
-        $message = ['status' => TOASTR_SUCCESS, 'content' => 'Article Created Successfully'];
-        session()->flash(TOASTR, json_encode($message));
-        return redirect()->route('articles.index');
     }
 
     /**
@@ -127,7 +125,7 @@ class ArticleController extends Controller
     {
         try {
             $article = Article::findOrFail($id);
-            $tags = explode(',', $request->tags);
+            $tags = json_decode($request->tags);
             $tag_ids = [];
 
             foreach ($article->tags as $article_tag) {
@@ -135,9 +133,9 @@ class ArticleController extends Controller
             }
 
             foreach ($tags as $key => $tag) {
-                $slugTag = ConvertSlugHelper::convert_slug($tag);
+                $slugTag = ConvertSlugHelper::convert_slug($tag->value);
                 $newTag = ArticleTag::create([
-                    'name' => $tag,
+                    'name' => $tag->value,
                     'slug' => $slugTag,
                 ]);
                 $tag_ids[$key] = $newTag->id;
@@ -162,15 +160,13 @@ class ArticleController extends Controller
             }
 
             $article->update($dataUpdate);
+            return redirect()->route('articles.index')->with('flash_message', 'Cập nhật bài viết thành công')->with('status', 'success');
         } catch (\Exception $e) {
-            $message = ['status' => TOASTR_ERROR, 'content' => 'Article Update Failed'];
-            session()->flash(TOASTR, json_encode($message));
-            return redirect()->route('articles.index');
+            return redirect()->route('articles.index')->with('flash_message', 'Cập nhật bài viết thất bại')->with('status', 'danger');
         }
 
-        $message = ['status' => TOASTR_SUCCESS, 'content' => 'Article Updated Successfully'];
-        session()->flash(TOASTR, json_encode($message));
-        return redirect()->route('articles.index');
+
+
     }
 
     /**
@@ -184,17 +180,13 @@ class ArticleController extends Controller
         try {
             $article = Article::findOrFail($id);
             $article->categories()->detach();
+            ArticleTag::whereIn('id', $article->tags->pluck('id'))->delete();
             $article->tags()->detach();
             $article->comments()->delete();
             $article->delete();
+            return redirect()->back()->with('flash_message', 'Xóa bài viết thành công')->with('status', 'success');
         } catch (\Exception $e) {
-            $message = ['status' => TOASTR_ERROR, 'content' => 'Article Delete Failed'];
-            session()->flash(TOASTR, json_encode($message));
-            return redirect()->back();
+            return redirect()->back()->with('flash_message', "Xóa bài viết không thành công")->with('status', 'danger');
         }
-
-        $message = ['status' => TOASTR_SUCCESS, 'content' => 'Article Deleted Successfully'];
-        session()->flash(TOASTR, json_encode($message));
-        return redirect()->back();
     }
 }
