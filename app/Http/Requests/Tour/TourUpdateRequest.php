@@ -25,7 +25,7 @@ class TourUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|min:10|max:255',
-            'address' => 'required|min:10|max:255',
+            'address' => 'required|max:255',
             'thumbnail' => 'mimes:png,jpg,jpeg|max:5000',
             'banner' => 'mimes:png,jpg,jpeg|max:5000',
             'slide.*' => 'mimes:png,jpg,jpeg|max:5000',

@@ -130,7 +130,7 @@
                             <!-- Default checked -->
                             <div class="col-lg-8 col-xl-8 custom-control custom-switch">
                                 {{--                                    <input type="checkbox" name="publish" data-toggle="switchbutton" checked data-size="sm">--}}
-                                {!! Form::checkbox('publish','1',$tour->pubish === 1 ? true : false,['data-toggle'=>'switchbutton','data-size'=>'sm']) !!}
+                                {!! Form::checkbox('publish','1',$tour->publish == 1 ? true : false,['data-toggle'=>'switchbutton','data-size'=>'sm']) !!}
                             </div>
                         </div>
                         <div class="form-group row fv-plugins-icon-container">
