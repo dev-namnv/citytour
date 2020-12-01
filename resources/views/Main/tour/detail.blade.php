@@ -92,14 +92,14 @@
 
                     <div id="Img_carousel" class="slider-pro">
                         <div class="sp-slides">
-                            @foreach($tour->album as $image)
+                            @foreach($tour->albums as $image)
                             <div class="sp-slide">
                                 <img alt="Image" class="sp-image" src="{{asset('Libraries/Main/css/images/blank.gif')}}" data-src="{{ $image->image }}" data-small="{{ $image->image }}" data-medium="{{ $image->image }}" data-large="{{ $image->image }}" data-retina="{{ $image->image }}">
                             </div>
                             @endforeach
                         </div>
                         <div class="sp-thumbnails">
-                            @foreach($tour->album as $thumbnail)
+                            @foreach($tour->albums as $thumbnail)
                                 <img alt="Image" class="sp-thumbnail" src="{{ $thumbnail->image }}">
                             @endforeach
                         </div>

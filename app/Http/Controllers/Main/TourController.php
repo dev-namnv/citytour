@@ -28,12 +28,12 @@ class TourController extends Controller
 
     public function show($slug)
     {
-        $tour = Tour::query()->with('album','reviews','category','schedules')
+        $tour = Tour::query()->with('albums','reviews','category','schedules')
             ->with(['batches'=>function($q){
                 $q->where('batch','>',now())->select();
             }])
             ->where('slug',$slug)
-            ->first();
+            ->firstOrFail();
         $invoices = Invoice::query()->where('tour_id',$tour->id)
             ->where('start_date',$tour->batches->first()->batch)
             ->get(['adult_count','child_count']);
