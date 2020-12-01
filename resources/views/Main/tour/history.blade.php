@@ -59,7 +59,7 @@
                                            aria-controls="profile" aria-selected="false">Lịch trình</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
+                                        <a class="nav-link" id="invoice-tab" data-toggle="tab" href="#contact"
                                            role="tab"
                                            aria-controls="contact" aria-selected="false">Thông tin thanh toán</a>
                                     </li>
@@ -182,7 +182,7 @@
                                         </ul>
                                     </div>
                                     <div class="tab-pane fade" id="contact" role="tabpanel"
-                                         aria-labelledby="contact-tab">
+                                         aria-labelledby="invoice-tab">
                                         <div class="row">
 
                                             <div class="col-6">
