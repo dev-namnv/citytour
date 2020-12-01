@@ -10,21 +10,25 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $fillable = [
+        'sku',
         'name',
         'sub_cost',
         'deposit_cost',
         'vat_cost',
         'total_cost',
         'address',
-        'email',
-        'message',
-        'status',
         'payment_type',
-        'payment_status',
+        'payment_code',
         'tour_id',
         'guide_id',
         'user_id',
         'start_date',
+        'adult_count',
+        'child_count',
+        'customer_name',
+        'customer_address',
+        'customer_phone',
+        'customer_email',
     ];
 
     /**

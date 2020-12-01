@@ -53496,12 +53496,61 @@ Main = {
       validClass: 'is-valid'
     });
   },
-  addToCart: function addToCart(id) {
-    var date = $('#js-tour-batch').val();
-    axios.post("".concat(BASE_URL, "/cart/").concat(id, "/").concat(date, "/add")).then(function (res) {
-      console.log(res);
-    })["catch"](function (err) {
-      console.log(err);
+  checkoutValidate: function checkoutValidate() {
+    $('#js-form-payment').validate({
+      rules: {
+        customer_name: {
+          required: true
+        },
+        tour_id: {
+          required: true
+        },
+        customer_phone: {
+          required: true
+        },
+        customer_email: {
+          required: true,
+          email: true
+        },
+        customer_email_confirm: {
+          required: true,
+          email: true
+        },
+        customer_address: {
+          required: true
+        },
+        country: {
+          required: true
+        },
+        state: {
+          required: true
+        },
+        zipcode: {
+          required: true,
+          digits: true
+        },
+        batch: {
+          required: true,
+          date: true
+        },
+        adult_count: {
+          required: true,
+          min: 1,
+          max: 10
+        },
+        child_count: {
+          required: true,
+          min: 0,
+          max: 10
+        },
+        city: {
+          required: true
+        },
+        policy_terms: {
+          required: true
+        }
+      },
+      invalidClass: 'is-invalid'
     });
   }
 }; // Run function
@@ -53510,6 +53559,7 @@ $(window).on('load', function () {
   Main.loginValidate();
   Main.forgotPasswordValidate();
   Main.formContactValidate();
+  Main.checkoutValidate();
 });
 
 /***/ }),
@@ -53688,6 +53738,27 @@ __webpack_require__.r(__webpack_exports__);
         "post_comment": "Post comment",
         "active": "Active",
         "not_active": "Not Active"
+      },
+      "contact": {
+        "title": "contact",
+        "section": {
+          "title": "contact Us",
+          "desc": "Do not hesitate, please contact us for support!"
+        },
+        "main": {
+          "form-title": "Form contact us",
+          "form-desc": "Please complete the information below.",
+          "first-name": "First Name",
+          "last-name": "Last Name",
+          "email": "Email",
+          "phone": "Phone",
+          "subject": "Subject",
+          "message": "Message",
+          "send": "Send Mail",
+          "address": "Address",
+          "help": "Help center",
+          "support": "Support"
+        }
       }
     },
     "pagination": {
@@ -53844,7 +53915,19 @@ __webpack_require__.r(__webpack_exports__);
         "message": "message",
         "available": "available",
         "size": "size",
-        "slug": "slug"
+        "slug": "slug",
+        "tour_id": "ID Tour",
+        "customer_name": "customer name",
+        "customer_phone": "customer phone number",
+        "customer_email": "customer email address",
+        "customer_email_confirm": "confirm email address",
+        "customer_address": "customer address",
+        "state": "state",
+        "batch": "date start",
+        "adult_count": "adult quantity",
+        "child_count": "child quantity",
+        "policy_terms": "policy terms",
+        "zipcode": "mã zip"
       }
     }
   },
@@ -54121,7 +54204,8 @@ __webpack_require__.r(__webpack_exports__);
         "section": {
           "title": "Tour du lịch Paris giá cả phải chăng",
           "desc": "TOUR TOUR THÀNH PHỐ / VÉ TOUR / HƯỚNG DẪN TOUR"
-        }
+        },
+        "name": "Trang chủ"
       },
       "article": {
         "home": "Trang chủ",
@@ -54145,6 +54229,47 @@ __webpack_require__.r(__webpack_exports__);
         "post_comment": "Đăng bình luận",
         "active": "Hiển thị",
         "not_active": "Ẩn"
+      },
+      "contact": {
+        "title": "Liên hệ",
+        "section": {
+          "title": "Liên hệ chúng tôi",
+          "desc": "Đùng ngần ngại, hãy liên hệ với chúng tôi để dược hỗ trợ nhé !"
+        },
+        "main": {
+          "form-title": "Biểu mẫu",
+          "form-desc": "Hãy điền đầy đủ thông tin bên dưới.",
+          "first-name": "Họ",
+          "last-name": "Tên",
+          "email": "Email",
+          "phone": "Số điện thoại",
+          "subject": "Tiêu đề",
+          "message": "Nội dung",
+          "send": "Gửi đi",
+          "address": "Địa chỉ",
+          "help": "Trợ giúp",
+          "support": "Hỗ Trợ"
+        }
+      },
+      "user": {
+        "profile": {
+          "label": {
+            "name": "Thông tin cá nhân",
+            "booking": "Đặt trước",
+            "wishlist": "Yêu thích",
+            "settings": "Cài đặt",
+            "profile": "Hồ sơ cá nhân",
+            "first_name": "Tên",
+            "last_name": "Họ và tên đệm",
+            "phone": "Số điện thoại",
+            "birthday": "Ngày sinh",
+            "address": "Địa chỉ",
+            "city": "Thành phố",
+            "zipcode": "Zip code",
+            "country": "Quốc gia"
+          },
+          "desc": "Cập nhật thông tin cá nhân của bạn"
+        }
       }
     },
     "pagination": {
@@ -54416,7 +54541,19 @@ __webpack_require__.r(__webpack_exports__);
         "image": "ảnh",
         "tags": "thẻ",
         "category": "danh mục",
-        "slug": "đường dẫn tĩnh"
+        "slug": "đường dẫn tĩnh",
+        "tour_id": "ID Tour",
+        "customer_name": "tên",
+        "customer_phone": "số điện thoại",
+        "customer_email": "địa chỉ email",
+        "customer_email_confirm": "xác thực email",
+        "customer_address": "địa chỉ",
+        "state": "quận/huyện",
+        "batch": "ngày khởi hành",
+        "adult_count": "người lớn",
+        "child_count": "trẻ em",
+        "policy_terms": "chính sách bảo mật",
+        "zipcode": "mã zip"
       }
     }
   }

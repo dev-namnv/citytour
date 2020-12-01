@@ -278,19 +278,10 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a class="btn_full" onclick="Main.addToCart({{ $tour->id }})" href="{{ route('checkout.overview', ['id' => $tour->id]) }}">Đặt ngay</a>
+                            <a class="btn_full" href="{{ route('checkout.detail', ['slug' => $tour->slug]) }}">Đặt ngay</a>
                             <a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Yêu thích</a>
                         </form>
                     </div>
-                    <!--/box_style_1 -->
-
-{{--                    <div class="box_style_4">--}}
-{{--                        <a href="tel://004542344599" class="phone">--}}
-{{--                            <i class="icon_set_1_icon-90"></i>--}}
-{{--                            <h4>Liên hệ trực tiếp</h4>--}}
-{{--                            +45 423 445 99--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
 
                 </aside>
             </div>
@@ -303,7 +294,6 @@
     </main>
 
     <div id="toTop"></div><!-- Back to top button -->
-
 
     <!-- Modal Review -->
     @if(Auth::user())

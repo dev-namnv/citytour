@@ -42,11 +42,9 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="#">Home</a>
+                    <li><a href="{{ route('home') }}">Trang chủ</a>
                     </li>
-                    <li><a href="#">Category</a>
-                    </li>
-                    <li>Page active</li>
+                    <li>Chi tiết thanh toán</li>
                 </ul>
             </div>
         </div>
@@ -54,48 +52,54 @@
 
 
         <div class="container margin_60">
-            <div class="row">
+            <form class="row" id="js-form-payment" method="post" action="{{ route('checkout.payment') }}">
+                @csrf
+                <input type="hidden" name="tour_id" value="{{ $tour->id }}">
                 <div class="col-lg-8 add_bottom_15">
                     <div class="form_title">
-                        <h3><strong>1</strong>Your Details</h3>
+                        <h3><strong>1</strong>Thông tin cá nhân</h3>
                         <p>
-                            Mussum ipsum cacilds, vidis litro abertis.
+                            Vui lòng điền đẩy đủ thông tin của bạn để xác thực đặt Tour.
                         </p>
                     </div>
                     <div class="step">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>First name</label>
-                                    <input type="text" class="form-control" id="firstname_booking" name="firstname_booking">
+                                    <label>Họ tên <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('customer_name') is-invalid @enderror" id="firstname_booking" value="{{ Auth::check() ? Auth::user()->getFullName() : old('customer_name') }}" name="customer_name">
+                                    @error('customer_name')
+                                        <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Last name</label>
-                                    <input type="text" class="form-control" id="lastname_booking" name="lastname_booking">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" id="email_booking" name="email_booking" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Confirm email</label>
-                                    <input type="email" id="email_booking_2" name="email_booking_2" class="form-control">
+                                    <label>Số điện thoại <span class="text-danger">*</span></label>
+                                    <input type="tel" id="customer_phone" name="customer_phone" value="{{ Auth::check() ? Auth::user()->phone : old('customer_phone') }}" class="form-control @error('customer_phone') is-invalid @enderror">
+                                    @error('customer_phone')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Telephone</label>
-                                    <input type="text" id="telephone_booking" name="telephone_booking" class="form-control">
+                                    <label>Địa chỉ email <span class="text-danger">*</span></label>
+                                    <input type="email" id="email_booking" name="customer_email" value="{{ Auth::check() ? Auth::user()->email : old('customer_email') }}" class="form-control @error('customer_email') is-invalid @enderror">
+                                    @error('customer_email')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Xác thưc lại email</label>
+                                    <input type="email" id="email_booking_2" name="customer_email_confirm" value="{{ old('customer_email_confirm') }}" class="form-control @error('customer_email_confirm') is-invalid @enderror">
+                                    @error('customer_email_confirm')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -103,77 +107,9 @@
                     <!--End step -->
 
                     <div class="form_title">
-                        <h3><strong>2</strong>Payment Information</h3>
+                        <h3><strong>2</strong>Địa chỉ</h3>
                         <p>
-                            Mussum ipsum cacilds, vidis litro abertis.
-                        </p>
-                    </div>
-                    <div class="step">
-                        <div class="form-group">
-                            <label>Name on card</label>
-                            <input type="text" class="form-control" id="name_card_bookign" name="name_card_bookign">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label>Card number</label>
-                                    <input type="text" id="card_number" name="card_number" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <img src="img/cards.png" width="207" height="43" alt="Cards" class="cards">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Expiration date</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" id="expire_month" name="expire_month" class="form-control" placeholder="MM">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" id="expire_year" name="expire_year" class="form-control" placeholder="Year">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Security code</label>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <input type="text" id="ccv" name="ccv" class="form-control" placeholder="CCV">
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <img src="img/icon_ccv.gif" width="50" height="29" alt="ccv"><small>Last 3 digits</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--End row -->
-
-                        <hr>
-
-                        <h4>Or checkout with Paypal</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie, reque fierent dissentiunt mel ea.
-                        </p>
-                        <p>
-                            <img src="img/paypal_bt.png" alt="Image">
-                        </p>
-                    </div>
-                    <!--End step -->
-
-                    <div class="form_title">
-                        <h3><strong>3</strong>Billing Address</h3>
-                        <p>
-                            Mussum ipsum cacilds, vidis litro abertis.
+                            Vui lòng cung cấp chính xác thông tin địa chỉ của bạn.
                         </p>
                     </div>
                     <div class="step">
@@ -182,25 +118,23 @@
                                 <div class="form-group">
                                     <label>Country</label>
                                     <select class="form-control" name="country" id="country">
-                                        <option value="" selected>Select your country</option>
-                                        <option value="Europe">Europe</option>
-                                        <option value="United states">United states</option>
-                                        <option value="Asia">Asia</option>
+                                        <option value="VN" selected>Việt Nam</option>
+                                        <option value="US">United states</option>
                                     </select>
+                                    @error('country')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Street line 1</label>
-                                    <input type="text" id="street_1" name="street_1" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Street line 2</label>
-                                    <input type="text" id="street_2" name="street_2" class="form-control">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" id="street_1" name="customer_address" value="{{ Auth::check() ? Auth::user()->address : old('customer_address') }}" class="form-control">
+                                    @error('customer_address')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -208,19 +142,28 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>City</label>
-                                    <input type="text" id="city_booking" name="city_booking" class="form-control">
+                                    <input type="text" id="city_booking" name="city" value="{{ Auth::check() ? Auth::user()->city : old('city') }}" class="form-control">
+                                    @error('city')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-group">
                                     <label>State</label>
-                                    <input type="text" id="state_booking" name="state_booking" class="form-control">
+                                    <input type="text" id="state_booking" name="state" value="{{ Auth::check() ? Auth::user()->state : old('state') }}" class="form-control">
+                                    @error('state')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-group">
-                                    <label>Postal code</label>
-                                    <input type="text" id="postal_code" name="postal_code" class="form-control">
+                                    <label>Zip code</label>
+                                    <input type="text" id="postal_code" name="zipcode" value="{{ Auth::check() ? Auth::user()->zipcode : old('zipcode') }}" class="form-control">
+                                    @error('zipcode')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -232,70 +175,153 @@
                         <h4>Cancellation policy</h4>
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
+                                <input type="checkbox" value="{{ old('policy_terms') }}" name="policy_terms" id="policy_terms"> Tôi chấp nhận các điều khoản và điều kiện và chính sách chung.</label>
+                            @error('policy_terms')
+                            <small class="text-sm-left text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
-                        <a href="confirmation_fixed_sidebar.html" class="btn_1 green medium">Book now</a>
+                        <button type="submit" class="btn_1 green medium">Đặt ngay</button>
                     </div>
                 </div>
 
-                <aside class="col-lg-4" id="sidebar">
-                    <div class="theiaStickySidebar">
-                        <div class="box_style_1" id="booking_box">
-                            <h3 class="inner">- Summary -</h3>
-                            <table class="table table_summary">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        Adults
-                                    </td>
-                                    <td class="text-right">
-                                        2
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Children
-                                    </td>
-                                    <td class="text-right">
-                                        0
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Dedicated tour guide
-                                    </td>
-                                    <td class="text-right">
-                                        $34
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Insurance
-                                    </td>
-                                    <td class="text-right">
-                                        $34
-                                    </td>
-                                </tr>
-                                <tr class="total">
-                                    <td>
-                                        Total cost
-                                    </td>
-                                    <td class="text-right">
-                                        $154
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <a class="btn_full" href="confirmation_fixed_sidebar.html">Book now</a>
-                            <a class="btn_full_outline" href="#"><i class="icon-right"></i> Continue shopping</a>
+                <aside class="col-lg-4">
+                    <div class="box_style_1 expose">
+                        <h3 class="inner">- Đặt lịch -</h3>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <span>Khởi hành : </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select name="batch" class="form-control @error('batch') input-invalid @enderror" id="js-tour-batch">
+                                        @foreach($tour->batches as $batch)
+                                            <option value="{{ $batch->batch }}">{{ $batch->batch }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('batch')
+                                    <small class="text-sm-left text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <span>Số hành khách hiện tại : </span>
+                            </div>
+                            <div class="col-sm-6">
+                                <b id="customer_total">{{ $customer_total }}</b>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Người lớn</label>
+                                    <div class="numbers-row">
+                                        <input type="text" value="0" id="adults" class="qty2 form-control bg-white" name="adult_count">
+                                        @error('adult_count')
+                                        <small class="text-sm-left text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Trẻ em</label>
+                                    <div class="numbers-row">
+                                        <input type="text" value="0" id="children" class="qty2 form-control bg-white" name="child_count">
+                                        @error('child_count')
+                                        <small class="text-sm-left text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <table class="table table_summary">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Người lớn
+                                </td>
+                                <td class="text-right">
+                                    <span class="text-danger">{{ $tour->adult_price }}</span>
+                                    x
+                                    <span class="person-adult">0</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Trẻ em
+                                </td>
+                                <td class="text-right">
+                                    <span class="text-danger">{{ $tour->child_price }}</span>
+                                    x
+                                    <span class="person-child">0</span>
+                                </td>
+                            </tr>
+                            <tr class="total">
+                                <td>
+                                    Tổng tiền
+                                </td>
+                                <td class="text-right" id="total-price">
+                                    0 đ
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn_full" type="submit">Đặt ngay</button>
+                        <a class="btn_full_outline" href="javascript:void(0)"><i class=" icon-heart"></i> Yêu thích</a>
                     </div>
-                    <!--End sticky -->
+
                 </aside>
 
-            </div>
+            </form>
             <!--End row -->
         </div>
         <!--End container -->
     </main>
+@endsection
+
+@section('extra-js')
+    <!-- Date and time pickers -->
+    <script>
+        $('input.date-pick').datepicker('setDate', 'today');
+        $('input.time-pick').timepicker({
+            minuteStep: 15,
+            showInpunts: false
+        })
+    </script>
+
+    <script>
+        $('.numbers-row').on('click',function () {
+            let adult_price = parseFloat({{ $tour->adult_price->getAmount() }}) ;
+            let child_price = {{ $tour->child_price->getAmount() }};
+            let adults = $('input#adults').val()
+            let children = $('input#children').val()
+            let total_price = (adult_price * adults) + (child_price * children);
+            $('.person-adult').text(adults)
+            $('.person-child').text(children)
+            $('#total-price').text(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(total_price))
+        })
+
+        $(`select[name='start_date']`).change(function (){
+            let tour_id = {{ $tour->id }};
+            let start_date = $(this).val();
+            let customer_total = document.querySelector('#customer_total');
+            $.ajax({
+                url: `{{ route('api-customer-total') }}`,
+                method: "GET",
+                data: {
+                    tour_id: tour_id,
+                    start_date: start_date,
+                }
+            }).done(function (res) {
+                customer_total.textContent = res.customer_total;
+            })
+        })
+    </script>
+
 @endsection

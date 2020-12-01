@@ -119,8 +119,9 @@ Route::group(['namespace' => 'Main'], function () {
     });
 
     Route::group(['prefix' => 'checkout'], function () {
-        Route::get('{id}/overview', 'CheckoutController@overview')->name('checkout.overview');
-        Route::get('{id}/detail', 'CheckoutController@detail')->name('checkout.detail');
+        Route::get('{slug}/detail', 'CheckoutController@detail')->name('checkout.detail');
+        Route::post('payment', 'CheckoutController@payment')->name('checkout.payment');
+        Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
     });
 });
 
