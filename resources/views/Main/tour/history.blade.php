@@ -177,8 +177,6 @@
                                                 @endif
 
                                             @endforeach
-
-
                                         </ul>
                                     </div>
                                     <div class="tab-pane fade" id="contact" role="tabpanel"
@@ -218,7 +216,9 @@
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Trạng thái thanh toán</strong></td>
-                                                        <td>{{$invoices[0]->getStatus()}}</td>
+                                                        <td>
+                                                            <span class="text-success">{{$invoices[0]->getStatus()}}</span>
+                                                        </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
