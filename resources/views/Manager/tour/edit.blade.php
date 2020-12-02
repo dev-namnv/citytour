@@ -335,26 +335,29 @@
 
 @section('extra-js')
     <!-- include summernote css/js -->
-    <script src="{{ asset('Libraries/Manager/plugins/summernote/summernote.min.js') }}"></script>
+
+    <script src="{{asset('libraries/manager/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
     <script
         src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#description').summernote({
-                placeholder: 'Mô tả',
-                tabsize: 2,
-                height: 250,
-            });
-            $('#note').summernote({
-                placeholder: 'Ghi chú',
-                tabsize: 2,
-                height: 180,
-            });
-            $('#schedule1').summernote({
-                placeholder: 'Lịch trình',
-                tabsize: 2,
-                height: 200,
-            });
+
+        var KTCkeditor = function () {
+            // Private functions
+            var demos = function () {
+                ClassicEditor.create(document.querySelector('#description'));
+                ClassicEditor.create(document.querySelector('#note'));
+                ClassicEditor.create(document.querySelector('#schedule1'));
+            }
+            return {
+                // public functions
+                init: function () {
+                    demos();
+                }
+            };
+        }();
+        // Initialization
+        jQuery(document).ready(function () {
+            KTCkeditor.init();
         });
 
         function addSlide(index) {
@@ -382,18 +385,11 @@
                     </div>
                 </div>
             `)
-
-            $(`#schedule${index}`).summernote({
-                tabsize: 2,
-                height: 200,
-            });
+            ClassicEditor.create(document.querySelector(`#schedule${index}`));
         }
 
         $(`textarea[name='schedule[]']`).each(function (index,value){
-            $(`#schedule${index}`).summernote({
-                tabsize: 2,
-                height: 200,
-            });
+            ClassicEditor.create(document.querySelector(`#schedule${index}`));
         })
 
         function addBatch() {
