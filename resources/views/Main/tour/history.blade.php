@@ -7,13 +7,42 @@
     <link href="{{ asset('libraries/main/css/timeline.css') }}" rel="stylesheet">
 
     <style>
-        .blur {
-            background-size: cover;
-            filter: blur(1px);
+        .cbp_tmtimeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: none;
+            left: 20%;
+            margin-left: -8px;
         }
 
         .cbp_tmtimeline > li .cbp_tmlabel {
             background: none;
+        }
+
+        .cbp_tmtimeline > li .cbp_tmiconFake {
+            width: 48px;
+            height: 48px;
+            font-family: 'fontello';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            font-size: 24px;
+            line-height: 48px;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            color: #53eb93;
+            background:#f9f9f9;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #53eb93;
+            text-align: center;
+            left: 19.6%;
+            top: -1%;
+            margin: 0 0 0 -25px;
         }
     </style>
 @endsection
@@ -69,11 +98,16 @@
                                     <div class="tab-pane fade active show" id="home" role="tabpanel"
                                          aria-labelledby="tour-infomation-tab">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-12">
+                                                <div class="row justify-content-center">
+                                                    <img class="img-fluid" width="900" src="{{$invoices[0]->tour->banner}}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-5">
                                                 <table class="table table-condensed">
                                                     <tbody>
                                                     <tr>
-                                                        <td class="text-right"><strong>Tên tour:</strong></td>
+                                                        <td width="50%" class="text-right"><strong>Tên tour:</strong></td>
                                                         <td>{{$invoices[0]->tour->name}}</td>
                                                     </tr>
                                                     <tr>
@@ -109,12 +143,7 @@
                                                 </table>
 
                                             </div>
-                                            <div class="col-6">
-                                                <div class="row justify-content-center">
-                                                    <strong>Ảnh</strong>
-                                                    <img class="img-fluid" src="{{$invoices[0]->tour->banner}}" alt="">
-                                                </div>
-                                            </div>
+
                                         </div>
 
                                     </div>
@@ -128,7 +157,7 @@
                                                             <span
                                                                 style="font-size: 25px">{{$invoices[0]->getDayAddFromStart($key)}}</span>
                                                         </time>
-                                                        <div class="cbp_tmicon timeline_icon_point"></div>
+                                                        <div class="cbp_tmiconFake timeline_icon_point"></div>
                                                         <div class="cbp_tmlabel">
                                                             <div class="float-right d-none d-md-block">Hướng dẫn viên
                                                                 <strong>{{$invoices[0]->guide->getFullName()}}</strong><img
@@ -177,8 +206,6 @@
                                                 @endif
 
                                             @endforeach
-
-
                                         </ul>
                                     </div>
                                     <div class="tab-pane fade" id="contact" role="tabpanel"
@@ -218,7 +245,9 @@
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Trạng thái thanh toán</strong></td>
-                                                        <td>{{$invoices[0]->getStatus()}}</td>
+                                                        <td>
+                                                            <span class="text-success">{{$invoices[0]->getStatus()}}</span>
+                                                        </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
