@@ -7,6 +7,17 @@
     <link href="{{ asset('libraries/main/css/timeline.css') }}" rel="stylesheet">
 
     <style>
+        .cbp_tmtimeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: none;
+            left: 20%;
+            margin-left: -8px;
+        }
+
         .cbp_tmtimeline > li .cbp_tmlabel {
             background: none;
         }
@@ -141,7 +152,7 @@
                                         <ul class="cbp_tmtimeline">
                                             @foreach($invoices[0]->tour->schedules as $key => $schedule)
                                                 @if ($key < $invoices[0]->calculateDaysDiff() && $invoices[0]->start_date <= today()->toDateString())
-                                                    <li>
+                                                    <li class="blur">
                                                         <time class="cbp_tmtime">
                                                             <span
                                                                 style="font-size: 25px">{{$invoices[0]->getDayAddFromStart($key)}}</span>
