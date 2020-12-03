@@ -92,14 +92,14 @@
 
                     <div id="Img_carousel" class="slider-pro">
                         <div class="sp-slides">
-                            @foreach($tour->album as $image)
+                            @foreach($tour->albums as $image)
                             <div class="sp-slide">
                                 <img alt="Image" class="sp-image" src="{{asset('Libraries/Main/css/images/blank.gif')}}" data-src="{{ $image->image }}" data-small="{{ $image->image }}" data-medium="{{ $image->image }}" data-large="{{ $image->image }}" data-retina="{{ $image->image }}">
                             </div>
                             @endforeach
                         </div>
                         <div class="sp-thumbnails">
-                            @foreach($tour->album as $thumbnail)
+                            @foreach($tour->albums as $thumbnail)
                                 <img alt="Image" class="sp-thumbnail" src="{{ $thumbnail->image }}">
                             @endforeach
                         </div>
@@ -112,7 +112,7 @@
                             <h3>Mô tả</h3>
                         </div>
                         <div class="col-lg-9">
-                            {{ $tour->description }}
+                            {!! $tour->description !!}
                             <!-- End row  -->
                         </div>
                     </div>
@@ -126,14 +126,14 @@
                                 @foreach($tour->schedules as $key => $schedule)
                                     <div class="row">
                                         <h4><strong>Ngày {{ $key + 1 }}</strong></h4>
-                                        {{ $schedule->description }}
+                                        {!! $schedule->description !!}
                                     </div>
                                     <hr/>
                                 @endforeach
                             @else
                                 <h4><strong>Đi trong ngày</strong></h4>
-                                {{ $tour->schedules->first()->description }}
-                           @endif
+                                {!! $tour->schedules->first()->description !!}
+                            @endif
                         </div>
                     </div>
                     @if(!empty($tour->note))
@@ -143,7 +143,7 @@
                                 <h3>Chú ý</h3>
                             </div>
                             <div class="col-lg-9">
-                            {{ $tour->note }}
+                            {!! $tour->note !!}
                             <!-- End row  -->
                             </div>
                         </div>

@@ -14,7 +14,7 @@ class InvoiceSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('vi_VN');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             $tour = DB::table('tours')->inRandomOrder()->first();
             $user = DB::table('users')->inRandomOrder()->first(['id']);
             $cost = rand(100000, 100000000);

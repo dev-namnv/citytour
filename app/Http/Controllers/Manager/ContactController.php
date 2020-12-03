@@ -23,7 +23,7 @@ class ContactController extends Controller
         $contacts = Contact::query()
             ->whereIn('status',$status)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(20);
         return view('Manager.contacts.index',compact('contacts'));
     }
 

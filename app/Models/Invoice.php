@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Currency;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
@@ -83,5 +84,20 @@ class Invoice extends Model
     public function guide()
     {
         return $this->belongsTo('App\Models\User', 'guide_id');
+    }
+
+    public function getEndDateAttribute()
+    {
+        return Carbon::createFromDate($this->start_date)->addDays((count($this->tour->schedules)))->toDateString();
+    }
+
+    public function getDayAddFromStart($days)
+    {
+        return Carbon::createFromDate($this->start_date)->addDays($days)->format('d-m-Y');
+    }
+
+    public function calculateDaysDiff()
+    {
+        return today()->diffInDays(Carbon::createFromDate($this->start_date));
     }
 }

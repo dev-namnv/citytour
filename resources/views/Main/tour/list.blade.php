@@ -189,7 +189,6 @@
                                             <small>{{ $tour->reviews->count() }}</small>
                                         </div>
                                         <h3><strong>{!! $tour->name !!}</strong> tour</h3>
-                                        <p>{!! substr($tour->description,0,125).'....' !!}</p>
                                         <div class="add_info">
                                             <div class="tooltip-item">
                                                 Tour <span>
@@ -219,7 +218,7 @@
                                     <div class="price_list">
                                         <div class="price">
                                             <p style="font-size: 50%">{!! $tour->getCurrentPrice() !!}</p>
-                                            <small>*Per person</small>
+                                            <small>*Người lớn</small>
                                             <p>
                                                 <a href="{{route('Main.tour.show',['slug'=> $tour->slug])}}" class="btn_1">Details</a>
                                             </p>

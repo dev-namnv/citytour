@@ -47,7 +47,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/', 'TourController@list')->name('tour-list');
         Route::get('/create', 'TourController@create')->name('tour-create');
         Route::post('/store', 'TourController@store')->name('tour-store');
-        Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
+        Route::get('/edit/{slug}', 'TourController@edit')->name('tour-edit');
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
         Route::get('/{id}', 'TourController@detail')->name('tour-detail');
@@ -113,9 +113,11 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('/{guide_id}/detail', 'GuideController@detail')->name('guide.detail');
     });
 
-    Route::group(['prefix' => 'cart'], function () {
-        Route::get('all', 'CartController@all')->name('cart.all');
-        Route::post('{id}/{date}/add', 'CartController@add')->name('cart.add');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/history', 'TourController@history')->name('Main.history');
+        Route::get('/invoices/{id}/detail', 'InvoiceController@detail')->name('Main.invoice_detail');
+        Route::get('/invoices/{id}/schedule', 'InvoiceController@schedule')->name('Main.invoice_schedule');
+
     });
 
     Route::group(['prefix' => 'checkout'], function () {

@@ -143,7 +143,9 @@
                                                     <div class="symbol-label" style="background-image:url(${row.thumbnail})"></div>
                                                 </div>
                                                 <div class="ml-2">
-                                                    <div class="text-dark-75 font-weight-bold line-height-sm">${row.name}</div>
+                                                    <div class="font-weight-bold line-height-sm">
+                                                        <a class="text-dark-75" href="{{ route('tour-edit',['slug'=>'/']) }}/${row.slug}">${row.name}</a>
+                                                    </div>
                                                 </div>
                                             </div>`
                                 }
@@ -263,7 +265,7 @@
 \t                        <button data-record-id="${row.id}" class="btn btn-sm btn-clean" title="Xem chi tiết">
 \t                          <i class="flaticon2-document"></i>
 \t                       </button>
-\t                        <a href="javascript:void(0)" class="btn btn-sm btn-clean btn-icon js-btn-delete" onclick="confirm('Xác nhận xóa Tour?') && deleteTour(${row.id})" title="Delete">
+\t                        <a href="javascript:void(0)" class="btn btn-sm btn-clean btn-icon js-btn-delete bg-danger" onclick="confirm('Xác nhận xóa Tour?') && deleteTour(${row.id})" title="Delete">
 \t                            <span class="svg-icon svg-icon-md">
 \t                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 \t                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -896,7 +898,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a href="#" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ route('tour-create') }}" class="btn btn-primary font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -911,7 +913,7 @@
                                 </g>
                             </svg>
                             <!--end::Svg Icon-->
-                            </span>New Record</a>
+                            </span>Thêm Tour</a>
                     <!--end::Button-->
                 </div>
             </div>

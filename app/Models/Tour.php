@@ -16,17 +16,21 @@ class Tour extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'address',
         'description',
         'thumbnail',
         'banner',
-        'content',
         'adult_price',
         'child_price',
         'google_map',
         'publish',
+        'active',
         'category_id',
+        'guide_id',
+        'user_id',
         'note',
+        'deleted_at',
     ];
 
     use SoftDeletes;
@@ -93,7 +97,7 @@ class Tour extends Model
         return $this->hasMany('App\Models\Review');
     }
 
-    public function album()
+    public function albums()
     {
         return $this->hasMany('App\Models\Album');
     }
