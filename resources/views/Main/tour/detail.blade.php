@@ -24,6 +24,10 @@
         {
             background-color: #e04f67;
         }
+        .price strong{
+            font-size: 24px;
+            color: red;
+        }
     </style>
 @endsection
 
@@ -67,50 +71,40 @@
         <div class="container margin_60">
             <div class="row">
                 <div class="col-lg-9" id="single_tour_desc">
-                    <div class="">
+                    <div class="row p-3 bg-white">
                         <div class="col-md-4">
-                            <strong>
-                                ĐIÊM XUẤT PHÁT:
-                            </strong>
-                            <span>{{ $tour->origin }}</span>
+                            <div class="row">
+                                <strong>ĐIỂM XUẤT PHÁT: </strong>
+                                <span>{{ $tour->origin }}</span>
+                            </div>
+                            <div class="row">
+                                <strong>THỜI GIAN: </strong>
+                                <span>{{ $tour->schedules->count() }} ngày</span>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <strong>
-                                THỜI GIAN:
-                            </strong>
-                            <span>{{ $tour->schedules->count() }} ngày</span>
+                        <div class="col-md-3">
+                            <div class="price">
+                                Giá Người Lớn: <strong>{{ $tour->adult_price }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="price">
+                                Giá Trẻ Em: <strong>{{ $tour->child_price }}</strong>
+                            </div>
                         </div>
                     </div>
                     <hr/>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col-3">Khởi hành</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Giá trẻ em</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($tour->batches as $batch)
-                            <tr>
-                                <th scope="row">{{ $batch->batch }}</th>
-                                <td class="text-danger">
-                                    <strong>{{ $tour->adult_price }}</strong>
-                                </td>
-                                <td class="text-danger">
-                                    <strong>{{ $tour->child_price }}</strong>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr class="bg-info text-center">
-                                <td colspan="3">
-                                    <a href="#booking" style="color: #ffffff" class="d-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="booking">Đặt Lịch</a>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div class="row mb-2">
+                        <strong class="ml-3">Ngày khởi hành: </strong>
+                        <div class="col-lg-12 text-center mb-2">
+                            @foreach($tour->batches as $batch)
+                                <span class="d-inline-block p-1 bg-secondary rounded text-white">{{ $batch->batch }}</span>
+                            @endforeach
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <a href="#booking" style="color: #ffffff" class="bg-info p-2 d-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="booking">Đặt Lịch</a>
+                        </div>
+                    </div>
                     <div class="collapse" id="booking">
                         <div class="card card-body">
                             <form action="" method="get">
@@ -192,7 +186,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <button class="btn_full">Thanh toán</button>
+                                <button style="background-color: #e3342f;" class="btn_full">Thanh toán</button>
                             </form>
                         </div>
                     </div>
