@@ -12,39 +12,32 @@
 @section('title', 'Article Category Create')
 
 @section('content')
-    <div class="container" style="max-width: 100%!important;">
-        <div class="container">
-            <div class="row">
-                <div id="flStackForm" class="col-lg-12 layout-spacing layout-top-spacing">
-                    <div class="statbox widget box box-shadow">
-                        <div class="widget-header">
-                            <div class="row">
-                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <h4>Article Category Create</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-content widget-content-area">
-                            <form method="POST" class="form-create-article-category" action="{{route('article_categories.store')}}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row ">
-                                    <div class="col-6">
-                                        <div class="form-group ">
-                                            <label for="article_category_name">Name</label>
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="article_title" name="name" value="{{old('name')}}">
-                                            @error('name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="card card-custom gutter-b example example-compact">
+            <div class="card-header">
+                <h3 class="card-title">Thêm bài viết</h3>
             </div>
+            <!--begin::Form-->
+            <form method="POST" class="form-create-article-category" action="{{route('article_categories.store')}}" enctype="multipart/form-data">
+                @csrf
+                <div class="card-body ">
+                    <div class="col-6">
+                        <div class="form-group ">
+                            <label for="article_category_name">Tên danh mục</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="article_title" name="name" value="{{old('name')}}">
+                            @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button onclick="window.history.go(-1); return false;" class="btn btn-secondary">Quay lại</button>
+                </div>
+
+            </form>
+            <!--end::Form-->
         </div>
     </div>
+
 @endsection

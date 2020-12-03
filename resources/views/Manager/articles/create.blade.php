@@ -37,7 +37,7 @@
     </script>
 @endsection
 
-@section('title', 'Articles Create')
+@section('title', 'Thêm bài viết')
 
 @section('content')
     <div class="container">
@@ -69,7 +69,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="article_category">Custom Select</label>
+                        <label for="article_category">Danh mục bài viết</label>
                         <div></div>
                         <select title="Hãy chọn danh mục bài viết" name="category_ids[]" id="article_category"
                                 class="selectpicker custom-select form-control @error('category_ids') is-invalid @enderror"
@@ -119,8 +119,8 @@
 
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button onclick="window.history.go(-1); return false;" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary mr-2">Lưu</button>
+                    <button onclick="window.history.go(-1); return false;" class="btn btn-secondary">Quay lại</button>
                 </div>
             </form>
             <!--end::Form-->
