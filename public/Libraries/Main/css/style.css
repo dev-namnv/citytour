@@ -72,7 +72,7 @@ Author URI: http://themeforest.net/user/Ansonika/
 /*============================================================================================*/
 
 /*-------- 1.1 Typography --------*/
-body {background:#f9f9f9; font-size:13px; line-height:20px; font-family:"Montserrat", Arial, sans-serif; color:#555;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+body {background:#f9f9f9; font-size:13px; line-height:20px; font-family: 'Roboto', sans-serif; color:#555;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
 
 h1, h2, h3, h4, h5, h6 {-webkit-font-smoothing:antialiased; color:#333;}
 h3{font-size:22px;}
@@ -1632,10 +1632,8 @@ ul.add_info {
 ul.add_info li {
 	display: inline-block;
 	margin-right: 5px;
-	border: 1px solid #ededed;
+    font-weight: bold;
 	text-align: center;
-	width: 35px;
-	height: 35px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -3421,6 +3419,8 @@ ul.list_order li span {
 .tooltip-item {
 	cursor: pointer;
 	display: inline-block;
+    padding: 4px;
+    background-color: #ebebeb;
 }
 
 .tooltip-item::after {
@@ -5097,7 +5097,7 @@ a.btn_infobox:hover, .btn_infobox:hover{
 /*-------- 6.1 Footer fixed --------*/
 main{
 	background-color: #f9f9f9;
-	z-index:2;
+	z-index:5;
 	position:relative;
 }
 .parallax-content-1 {

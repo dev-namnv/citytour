@@ -1,32 +1,52 @@
 @extends('layouts.manager.app')
 @section('title', 'Invoices')
 
-@section('extra-css')
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('Libraries/Manager/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('Libraries/Manager/plugins/table/datatable/custom_dt_html5.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('Libraries/Manager/plugins/table/datatable/dt-global_style.css') }}">
-    <!-- END PAGE LEVEL CUSTOM STYLES -->
-@endsection
 
 @section('content')
-    <div class="layout-px-spacing">
+    <div class="container bg-white">
 
         <div class="row layout-top-spacing">
             <div class="widget-content widget-content-area br-6 ml-3">
-
+                <ul class="nav">
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][0] }}">
+                        <a class="nav-link text-white" href="?status=0">{{ config('masterdata')['invoice']['status'][0] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][1] }}">
+                        <a class="nav-link text-white" href="?status=1">{{ config('masterdata')['invoice']['status'][1] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][2] }}">
+                        <a class="nav-link text-white" href="?status=2">{{ config('masterdata')['invoice']['status'][2] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][3] }}">
+                        <a class="nav-link" href="?status=3">{{ config('masterdata')['invoice']['status'][3] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][4] }}">
+                        <a class="nav-link text-white" href="?status=4">{{ config('masterdata')['invoice']['status'][4] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][5] }}">
+                        <a class="nav-link text-white" href="?status=5">{{ config('masterdata')['invoice']['status'][5] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][6] }}">
+                        <a class="nav-link text-white" href="?status=6">{{ config('masterdata')['invoice']['status'][6] }}</a>
+                    </li>
+                    <li class="nav-item m-3">
+                        <a class="nav-link text-dark" href="{{ route('invoice-index') }}">Tất cả</a>
+                    </li>
+                </ul>
             </div>
         </div>
+
+        <hr/>
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
                 <div class="widget-content widget-content-area br-6">
                     <div class="table-responsive mb-4 mt-4">
-                        <table class="table table-hover non-hover" style="width:100%">
+                        <table class="table table-hover non-hover text-center" style="width:100%">
                             <thead>
                             <tr class="text-center">
                                 <th>Tên tour</th>
-                                <th>Thumbnail</th>
+                                <th>Ảnh thu nhỏ</th>
                                 <th>Tên khách hàng</th>
                                 <th>Địa chỉ khách hàng</th>
                                 <th>Số người </th>
@@ -60,13 +80,7 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{route('tour-edit',$invoice->id)}}" class="btn btn-sm">Open</a>
-                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuReference1">
-                                                <a class="dropdown-item" href="#active" tour-id="{{ $invoice->id }}" >{{ $invoice->active == 0 ?  'Public':'Private' }}</a>
-                                            </div>
+                                            <a href="{{route('invoice-show',$invoice->sku)}}" class="btn btn-sm btn-light">Open</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -82,30 +96,3 @@
     </div>
 @endsection
 
-@section('extra-js')
-    <script type="javascript">
-        $(document).ready(function (){
-            function active(id) {
-                $.ajax({
-                    url: {{ route('tour-set-active') }},
-                    type: 'POST',
-                    data: {
-                        method : 'PUT',
-                        tour_id : id
-                    },
-                }).done(function (res) {
-                    console.log(res)
-                }).error(function (error) {
-                    console.log(error)
-                })
-            }
-        })
-    </script>
-    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
-    <script src="{{ asset('Libraries/Manager/plugins/table/datatable/datatables.js') }}"></script>
-    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
-    <script src="{{ asset('Libraries/Manager/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('Libraries/Manager/plugins/table/datatable/button-ext/jszip.min.js') }}"></script>
-    <script src="{{ asset('Libraries/Manager/plugins/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('Libraries/Manager/plugins/table/datatable/button-ext/buttons.print.min.js') }}"></script>
-@endsection

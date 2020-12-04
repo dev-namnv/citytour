@@ -40,16 +40,14 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         })->name('dashboard');
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
-        Route::get('/user_profile', 'DashboardController@profile')->name('user_profile');
-        Route::get('profile-detail/{id}', 'DashboardController@detailProfile')->name('profile-detail');
     });
 
     // Tour
     Route::group(['prefix' => 'tour'], function () {
-        Route::get('/', 'TourController@index')->name('tour-list');
+        Route::get('/', 'TourController@list')->name('tour-list');
         Route::get('/create', 'TourController@create')->name('tour-create');
         Route::post('/store', 'TourController@store')->name('tour-store');
-        Route::get('/{id}/edit', 'TourController@edit')->name('tour-edit');
+        Route::get('/edit/{slug}', 'TourController@edit')->name('tour-edit');
         Route::post('/update', 'TourController@update')->name('tour-update');
         Route::post('/delete', 'TourController@delete')->name('tour-delete');
         Route::get('/{id}', 'TourController@detail')->name('tour-detail');
@@ -65,12 +63,28 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
     });
 
-
+    // Article
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('articles', 'ArticleController')->except(['show']);
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
+        //Contacts
+        Route::resource('contacts','ContactController');
+        Route::post('/contacts/reply', 'ContactController@reply')->name('contacts.reply');
+        Route::get('/update-{id}-{status}', 'ContactController@update')->name('contacts.update');
     });
 
+    // Profile
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('/', function () {
+            return redirect()->route('account.overview');
+        })->name('account');
+        Route::get('overview', 'AccountController@overview')->name('account.overview');
+        Route::get('personal-information', 'AccountController@personalInformation')->name('account.personal-information');
+        Route::post('update', 'AccountController@updateInformation')->name('account.update');
+        Route::get('account-information', 'AccountController@accountInformation')->name('account.account-information');
+        Route::get('change-password', 'AccountController@changePassword')->name('account.change-password');
+        Route::get('email-setting', 'AccountController@emailSetting')->name('account.email-setting');
+    });
 });
 
 // Main
@@ -94,6 +108,17 @@ Route::group(['namespace' => 'Main'], function () {
        Route::get('/', 'ContactController@index')->name('contact.index');
        Route::post('/', 'ContactController@store')->name('contact.store');
     });
+
+    Route::group(['prefix' => 'guide'], function() {
+        Route::get('/{guide_id}/detail', 'GuideController@detail')->name('guide.detail');
+    });
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/history', 'TourController@history')->name('Main.history');
+        Route::get('/invoices/{id}/detail', 'InvoiceController@detail')->name('Main.invoice_detail');
+        Route::get('/invoices/{id}/schedule', 'InvoiceController@schedule')->name('Main.invoice_schedule');
+
+    });
 });
 
 /**
@@ -113,6 +138,7 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
             Route::patch('{id}/active', 'TourController@setActive');
             Route::patch('{id}/publish', 'TourController@setPublish');
             Route::delete('{id}/delete', 'TourController@delete');
+            Route::get('{id}/schedules', 'TourController@schedules');
         });
     });
 

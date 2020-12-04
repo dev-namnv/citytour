@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TourController extends Controller
 {
 
     public function index($param = 'lists')
     {
-        $tours = Tour::query()->with('category','services')
+        $tours = Tour::query()->with('category','reviews','schedules')
+            ->with(['batches' => function ($q) {
+                $q->select()->where('batch','>',date('Y-m-d'));
+            }])
+            ->orderBy('created_at','desc')
             ->paginate(PAGINATION_TOUR);
         $categories = Category::query()->get();
         if ($param == 'list-grid') {
@@ -24,7 +28,7 @@ class TourController extends Controller
 
     public function show($slug)
     {
-        $tour = Tour::query()->with('album','reviews','category','schedules')
+        $tour = Tour::query()->with('albums','reviews','category','schedules')
             ->with(['batches'=>function($q){
                 $q->where('batch','>',now())->select();
             }])
@@ -44,5 +48,14 @@ class TourController extends Controller
         $customer_total = $invoices->sum('adult_count') + $invoices->sum('child_count');
         return view('Main.tour.detail', compact('tour','customer_total','tour_recommend'));
     }
+
+    public function history()
+    {
+        $user_id = auth()->user()->id;
+        $invoices = Invoice::where('user_id', '=', $user_id)->orderBy('id', 'desc')->get();
+        return view('Main.tour.history', compact(['invoices']));
+    }
+
+
 
 }

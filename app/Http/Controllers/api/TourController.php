@@ -6,6 +6,7 @@ use App\Helpers\ConvertSlugHelper;
 use App\Helpers\ReviewHelper;
 use App\Helpers\StorageS3Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Schedule;
 use App\Models\Tour;
 use App\Scopes\ActiveScope;
 use App\Scopes\PublishScope;
@@ -15,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class TourController extends Controller
@@ -54,32 +56,62 @@ class TourController extends Controller
      */
     protected function manager(Request $request)
     {
-        $limit = PAGINATION_TOUR;
-        if ($request->has('limit') && (int)$request->limit > 0 && (int)$request->limit <= 50) {
-            $limit = (int)$request->limit;
+        // Lấy param query
+        $pagination = $request->get('pagination');
+        $query = $request->get('query');
+        $sort = $request->get('sort');
+
+        // Phân trang mặc định
+        $perPage = PAGINATION_TOUR;
+        // Nếu phân trang > 0 và <= 50 thì sẽ lấy giá trị
+        if ($request->has('pagination') && (int)$pagination['perpage'] > 0 && (int)$pagination['perpage'] <= 50) {
+            $perPage = (int)$pagination['perpage'];
         }
 
-        $params = $request->only(['page', 'active', 'publish']);
         if (Auth::user()->role === ADMIN) { // Nếu là ADMIN đăng nhập
             $docs = Tour::query()
-                ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
-                ->orderBy('created_at', 'desc');
+                ->withoutGlobalScopes([ActiveScope::class, PublishScope::class]);
         } else { // Nếu là GUIDE đăng nhập
             $docs = Tour::query()
                 ->withoutGlobalScope(PublishScope::class)
-                ->ofGuide()
-                ->orderBy('created_at', 'desc');
+                ->ofGuide();
         }
 
-        foreach ($params as $key => $param) {
-            if (is_bool($param) && $key) {
-                $docs = $docs->where($key, '=', $param);
+        // Nếu có sort order
+        if ($sort && in_array($sort['sort'], ['asc', 'desc'])) {
+            // Lấy giá trị theo field và type sort
+            $docs = $docs->orderBy($sort['field'], $sort['sort']);
+        } else {
+            // Nếu không mặc định sort order theo created_at
+            $docs = $docs->orderBy('created_at', 'desc');
+        }
+
+        // Kiểm tra tồn tại query thì thêm where
+        if ($query) {
+            foreach ($query as $key => $q) { // Thực hiện query theo active và publish
+                if (in_array($key, ['active', 'publish']) && isset($q)) {
+                    $docs = $docs->where($key, '=', $q === 'true' ? 1 : 0);
+                }
+            }
+
+            // Kiểm tra keyword search tồn tại
+            // Search theo: tour name hoặc guide name hoặc batch
+            if (!empty($query['keyword']) && $query['keyword']) {
+                $docs = $docs
+                    ->where('name', 'like', '%'.$query['keyword'].'%')
+                    ->orWhereHas('guide', function ($c) use ($query) {
+                        $c->where('first_name', 'like',  '%'.$query['keyword'].'%');
+                    })
+                    ->orWhereHas('batches', function ($c) use ($query) {
+                        $c->where('batch', 'like',  '%'.$query['keyword'].'%');
+                    });
             }
         }
 
+        // Lấy thêm eloquent liên quan
         $tours = $docs
             ->with('schedules', 'batches', 'category', 'guide', 'reviews.user')
-            ->paginate($limit);
+            ->paginate($perPage, '*', 'pagination[page]', $pagination['page']);
 
         // Convert data
         foreach ($tours as $tour) {
@@ -218,7 +250,6 @@ class TourController extends Controller
         try {
             $tour = Tour::query()
                 ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
-                ->ofGuide()
                 ->find($id);
             $tour->active = !$tour->active;
             $response = [
@@ -324,5 +355,11 @@ class TourController extends Controller
 
         $tour = $doc->with('category', 'guide', 'services', 'batches', 'reviews.user')->find($id);
         return $tour ? response()->json($tour) : response(['message' => 'Không tìm thấy Tour'], 404);
+    }
+
+    public function schedules($id)
+    {
+        $schedules = Schedule::query()->where('tour_id', '=', $id)->get();
+        return response()->json($schedules);
     }
 }
