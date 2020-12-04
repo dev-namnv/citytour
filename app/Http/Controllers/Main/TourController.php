@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
+use App\Scopes\GuideBehaviorScope;
 use Carbon\Carbon;
 
 class TourController extends Controller
@@ -13,7 +14,9 @@ class TourController extends Controller
 
     public function index($param = 'lists')
     {
-        $tours = Tour::query()->with('category','reviews','schedules')
+        $tours = Tour::query()
+            ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
+            ->with('category','reviews','schedules')
             ->with(['batches' => function ($q) {
                 $q->select()->where('batch','>',date('Y-m-d'));
             }])
@@ -28,7 +31,9 @@ class TourController extends Controller
 
     public function show($slug)
     {
-        $tour = Tour::query()->with('albums','reviews','category','schedules')
+        $tour = Tour::query()
+            ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
+            ->with('albums','reviews','category','schedules')
             ->with(['batches'=>function($q){
                 $q->where('batch','>',now())->select();
             }])

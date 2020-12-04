@@ -38,5 +38,8 @@ class DatabaseSeeder extends Seeder
 
         // Wishlist
         $this->call(WishlistSeeder::class);
+
+        // Cancel policy
+        $this->call(CancelPolicySeeder::class);
     }
 }

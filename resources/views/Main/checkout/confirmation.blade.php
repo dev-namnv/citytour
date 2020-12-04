@@ -3,29 +3,29 @@
 @section('title', 'Xem trước')
 
 @section('content')
-    <section id="hero_2">
+    <section id="hero_2" style="background: url('https://hiteapts.com/assets/images/cache/banner_tour-5405a7630ed2b4367d9afe15b947a91d.jpg')">
         <div class="intro_title">
-            <h1>Place your order</h1>
+            <h1>Đơn đặt lịch của bạn</h1>
             <div class="bs-wizard row">
 
                 <div class="col-4 bs-wizard-step complete">
-                    <div class="text-center bs-wizard-stepnum">Your cart</div>
+                    <div class="text-center bs-wizard-stepnum">{{ \Illuminate\Support\Str::limit($tour->name, 20) }}</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
-                    <a href="cart.html" class="bs-wizard-dot"></a>
+                    <a href="#" class="bs-wizard-dot"></a>
                 </div>
 
                 <div class="col-4 bs-wizard-step complete">
-                    <div class="text-center bs-wizard-stepnum">Your details</div>
+                    <div class="text-center bs-wizard-stepnum">Chi tiết thanh toán</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
-                    <a href="payment.html" class="bs-wizard-dot"></a>
+                    <a href="#" class="bs-wizard-dot"></a>
                 </div>
 
                 <div class="col-4 bs-wizard-step complete">
-                    <div class="text-center bs-wizard-stepnum">Finish!</div>
+                    <div class="text-center bs-wizard-stepnum">Hoàn thành!</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
