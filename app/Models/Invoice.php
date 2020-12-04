@@ -100,4 +100,9 @@ class Invoice extends Model
     {
         return today()->diffInDays(Carbon::createFromDate($this->start_date));
     }
+
+    public function batch()
+    {
+        return $this->belongsTo('App\Models\Batch', 'start_date', 'id');
+    }
 }
