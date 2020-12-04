@@ -12,16 +12,20 @@
                             <form class="form-login" method="post" action="{{ route('register') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Username</label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror"  placeholder="Username">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control @error('first_name') is-invalid @enderror"  placeholder="First Name" name="first_name" >
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control @error('last_name') is-invalid @enderror"  placeholder="Last Name" name="last_name">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password1" placeholder="Password">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password1" name="password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <label>Confirm password</label>
