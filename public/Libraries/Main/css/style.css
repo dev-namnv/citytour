@@ -102,7 +102,7 @@ h2 span, h3 span, h4 span, h5 span, h6 span{color:#e04f67;}
 }
 
 /*General links color*/
-a {color: #e14d67;text-decoration: none;-webkit-transition: all 0.2s ease;transition: all 0.2s ease; outline:none;}
+a {text-decoration: none;-webkit-transition: all 0.2s ease;transition: all 0.2s ease; outline:none;}
 a:hover,a:focus {color: #111;text-decoration: none; outline:none;}
 
 p {margin: 0 0 20px 0;}
@@ -3187,7 +3187,7 @@ ul.list_order li span {
 
 /* Parallax bg */
 .parallax-window {
-	min-height: 470px;
+	min-height: 370px;
 	background: transparent;
 	position: relative;
 }

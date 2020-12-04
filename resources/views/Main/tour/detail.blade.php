@@ -24,35 +24,26 @@
         {
             background-color: #e04f67;
         }
+        .price strong{
+            font-size: 24px;
+            color: red;
+        }
     </style>
 @endsection
 
 
 @section('content')
-
     <section class="parallax-window" data-parallax="scroll" data-image-src="{{ $tour->banner }}" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-2">
-            <div class="container">
+            <div class="container title">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12 text-center rounded pt-2" style="background-color: #00000085">
                         <h1>{{$tour->name}}</h1>
                         <span>{{ $tour->address }}</span>
-                        <div class="rating">
-                            @for($i=1; $i<=5; $i++)
-                                @if($i <= round($tour->reviews->avg('star')))
-                                    <i class="icon-smile voted"></i>
-                                @else
-                                    <i class="icon-smile"></i>
-                                @endif
-                            @endfor
-                        ({{ round($tour->reviews->avg('star'),1) }})
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div id="price_single_main">
-                            <span>{{ $tour->getCurrentPrice() }}</span>
-                            <i>/người lớn</i>
-                        </div>
+                        <br/>
+                        @if($tour->reviews->count() > 0)
+                            <p class="d-inline-block bg-info p-2 text-white rounded">điểm {{ round($tour->reviews->avg('star'),1) }}/10</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -78,18 +69,126 @@
 
         <div class="container margin_60">
             <div class="row">
-                <div class="col-lg-8" id="single_tour_desc">
-{{--                    <div id="single_tour_feat">--}}
-{{--                        <ul>--}}
-{{--                            @foreach($tour->facilities as $facility)--}}
-{{--                                <li>--}}
-{{--                                    <i class="{{ $facility->icon }}"></i>--}}
-{{--                                    {{ $facility->name }}--}}
-{{--                                </li>--}}
-{{--                            @endforeach--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-
+                <div class="col-lg-9" id="single_tour_desc">
+                    <div class="row p-3 bg-white">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <strong>ĐIỂM XUẤT PHÁT: </strong>
+                                <span class="ml-1">{{ $tour->origin }}</span>
+                            </div>
+                            <div class="row">
+                                <strong>THỜI GIAN: </strong>
+                                <span class="ml-1">{{ $tour->schedules->count() }} ngày</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="price">
+                                Giá Người Lớn: <strong>{{ $tour->adult_price }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="price">
+                                Giá Trẻ Em: <strong>{{ $tour->child_price }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row mb-2">
+                        <strong class="ml-3">Ngày khởi hành: </strong>
+                        <div class="col-lg-12 text-center mb-2">
+                            @foreach($tour->batches as $batch)
+                                <span class="d-inline-block p-1 bg-secondary rounded text-white">{{ $batch->batch }}</span>
+                            @endforeach
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <a href="#booking" style="color: #ffffff" class="bg-info p-2 d-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="booking">Đặt Lịch</a>
+                        </div>
+                    </div>
+                    <div class="collapse" id="booking">
+                        <div class="card card-body">
+                            <form action="" method="get">
+                                @csrf
+                                <h3 class="inner">- Đặt lịch -</h3>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <span>Khởi hành : </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <select name="start_date" class="form-control">
+                                                @foreach($tour->batches as $batch)
+                                                    <option value="{{ $batch->batch }}">{{ $batch->batch }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span>Số hành khách hiện tại : </span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b id="customer_total">{{ $customer_total }}</b>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Người lớn</label>
+                                            <div class="numbers-row">
+                                                <input type="text" value="0" id="adults" class="qty2 form-control bg-white" readonly name="adult_quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Trẻ em</label>
+                                            <div class="numbers-row">
+                                                <input type="text" value="0" id="children" class="qty2 form-control bg-white" readonly name="children_quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <table class="table table_summary">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            Người lớn
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="text-danger">{{ $tour->adult_price }}</span>
+                                            x
+                                            <span class="person-adult">0</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Trẻ em
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="text-danger">{{ $tour->child_price }}</span>
+                                            x
+                                            <span class="person-child">0</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>
+                                            Tổng tiền
+                                        </td>
+                                        <td class="text-right" id="total-price">
+                                            0 đ
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <button style="background-color: #e3342f;" class="btn_full">Thanh toán</button>
+                            </form>
+                        </div>
+                    </div>
                     <div id="Img_carousel" class="slider-pro">
                         <div class="sp-slides">
                             @foreach($tour->albums as $image)
@@ -98,6 +197,7 @@
                             </div>
                             @endforeach
                         </div>
+                        <span id="description"></span>
                         <div class="sp-thumbnails">
                             @foreach($tour->albums as $thumbnail)
                                 <img alt="Image" class="sp-thumbnail" src="{{ $thumbnail->image }}">
@@ -105,7 +205,7 @@
                         </div>
                     </div>
 
-                    <hr>
+                    <hr id="schedule">
 
                     <div class="row">
                         <div class="col-lg-3">
@@ -124,10 +224,8 @@
                         <div class="col-lg-9">
                            @if(count($tour->schedules) > 1)
                                 @foreach($tour->schedules as $key => $schedule)
-                                    <div class="row">
-                                        <h4><strong>Ngày {{ $key + 1 }}</strong></h4>
-                                        {!! $schedule->description !!}
-                                    </div>
+                                    <h4><strong>Ngày {{ $key + 1 }}</strong></h4>
+                                    {!! $schedule->description !!}
                                     <hr/>
                                 @endforeach
                             @else
@@ -148,27 +246,20 @@
                             </div>
                         </div>
                     @endif
-                    <hr>
+                    <hr id="review">
                     <div class="row">
                         <div class="col-lg-3">
-                            <h3>Reviews </h3>
+                            <h3>Đánh giá </h3>
                             @if(Auth::user())
-                                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Leave a review</a>
+                                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Viết đánh giá</a>
                             @endif
                         </div>
                         <div class="col-lg-9">
                             <div class="text-right" id="general_rating">
-                                <p>{{ $tour->reviews->count() }} Reviews</p>
-                                <div class="rating">
-                                    @for($i=1; $i<=5; $i++)
-                                        @if($i <= round($tour->reviews->avg('star')))
-                                            <i class="icon-smile voted"></i>
-                                        @else
-                                            <i class="icon-smile"></i>
-                                        @endif
-                                    @endfor
-                                </div>
-                                ({{ round($tour->reviews->avg('star'),1) }})
+                                <p>{{ $tour->reviews->count() }} đánh giá</p>
+                                @if($tour->reviews->count())
+                                    <p class="d-inline-block bg-info p-2 text-white rounded">điểm {{ round($tour->reviews->avg('star'),1) }}/10</p>
+                                @endif
                             </div>
                             <!-- End general_rating -->
                             @foreach($tour->reviews as $key => $review)
@@ -196,94 +287,60 @@
                     </div>
                 </div>
                 <!--End  single_tour_desc-->
-
-                <aside class="col-lg-4">
-                    <div class="box_style_1 expose">
-                        <form action="" method="get">
-                            @csrf
-                            <h3 class="inner">- Booking -</h3>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <span>Khởi hành : </span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <select name="start_date" class="form-control" id="js-tour-batch">
-                                            @foreach($tour->batches as $batch)
-                                                <option value="{{ $batch->batch }}">{{ $batch->batch }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span>Số hành khách hiện tại : </span>
-                                </div>
-                                <div class="col-sm-6">
-                                    <b id="customer_total">{{ $customer_total }}</b>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Người lớn</label>
-                                        <div class="numbers-row">
-                                            <input type="text" value="0" id="adults" class="qty2 form-control bg-white" readonly name="adult_quantity">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Trẻ em</label>
-                                        <div class="numbers-row">
-                                            <input type="text" value="0" id="children" class="qty2 form-control bg-white" readonly name="children_quantity">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <table class="table table_summary">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        Người lớn
-                                    </td>
-                                    <td class="text-right">
-                                        <span class="text-danger">{{ $tour->adult_price }}</span>
-                                         x
-                                        <span class="person-adult">0</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Trẻ em
-                                    </td>
-                                    <td class="text-right">
-                                        <span class="text-danger">{{ $tour->child_price }}</span>
-                                         x
-                                        <span class="person-child">0</span>
-                                    </td>
-                                </tr>
-                                <tr class="total">
-                                    <td>
-                                        Tổng tiền
-                                    </td>
-                                    <td class="text-right" id="total-price">
-                                        0 đ
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <a class="btn_full" href="{{ route('checkout.detail', ['slug' => $tour->slug]) }}">Đặt ngay</a>
-                            <a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Yêu thích</a>
-                        </form>
+                <div class="col-lg-3">
+                    <div class="sidebar border">
+                        <ul class="navbar-nav bg-white">
+                            <li class="navbar-item p-2 border-bottom">
+                                <a href="#description" class="navbar-link text-dark-75">Mô tả</a>
+                            </li>
+                            <li class="navbar-item p-2 border-bottom">
+                                <a href="#schedule" class="navbar-link text-dark-75">Lịch trình</a>
+                            </li>
+                            <li class="navbar-item p-2 border-bottom">
+                                <a href="#review" class="navbar-link text-dark-75">Đánh giá</a>
+                            </li>
+                            <li class="navbar-item p-2 border-bottom">
+                                <a href="#recommend" class="navbar-link text-dark-75">Tour liên quan</a>
+                            </li>
+                        </ul>
                     </div>
-
-                </aside>
+                    <div class="box_style_4 mt-3">
+                        <a href="tel://004542344599" class="phone">
+                            <i class="icon_set_1_icon-90"></i>
+                            <h4>Hỗ Trợ</h4>
+                            {{ __('info.hotline') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <h5 class="ml-auto" id="recommend">Tour liên quan</h5>
+            <div class="row">
+                @foreach($tour_recommend as $tour)
+                    <div class="col-lg-3 col-md-6 text-center mb-2">
+                        <a class="text-dark" href="{{route('Main.tour.show',['slug'=> $tour->slug])}}">
+                            <p>
+                                <img src="{{ $tour->thumbnail }}" alt="Pic" class="img-fluid">
+                            </p>
+                            <div class="tour_info">
+                                <strong>{!! $tour->name !!}</strong>
+                                @if($tour->reviews->count() != 0 )
+                                    <div class="small">
+                                        Điểm:
+                                        <span>{{ round($tour->reviews->avg('star'),1) }}</span>
+                                    </div>
+                                @endif
+                                <div class="add_info">
+                                    <div class="tooltip-item">
+                                        Tour <span>
+                                            {{ $tour->schedules->count() == 1 ? 'trong' : $tour->schedules->count() }}
+                                        </span> ngày
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
             <!--End row -->
         </div>
@@ -316,11 +373,16 @@
                                     <div class="form-group">
                                         <label>Chất lượng dịch vụ</label>
                                         <select class="form-control" name="star" id="position_review">
-                                            <option value="1">1 Sao</option>
-                                            <option value="2">2 Sao</option>
-                                            <option value="3">3 Sao</option>
-                                            <option value="4">4 Sao</option>
-                                            <option value="5">5 Sao</option>
+                                            <option value="1">1 điểm</option>
+                                            <option value="2">2 điểm</option>
+                                            <option value="3">3 điểm</option>
+                                            <option value="4">4 điểm</option>
+                                            <option value="5">5 điểm</option>
+                                            <option value="6">6 điểm</option>
+                                            <option value="7">7 điểm</option>
+                                            <option value="8">8 điểm</option>
+                                            <option value="9">9 điểm</option>
+                                            <option value="10">10 điểm</option>
                                         </select>
                                     </div>
                                 </div>
