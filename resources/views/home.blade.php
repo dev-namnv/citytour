@@ -44,17 +44,19 @@
             @foreach($main as $item)
                 <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                     <div class="tour_container">
-                        <div class="ribbon_3 popular"><span>Popular</span></div>
                         <div class="img_container">
-                            <a href="{{route('Main.tour.show',['slug'=> $item['slug']])}}">
-                                <img src="{{$item['thumbnail']}}" width="800" height="533" class="img-fluid" alt="Image">
+                            <a href="{{route('Main.tour.show',['slug'=> $item->slug])}}">
+                                <img src="{{$item->thumbnail}}" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
-                                    <span class="price">{{$item['adult_price']['formatted']}}</span>
+                                    <i class="icon_set_1_icon-44"></i>{{$item->category->name}}<span class="price">{{$item->adult_price}}</span>
                                 </div>
                             </a>
                         </div>
                         <div class="tour_title">
                             <h3><strong>{{$item['name']}}</strong> tour</h3>
+                            <div class="rating">
+                                <small>(75)</small>
+                            </div><!-- end rating -->
                             <div class="wishlist">
                                 <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                             </div><!-- End wish list-->
@@ -65,7 +67,7 @@
             </div><!-- End row -->
 
             <p class="text-center nopadding">
-                <a href="#" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours (144) </a>
+                <a href="{{route('Main.tour.index')}}" class="btn_1 medium"><i class="icon-eye-7"></i>Toàn bộ tours ({{$tour1}}) </a>
             </p>
         </div><!-- End container -->
 
@@ -74,9 +76,9 @@
                 <!-- End row -->
 
                 <div class="banner colored">
-                    <h4>Discover our Top tours <span>from $34</span></h4>
+                    <h3 style="font-size: 28px; color: white">Bạn sẽ đi đâu nếu chỉ có 1.000.000VNĐ</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in.
+                        Sẽ có rất nhiều hình thức du lịch siêu tiết kiệm, cũng như rất là an toàn và đem lại trải nghiệm khó quên
                     </p>
                     <a href="single_tour.html" class="btn_1 white">Read more</a>
                 </div>
@@ -85,18 +87,16 @@
                     @foreach($tour as $item)
                     <div class="col-lg-3 col-md-6 wow zoomIn" data-wow-delay="0.2s">
                         <div class="tour_container">
-                            <div class="ribbon_3 popular"><span>Popular</span></div>
                             <div class="img_container">
-                                <a href="{{route('Main.tour.show',['slug'=> $item['slug']])}}">
-                                    <img src="{{$item['thumbnail']}}" width="800" height="533" class="img-fluid" alt="Image">
-                                    <div class="badge_save">Save<strong>30%</strong></div>
+                                <a href="{{route('Main.tour.show',['slug'=> $item->slug])}}">
+                                    <img src="{{$item->thumbnail}}" width="800" height="533" class="img-fluid" alt="Image">
                                     <div class="short_info">
-                                        <span class="price">{{$item['adult_price']['formatted']}}</span>
+                                        <i class="{{$item->category->icon}}"></i>{{$item->category->name}}<span class="price">{{$item->adult_price}}</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="tour_title">
-                                <h3><strong>{{$item['name']}}</strong> tour</h3>
+                                <h3><strong>{{$item->name}}</strong> tour</h3>
                                 <div class="wishlist">
                                     <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                                 </div><!-- End wish list-->
@@ -114,10 +114,7 @@
         <div class="container margin_60">
 
             <div class="main_title">
-                <h2>Some <span>good</span> reasons</h2>
-                <p>
-                    Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.
-                </p>
+                <h2>CITY TOURS CÓ GÌ?</h2>
             </div>
 
             <div class="row">
@@ -125,9 +122,9 @@
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.2s">
                     <div class="feature_home">
                         <i class="icon_set_1_icon-41"></i>
-                        <h3><span>+120</span> Premium tours</h3>
+                        <h3><span>+120</span> Tours</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                            Chúng tôi luôn có những tours 'xịn xò' nhất dành cho khách hàng.
                         </p>
                         <a href="about.html" class="btn_1 outline">Read more</a>
                     </div>
@@ -136,9 +133,9 @@
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.4s">
                     <div class="feature_home">
                         <i class="icon_set_1_icon-30"></i>
-                        <h3><span>+1000</span> Customers</h3>
+                        <h3><span>+1000</span> Khách hàng</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                            Khách hàng khi đến với City Tours, đều ra về với những khuôn mặt tười cười cùng với tâm trạng thoải mái.
                         </p>
                         <a href="about.html" class="btn_1 outline">Read more</a>
                     </div>
@@ -147,9 +144,9 @@
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
                     <div class="feature_home">
                         <i class="icon_set_1_icon-57"></i>
-                        <h3><span>H24 </span> Support</h3>
+                        <h3><span>24/7 </span> Hỗ trợ</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                            City Tours luôn mong muốn có thể hỗ trợ khách hàng nhanh, kịp thời.
                         </p>
                         <a href="about.html" class="btn_1 outline">Read more</a>
                     </div>
