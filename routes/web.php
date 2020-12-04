@@ -128,6 +128,12 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('/invoices/{id}/schedule', 'InvoiceController@schedule')->name('Main.invoice_schedule');
 
     });
+
+    Route::group(['prefix' => 'checkout'], function () {
+        Route::get('{slug}/detail', 'CheckoutController@detail')->name('checkout.detail');
+        Route::post('payment', 'CheckoutController@payment')->name('checkout.payment');
+        Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
+    });
 });
 
 /**
