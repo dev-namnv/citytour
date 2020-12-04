@@ -12,8 +12,8 @@
                 type: status,
                 allow_dismiss: false,
                 newest_on_top: true,
-                mouse_over:  false,
-                showProgressbar:  false,
+                mouse_over: false,
+                showProgressbar: false,
                 spacing: 10,
                 timer: 2000,
                 placement: {
@@ -56,7 +56,7 @@
                         $(`#status_guide_${guide_id}`).removeClass('text-danger').addClass('text-success').text('Mở')
                     }
                 },
-                error: err => {
+                error: () => {
                     showNotify('Hướng dẫn viên không tồn tại', 'danger')
                 }
             })
@@ -81,8 +81,9 @@
                 }
             })
         }
+
         const removeGuide = guide_id => {
-            const x =  confirm('Bạn có thực sự muốn xóa không?')
+            const x = confirm('Bạn có thực sự muốn xóa không?')
             if (x) {
                 $.ajax({
                     type: "POST",
@@ -96,7 +97,7 @@
                         showNotify(data.flash_message, 'success')
                         $(`#guide_tr_${data.id}`).hide()
                     },
-                    error: err => {
+                    error: () => {
                         showNotify("Gặp lỗi khi xóa", 'danger')
                     }
                 })
@@ -140,7 +141,6 @@
                                     <tbody>
 
 
-
                                     @foreach($guides as $key => $guide)
                                         <tr id="guide_tr_{{$guide->id}}">
                                             <td>
@@ -151,12 +151,14 @@
                                             <td>{{$guide->email}}</td>
                                             <td>{{$guide->phone}}</td>
                                             <td>
-                                                <span id="status_guide_{{$guide->id}}" class="{{$guide->status == 0 ? 'text-danger' : 'text-success'}}">
+                                                <span id="status_guide_{{$guide->id}}"
+                                                      class="{{$guide->status == 0 ? 'text-danger' : 'text-success'}}">
                                                     {{$guide->status == 0 ? 'Khóa' : 'Mở'}}
                                                 </span>
                                                 <a href="javascript:;"
                                                    class="btn btn-sm btn-clean btn-icon mr-2"
-                                                   title="Sửa trạng thái" data-toggle="modal" data-target="#update_status_modal_{{$guide->id}}">
+                                                   title="Sửa trạng thái" data-toggle="modal"
+                                                   data-target="#update_status_modal_{{$guide->id}}">
                                                     <span class="svg-icon svg-icon-md">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -183,10 +185,12 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <span id="behavior_score_{{$guide->id}}">{{$guide->behavior_score}}</span>
+                                                <span
+                                                    id="behavior_score_{{$guide->id}}">{{$guide->behavior_score}}</span>
                                                 <a href="#"
                                                    class="btn btn-sm btn-clean btn-icon mr-2"
-                                                   title="Sửa điểm hành vi" data-toggle="modal" data-target="#update_behavior_score_modal_{{$guide->id}}">
+                                                   title="Sửa điểm hành vi" data-toggle="modal"
+                                                   data-target="#update_behavior_score_modal_{{$guide->id}}">
                                                     <span class="svg-icon svg-icon-md">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -246,62 +250,82 @@
                                             </td>
                                         </tr>
 
-                                        <div class="modal fade" id="update_status_modal_{{$guide->id}}" style="display: none;" aria-hidden="true">
+                                        <div class="modal fade" id="update_status_modal_{{$guide->id}}"
+                                             style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Sửa trạng thái</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
                                                             <i aria-hidden="true" class="ki ki-close"></i>
                                                         </button>
                                                     </div>
-                                                        <div class="modal-body">
-                                                            <form class="form">
-                                                                <div class="form-group row">
-                                                                    <label class="text-right col-lg-3 col-sm-12">Trạng thái</label>
-                                                                    <div class="col-lg-9 col-md-9 col-sm-12">
-                                                                        <div class="radio-inline" id="radio_guide_{{$guide->id}}">
-                                                                            <label class="radio">
-                                                                                <input type="radio" value="0" name="status" @if($guide->status == 0) checked @endif>
-                                                                                <span></span>Khóa</label>
-                                                                            <label class="radio">
-                                                                                <input type="radio" value="1" name="status" @if($guide->status == 1) checked @endif>
-                                                                                <span></span>Mở</label>
-                                                                        </div>
+                                                    <div class="modal-body">
+                                                        <form class="form">
+                                                            <div class="form-group row">
+                                                                <label class="text-right col-lg-3 col-sm-12">Trạng
+                                                                    thái</label>
+                                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                                    <div class="radio-inline"
+                                                                         id="radio_guide_{{$guide->id}}">
+                                                                        <label class="radio">
+                                                                            <input type="radio" value="0" name="status"
+                                                                                   @if($guide->status == 0) checked @endif>
+                                                                            <span></span>Khóa</label>
+                                                                        <label class="radio">
+                                                                            <input type="radio" value="1" name="status"
+                                                                                   @if($guide->status == 1) checked @endif>
+                                                                            <span></span>Mở</label>
                                                                     </div>
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary mr-2" data-dismiss="modal">Đóng</button>
-                                                            <button type="submit" class="btn btn-secondary" onclick="updateStatus({{$guide->id}})">Lưu</button>
-                                                        </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary mr-2"
+                                                                data-dismiss="modal">Đóng
+                                                        </button>
+                                                        <button type="submit" class="btn btn-secondary"
+                                                                onclick="updateStatus({{$guide->id}})">Lưu
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal fade" id="update_behavior_score_modal_{{$guide->id}}" style="display: none;" aria-hidden="true">
+                                        <div class="modal fade" id="update_behavior_score_modal_{{$guide->id}}"
+                                             style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Sửa điểm hành vi</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
                                                             <i aria-hidden="true" class="ki ki-close"></i>
                                                         </button>
                                                     </div>
-                                                        <div class="modal-body">
-                                                            <form class="form">
-                                                                <div class="form-group row">
-                                                                    <label class="col-form-label text-right col-lg-3 col-sm-12">Điểm hành vi</label>
-                                                                    <div class="col-lg-9 col-md-9 col-sm-12">
-                                                                        <input type="text" class="form-control" name="behavior_score" id="bh-{{$guide->id}}" value="{{$guide->behavior_score}}">
-                                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="form">
+                                                            <div class="form-group row">
+                                                                <label
+                                                                    class="col-form-label text-right col-lg-3 col-sm-12">Điểm
+                                                                    hành vi</label>
+                                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                                    <input type="text" class="form-control"
+                                                                           name="behavior_score" id="bh-{{$guide->id}}"
+                                                                           value="{{$guide->behavior_score}}">
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary mr-2" data-dismiss="modal">Đóng</button>
-                                                            <button type="submit" class="btn btn-secondary" onclick="updateBehaviorScore({{$guide->id}})">Lưu</button>
-                                                        </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary mr-2"
+                                                                data-dismiss="modal">Đóng
+                                                        </button>
+                                                        <button type="submit" class="btn btn-secondary"
+                                                                onclick="updateBehaviorScore({{$guide->id}})">Lưu
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
