@@ -52135,6 +52135,49 @@ Main = {
       invalidClass: 'is-invalid',
       validClass: 'is-valid'
     });
+  },
+  addToWishlist: function addToWishlist(tour_id) {
+    $.ajax({
+      type: "POST",
+      url: "".concat(window.location.origin, "/wishlist/add/").concat(tour_id),
+      data: {
+        _token: $("meta[name='csrf-token']").attr('content')
+      },
+      success: function success(data) {
+        Toastr.show({
+          "status": data.status,
+          "content": data.content
+        });
+      },
+      error: function error(_error) {
+        Toastr.show({
+          "status": _error.responseJSON.status,
+          "content": _error.responseJSON.content
+        });
+      }
+    });
+  },
+  removeTourInWishlist: function removeTourInWishlist(tour_id) {
+    $.ajax({
+      type: "POST",
+      url: "".concat(window.location.origin, "/wishlist/remove/").concat(tour_id),
+      data: {
+        _token: $("meta[name='csrf-token']").attr('content'),
+        _method: "DELETE"
+      },
+      success: function success(data) {
+        Toastr.show({
+          "content": "Xóa tour khỏi danh sách yêu thích thành công"
+        });
+        $("#tour_".concat(data.tour_id)).hide();
+      },
+      error: function error(_error2) {
+        Toastr.show({
+          "status": "error",
+          "content": "Xóa tour khỏi danh sách yêu thích thất bại"
+        });
+      }
+    });
   }
 }; // Run function
 
