@@ -74,7 +74,7 @@ class Invoice extends Model
 
     public function tour()
     {
-        return $this->belongsTo('App\Models\Tour','tour_id');
+        return $this->belongsTo('App\Models\Tour','tour_id')->withoutGlobalScopes();
     }
 
     public function guide()
