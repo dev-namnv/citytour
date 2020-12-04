@@ -71,6 +71,7 @@
         <div class="container margin_60">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
+                    @if (count($invoices) > 0)
                     @if(today()->toDateString() <= $invoices[0]->end_date)
                         <div class="row">
                             <div class="col-md-12">
@@ -396,7 +397,11 @@
                             </table>
                         </div><!-- End col-md-12-->
                     </div>
+                    @else
+                        <h2>Bạn chưa từng đi một tour nào cả !</h2>
+                    @endif
                 </div>
+
             </div>
         </div>
 
