@@ -219,12 +219,6 @@
                                                     <span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
                                                     <div class="tooltip-content">
                                                         <h4>Schedule</h4>
-{{--                                                        @foreach(json_decode($tour->schedule) as $schedule)--}}
-{{--                                                            <p>--}}
-{{--                                                                <strong>{!! $schedule->name !!}</strong>--}}
-{{--                                                                {!! $schedule->time !!}--}}
-{{--                                                            </p>--}}
-{{--                                                        @endforeach--}}
                                                     </div>
                                                 </div>
                                             </li>

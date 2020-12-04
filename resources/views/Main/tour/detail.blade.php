@@ -33,7 +33,6 @@
 
 
 @section('content')
-
     <section class="parallax-window" data-parallax="scroll" data-image-src="{{ $tour->banner }}" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-2">
             <div class="container title">
@@ -75,11 +74,11 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <strong>ĐIỂM XUẤT PHÁT: </strong>
-                                <span>{{ $tour->origin }}</span>
+                                <span class="ml-1">{{ $tour->origin }}</span>
                             </div>
                             <div class="row">
                                 <strong>THỜI GIAN: </strong>
-                                <span>{{ $tour->schedules->count() }} ngày</span>
+                                <span class="ml-1">{{ $tour->schedules->count() }} ngày</span>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -300,6 +299,9 @@
                             <li class="navbar-item p-2 border-bottom">
                                 <a href="#review" class="navbar-link text-dark-75">Đánh giá</a>
                             </li>
+                            <li class="navbar-item p-2 border-bottom">
+                                <a href="#recommend" class="navbar-link text-dark-75">Tour liên quan</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="box_style_4 mt-3">
@@ -310,6 +312,35 @@
                         </a>
                     </div>
                 </div>
+            </div>
+            <hr/>
+            <h5 class="ml-auto" id="recommend">Tour liên quan</h5>
+            <div class="row">
+                @foreach($tour_recommend as $tour)
+                    <div class="col-lg-3 col-md-6 text-center mb-2">
+                        <a class="text-dark" href="{{route('Main.tour.show',['slug'=> $tour->slug])}}">
+                            <p>
+                                <img src="{{ $tour->thumbnail }}" alt="Pic" class="img-fluid">
+                            </p>
+                            <div class="tour_info">
+                                <strong>{!! $tour->name !!}</strong>
+                                @if($tour->reviews->count() != 0 )
+                                    <div class="small">
+                                        Điểm:
+                                        <span>{{ round($tour->reviews->avg('star'),1) }}</span>
+                                    </div>
+                                @endif
+                                <div class="add_info">
+                                    <div class="tooltip-item">
+                                        Tour <span>
+                                            {{ $tour->schedules->count() == 1 ? 'trong' : $tour->schedules->count() }}
+                                        </span> ngày
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
             <!--End row -->
         </div>
@@ -342,11 +373,16 @@
                                     <div class="form-group">
                                         <label>Chất lượng dịch vụ</label>
                                         <select class="form-control" name="star" id="position_review">
-                                            <option value="1">1 Sao</option>
-                                            <option value="2">2 Sao</option>
-                                            <option value="3">3 Sao</option>
-                                            <option value="4">4 Sao</option>
-                                            <option value="5">5 Sao</option>
+                                            <option value="1">1 điểm</option>
+                                            <option value="2">2 điểm</option>
+                                            <option value="3">3 điểm</option>
+                                            <option value="4">4 điểm</option>
+                                            <option value="5">5 điểm</option>
+                                            <option value="6">6 điểm</option>
+                                            <option value="7">7 điểm</option>
+                                            <option value="8">8 điểm</option>
+                                            <option value="9">9 điểm</option>
+                                            <option value="10">10 điểm</option>
                                         </select>
                                     </div>
                                 </div>

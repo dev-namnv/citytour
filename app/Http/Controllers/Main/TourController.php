@@ -30,11 +30,19 @@ class TourController extends Controller
             }])
             ->where('slug',$slug)
             ->first();
+
+        $tour_recommend = Tour::query()->where('category_id',$tour->category->id)
+            ->orWhere('origin','like','%'.$tour->origin.'%')
+            ->where('id','!=',$tour->id)
+            ->limit(8)
+            ->orderBy('id','desc')
+            ->get();
+
         $invoices = Invoice::query()->where('tour_id',$tour->id)
             ->where('start_date',$tour->batches->first()->batch)
             ->get(['adult_count','child_count']);
         $customer_total = $invoices->sum('adult_count') + $invoices->sum('child_count');
-        return view('Main.tour.detail', compact('tour','customer_total'));
+        return view('Main.tour.detail', compact('tour','customer_total','tour_recommend'));
     }
 
 }
