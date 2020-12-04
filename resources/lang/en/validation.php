@@ -179,7 +179,19 @@ return [
         'message'               => 'message',
         'available'             => 'available',
         'size'                  => 'size',
-        'slug'                  => 'slug'
+        'slug'                  => 'slug',
+        'tour_id'               => 'ID Tour',
+        'customer_name'         => 'customer name',
+        'customer_phone'        => 'customer phone number',
+        'customer_email'        => 'customer email address',
+        'customer_email_confirm' => 'confirm email address',
+        'customer_address'      => 'customer address',
+        'state'                 => 'state',
+        'batch'                 => 'date start',
+        'adult_count'           => 'adult quantity',
+        'child_count'           => 'child quantity',
+        'policy_terms'          => 'policy terms',
+        'zipcode'               => 'mã zip'
     ],
 
 ];

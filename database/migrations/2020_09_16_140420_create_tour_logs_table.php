@@ -28,6 +28,6 @@ class CreateTourLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_logs');
+        Schema::dropIfExists('tour_logs');
     }
 }

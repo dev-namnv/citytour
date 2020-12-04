@@ -137,7 +137,7 @@
                                 @if($comment->reply_for === null)
                                     <li>
                                         <div class="avatar">
-                                            <a href="#"><img src="{{$comment->user->avatar}}" alt="Image">
+                                            <a href="#"><img src="{{$comment->user->avatar}}" width="50" alt="Image">
                                             </a>
                                         </div>
 
@@ -154,7 +154,7 @@
                                                 <ul>
                                                     <li>
                                                         <div class="avatar">
-                                                            <a href="#"><img src="{{$reply_comment->user->avatar}}" alt="Image">
+                                                            <a href="#"><img width="50" src="{{$reply_comment->user->avatar}}" alt="Image">
                                                             </a>
                                                         </div>
 

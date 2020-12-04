@@ -31,7 +31,9 @@ class User extends Authenticatable
         'city',
         'zipcode',
         'country',
-        'google_map'
+        'google_map',
+        'status',
+        'behavior_score'
     ];
 
     /**
@@ -40,7 +42,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'role'
     ];
 
     /**
@@ -53,10 +55,6 @@ class User extends Authenticatable
         'active' => 'boolean'
     ];
 
-    /**
-     * @var mixed
-     */
-    private $role;
 
     /**
      * Get full name
@@ -88,4 +86,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Tour', 'wishlists', 'user_id', 'tour_id');
     }
+
+    public function tours()
+    {
+        return $this->hasMany('App\Models\Tour');
+    }
+
+
 }

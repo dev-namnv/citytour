@@ -15,14 +15,14 @@ class ArticleSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('vi_VN');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $name = 'Bài viết số ' . $i;
             $id = DB::table('articles')->insertGetId([
                 'title' => $name,
                 'heading' => $name,
                 'slug' => Str::slug($name) . '-' . rand(99, 9999),
                 'content' => $faker->text(),
-                'image' => 'https://via.placeholder.com/950x375?text='. $name,
+                'image' => 'http://lorempixel.com/950/375/city/',
                 'user_id' => DB::table('users')->inRandomOrder()->first('id')->id
             ]);
 

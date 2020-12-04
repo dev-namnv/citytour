@@ -55,6 +55,27 @@ export default {
                 "post_comment": "Post comment",
                 "active": "Active",
                 "not_active": "Not Active"
+            },
+            "contact": {
+                "title": "contact",
+                "section": {
+                    "title": "contact Us",
+                    "desc": "Do not hesitate, please contact us for support!"
+                },
+                "main": {
+                    "form-title": "Form contact us",
+                    "form-desc": "Please complete the information below.",
+                    "first-name": "First Name",
+                    "last-name": "Last Name",
+                    "email": "Email",
+                    "phone": "Phone",
+                    "subject": "Subject",
+                    "message": "Message",
+                    "send": "Send Mail",
+                    "address": "Address",
+                    "help": "Help center",
+                    "support": "Support"
+                }
             }
         },
         "pagination": {
@@ -211,7 +232,19 @@ export default {
                 "message": "message",
                 "available": "available",
                 "size": "size",
-                "slug": "slug"
+                "slug": "slug",
+                "tour_id": "ID Tour",
+                "customer_name": "customer name",
+                "customer_phone": "customer phone number",
+                "customer_email": "customer email address",
+                "customer_email_confirm": "confirm email address",
+                "customer_address": "customer address",
+                "state": "state",
+                "batch": "date start",
+                "adult_count": "adult quantity",
+                "child_count": "child quantity",
+                "policy_terms": "policy terms",
+                "zipcode": "mã zip"
             }
         }
     },
@@ -488,7 +521,8 @@ export default {
                 "section": {
                     "title": "Tour du lịch Paris giá cả phải chăng",
                     "desc": "TOUR TOUR THÀNH PHỐ / VÉ TOUR / HƯỚNG DẪN TOUR"
-                }
+                },
+                "name": "Trang chủ"
             },
             "article": {
                 "home": "Trang chủ",
@@ -512,6 +546,47 @@ export default {
                 "post_comment": "Đăng bình luận",
                 "active": "Hiển thị",
                 "not_active": "Ẩn"
+            },
+            "contact": {
+                "title": "Liên hệ",
+                "section": {
+                    "title": "Liên hệ chúng tôi",
+                    "desc": "Đùng ngần ngại, hãy liên hệ với chúng tôi để dược hỗ trợ nhé !"
+                },
+                "main": {
+                    "form-title": "Biểu mẫu",
+                    "form-desc": "Hãy điền đầy đủ thông tin bên dưới.",
+                    "first-name": "Họ",
+                    "last-name": "Tên",
+                    "email": "Email",
+                    "phone": "Số điện thoại",
+                    "subject": "Tiêu đề",
+                    "message": "Nội dung",
+                    "send": "Gửi đi",
+                    "address": "Địa chỉ",
+                    "help": "Trợ giúp",
+                    "support": "Hỗ Trợ"
+                }
+            },
+            "user": {
+                "profile": {
+                    "label": {
+                        "name": "Thông tin cá nhân",
+                        "booking": "Đặt trước",
+                        "wishlist": "Yêu thích",
+                        "settings": "Cài đặt",
+                        "profile": "Hồ sơ cá nhân",
+                        "first_name": "Tên",
+                        "last_name": "Họ và tên đệm",
+                        "phone": "Số điện thoại",
+                        "birthday": "Ngày sinh",
+                        "address": "Địa chỉ",
+                        "city": "Thành phố",
+                        "zipcode": "Zip code",
+                        "country": "Quốc gia"
+                    },
+                    "desc": "Cập nhật thông tin cá nhân của bạn"
+                }
             }
         },
         "pagination": {
@@ -783,7 +858,19 @@ export default {
                 "image": "ảnh",
                 "tags": "thẻ",
                 "category": "danh mục",
-                "slug": "đường dẫn tĩnh"
+                "slug": "đường dẫn tĩnh",
+                "tour_id": "ID Tour",
+                "customer_name": "tên",
+                "customer_phone": "số điện thoại",
+                "customer_email": "địa chỉ email",
+                "customer_email_confirm": "xác thực email",
+                "customer_address": "địa chỉ",
+                "state": "quận/huyện",
+                "batch": "ngày khởi hành",
+                "adult_count": "người lớn",
+                "child_count": "trẻ em",
+                "policy_terms": "chính sách bảo mật",
+                "zipcode": "mã zip"
             }
         }
     }
