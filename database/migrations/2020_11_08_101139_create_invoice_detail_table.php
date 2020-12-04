@@ -19,8 +19,8 @@ class CreateInvoiceDetailTable extends Migration
             $table->string('name')->comment('tên tour');
             $table->string('address')->comment('địa chỉ tour');
             $table->string('thumbnail')->comment('ảnh thumbnail');
-            $table->float('adult_price', 12, 3)->comment('Giá người lớn');
-            $table->float('child_price', 12, 3)->comment('Giá trẻ em');
+            $table->integer('adult_price')->comment('Giá người lớn');
+            $table->integer('child_price')->comment('Giá trẻ em');
             $table->jsonb('schedule')->comment('lịch trình (json)');
         });
     }

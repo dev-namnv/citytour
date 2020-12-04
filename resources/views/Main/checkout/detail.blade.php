@@ -44,6 +44,8 @@
                 <ul>
                     <li><a href="{{ route('home') }}">Trang chủ</a>
                     </li>
+                    <li><a href="#">Thanh toán</a>
+                    </li>
                     <li>Chi tiết thanh toán</li>
                 </ul>
             </div>
@@ -52,6 +54,9 @@
 
 
         <div class="container margin_60">
+            @isset($error)
+                {{ $error }}
+            @endisset
             <form class="row" id="js-form-payment" method="post" action="{{ route('checkout.payment') }}">
                 @csrf
                 <input type="hidden" name="tour_id" value="{{ $tour->id }}">

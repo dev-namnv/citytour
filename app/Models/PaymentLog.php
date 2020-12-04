@@ -9,6 +9,9 @@ class PaymentLog extends Model
     protected $table = 'payment_logs';
 
     protected $fillable = [
+        'batch',
+        'adult_count',
+        'child_count',
         'deposit_cost',
         'total_cost',
         'payment_type',
@@ -28,4 +31,9 @@ class PaymentLog extends Model
         'guide_id',
         'user_id',
     ];
+
+    public function tour()
+    {
+        return $this->belongsTo('App\Models\Tour');
+    }
 }

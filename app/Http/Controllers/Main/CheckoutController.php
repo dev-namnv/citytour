@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Main;
 
+use App\Helpers\VNPayHelper;
 use App\Models\PaymentLog;
 use App\Models\TourLog;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +21,7 @@ class CheckoutController extends Controller
 {
     public function detail($slug)
     {
-        $tour = Tour::query()->with('album','reviews','category','schedules')
+        $tour = Tour::query()->with('albums','reviews','category','schedules')
             ->with(['batches'=>function($q){
                 $q->where('batch','>',now())->select();
             }])
@@ -198,6 +199,9 @@ class CheckoutController extends Controller
              * Payment log
              */
             $new_payment_log = new PaymentLog([
+                'batch' => $request->batch,
+                'adult_count' => $request->adult_count,
+                'child_count' => $request->child_count,
                 'deposit_cost' => $deposit_cost,
                 'total_cost' => $total_cost,
                 'payment_type' => PAYMENT_TYPE_VNPAY,
@@ -219,10 +223,34 @@ class CheckoutController extends Controller
 
     public function confirmation(Request $request)
     {
-        if (session()->has(PAYMENT_CODE)) {
-            $payment_log = PaymentLog::query()
-                ->where('payment_code', session(PAYMENT_CODE))
-                ->first();
+        $payment_log = PaymentLog::query()
+            ->where('payment_code', session(PAYMENT_CODE))
+            ->first();
+        $tour = Tour::query()->findOrFail($payment_log->tour_id);
+        try {
+            if ($request->get('vnp_ResponseCode') == '00') {
+                if (session()->has(PAYMENT_CODE)) {
+                    $payment_log->vnp_Amount = $request->get('vnp_Amount');
+                    $payment_log->vnp_BankCode = $request->get('vnp_BankCode');
+                    $payment_log->vnp_BankTranNo = $request->get('vnp_BankTranNo');
+                    $payment_log->vnp_CardType = $request->get('vnp_CardType');
+                    $payment_log->vnp_OrderInfo = $request->get('vnp_OrderInfo');
+                    $payment_log->vnp_PayDate = $request->get('vnp_PayDate');
+                    $payment_log->vnp_ResponseCode = $request->get('vnp_ResponseCode');
+                    $payment_log->vnp_SecureHash = $request->get('vnp_SecureHash');
+                    $payment_log->vnp_PaymentMessage = $request->get('vnp_Command')
+                        ? VNPayHelper::getPaymentMessage($request->get('vnp_Command'), $request->get('vnp_ResponseCode'))
+                        : 'Thanh toán thành công';
+                    $payment_log->save();
+                }
+                $message = 'Giao dịch thành công';
+            } else {
+                $message = 'Giao dịch thất bại';
+            }
+            return view('Main.checkout.confirmation', compact('message', 'payment_log'));
+        } catch (\Exception $exception) {
+            $error = 'Có lỗi xảy ra trong quá trình thanh toán';
+            return redirect()->route('checkout.detail', ['slug' => $tour->slug, 'error' => $error]);
         }
     }
 }

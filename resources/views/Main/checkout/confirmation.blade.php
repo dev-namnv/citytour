@@ -42,11 +42,11 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="#">Home</a>
+                    <li><a href="{{ route('home') }}">Trang chủ</a>
                     </li>
-                    <li><a href="#">Category</a>
+                    <li><a href="#">Thanh toán</a>
                     </li>
-                    <li>Page active</li>
+                    <li>Trạng thái thanh toán</li>
                 </ul>
             </div>
         </div>
@@ -57,22 +57,23 @@
                 <div class="col-lg-8 add_bottom_15">
 
                     <div class="form_title">
-                        <h3><strong><i class="icon-ok"></i></strong>Thank you!</h3>
+                        <h3><strong><i class="icon-ok"></i></strong>Cảm ơn!</h3>
                         <p>
-                            Mussum ipsum cacilds, vidis litro abertis.
+                            {{ $message }}
                         </p>
                     </div>
                     <div class="step">
                         <p>
-                            Lorem ipsum dolor sit amet, nostrud nominati vis ex, essent conceptam eam ad. Cu etiam comprehensam nec. Cibo delicata mei an, eum porro legere no. Te usu decore omnium, quem brute vis at, ius esse officiis legendos cu. Dicunt voluptatum at cum. Vel et facete equidem deterruisset, mei graeco cetero labores et. Accusamus inciderint eu mea.
+                            Bạn đã đặt thành công <b>{{ $payment_log->tour->name }}</b>
                         </p>
+                        <p>Cảm ơn quý khách đã tin tưởng sử dụng dịch vụ <b>đặt tour trực tuyến</b> của chúng tôi. Chúng tôi sẽ gửi mail thông báo đến địa chỉ email của bạn</p>
                     </div>
                     <!--End step -->
 
                     <div class="form_title">
-                        <h3><strong><i class="icon-tag-1"></i></strong>Booking summary</h3>
+                        <h3><strong><i class="icon-tag-1"></i></strong>Tóm tắt hóa đơn</h3>
                         <p>
-                            Mussum ipsum cacilds, vidis litro abertis.
+                            Tóm tắt thông tin đơn đặt hàng.
                         </p>
                     </div>
                     <div class="step">
@@ -80,84 +81,46 @@
                             <thead>
                             <tr>
                                 <th colspan="2">
-                                    Item 1
+                                    Tour
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>
-                                    <strong>Louvre musuem tickets</strong>
-                                </td>
-                                <td>
-                                    2x
+                                <td colspan="2" class="text-sm-center">
+                                    <strong>{{ $payment_log->tour->name }}</strong>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Date</strong>
+                                    <strong>Ngày khởi hành</strong>
                                 </td>
                                 <td>
-                                    25 Febraury 2015
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>To</strong>
-                                </td>
-                                <td>
-                                    Jhon Doe
+                                    {{ date("l jS \of F Y", strtotime($payment_log->batch)) }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Payment type</strong>
+                                    <strong>Số người lớn</strong>
                                 </td>
                                 <td>
-                                    Credit card
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <table class="table table-striped confirm">
-                            <thead>
-                            <tr>
-                                <th colspan="2">
-                                    Item 2
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <strong>Senna river tour</strong>
-                                </td>
-                                <td>
-                                    2x
+                                    {{ $payment_log->adult_count }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Date</strong>
+                                    <strong>Số trẻ em</strong>
                                 </td>
                                 <td>
-                                    27 Febraury 2015
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>To</strong>
-                                </td>
-                                <td>
-                                    Jhon Doe
+                                    {{ $payment_log->child_count }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Payment type</strong>
+                                    <strong>Phương thức thanh toán</strong>
                                 </td>
                                 <td>
-                                    Credit card
+                                    VNPay
                                 </td>
                             </tr>
                             </tbody>
@@ -169,18 +132,15 @@
 
                 <aside class="col-lg-4">
                     <div class="box_style_1">
-                        <h3 class="inner">Thank you!</h3>
-                        <p>
-                            Nihil inimicus ex nam, in ipsum dignissim duo. Tale principes interpretaris vim ei, has posidonium definitiones ut. Duis harum fuisset ut his, duo an dolor epicuri appareat.
-                        </p>
+                        <h3 class="inner">Cảm ơn!</h3>
+                        {{ $message }}
                         <hr>
                         <a class="btn_full_outline" href="invoice.html" target="_blank">View your invoice</a>
                     </div>
                     <div class="box_style_4">
                         <i class="icon_set_1_icon-89"></i>
-                        <h4>Have <span>questions?</span></h4>
-                        <a href="tel://004542344599" class="phone">+45 423 445 99</a>
-                        <small>Monday to Friday 9.00am - 7.30pm</small>
+                        <h4>Bạn có thắc mắc về <span>Tour?</span></h4>
+                        <a href="{{ 'tel://'.$payment_log->tour->guide->phone }}" class="phone">{{ $payment_log->tour->guide->phone }}</a>
                     </div>
                 </aside>
 
