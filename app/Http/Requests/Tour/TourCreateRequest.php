@@ -36,6 +36,7 @@ class TourCreateRequest extends FormRequest
             'tour_note' => 'required',
             'schedule.*' => 'required',
             'batches.*' => 'required|date|after:now',
+            'origin' => 'required|max:255',
         ];
     }
 }
