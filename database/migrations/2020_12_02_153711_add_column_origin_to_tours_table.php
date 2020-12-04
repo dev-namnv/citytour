@@ -14,7 +14,7 @@ class AddColumnOriginToToursTable extends Migration
     public function up()
     {
         Schema::table('tours', function (Blueprint $table) {
-            $table->string('origin')->comment('diem xuat phat');
+            $table->string('origin')->nullable()->comment('diem xuat phat');
         });
     }
 
