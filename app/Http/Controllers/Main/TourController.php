@@ -33,7 +33,7 @@ class TourController extends Controller
                 $q->where('batch','>',now())->select();
             }])
             ->where('slug',$slug)
-            ->first();
+            ->firstOrFail();
 
         $tour_recommend = Tour::query()->where('category_id',$tour->category->id)
             ->orWhere('origin','like','%'.$tour->origin.'%')
