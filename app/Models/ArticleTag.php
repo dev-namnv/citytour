@@ -10,6 +10,8 @@ class ArticleTag extends Model
     protected $table = 'article_tags';
 
     protected $fillable = ['name', 'slug'];
+
+    public $timestamps = false;
     /**
      * Add active scope in query
      */

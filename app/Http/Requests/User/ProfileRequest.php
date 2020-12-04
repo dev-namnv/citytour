@@ -31,7 +31,8 @@ class ProfileRequest extends FormRequest
             'address' => 'required|string',
             'city' => 'required',
             'zipcode' => 'nullable|regex:/\b\d{5}\b/',
-            'country' => 'required'
+            'country' => 'required',
+
         ];
     }
 

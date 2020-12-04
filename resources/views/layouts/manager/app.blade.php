@@ -52,10 +52,8 @@
 
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 @include('layouts.manager.header')
-
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     @include('layouts.manager.subheader')
-
                     <div class="d-flex flex-column-fluid">
                         @yield('content')
                     </div>

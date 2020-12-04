@@ -10,6 +10,18 @@ class InvoiceDetail extends Model
 {
     protected $table = 'invoice_detail';
 
+    protected $fillable = [
+        'invoice_id',
+        'name',
+        'address',
+        'thumbnail',
+        'adult_price',
+        'child_price',
+        'schedule'
+    ];
+
+    public $timestamps = false;
+
     /**
      * Convert data
      */
