@@ -46,7 +46,7 @@
                     <div class="tour_container">
                         <div class="ribbon_3 popular"><span>Popular</span></div>
                         <div class="img_container">
-                            <a href="single_tour.html">
+                            <a href="{{route('Main.tour.show',['slug'=> $item['slug']])}}">
                                 <img src="{{$item['thumbnail']}}" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <span class="price">{{$item['adult_price']['formatted']}}</span>
@@ -87,7 +87,7 @@
                         <div class="tour_container">
                             <div class="ribbon_3 popular"><span>Popular</span></div>
                             <div class="img_container">
-                                <a href="single_tour.html">
+                                <a href="{{route('Main.tour.show',['slug'=> $item['slug']])}}">
                                     <img src="{{$item['thumbnail']}}" width="800" height="533" class="img-fluid" alt="Image">
                                     <div class="badge_save">Save<strong>30%</strong></div>
                                     <div class="short_info">
