@@ -36,6 +36,7 @@ class TourUpdateRequest extends FormRequest
             'note' => 'required',
             'schedule.*' => 'required',
             'batches.*' => 'required|date|after:now',
+            'origin' => 'required|max:255',
         ];
     }
 }

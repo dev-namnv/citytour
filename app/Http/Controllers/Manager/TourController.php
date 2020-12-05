@@ -58,6 +58,7 @@ class TourController extends Controller
             'category_id' => $request->tour_category,
             'note' => $request->tour_note,
             'guide_id' => Auth::id(),
+            'origin' => $request->origin,
         ]);
         //album
         if (!empty($request->slide)){

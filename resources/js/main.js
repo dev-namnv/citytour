@@ -1,6 +1,7 @@
 /* Import libraries */
 require('./validation')
 require('./toastr')
+window.PerfectScrollbar = require('perfect-scrollbar/dist/perfect-scrollbar')
 
 // Main js
 Main = {
@@ -105,6 +106,64 @@ Main = {
         })
     },
 
+    checkoutValidate: () => {
+        $('#js-form-payment').validate({
+            rules: {
+                customer_name: {
+                    required: true
+                },
+                tour_id: {
+                    required: true
+                },
+                customer_phone: {
+                    required: true,
+                },
+                customer_email: {
+                    required: true,
+                    email: true
+                },
+                customer_email_confirm: {
+                    required: true,
+                    email: true
+                },
+                customer_address: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
+                state: {
+                    required: true
+                },
+                zipcode: {
+                    required: true,
+                    digits: true,
+                },
+                batch: {
+                    required: true,
+                    date: true,
+                },
+                adult_count: {
+                    required: true,
+                    min: 1,
+                    max: 10
+                },
+                child_count: {
+                    required: true,
+                    min: 0,
+                    max: 10
+                },
+                city: {
+                    required: true
+                },
+                policy_terms: {
+                    required: true
+                }
+            },
+            invalidClass: 'is-invalid',
+        })
+    },
+
     addToWishlist: (tour_id) => {
         $.ajax({
             type: "POST",
@@ -156,4 +215,5 @@ $(window).on('load', () => {
     Main.loginValidate()
     Main.forgotPasswordValidate()
     Main.formContactValidate()
+    Main.checkoutValidate()
 })

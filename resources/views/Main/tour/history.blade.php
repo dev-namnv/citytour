@@ -41,8 +41,39 @@
             box-shadow: 0 0 0 3px #53eb93;
             text-align: center;
             left: 19.6%;
-            top: -1%;
+            top: 15%;
             margin: 0 0 0 -25px;
+        }
+
+        .cbp_tmtimeline > li .cbp_tmicon {
+            width: 48px;
+            height: 48px;
+            font-family: 'fontello';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            font-size: 24px;
+            line-height: 48px;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            color: #e04f67;
+            background:#f9f9f9;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #e04f67;
+            text-align: center;
+            left: 19.6%;
+            top: 15%;
+            margin: 0 0 0 -25px;
+        }
+
+        .cbp_tmtimeline > li .cbp_tmtime {
+            display: block;
+            width: 25%;
+            padding-right: 100px;
+            position: absolute;
+            margin-top: 37px;
         }
     </style>
 @endsection
@@ -71,6 +102,7 @@
         <div class="container margin_60">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
+                    @if (count($invoices) > 0)
                     @if(today()->toDateString() <= $invoices[0]->end_date)
                         <div class="row">
                             <div class="col-md-12">
@@ -131,10 +163,10 @@
                                                         <td>
                                                             @if(today()->toDateString() < $invoices[0]->start_date)
                                                                 <span class="text-secondary">Sắp khởi hành, còn {{$invoices[0]->calculateDaysDiff()}} ngày</span>
-                                                            @elseif(today()->toDateString() < $invoices[0]->end_date)
+                                                            @elseif(today()->toDateString() <= $invoices[0]->end_date)
                                                                 <span class="text-primary">Đang đi</span>
                                                             @else
-                                                                Đã kết thúc
+                                                                <span class="text-success">Đã kết thúc</span>
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -396,7 +428,11 @@
                             </table>
                         </div><!-- End col-md-12-->
                     </div>
+                    @else
+                        <h2>Bạn chưa từng đi một tour nào cả !</h2>
+                    @endif
                 </div>
+
             </div>
         </div>
 

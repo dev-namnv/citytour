@@ -11,21 +11,25 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $fillable = [
+        'sku',
         'name',
         'sub_cost',
         'deposit_cost',
         'vat_cost',
         'total_cost',
         'address',
-        'email',
-        'message',
-        'status',
         'payment_type',
-        'payment_status',
+        'payment_code',
         'tour_id',
         'guide_id',
         'user_id',
         'start_date',
+        'adult_count',
+        'child_count',
+        'customer_name',
+        'customer_address',
+        'customer_phone',
+        'customer_email',
     ];
 
     /**
@@ -74,7 +78,7 @@ class Invoice extends Model
 
     public function tour()
     {
-        return $this->belongsTo('App\Models\Tour','tour_id');
+        return $this->belongsTo('App\Models\Tour','tour_id')->withoutGlobalScopes();
     }
 
     public function guide()
@@ -84,7 +88,7 @@ class Invoice extends Model
 
     public function getEndDateAttribute()
     {
-        return Carbon::createFromDate($this->start_date)->addDays((count($this->tour->schedules)))->toDateString();
+        return Carbon::createFromDate($this->start_date)->addDays((count($this->tour->schedules) - 1))->toDateString();
     }
 
     public function getDayAddFromStart($days)
@@ -95,5 +99,10 @@ class Invoice extends Model
     public function calculateDaysDiff()
     {
         return today()->diffInDays(Carbon::createFromDate($this->start_date));
+    }
+
+    public function batch()
+    {
+        return $this->belongsTo('App\Models\Batch', 'start_date', 'id');
     }
 }
