@@ -88,7 +88,7 @@ class Invoice extends Model
 
     public function getEndDateAttribute()
     {
-        return Carbon::createFromDate($this->start_date)->addDays((count($this->tour->schedules)))->toDateString();
+        return Carbon::createFromDate($this->start_date)->addDays((count($this->tour->schedules) - 1))->toDateString();
     }
 
     public function getDayAddFromStart($days)
@@ -99,5 +99,10 @@ class Invoice extends Model
     public function calculateDaysDiff()
     {
         return today()->diffInDays(Carbon::createFromDate($this->start_date));
+    }
+
+    public function batch()
+    {
+        return $this->belongsTo('App\Models\Batch', 'start_date', 'id');
     }
 }

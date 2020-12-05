@@ -129,10 +129,17 @@ Route::group(['namespace' => 'Main'], function () {
 
     });
 
+    Route::group(['prefix' => 'wishlist', 'middleware' => 'auth'], function () {
+        Route::get('/', 'WishlistController@list')->name('wishlist.list');
+        Route::post('/add/{item}', 'WishlistController@addItem')->name('wishlist.add');
+        Route::delete('/remove/{item}', 'WishlistController@removeItem')->name('wishlist.remove');
+    });
+
     Route::group(['prefix' => 'checkout'], function () {
         Route::get('{slug}/detail', 'CheckoutController@detail')->name('checkout.detail');
         Route::post('payment', 'CheckoutController@payment')->name('checkout.payment');
         Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
+        Route::get('check-tour-exist/{id}/{batch}', 'CheckoutController@checkTourExist')->name('checkout.checkTourExist');
     });
 });
 
