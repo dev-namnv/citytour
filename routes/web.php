@@ -126,6 +126,7 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('/history', 'TourController@history')->name('Main.history');
         Route::get('/invoices/{id}/detail', 'InvoiceController@detail')->name('Main.invoice_detail');
         Route::get('/invoices/{id}/schedule', 'InvoiceController@schedule')->name('Main.invoice_schedule');
+
     });
 
     Route::group(['prefix' => 'wishlist', 'middleware' => 'auth'], function () {
