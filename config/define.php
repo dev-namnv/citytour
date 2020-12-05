@@ -83,12 +83,3 @@ define('PAYMENT_STATUS_FAIL', 0);
 define('PAYMENT_STATUS_SUCCESS', 1);
 define('PAYMENT_TYPE_VNPAY', 'VNPAY');
 define('PAYMENT_CODE', 'payment_code');
-
-// Cart
-define('CART', 'TOUR_CART');
-
-// Payment
-define('PAYMENT_STATUS_FAIL', 0);
-define('PAYMENT_STATUS_SUCCESS', 1);
-define('PAYMENT_TYPE_VNPAY', 'VNPAY');
-define('PAYMENT_CODE', 'payment_code');
