@@ -84,7 +84,7 @@ class Invoice extends Model
 
     public function getEndDateAttribute()
     {
-        return Carbon::createFromDate($this->start_date)->addDays((count($this->tour->schedules)))->toDateString();
+        return Carbon::createFromDate($this->start_date)->addDays((count($this->tour->schedules) - 1))->toDateString();
     }
 
     public function getDayAddFromStart($days)
