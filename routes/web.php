@@ -61,6 +61,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     Route::group(['prefix' => 'invoices'], function () {
         Route::get('/', 'InvoiceController@index')->name('invoice-index');
         Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
+        Route::get('/schedule/{sku}', 'InvoiceController@schedule')->name('invoice-schedule');
     });
 
     // Middleware admin

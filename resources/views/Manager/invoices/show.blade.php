@@ -64,7 +64,9 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>{{ $invoice->invoice_detail->name }}</td>
+                                        <td>
+                                            <a href="{{ route('invoice-schedule',['sku'=>$invoice->sku]) }}" target="_blank" class="text-primary">{{ $invoice->invoice_detail->name }}</a>
+                                        </td>
                                         <td>{{ $invoice->guide->first_name .' '. $invoice->guide->last_name }}</td>
                                         <td>{{ $invoice->invoice_detail->address }}</td>
                                         <td class="text-right">
@@ -158,7 +160,7 @@
                         <span>Quý khách hàng sẽ thanh toán <i class="text-danger">{{ number_format($invoice->total_cost->getAmount() - $invoice->deposit_cost->getAmount()) }} đ</i> (tương đương 70% số tiền còn lại) cho Hướng dẫn viên trước khi chuyến du lịch diễn ra.</span>
                     </p>
                     <span>Được tạo bởi user: {{ $invoice->user->username }}</span>
-                    <p>Lịch trình có thể xem tại: <a href="#" class="text-primary">Lịch Trình</a></p>
+                    <p>Lịch trình có thể xem tại: <a href="{{ route('invoice-schedule',['sku'=>$invoice->sku]) }}" target="_blank" class="text-primary">Lịch Trình</a></p>
                 </div>
             </div>
 
