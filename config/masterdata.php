@@ -23,7 +23,7 @@ return [
             TICKET_CUSTOMER_REPLY => 'bg-success',
             TICKET_WAITING_FOR_PROGRESS => 'bg-info',
             TICKET_PROCESSING => 'bg-danger',
-            TICKET_CLOSED => 'bg-secondary',
+            TICKET_CLOSED => 'bg-secondary text-dark',
         ]
     ],
     'tour' => [

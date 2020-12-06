@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class InvoiceSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('vi_VN');
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             $tour = DB::table('tours')->inRandomOrder()->first();
             $user = DB::table('users')->inRandomOrder()->first(['id']);
             $cost = rand(100000, 100000000);
@@ -79,6 +80,9 @@ class InvoiceSeeder extends Seeder
 
             // Payment log
             DB::table('payment_logs')->insert([
+                'batch' => Carbon::now(),
+                'adult_count' => rand(1, 9),
+                'child_count' => rand(0, 4),
                 'deposit_cost' => $deposit_cost,
                 'total_cost' => $total_cost,
                 'payment_type' => CREDIT_CARD,
