@@ -60,7 +60,6 @@
                                         <th scope="col">Địa Chỉ</th>
                                         <th class="text-right" scope="col">Số người</th>
                                         <th class="text-right" scope="col">Giá Tiền</th>
-                                        <th class="text-right" scope="col">Ngày bắt đầu</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -70,10 +69,10 @@
                                         <td>{{ $invoice->invoice_detail->address }}</td>
                                         <td class="text-right">
                                             <span class="d-block">Người lớn:</span>
-                                            <span class="text-danger">{{ $invoice->adult_count }}</span>
+                                            <span class="text-info">{{ $invoice->adult_count }}</span>
                                             <br/>
                                             <span class="d-block">Trẻ em:</span>
-                                            <span class="text-danger">{{ $invoice->child_count }}</span>
+                                            <span class="text-info">{{ $invoice->child_count }}</span>
                                         </td>
                                         <td class="text-right">
                                             <span class="d-block">Người lớn:</span>
@@ -82,14 +81,13 @@
                                             <span class="d-block">Trẻ em:</span>
                                             <span class="text-danger">{{ number_format($invoice->invoice_detail->child_price->getAmount() * $invoice->child_count) }}</span>
                                         </td>
-                                        <td class="text-right">{{ $invoice->start_date }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
+                    <hr/>
                     <div class="row mt-4">
                         <div class="col-sm-5 col-12 order-sm-0 order-1">
                             <div class="inv--payment-info">
@@ -98,16 +96,16 @@
                                         <h6 class=" inv-title">Thông tin thanh toán:</h6>
                                     </div>
                                     <div class="col-sm-4 col-12">
-                                        <p class=" inv-subtitle">Tên ngân hàng: </p>
+                                        <p class=" inv-subtitle">Phương thức thanh toán: </p>
                                     </div>
                                     <div class="col-sm-8 col-12">
-                                        <p class="">Bank of America</p>
+                                        <p class="">{{ $invoice->payment_type }}</p>
                                     </div>
                                     <div class="col-sm-4 col-12">
-                                        <p class=" inv-subtitle">Account Number : </p>
+                                        <p class=" inv-subtitle">Mã thanh toán : </p>
                                     </div>
                                     <div class="col-sm-8 col-12">
-                                        <p class="">1234567890</p>
+                                        <p class="">{{ $invoice->payment_code }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -119,19 +117,21 @@
                                         <p class="">Tổng: </p>
                                     </div>
                                     <div class="col-sm-4 col-5">
-                                        <p class="">{{ $invoice->sub_cost }}</p>
+                                        <p class="text-danger font-size-h4">{{ $invoice->sub_cost }}</p>
                                     </div>
                                     <div class="col-sm-8 col-7">
                                         <p class="">VAT: </p>
                                     </div>
                                     <div class="col-sm-4 col-5">
-                                        <p class="">{{ $invoice->vat_cost }}</p>
+                                        <p class="text-danger font-size-h5">{{ $invoice->vat_cost }}</p>
                                     </div>
                                     <div class="col-sm-8 col-7 grand-total-title">
                                         <h4 class="">Tổng thanh toán : </h4>
                                     </div>
                                     <div class="col-sm-4 col-5 grand-total-amount">
-                                        <h4 class="text-danger">{{ $invoice->total_cost }}</h4>
+                                        <h4 class="text-white bg-danger p-2 font-size-h3">
+                                            <trong>{{ $invoice->total_cost }}</trong>
+                                        </h4>
                                     </div>
                                     <div class="col-sm-8 col-7">
                                         <p class=" discount-rate">Đã thanh toán :
@@ -139,7 +139,15 @@
                                         </p>
                                     </div>
                                     <div class="col-sm-4 col-5">
-                                        <p class="">{{ $invoice->deposit_cost }}</p>
+                                        <strong class="text-danger font-size-h4">{{ $invoice->deposit_cost }}</strong>
+                                    </div>
+                                    <div class="col-sm-8 col-7">
+                                        <p class=" discount-rate">Còn thiếu :
+                                            <span class="discount-percentage">70%</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-4 col-5">
+                                        <strong class="text-danger font-size-h4">{{ number_format($invoice->total_cost->getAmount() - $invoice->deposit_cost->getAmount()) }} đ</strong>
                                     </div>
                                 </div>
                             </div>
