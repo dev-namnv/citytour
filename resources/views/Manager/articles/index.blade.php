@@ -1,6 +1,6 @@
 @extends('layouts.manager.app')
 
-@section('title', 'Articles List')
+@section('title', 'Danh sách bài viết')
 
 @section('extra-js')
     <script>
@@ -50,8 +50,7 @@
                     </div>
                     <div class="card-toolbar">
                         <!--begin::Button-->
-                        <a href="{{route('articles.create')}}" class="btn btn-primary font-weight-bolder">New
-                            Article</a>
+                        <a href="{{route('articles.create')}}" class="btn btn-primary font-weight-bolder">Thêm mới</a>
                         <!--end::Button-->
                     </div>
                 </div>
@@ -65,11 +64,11 @@
                                        style="width: 1149px;">
                                     <thead>
                                     <tr role="row">
-                                        <th>Title</th>
+                                        <th>Tiêu đề</th>
                                         <th>Slug</th>
-                                        <th>Image</th>
-                                        <th>User</th>
-                                        <th>Action</th>
+                                        <th>Ảnh</th>
+                                        <th>Tác giả</th>
+                                        <th>Hành động</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -119,7 +118,7 @@
                                                 <button onclick=" event.preventDefault()
                                                                 const x =  confirm('Bạn có thực sự muốn xóa không?')
                                                                 if (x) {
-                                                                    document.getElementById('delete-form').submit()
+                                                                    document.getElementById('delete-form-{{$article->id}}').submit()
                                                                 }"
                                                         class="btn btn-sm btn-clean btn-icon"
                                                         title="Xóa bài viết">
@@ -150,7 +149,7 @@
                                                         </svg>
                                                     </span>
                                                 </button>
-                                                <form id="delete-form"
+                                                <form id="delete-form-{{$article->id}}"
                                                       action="{{route('articles.destroy', $article->id)}}"
                                                       method="POST" style="display: none">
                                                     @method('DELETE')
@@ -161,6 +160,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div class="justify-content-center row">
+                                    {{$articles->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>

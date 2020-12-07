@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleCategory\StoreArticleCategory;
 use App\Models\ArticleCategory;
 use App\Scopes\ActiveScope;
-use Illuminate\Http\Request;
 
 class ArticleCategoryController extends Controller
 {
@@ -18,7 +17,7 @@ class ArticleCategoryController extends Controller
      */
     public function index()
     {
-        $article_categories = ArticleCategory::orderBy('id', 'desc')->withoutGlobalScopes([ActiveScope::class])->get();
+        $article_categories = ArticleCategory::orderBy('id', 'desc')->withoutGlobalScopes([ActiveScope::class])->paginate(10);
         return view('Manager.article_categories.index', compact(['article_categories']));
     }
 
@@ -40,11 +39,16 @@ class ArticleCategoryController extends Controller
      */
     public function store(StoreArticleCategory $request)
     {
-    $article_category = ArticleCategory::create([
-        'name' => $request->get('name'),
-        'slug' => ConvertSlugHelper::convert_slug($request->get('name'))
-    ]);
-        return redirect()->route('article_category.index');
+        try {
+            $article_category = ArticleCategory::create([
+                'name' => $request->get('name'),
+                'slug' => ConvertSlugHelper::convert_slug($request->get('name'))
+            ]);
+
+            return redirect()->route('article_categories.index')->with('flash_message', 'Tạo danh mục bài viết thành công')->with('status', 'success');
+        } catch (\Exception $e) {
+            return redirect()->route('article_categories.index')->with('flash_message', $e->getMessage())->with('status', 'danger');
+        }
     }
 
     /**
@@ -77,21 +81,30 @@ class ArticleCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreArticleCategory $request, $id)
     {
-        $article_category = ArticleCategory::withoutGlobalScopes([ActiveScope::class])->findOrFail($id);
+        $article_category = ArticleCategory::withoutGlobalScopes([ActiveScope::class])->find($id);
         $dataUpdate = [
             'active' => $request->get('active')
         ];
 
-        if ($request->get('name') !== $article_category->name) {
-            $dataUpdate['name'] = $request->get('name');
-            $dataUpdate['slug'] = ConvertSlugHelper::convert_slug($request->get('name'));
+        if (empty($article_category)) {
+            return  abort(404, 'Không tìm thấy danh mục bài viết');
         }
 
-        $article_category->update($dataUpdate);
+        try {
+            if ($request->get('name') !== $article_category->name) {
+                $dataUpdate['name'] = $request->get('name');
+                $dataUpdate['slug'] = ConvertSlugHelper::convert_slug($request->get('name'));
+            }
 
-        return redirect()->route('article_categories.index');
+            $article_category->update($dataUpdate);
+            return redirect()->route('article_categories.index')->with('flash_message', 'Sửa danh mục bài viết thành công')->with('status', 'success');
+        } catch (\Exception $e) {
+            return redirect()->route('article_categories.index')->with('flash_message', $e->getMessage())->with('status', 'danger');
+        }
+
+
     }
 
     /**
@@ -102,15 +115,24 @@ class ArticleCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $article_category = ArticleCategory::withoutGlobalScopes([ActiveScope::class])->findOrFail($id);
+        $article_category = ArticleCategory::withoutGlobalScopes([ActiveScope::class])->find($id);
 
-        foreach ($article_category->articles as $key => $article) {
-            $article->tags()->detach();
-            $article->comments()->delete();
+        if (empty($article_category)) {
+            return abort(404, 'Danh mục bài viết không tồn tại');
         }
 
-        $article_category->articles()->detach();
-        $article_category->delete();
-        return redirect()->back();
+        try {
+            foreach ($article_category->articles as $key => $article) {
+                $article->tags()->detach();
+                $article->comments()->delete();
+            }
+
+            $article_category->articles()->detach();
+            $article_category->delete();
+            return redirect()->back()->with('flash_message', 'Xóa danh mục bài viết thành công')->with('status', 'success');
+        } catch(\Exception $e) {
+            return redirect()->back()->with('flash_message', $e->getMessage())->with('status', 'danger');
+        }
+
     }
 }
