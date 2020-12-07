@@ -182,6 +182,18 @@ return [
         'image'                 => 'ảnh',
         'tags'                  => 'thẻ',
         'category'              => 'danh mục',
-        'slug'                  => 'đường dẫn tĩnh'
+        'slug'                  => 'đường dẫn tĩnh',
+        'tour_id'               => 'ID Tour',
+        'customer_name'         => 'tên',
+        'customer_phone'        => 'số điện thoại',
+        'customer_email'        => 'địa chỉ email',
+        'customer_email_confirm' => 'xác thực email',
+        'customer_address'      => 'địa chỉ',
+        'state'                 => 'quận/huyện',
+        'batch'                 => 'ngày khởi hành',
+        'adult_count'           => 'người lớn',
+        'child_count'           => 'trẻ em',
+        'policy_terms'          => 'chính sách bảo mật',
+        'zipcode'               => 'mã zip'
     ],
 ];

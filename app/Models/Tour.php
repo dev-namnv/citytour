@@ -30,6 +30,7 @@ class Tour extends Model
         'guide_id',
         'user_id',
         'note',
+        'origin',
         'deleted_at',
     ];
 

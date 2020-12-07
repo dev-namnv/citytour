@@ -63,14 +63,23 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
     });
 
-    // Article
+    // Middleware admin
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('articles', 'ArticleController')->except(['show']);
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
+
         //Contacts
         Route::resource('contacts','ContactController');
         Route::post('/contacts/reply', 'ContactController@reply')->name('contacts.reply');
         Route::get('/update-{id}-{status}', 'ContactController@update')->name('contacts.update');
+
+        // Guide
+        Route::group(['prefix' => 'guides'], function () {
+           Route::get('/', 'GuideController@list')->name('Manager.guide.list');
+           Route::put('/{id}/updateStatus', 'GuideController@updateStatus')->name('Manager.guide.updateStatus');
+           Route::put('/{id}/updateBehaviorScore', 'GuideController@updateBehaviorScore')->name('Manager.guide.updateBehaviorScore');
+           Route::delete('/{id}', 'GuideController@remove')->name('Manager.guide.remove');
+        });
     });
 
     // Profile
@@ -118,6 +127,19 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('/invoices/{id}/detail', 'InvoiceController@detail')->name('Main.invoice_detail');
         Route::get('/invoices/{id}/schedule', 'InvoiceController@schedule')->name('Main.invoice_schedule');
 
+    });
+
+    Route::group(['prefix' => 'wishlist', 'middleware' => 'auth'], function () {
+        Route::get('/', 'WishlistController@list')->name('wishlist.list');
+        Route::post('/add/{item}', 'WishlistController@addItem')->name('wishlist.add');
+        Route::delete('/remove/{item}', 'WishlistController@removeItem')->name('wishlist.remove');
+    });
+
+    Route::group(['prefix' => 'checkout'], function () {
+        Route::get('{slug}/detail', 'CheckoutController@detail')->name('checkout.detail');
+        Route::post('payment', 'CheckoutController@payment')->name('checkout.payment');
+        Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
+        Route::get('check-tour-exist/{id}/{batch}', 'CheckoutController@checkTourExist')->name('checkout.checkTourExist');
     });
 });
 

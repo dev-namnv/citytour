@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class StockScope implements Scope
+class GuideBehaviorScope implements Scope
 {
     /**
      * Apply the scope to a given Eloquent query builder.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $builder
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param Builder $builder
+     * @param Model $model
      * @return void
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('stocks', '>', 0);
+        $builder->whereHas('guide', function ($c) {
+            $c->where('behavior_score', '>', BEHAVIOR_SCORE_BLOCK);
+        });
     }
 }

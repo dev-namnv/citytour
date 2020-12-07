@@ -173,7 +173,7 @@
                                             <div class="short_info">
                                                 <i class="{!! $tours[$i]->category->icon !!}"></i>
                                                 {!! $tours[$i]->category->name !!}
-                                                <span class="price small">{!! $tours[$i]->getCurrentPrice() !!}</span>
+                                                <span class="price small" style="color: #ff8989">{!! $tours[$i]->getCurrentPrice() !!}</span>
                                             </div>
                                         </a>
                                     </div>
@@ -202,9 +202,11 @@
                                                 </li>
                                             @endforeach
                                         </ul>
-                                        <div class="rating mt-3">
-                                            Đánh giá ({{ $tours[$i]->reviews->count() }}) : {{ round($tours[$i]->reviews->avg('star'),1) }} / 5
-                                        </div>
+                                        @if($tours[$i]->reviews->count() != 0 )
+                                            <div class="small mt-3 ">
+                                                Điểm: {{ round($tours[$i]->reviews->avg('star'),1) }}
+                                            </div>
+                                        @endif
                                         <!-- end rating -->
                                         <div class="wishlist">
                                             <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
@@ -225,7 +227,7 @@
                                             <div class="short_info">
                                                 <i class="{!! $tours[$i]->category->icon !!}"></i>
                                                 {!! $tours[$i]->category->name !!}
-                                                <span class="price small">{!! $tours[$i]->getCurrentPrice() !!}</span>
+                                                <span class="price small" style="color: #ff8989">{!! $tours[$i]->getCurrentPrice() !!}</span>
                                             </div>
                                         </a>
                                     </div>
@@ -254,9 +256,11 @@
                                                 </li>
                                             @endforeach
                                         </ul>
-                                        <div class="rating mt-3">
-                                            Đánh giá ({{ $tours[$i]->reviews->count() }}) : {{ round($tours[$i]->reviews->avg('star'),1) }} / 5
-                                        </div>
+                                        @if($tours[$i]->reviews->count() != 0 )
+                                            <div class="small mt-3 ">
+                                                Điểm: {{ round($tours[$i]->reviews->avg('star'),1) }}
+                                            </div>
+                                        @endif
                                         <!-- end rating -->
                                         <div class="wishlist">
                                             <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
