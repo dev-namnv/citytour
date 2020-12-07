@@ -142,6 +142,10 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
         Route::get('check-tour-exist/{id}/{batch}', 'CheckoutController@checkTourExist')->name('checkout.checkTourExist');
     });
+    Route::group(['prefix' => 'social'], function () {
+        Route::get('auth/google', 'GoogleController@redirectToGoogle')->name('social.google');
+        Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback')->name('social.google.callback');
+    });
 
     Route::get('/article_categories/{slug}', 'ArticleCategoryController@show')->name('Main.article_category.show');
 });
