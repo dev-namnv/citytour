@@ -102,7 +102,6 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('{param?}','TourController@index')->name('Main.tour.index');
         Route::get('/show/{slug}','TourController@show')->name('Main.tour.show');
     });
-
     Route::group(['prefix' => 'news'], function () {
        Route::get('/', 'ArticleController@list')->name('articles.list');
        Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
@@ -140,6 +139,10 @@ Route::group(['namespace' => 'Main'], function () {
         Route::post('payment', 'CheckoutController@payment')->name('checkout.payment');
         Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
         Route::get('check-tour-exist/{id}/{batch}', 'CheckoutController@checkTourExist')->name('checkout.checkTourExist');
+    });
+    Route::group(['prefix' => 'social'], function () {
+        Route::get('auth/google', 'GoogleController@redirectToGoogle')->name('social.google');
+        Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback')->name('social.google.callback');
     });
 });
 
