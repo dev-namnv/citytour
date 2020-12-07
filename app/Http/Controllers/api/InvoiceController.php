@@ -5,9 +5,27 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
+    public function getNewInvoice()
+    {
+        if (Auth::user()->role === GUIDE) {
+            $invoices = Invoice::query()->withoutGlobalScopes()
+                ->where('guide_id',Auth::id())
+                ->whereIn('status', INVOICE_NEW)
+                ->orderBy('created_at','DESC')
+                ->paginate(PAGINATION_TOUR);
+        } else {
+            $invoices = Invoice::query()->withoutGlobalScopes()
+                ->whereIn('status', INVOICE_NEW)
+                ->orderBy('created_at','DESC')
+                ->paginate(PAGINATION_TOUR);
+        }
+        return response(['data'=>$invoices]);
+    }
+
     public function getCustomerTotal(Request $request)
     {
         $tour_id = $request->get('tour_id');

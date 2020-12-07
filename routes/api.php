@@ -24,5 +24,6 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager'], function () {
     });
 });
 
+Route::get('/new-invoice','api\InvoiceController@getNewInvoice')->name('api-new-invoice');
 Route::get('/get-customer-total','api\InvoiceController@getCustomerTotal')->name('api-customer-total');
 
