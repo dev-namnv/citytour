@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Lưu</button>
-                    <button onclick="window.history.go(-1); return false;" class="btn btn-secondary">Quay lại</button>
+                    <a href="{{route('article_categories.index')}}" class="btn btn-secondary">Quay lại</a>
                 </div>
 
             </form>

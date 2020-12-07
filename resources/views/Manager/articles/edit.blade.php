@@ -125,7 +125,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary mr-2">Lưu</button>
-                    <button onclick="window.history.go(-1); return false;" class="btn btn-secondary">Quay lại</button>
+                    <a href="{{route('articles.index')}}" class="btn btn-secondary">Quay lại</a>
                 </div>
             </form>
             <!--end::Form-->

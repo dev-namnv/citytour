@@ -68,6 +68,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::resource('articles', 'ArticleController')->except(['show']);
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
 
+
         //Contacts
         Route::resource('contacts','ContactController');
         Route::post('/contacts/reply', 'ContactController@reply')->name('contacts.reply');
@@ -103,7 +104,7 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('/show/{slug}','TourController@show')->name('Main.tour.show');
     });
 
-    Route::group(['prefix' => 'news'], function () {
+    Route::group(['prefix' => 'articles'], function () {
        Route::get('/', 'ArticleController@list')->name('articles.list');
        Route::get('/{slug}', 'ArticleController@detail')->name('articles.detail');
        });
@@ -141,6 +142,8 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
         Route::get('check-tour-exist/{id}/{batch}', 'CheckoutController@checkTourExist')->name('checkout.checkTourExist');
     });
+
+    Route::get('/article_categories/{slug}', 'ArticleCategoryController@show')->name('Main.article_category.show');
 });
 
 /**

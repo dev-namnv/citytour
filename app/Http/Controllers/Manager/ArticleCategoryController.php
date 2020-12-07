@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleCategory\StoreArticleCategory;
 use App\Models\ArticleCategory;
 use App\Scopes\ActiveScope;
-use Illuminate\Http\Request;
 
 class ArticleCategoryController extends Controller
 {
