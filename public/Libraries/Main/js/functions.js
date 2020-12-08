@@ -196,12 +196,12 @@ $(function () {
 		hide_min_max: true,
 		keyboard: true,
 		min: 0,
-		max: 150,
-		from: 30,
-		to: 100,
+		max: 10000000,
+		from: 1000000,
+		to: 4000000,
 		type: 'double',
 		step: 1,
-		prefix: "$",
+		prefix: "₫",
 		grid: true
 	});
 

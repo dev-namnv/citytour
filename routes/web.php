@@ -101,7 +101,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 // Main
 Route::group(['namespace' => 'Main'], function () {
     Route::group(['prefix' => 'tours'], function () {
-        Route::get('{param?}','TourController@index')->name('Main.tour.index');
+        Route::get('/','TourController@index')->name('Main.tour.index');
         Route::get('/show/{slug}','TourController@show')->name('Main.tour.show');
     });
 
@@ -170,6 +170,8 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
             Route::delete('{id}/delete', 'TourController@delete');
             Route::get('{id}/schedules', 'TourController@schedules');
         });
+
+        Route::get('category', 'CategoryController@list');
     });
 
 });
