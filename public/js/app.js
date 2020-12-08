@@ -53367,6 +53367,8 @@ $.ajaxSetup({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var _Main;
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /* Import libraries */
@@ -53376,7 +53378,7 @@ __webpack_require__(/*! ./toastr */ "./resources/js/toastr.js");
 
 window.PerfectScrollbar = __webpack_require__(/*! perfect-scrollbar/dist/perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.js"); // Main js
 
-Main = _defineProperty({
+Main = (_Main = {
   // Validate form login
   loginValidate: function loginValidate() {
     $('.form-login').validate({
@@ -53555,7 +53557,7 @@ Main = _defineProperty({
       invalidClass: 'is-invalid'
     });
   }
-}, "checkoutValidate", function checkoutValidate() {
+}, _defineProperty(_Main, "checkoutValidate", function checkoutValidate() {
   $('#js-form-payment').validate({
     rules: {
       customer_name: {
@@ -53611,7 +53613,48 @@ Main = _defineProperty({
     },
     invalidClass: 'is-invalid'
   });
-}); // Run function
+}), _defineProperty(_Main, "addToWishlist", function addToWishlist(tour_id) {
+  $.ajax({
+    type: "POST",
+    url: "".concat(window.location.origin, "/wishlist/add/").concat(tour_id),
+    data: {
+      _token: $("meta[name='csrf-token']").attr('content')
+    },
+    success: function success(data) {
+      Toastr.show({
+        "status": data.status,
+        "content": data.content
+      });
+    },
+    error: function error(_error) {
+      Toastr.show({
+        "status": _error.responseJSON.status,
+        "content": _error.responseJSON.content
+      });
+    }
+  });
+}), _defineProperty(_Main, "removeTourInWishlist", function removeTourInWishlist(tour_id) {
+  $.ajax({
+    type: "POST",
+    url: "".concat(window.location.origin, "/wishlist/remove/").concat(tour_id),
+    data: {
+      _token: $("meta[name='csrf-token']").attr('content'),
+      _method: "DELETE"
+    },
+    success: function success(data) {
+      Toastr.show({
+        "content": "Xóa tour khỏi danh sách yêu thích thành công"
+      });
+      $("#tour_".concat(data.tour_id)).hide();
+    },
+    error: function error(_error2) {
+      Toastr.show({
+        "status": "error",
+        "content": "Xóa tour khỏi danh sách yêu thích thất bại"
+      });
+    }
+  });
+}), _Main); // Run function
 
 $(window).on('load', function () {
   Main.loginValidate();

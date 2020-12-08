@@ -209,7 +209,7 @@
                                         @endif
                                         <!-- end rating -->
                                         <div class="wishlist">
-                                            <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+                                            <a onclick="Main.addToWishlist({{$tours[$i]->id}})" class="tooltip_flip tooltip-effect-1" href="javascript:;">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                                         </div>
 
                                         <!-- End wish list-->
@@ -263,7 +263,7 @@
                                         @endif
                                         <!-- end rating -->
                                         <div class="wishlist">
-                                            <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+                                            <a onclick="Main.addToWishlist({{$tours[$i]->id}})" class="tooltip_flip tooltip-effect-1" href="javascript:;">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                                         </div>
                                         <!-- End wish list-->
                                     </div>

@@ -220,6 +220,51 @@ Main = {
             },
             invalidClass: 'is-invalid',
         })
+    },
+
+    addToWishlist: (tour_id) => {
+        $.ajax({
+            type: "POST",
+            url: `${window.location.origin}/wishlist/add/${tour_id}`,
+            data: {
+                _token: $("meta[name='csrf-token']").attr('content'),
+            },
+            success: (data) => {
+                Toastr.show({
+                    "status": data.status,
+                    "content": data.content
+                })
+            },
+            error: (error) => {
+                Toastr.show({
+                    "status": error.responseJSON.status,
+                    "content": error.responseJSON.content
+                })
+            }
+        })
+    },
+
+    removeTourInWishlist: (tour_id) => {
+        $.ajax({
+            type: "POST",
+            url: `${window.location.origin}/wishlist/remove/${tour_id}`,
+            data: {
+                _token: $("meta[name='csrf-token']").attr('content'),
+                _method: "DELETE"
+            },
+            success: (data) => {
+                Toastr.show({
+                    "content": "Xóa tour khỏi danh sách yêu thích thành công"
+                });
+                $(`#tour_${data.tour_id}`).hide()
+            },
+            error: (error) => {
+                Toastr.show({
+                    "status": "error",
+                    "content": "Xóa tour khỏi danh sách yêu thích thất bại"
+                })
+            }
+        })
     }
 }
 
