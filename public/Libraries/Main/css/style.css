@@ -72,7 +72,7 @@ Author URI: http://themeforest.net/user/Ansonika/
 /*============================================================================================*/
 
 /*-------- 1.1 Typography --------*/
-body {background:#f9f9f9; font-size:13px; line-height:20px; font-family: 'Roboto', sans-serif; color:#555;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+body {background:#f9f9f9; font-size:13px; line-height:20px; font-family: 'Mitr', sans-serif; color:#555;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
 
 h1, h2, h3, h4, h5, h6 {-webkit-font-smoothing:antialiased; color:#333;}
 h3{font-size:22px;}
@@ -6481,7 +6481,7 @@ a.box_news ul li:after {
 #search_container_2 {
 	position: relative;
 	height: 580px;
-	background: #ccc url(../img/hero_3.jpg) no-repeat center top;
+	background: #ccc url(https://amazingdalat.com/media/upload/images/tin-tuc/Que%20garden%20Da%20Lat.jpg) no-repeat center top;
 	background-size: cover;
 	color: #fff;
 	width: 100%;

@@ -2,394 +2,179 @@
 
 @section('title', 'Welcome')
 
+@section('extra-js')
+    <script>
+        $('#example-date-input').datepicker({
+            format: 'dd-mm-yyyy',
+            setDate: true,
+            today: true,
+            showInput: true
+        });
+    </script>
+@endsection
+
 @section('content')
     <main>
         <div id="search_container_2">
             <div id="search_2">
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="tours">
-                        <form>
+                        <form action="{{ route('Main.tour.index') }}" method="get">
                             <div class="row no-gutters custom-search-input-2">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Where..." id="autocomplete">
+                                        <input class="form-control" name="where" type="text" placeholder="Địa điểm..." id="autocomplete">
                                         <i class="icon_pin_alt"></i>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <input class="form-control date-pick" type="text" name="dates" placeholder="When..">
+                                        <input class="form-control date-pick" id="example-date-input" type="text" name="when" placeholder="Ngày..">
                                         <i class="icon_calendar"></i>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
-                                    <input type="submit" class="btn_search" value="Search">
+                                    <input type="submit" class="btn_search" value="Tìm kiếm">
                                 </div>
                             </div>
-                            <!-- /row -->
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End search_container -->
         <div class="container margin_60">
 
             <div class="main_title">
-                <h2>Paris <span>Top</span> Tours</h2>
-                <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+                <h2><span>Top</span> Tours </h2>
+                <p>Top những chuyến du lịch tuyệt vời nhất dành cho bạn</p>
             </div>
 
             <div class="row">
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
+                @php($key = 0)
+                @foreach($tours as $tour)
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.{{ ++$key }}s">
                     <div class="tour_container">
-                        <div class="ribbon_3 popular"><span>Popular</span></div>
+                        @if($tour->top > TOUR_POPULAR)
+                            <div class="ribbon_3 popular"><span>Popular</span></div>
+                        @elseif($tour->rating >= TOUR_RATING)
+                            <div class="ribbon_3 rating"><span>Rate</span></div>
+                        @endif
                         <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="Image">
+                            <a href="{{ route('Main.tour.show', ['slug' => $tour->slug]) }}">
+                                <img src="{{ $tour->thumbnail }}" width="800" height="533" class="img-fluid" alt="Image">
                                 <div class="short_info">
-                                    <i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>39</span>
+                                    <i class="icon_set_1_icon-44"></i>{{ $tour->category->name }}<span class="price">{{ $tour->getCurrentPrice() }}</span>
                                 </div>
                             </a>
                         </div>
                         <div class="tour_title">
-                            <h3><strong>Arc Triomphe</strong> tour</h3>
+                            <h3><strong>{{ \Illuminate\Support\Str::limit($tour->name, 20) }}</strong></h3>
                             <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
+                                {{ \App\Helpers\ReviewHelper::rating($tour->reviews) }}<small>({{ $tour->reviews->count() }})</small>
+                            </div>
                             <div class="wishlist">
                                 <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
+                            </div>
                         </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.2s">
-                    <div class="tour_container">
-                        <div class="ribbon_3 popular"><span>Popular</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_2.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="badge_save">Save<strong>30%</strong></div>
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-43"></i>Churches<span class="price"><sup>$</sup>45</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Notredame</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-                    <div class="tour_container">
-                        <div class="ribbon_3 popular"><span>Popular</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_3.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>48</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Versailles</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.4s">
-                    <div class="tour_container">
-                        <div class="ribbon_3"><span>Top rated</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_4.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="badge_save">Save<strong>30%</strong></div>
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-30"></i>Walking tour<span class="price"><sup>$</sup>36</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Pompidue</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.5s">
-                    <div class="tour_container">
-                        <div class="ribbon_3"><span>Top rated</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_14.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-28"></i>Skyline tours<span class="price"><sup>$</sup>42</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Tour Eiffel</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
-                    <div class="tour_container">
-                        <div class="ribbon_3"><span>Top rated</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_5.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-44"></i>Historic Buildings<span class="price"><sup>$</sup>40</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Pantheon</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.7s">
-                    <div class="tour_container">
-                        <div class="ribbon_3"><span>Top rated</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_8.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-3"></i>City sightseeing<span class="price"><sup>$</sup>35</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Open Bus</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.8s">
-                    <div class="tour_container">
-                        <div class="ribbon_3"><span>Top rated</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_9.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-4"></i>Museums<span class="price"><sup>$</sup>38</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Louvre museum</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
-                    <div class="tour_container">
-                        <div class="ribbon_3"><span>Top rated</span></div>
-                        <div class="img_container">
-                            <a href="single_tour.html">
-                                <img src="libraries/main/img/tour_box_12.jpg" width="800" height="533" class="img-fluid" alt="Image">
-                                <div class="short_info">
-                                    <i class="icon_set_1_icon-14"></i>Eat &amp; drink<span class="price"><sup>$</sup>25</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="tour_title">
-                            <h3><strong>Boulangerie</strong> tour</h3>
-                            <div class="rating">
-                                <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><small>(75)</small>
-                            </div><!-- end rating -->
-                            <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                            </div><!-- End wish list-->
-                        </div>
-                    </div><!-- End box tour -->
-                </div><!-- End col -->
-
-            </div><!-- End row -->
+                    </div>
+                </div>
+                @endforeach
+            </div>
 
             <p class="text-center nopadding">
-                <a href="#" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours (144) </a>
+                <a href="#" class="btn_1 medium"><i class="icon-eye-7"></i>Xem tất cả tour ({{ \App\Helpers\TourHelper::count() }}) </a>
             </p>
-        </div><!-- End container -->
+        </div>
 
         <div class="white_bg">
             <div class="container margin_60">
                 <div class="main_title">
-                    <h2>Other <span>Popular</span> tours</h2>
-                    <p>
-                        Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.
-                    </p>
+                    <h2>Danh mục <span>Nổi bật</span></h2>
+                    <p>Các danh mục Tour được gợi ý dành cho bạn</p>
                 </div>
                 <div class="row add_bottom_45">
                     <div class="col-lg-4 other_tours">
                         <ul>
-                            <li><a href="#"><i class="icon_set_1_icon-3"></i>Tour Eiffel<span class="other_tours_price">$42</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-30"></i>Shopping tour<span class="other_tours_price">$35</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-44"></i>Versailles tour<span class="other_tours_price">$20</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-3"></i>Montparnasse skyline<span class="other_tours_price">$26</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-44"></i>Pompidue<span class="other_tours_price">$26</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-3"></i>Senna River tour<span class="other_tours_price">$32</span></a>
-                            </li>
+                            @foreach($categories[0] as $category)
+                                <li>
+                                    <a href="{{ route('Main.tour.index', ['category' => $category->slug]) }}">
+                                        <i class="{{ $category->icon }}"></i>
+                                            {{ $category->name }}
+                                        <span class="other_tours_price">{{ \App\Helpers\TourHelper::countOfCategory($category->id) }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-lg-4 other_tours">
                         <ul>
-                            <li><a href="#"><i class="icon_set_1_icon-1"></i>Notredame<span class="other_tours_price">$48</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-4"></i>Lafaiette<span class="other_tours_price">$55</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-30"></i>Trocadero<span class="other_tours_price">$76</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-3"></i>Open Bus tour<span class="other_tours_price">$55</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-30"></i>Louvre museum<span class="other_tours_price">$24</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-3"></i>Madlene Cathedral<span class="other_tours_price">$24</span></a>
-                            </li>
+                            @foreach($categories[1] as $category)
+                                <li>
+                                    <a href="{{ route('Main.tour.index', ['category' => $category->slug]) }}">
+                                        <i class="{{ $category->icon }}"></i>
+                                        {{ $category->name }}
+                                        <span class="other_tours_price">{{ \App\Helpers\TourHelper::countOfCategory($category->id) }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-lg-4 other_tours">
                         <ul>
-                            <li><a href="#"><i class="icon_set_1_icon-37"></i>Montparnasse<span class="other_tours_price">$36</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-1"></i>D'Orsey museum<span class="other_tours_price">$28</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-50"></i>Gioconda Louvre musuem<span class="other_tours_price">$44</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-44"></i>Tour Eiffel<span class="other_tours_price">$56</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-50"></i>Ladefanse<span class="other_tours_price">$16</span></a>
-                            </li>
-                            <li><a href="#"><i class="icon_set_1_icon-44"></i>Notredame<span class="other_tours_price">$26</span></a>
-                            </li>
+                            @foreach($categories[2] as $category)
+                                <li>
+                                    <a href="{{ route('Main.tour.index', ['category' => $category->slug]) }}">
+                                        <i class="{{ $category->icon }}"></i>
+                                        {{ $category->name }}
+                                        <span class="other_tours_price">{{ \App\Helpers\TourHelper::countOfCategory($category->id) }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
-                <!-- End row -->
 
-                <div class="banner colored">
-                    <h4>Discover our Top tours <span>from $34</span></h4>
-                    <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in.
-                    </p>
-                    <a href="single_tour.html" class="btn_1 white">Read more</a>
-                </div>
+                @isset($tour_min)
+                    <div class="banner colored">
+                        <h4>Đặt Tour ngay <span>chỉ với {{ $tour_min->adult_price }}</span></h4>
+                        <p>{{ \Illuminate\Support\Str::limit($tour_min->description, 150) }}</p>
+                        <a href="{{ route('Main.tour.show', ['slug' => $tour_min->slug]) }}" class="btn_1 white">Xem thêm</a>
+                    </div>
+                @endisset
 
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <p>
-                            <a href="#"><img src="libraries/main/img/bus.jpg" alt="Pic" class="img-fluid"></a>
-                        </p>
-                        <h4><span>Sightseen tour</span> booking</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.
-                        </p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <p>
-                            <a href="#"><img src="libraries/main/img/transfer.jpg" alt="Pic" class="img-fluid"></a>
-                        </p>
-                        <h4><span>Transfer</span> booking</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.
-                        </p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <p>
-                            <a href="#"><img src="libraries/main/img/guide.jpg" alt="Pic" class="img-fluid"></a>
-                        </p>
-                        <h4><span>Tour guide</span> booking</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.
-                        </p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <p>
-                            <a href="#"><img src="libraries/main/img/hotel.jpg" alt="Pic" class="img-fluid"></a>
-                        </p>
-                        <h4><span>Hotel</span> booking</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.
-                        </p>
-                    </div>
+                    @foreach($articles as $article)
+                        <div class="col-lg-3 col-md-6 text-center">
+                            <p>
+                                <a href="{{ route('articles.detail', ['slug' => $article->slug]) }}">
+                                    <img src="{{ $article->image }}" alt="Pic" class="img-fluid">
+                                </a>
+                            </p>
+                            <h4><span>{{ \Illuminate\Support\Str::limit($article->title, 20) }}</span> {{ \Illuminate\Support\Str::limit($article->heading, 10) }}</h4>
+                            <p>{{ \Illuminate\Support\Str::limit($article->content) }}</p>
+                        </div>
+                    @endforeach
                 </div>
-                <!-- End row -->
 
             </div>
-            <!-- End container -->
         </div>
-        <!-- End white_bg -->
 
         <section class="promo_full">
             <div class="promo_full_wp magnific">
                 <div>
-                    <h3>BELONG ANYWHERE</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex.
-                    </p>
+                    <h3>đi bất cứ đâu</h3>
+                    <p>Chúng tôi sẽ giúp bạn tìm kiếm các chuyến du lịch hấp dẫn nhất với giá cực ưu đãi. Đăng ký để nhận ngay thông tin!</p>
                     <a href="https://www.youtube.com/watch?v=Zz5cu72Gv5Y" class="video"><i class="icon-play-circled2-1"></i></a>
                 </div>
             </div>
         </section>
-        <!-- End section -->
 
         <div class="container margin_60">
 
             <div class="main_title">
-                <h2>Some <span>good</span> reasons</h2>
+                <h2>Sự lựa chọn<span> tuyệt vời</span> cho bạn</h2>
                 <p>
-                    Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.
+                    Tour chọn lọc chất lượng. Bảo đảm giá tốt nhất. Tư vấn tận tình. Thanh toán nhanh gọn. Đặt ngay hôm nay!
                 </p>
             </div>
 
@@ -398,38 +183,37 @@
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.2s">
                     <div class="feature_home">
                         <i class="icon_set_1_icon-41"></i>
-                        <h3><span>+120</span> Premium tours</h3>
+                        <h3><span>+{{ \App\Helpers\TourHelper::count() }}</span> Tour tuyệt vời</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                            Ở bất cứ nơi nào trên thế giới, những đứa trẻ hồn nhiên, vô tư vui đùa với nhau luôn là những khoảnh khắc tuyệt vời nhất.
                         </p>
-                        <a href="about.html" class="btn_1 outline">Read more</a>
+                        <a href="{{ route('Main.tour.index') }}" class="btn_1 outline">Xem thêm</a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.4s">
                     <div class="feature_home">
                         <i class="icon_set_1_icon-30"></i>
-                        <h3><span>+1000</span> Customers</h3>
+                        <h3><span>+{{ \App\Helpers\UserHelper::countUsers() }}</span> Khách hàng</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                            Chúng tôi đang dần nâng cao trải nghiệm của người dùng, đem đến cho bạn những lựa chọn hợp lý nhất. Phù hợp túi tiền với các bạn.
                         </p>
-                        <a href="about.html" class="btn_1 outline">Read more</a>
+                        <a href="{{ route('Main.tour.index') }}" class="btn_1 outline">Xem thêm</a>
                     </div>
                 </div>
 
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
                     <div class="feature_home">
                         <i class="icon_set_1_icon-57"></i>
-                        <h3><span>H24 </span> Support</h3>
+                        <h3>Hỗ trợ <span>24h</span></h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                            Chúng tôi luôn sẵn sàng giải đáp các thắc mắc của bạn. Tạo cảm giác như đang ở nhà. Nhấc điện thoại lên và liên hệ ngay với chúng tôi.
                         </p>
-                        <a href="about.html" class="btn_1 outline">Read more</a>
+                        <a href="{{ route('contact.store') }}" class="btn_1 outline">Liên hệ</a>
                     </div>
                 </div>
 
             </div>
-            <!--End row -->
 
             <hr>
 
@@ -438,21 +222,19 @@
                     <img src="libraries/main/img/laptop.png" alt="Laptop" class="img-fluid laptop">
                 </div>
                 <div class="col-md-6">
-                    <h3><span>Get started</span> with CityTours</h3>
+                    <h3><span>Bắt đầu</span> với CityTour</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                        Hướng dẫn bạn bắt đầu nhanh với City Tour
                     </p>
                     <ul class="list_order">
-                        <li><span>1</span>Select your preferred tours</li>
-                        <li><span>2</span>Purchase tickets and options</li>
-                        <li><span>3</span>Pick them directly from your office</li>
+                        <li><span>1</span>Chọn các chuyến tham quan ưa thích của bạn</li>
+                        <li><span>2</span>Đặt cọc tour và tiến hành thanh toán</li>
+                        <li><span>3</span>Đợi phản hồi và bắt đầu 1 chuyến du lịch tuyệt vời</li>
                     </ul>
-                    <a href="all_tour_list.html" class="btn_1">Start now</a>
+                    <a href="{{ route('Main.tour.index') }}" class="btn_1">Bắt đầu ngay</a>
                 </div>
             </div>
-            <!-- End row -->
 
         </div>
-        <!-- End container -->
     </main>
 @endsection
