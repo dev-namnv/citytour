@@ -33,7 +33,8 @@ class User extends Authenticatable
         'country',
         'google_map',
         'status',
-        'behavior_score'
+        'behavior_score',
+        'google_id'
     ];
 
     /**
