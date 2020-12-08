@@ -4,8 +4,7 @@
     </div>
 
         <div class="sign-in-wrapper">
-            <a href="#0" class="social_bt facebook">Login with Facebook</a>
-            <a href="#0" class="social_bt google">Login with Google</a>
+            <a href="{{route('social.google')}}" class="social_bt google">Login with Google</a>
             <div class="divider"><span>Or</span></div>
 
             <form class="form-login" method="post" action="{{ route('login') }}">
