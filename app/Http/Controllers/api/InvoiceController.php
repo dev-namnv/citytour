@@ -11,18 +11,11 @@ class InvoiceController extends Controller
 {
     public function getNewInvoice()
     {
-        if (Auth::user()->role === GUIDE) {
-            $invoices = Invoice::query()->withoutGlobalScopes()
-                ->where('guide_id',Auth::id())
-                ->whereIn('status', INVOICE_NEW)
-                ->orderBy('created_at','DESC')
-                ->paginate(PAGINATION_TOUR);
-        } else {
-            $invoices = Invoice::query()->withoutGlobalScopes()
-                ->whereIn('status', INVOICE_NEW)
-                ->orderBy('created_at','DESC')
-                ->paginate(PAGINATION_TOUR);
-        }
+        $invoices = Invoice::query()->withoutGlobalScopes()
+            ->where('status', INVOICE_NEW)
+            ->with('invoice_detail')
+            ->orderBy('created_at','DESC')
+            ->get();
         return response(['data'=>$invoices]);
     }
 
