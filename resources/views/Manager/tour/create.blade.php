@@ -210,7 +210,7 @@
                             <div class="form-group row m-3 fv-plugins-icon-container">
                                 <div class="col-lg-3 col-xl-3">
 {{--                                    <input class="form-control" name="batches[]" type="date" id="example-date-input" required data-label="Ngày khởi hành">--}}
-                                    {!! Form::date('batches[]','',['id'=>'example-date-input','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ngày khởi hành','required']) !!}
+                                    {!! Form::date('batches[]','',['id'=>'example-date-input','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ngày khởi hành','required','min'=>date('Y-m-d')]) !!}
                                 </div>
                             </div>
                         </div>
@@ -296,7 +296,7 @@
                 <div class="form-group row m-3 fv-plugins-icon-container">
                     <div class="col-lg-3 col-xl-3">
                         <div class="bg-danger text-danger col-lg-12 col-xl-12 mb-0 small" onclick="$(this).parent().parent().remove();">--</div>
-                        <input class="form-control" name="batches[]" type="date" id="example-date-input" required data-label="Ngày khởi hành">
+                        <input class="form-control" name="batches[]" type="date" id="example-date-input" min="{{date('Y-m-d')}}" required data-label="Ngày khởi hành">
                     </div>
                 </div>
             `)
