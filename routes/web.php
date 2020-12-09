@@ -61,6 +61,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     Route::group(['prefix' => 'invoices'], function () {
         Route::get('/', 'InvoiceController@index')->name('invoice-index');
         Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
+        Route::get('/schedule/{sku}', 'InvoiceController@schedule')->name('invoice-schedule');
     });
 
     // Middleware admin
@@ -100,7 +101,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 // Main
 Route::group(['namespace' => 'Main'], function () {
     Route::group(['prefix' => 'tours'], function () {
-        Route::get('{param?}','TourController@index')->name('Main.tour.index');
+        Route::get('/','TourController@index')->name('Main.tour.index');
         Route::get('/show/{slug}','TourController@show')->name('Main.tour.show');
     });
 
@@ -142,6 +143,10 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
         Route::get('check-tour-exist/{id}/{batch}', 'CheckoutController@checkTourExist')->name('checkout.checkTourExist');
     });
+    Route::group(['prefix' => 'social'], function () {
+        Route::get('auth/google', 'GoogleController@redirectToGoogle')->name('social.google');
+        Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback')->name('social.google.callback');
+    });
 
     Route::get('/article_categories/{slug}', 'ArticleCategoryController@show')->name('Main.article_category.show');
 });
@@ -165,6 +170,8 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
             Route::delete('{id}/delete', 'TourController@delete');
             Route::get('{id}/schedules', 'TourController@schedules');
         });
+
+        Route::get('category', 'CategoryController@list');
     });
 
 });

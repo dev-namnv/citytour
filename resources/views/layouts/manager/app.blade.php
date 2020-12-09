@@ -140,6 +140,28 @@
 
     <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
 
+    <script>
+        $.ajax({
+            url: '{{route('api-new-invoice')}}',
+            type: 'get',
+            success: function (res) {
+                let notification = res.data.map(function (val,index){
+                    return `<div class="p-2">
+                        <strong class="d-block">
+                            <a href="/manager/invoices/${val.sku}">${val.invoice_detail.name}</a>
+                        </strong>
+                        <small>${val.sku}</small></br>
+                        <span>--${val.created_at}--</span>
+                    </div><hr>`;
+                })
+                $(`.total-notification`).text(res.data.length)
+                $(`.notification`).append(notification)
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    </script>
     <!-- Extra js -->
     @yield('extra-js')
 

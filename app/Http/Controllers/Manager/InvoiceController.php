@@ -44,4 +44,15 @@ class InvoiceController extends Controller
         }
         return view('Manager.invoices.show',compact('invoice'));
     }
+
+
+    public function schedule($sku)
+    {
+        $invoice = Invoice::query()->where('sku',$sku)->firstOrFail();
+        if (Auth::user()->role != ADMIN && Auth::user()->id != $invoice->guide_id) {
+            return abort(404);
+        }
+
+        return view('Main.schedule.detail', compact(['invoice']));
+    }
 }
