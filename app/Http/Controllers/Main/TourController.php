@@ -17,7 +17,7 @@ class TourController extends Controller
             ->with(['batches' => function ($q) {
                 $q->select()->where('batch','>',date('Y-m-d'));
             }])
-            ->orderBy('created_at','desc')
+            ->orderBy('id','desc')
             ->paginate(PAGINATION_TOUR);
         $categories = Category::query()->get();
         if ($param == 'list-grid') {
