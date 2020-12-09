@@ -272,13 +272,10 @@
                                         "{{ $review->content }}"
                                     </p>
                                     <span class="rating">
-                                        @for($i=1; $i<=5; $i++)
-                                            @if($i <= $review->star)
-                                                <i class="icon-smile voted"></i>
-                                            @else
-                                                <i class="icon-smile"></i>
-                                            @endif
-                                        @endfor
+                                       <div class="small">
+                                        Điểm:
+                                        <span>{{ round($review->start) }}</span>
+                                    </div>
                                     </span>
                                 </div>
                                 <!-- End review strip -->
