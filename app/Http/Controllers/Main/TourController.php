@@ -30,6 +30,7 @@ class TourController extends Controller
             $tours = Tour::query()
                 ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
                 ->with('category','reviews','schedules')
+                ->orderBy('id','desc')
                 ->with(['batches' => function ($q) {
                     $q->select()->where('batch','>',date('Y-m-d'));
                 }]);
