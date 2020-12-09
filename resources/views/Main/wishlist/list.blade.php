@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="libraries/main/img/home_bg_1.jpg"
+    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('Libraries/Main/img/slides_bg/banner-tours.png')}}"
              data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">

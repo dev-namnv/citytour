@@ -168,7 +168,7 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4">
                                     <div class="wishlist">
-                                        <a onclick="Main.addToWishlist({{$tour->id}})" class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">{!! __('Add to wishlist') !!}</span></span></a>
+                                        <a @if(!auth()->guest()) onclick="Main.addToWishlist({{$tour->id}})" @endif class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">{!! __('Add to wishlist') !!}</span></span></a>
                                     </div>
                                     <div class="img_list">
                                         <a href="{{route('Main.tour.show',['slug'=> $tour->slug])}}"><img src="{!! $tour->thumbnail !!}" alt="Image">
