@@ -272,9 +272,9 @@
                                         "{{ $review->content }}"
                                     </p>
                                     <span class="rating">
-                                       <div class="small">
+                                       <div class="small text-primary">
                                         Điểm:
-                                        <span>{{ round($review->start) }}</span>
+                                        <span>{{ $review->star }}</span>
                                     </div>
                                     </span>
                                 </div>
