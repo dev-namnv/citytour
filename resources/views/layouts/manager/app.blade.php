@@ -154,6 +154,7 @@
                         <span>--${val.created_at}--</span>
                     </div><hr>`;
                 })
+                $(`.total-notification`).text(res.data.length)
                 $(`.notification`).append(notification)
             },
             error: function (error) {

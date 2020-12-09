@@ -39,7 +39,7 @@
                         <span class="svg-icon svg-icon-xl svg-icon-primary">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
                             <i class="fas fa-bell text-danger"></i>
-                            <sub style="color: red; font-size: 20px">*</sub>
+                            <sub class="total-notification" style="color: red; font-size: 20px">0</sub>
                             <!--end::Svg Icon-->
                         </span>
                     </div>
