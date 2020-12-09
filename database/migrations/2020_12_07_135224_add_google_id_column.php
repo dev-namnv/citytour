@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnOriginToToursTable extends Migration
+class AddGoogleIdColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnOriginToToursTable extends Migration
      */
     public function up()
     {
-        Schema::table('tours', function (Blueprint $table) {
-            $table->string('origin')->nullable()->comment('diem xuat phat');
+        Schema::table('users', function ($table) {
+            $table->string('google_id')->nullable();
         });
     }
 
@@ -25,8 +25,6 @@ class AddColumnOriginToToursTable extends Migration
      */
     public function down()
     {
-        Schema::table('tours', function (Blueprint $table) {
-            $table->dropColumn('origin');
-        });
+        //
     }
 }

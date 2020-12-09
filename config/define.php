@@ -75,11 +75,12 @@ define('NOT_PUBLISH', 0);
 // Slug
 define('REGEX_SLUG', '/^[^<>]*$/');
 
-// Cart
-define('CART', 'TOUR_CART');
-
 // Payment
 define('PAYMENT_STATUS_FAIL', 0);
 define('PAYMENT_STATUS_SUCCESS', 1);
 define('PAYMENT_TYPE_VNPAY', 'VNPAY');
 define('PAYMENT_CODE', 'payment_code');
+
+// Tour filter
+define('TOUR_POPULAR', 5);
+define('TOUR_RATING', 3);

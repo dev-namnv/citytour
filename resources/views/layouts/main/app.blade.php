@@ -30,7 +30,7 @@
 
     <!-- GOOGLE WEB FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@500&display=swap" rel="stylesheet">
 
     <!-- COMMON CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Main;
 
 use App\Helpers\VNPayHelper;
+use App\Models\CancelPolicy;
 use App\Models\PaymentLog;
 use App\Models\TourLog;
+use App\Scopes\GuideBehaviorScope;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Checkout\PaymentRequest;
@@ -21,7 +23,7 @@ class CheckoutController extends Controller
 {
     public function detail($slug)
     {
-        $tour = Tour::query()->with('albums','reviews','category','schedules')
+        $tour = Tour::query()->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)->with('albums','reviews','category','schedules')
             ->with(['batches'=>function($q){
                 $q->where('batch','>',now())->select();
             }])
@@ -31,8 +33,9 @@ class CheckoutController extends Controller
             ->where('start_date',$tour->batches->first()->batch)
             ->get(['adult_count','child_count']);
         $customer_total = $invoices->sum('adult_count') + $invoices->sum('child_count');
+        $cancel_policies = CancelPolicy::all();
 
-        return view('Main.checkout.detail', compact('tour', 'customer_total'));
+        return view('Main.checkout.detail', compact('tour', 'customer_total', 'cancel_policies'));
     }
 
     public function payment(PaymentRequest $request)
@@ -230,6 +233,11 @@ class CheckoutController extends Controller
         try {
             if ($request->get('vnp_ResponseCode') == '00') {
                 if (session()->has(PAYMENT_CODE)) {
+                    $invoice = Invoice::query()
+                        ->where('payment_code', session(PAYMENT_CODE))
+                        ->first();
+                    $invoice->payment_status = PAYMENT_STATUS_SUCCESS;
+                    $invoice->save();
                     $payment_log->vnp_Amount = $request->get('vnp_Amount');
                     $payment_log->vnp_BankCode = $request->get('vnp_BankCode');
                     $payment_log->vnp_BankTranNo = $request->get('vnp_BankTranNo');
@@ -252,5 +260,16 @@ class CheckoutController extends Controller
             $error = 'Có lỗi xảy ra trong quá trình thanh toán';
             return redirect()->route('checkout.detail', ['slug' => $tour->slug, 'error' => $error]);
         }
+    }
+
+    public function checkTourExist($id, $batch)
+    {
+        $checkTourExist = PaymentLog::query()
+            ->where('vnp_ResponseCode', '00')
+            ->where('tour_id', $id)
+            ->where('user_id', Auth::id())
+            ->where('batch', $batch)
+            ->first();
+        return $checkTourExist ? response()->json(['exist' => true, 'invoice' => $checkTourExist], 409) : response()->json(['exist' => false, 'invoice' => $checkTourExist]);
     }
 }

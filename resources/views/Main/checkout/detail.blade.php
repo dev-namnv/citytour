@@ -3,21 +3,21 @@
 @section('title', 'Chi tiết thanh toán')
 
 @section('content')
-    <section id="hero_2">
+    <section id="hero_2" style="background: url('https://hiteapts.com/assets/images/cache/banner_tour-5405a7630ed2b4367d9afe15b947a91d.jpg')">
         <div class="intro_title">
-            <h1>Place your order</h1>
+            <h1>Đơn đặt lịch của bạn</h1>
             <div class="bs-wizard row">
 
                 <div class="col-4 bs-wizard-step complete">
-                    <div class="text-center bs-wizard-stepnum">Your cart</div>
+                    <div class="text-center bs-wizard-stepnum">{{ \Illuminate\Support\Str::limit($tour->name, 20) }}</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
-                    <a href="cart.html" class="bs-wizard-dot"></a>
+                    <a href="#" class="bs-wizard-dot"></a>
                 </div>
 
                 <div class="col-4 bs-wizard-step active">
-                    <div class="text-center bs-wizard-stepnum">Your details</div>
+                    <div class="text-center bs-wizard-stepnum">Chi tiết thanh toán</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
@@ -25,11 +25,11 @@
                 </div>
 
                 <div class="col-4 bs-wizard-step disabled">
-                    <div class="text-center bs-wizard-stepnum">Finish!</div>
+                    <div class="text-center bs-wizard-stepnum">Hoàn thành!</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
-                    <a href="confirmation_fixed_sidebar.html" class="bs-wizard-dot"></a>
+                    <a href="#" class="bs-wizard-dot"></a>
                 </div>
 
             </div>
@@ -55,7 +55,7 @@
 
         <div class="container margin_60">
             @isset($error)
-                {{ $error }}
+                <div class="alert alert-danger" role="alert">{!! $error !!}</div>
             @endisset
             <form class="row" id="js-form-payment" method="post" action="{{ route('checkout.payment') }}">
                 @csrf
@@ -146,7 +146,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label>City</label>
+                                    <label>Thành phố</label>
                                     <input type="text" id="city_booking" name="city" value="{{ Auth::check() ? Auth::user()->city : old('city') }}" class="form-control">
                                     @error('city')
                                     <small class="text-sm-left text-danger">{{ $message }}</small>
@@ -155,7 +155,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-group">
-                                    <label>State</label>
+                                    <label>Quận/huyện</label>
                                     <input type="text" id="state_booking" name="state" value="{{ Auth::check() ? Auth::user()->state : old('state') }}" class="form-control">
                                     @error('state')
                                     <small class="text-sm-left text-danger">{{ $message }}</small>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="form-group">
-                                    <label>Zip code</label>
+                                    <label>Mã zip</label>
                                     <input type="text" id="postal_code" name="zipcode" value="{{ Auth::check() ? Auth::user()->zipcode : old('zipcode') }}" class="form-control">
                                     @error('zipcode')
                                     <small class="text-sm-left text-danger">{{ $message }}</small>
@@ -176,16 +176,45 @@
                     </div>
                     <!--End step -->
 
+                    <div class="form_title">
+                        <h3><strong>3</strong>Điều khoản và chính sách</h3>
+                        <p>
+                            Vui lòng đọc chi tiết chính sách hủy chuyến và hoàn tiền.
+                        </p>
+                    </div>
                     <div id="policy">
-                        <h4>Cancellation policy</h4>
                         <div class="form-group">
                             <label>
-                                <input type="checkbox" value="{{ old('policy_terms') }}" name="policy_terms" id="policy_terms"> Tôi chấp nhận các điều khoản và điều kiện và chính sách chung.</label>
+                                <input type="checkbox" {{ old('policy_terms') ? 'checked' : '' }} name="policy_terms" id="policy_terms"> Tôi chấp nhận các điều khoản, điều kiện và
+                                <a href="#cancel-policy" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="cancel-policy" data-parent="#cancel-policy">chính sách hủy chuyến</a>
+                                .</label>
                             @error('policy_terms')
                             <small class="text-sm-left text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <button type="submit" class="btn_1 green medium">Đặt ngay</button>
+                        <div id="cancel-policy">
+                            <div class="card card-body">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Thời gian</th>
+                                        <th scope="col">Phần trăm hoàn trả</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($cancel_policies as $key => $policy)
+                                        <tr>
+                                            <th scope="row">{{ $key + 1 }}</th>
+                                            <td>{{ $policy->name }}</td>
+                                            <td>{{ $policy->refunds }}%</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn_1 btn-primary medium">Đặt ngay</button>
                     </div>
                 </div>
 
@@ -225,7 +254,7 @@
                                 <div class="form-group">
                                     <label>Người lớn</label>
                                     <div class="numbers-row">
-                                        <input type="text" value="0" id="adults" class="qty2 form-control bg-white" name="adult_count">
+                                        <input type="text" value="{{ old('adult_count') ? old('adult_count') : 0 }}" id="adults" class="qty2 form-control bg-white" name="adult_count">
                                         @error('adult_count')
                                         <small class="text-sm-left text-danger">{{ $message }}</small>
                                         @enderror
@@ -236,7 +265,7 @@
                                 <div class="form-group">
                                     <label>Trẻ em</label>
                                     <div class="numbers-row">
-                                        <input type="text" value="0" id="children" class="qty2 form-control bg-white" name="child_count">
+                                        <input type="text" value="{{ old('child_count') ? old('child_count') : 0 }}" id="children" class="qty2 form-control bg-white" name="child_count">
                                         @error('child_count')
                                         <small class="text-sm-left text-danger">{{ $message }}</small>
                                         @enderror
@@ -275,6 +304,14 @@
                                     0 đ
                                 </td>
                             </tr>
+                            <tr class="total">
+                                <td>
+                                    Đặt cọc
+                                </td>
+                                <td class="text-right" id="deposit-price">
+                                    0 đ
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                         <button class="btn_full" type="submit">Đặt ngay</button>
@@ -301,7 +338,7 @@
     </script>
 
     <script>
-        $('.numbers-row').on('click',function () {
+        function realPrice() {
             let adult_price = parseFloat({{ $tour->adult_price->getAmount() }}) ;
             let child_price = {{ $tour->child_price->getAmount() }};
             let adults = $('input#adults').val()
@@ -310,6 +347,13 @@
             $('.person-adult').text(adults)
             $('.person-child').text(children)
             $('#total-price').text(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(total_price))
+            $('#deposit-price').text(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(total_price * 30/100))
+        }
+        $('.numbers-row').on('click', function () {
+            realPrice()
+        })
+        $(document).ready(function () {
+            realPrice()
         })
 
         $(`select[name='start_date']`).change(function (){
@@ -326,6 +370,33 @@
             }).done(function (res) {
                 customer_total.textContent = res.customer_total;
             })
+        })
+    </script>
+
+    <script>
+        function checkExistTour(batch) {
+            fetch(`${BASE_URL}/checkout/check-tour-exist/{{{ $tour->id }}}/${batch}`, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            })
+                .then((r) => {
+                    if (r.status === 409) {
+                        Toastr.show({status: 'warning', title: 'Trùng ngày khởi hành', content: `Bạn đã đặt <b>Tour</b> này trùng ngày khởi hành đã chọn: ${batch}`})
+                    }
+                })
+                .catch((e) => console.log(e));
+        }
+
+        $(document).ready(function () {
+            checkExistTour($('#js-tour-batch').val())
+        })
+        $('#js-tour-batch').on('change', function () {
+            checkExistTour($('#js-tour-batch').val())
         })
     </script>
 

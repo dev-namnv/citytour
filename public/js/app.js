@@ -53367,6 +53367,10 @@ $.ajaxSetup({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var _Main;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /* Import libraries */
 __webpack_require__(/*! ./validation */ "./resources/js/validation.js");
 
@@ -53374,7 +53378,7 @@ __webpack_require__(/*! ./toastr */ "./resources/js/toastr.js");
 
 window.PerfectScrollbar = __webpack_require__(/*! perfect-scrollbar/dist/perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.js"); // Main js
 
-Main = {
+Main = (_Main = {
   // Validate form login
   loginValidate: function loginValidate() {
     $('.form-login').validate({
@@ -53553,7 +53557,104 @@ Main = {
       invalidClass: 'is-invalid'
     });
   }
-}; // Run function
+}, _defineProperty(_Main, "checkoutValidate", function checkoutValidate() {
+  $('#js-form-payment').validate({
+    rules: {
+      customer_name: {
+        required: true
+      },
+      tour_id: {
+        required: true
+      },
+      customer_phone: {
+        required: true
+      },
+      customer_email: {
+        required: true,
+        email: true
+      },
+      customer_email_confirm: {
+        required: true,
+        email: true
+      },
+      customer_address: {
+        required: true
+      },
+      country: {
+        required: true
+      },
+      state: {
+        required: true
+      },
+      zipcode: {
+        required: true,
+        digits: true
+      },
+      batch: {
+        required: true,
+        date: true
+      },
+      adult_count: {
+        required: true,
+        min: 1,
+        max: 10
+      },
+      child_count: {
+        required: true,
+        min: 0,
+        max: 10
+      },
+      city: {
+        required: true
+      },
+      policy_terms: {
+        required: true
+      }
+    },
+    invalidClass: 'is-invalid'
+  });
+}), _defineProperty(_Main, "addToWishlist", function addToWishlist(tour_id) {
+  $.ajax({
+    type: "POST",
+    url: "".concat(window.location.origin, "/wishlist/add/").concat(tour_id),
+    data: {
+      _token: $("meta[name='csrf-token']").attr('content')
+    },
+    success: function success(data) {
+      Toastr.show({
+        "status": data.status,
+        "content": data.content
+      });
+    },
+    error: function error(_error) {
+      Toastr.show({
+        "status": _error.responseJSON.status,
+        "content": _error.responseJSON.content
+      });
+    }
+  });
+}), _defineProperty(_Main, "removeTourInWishlist", function removeTourInWishlist(tour_id) {
+  $.ajax({
+    type: "POST",
+    url: "".concat(window.location.origin, "/wishlist/remove/").concat(tour_id),
+    data: {
+      _token: $("meta[name='csrf-token']").attr('content'),
+      _method: "DELETE"
+    },
+    success: function success(data) {
+      Toastr.show({
+        "content": "Xóa tour khỏi danh sách yêu thích thành công"
+      });
+      $("#tour_".concat(data.tour_id)).hide();
+    },
+    error: function error(_error2) {
+      Toastr.show({
+        "status": "error",
+        "content": "Xóa tour khỏi danh sách yêu thích thất bại"
+      });
+    }
+  });
+}), _Main); // Run function
 
 $(window).on('load', function () {
   Main.loginValidate();

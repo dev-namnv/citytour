@@ -31,7 +31,7 @@
                                 </div>
                                 <!-- End Dropdown access -->
                             </li>
-                            <li><a href="wishlist.html" id="wishlist_link">{{ __('button.wishlist') }}</a></li>
+                            <li><a href="{{route('wishlist.list')}}" id="wishlist_link">{{ __('button.wishlist') }}</a></li>
                         @endauth
 
                         {{--If auth invalid--}}

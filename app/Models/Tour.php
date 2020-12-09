@@ -30,6 +30,7 @@ class Tour extends Model
         'guide_id',
         'user_id',
         'note',
+        'origin',
         'deleted_at',
     ];
 
@@ -77,10 +78,7 @@ class Tour extends Model
      */
     public function getCurrentPrice()
     {
-        if (!$this->price) {
-            return $this->adult_price;
-        }
-        return $this->price;
+        return $this->adult_price;
     }
 
 
@@ -120,6 +118,11 @@ class Tour extends Model
     public function guide()
     {
         return $this->belongsTo('App\Models\User', 'guide_id');
+    }
+
+    public function populars()
+    {
+        return $this->hasMany('App\Models\PaymentLog');
     }
 
     /**

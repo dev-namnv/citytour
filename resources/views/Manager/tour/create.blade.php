@@ -55,6 +55,13 @@
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
                             </div>
+                            <div class="form-group row fv-plugins-icon-container">
+                                <label class="col-xl-2 col-lg-2 col-form-label">Điểm xuất phát<span class="text-danger">*</span></label>
+                                <div class="col-lg-8 col-xl-8">
+                                    {!! Form::text('origin','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Điểm xuất phát','placeholder'=>'Điểm xuất phát','required']) !!}
+                                    <div class="fv-plugins-message-container"></div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Ảnh thu nhỏ (800x533)<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
