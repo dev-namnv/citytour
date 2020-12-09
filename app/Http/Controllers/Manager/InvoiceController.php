@@ -18,12 +18,12 @@ class InvoiceController extends Controller
             $invoices = Invoice::query()->withoutGlobalScopes()
                 ->where('guide_id',Auth::id())
                 ->whereIn('status', $status)
-                ->orderBy('created_at','DESC')
+                ->orderBy('id','DESC')
                 ->paginate(PAGINATION_TOUR);
         } else {
             $invoices = Invoice::query()->withoutGlobalScopes()
                 ->whereIn('status', $status)
-                ->orderBy('created_at','DESC')
+                ->orderBy('id','DESC')
                 ->paginate(PAGINATION_TOUR);
         }
 
@@ -54,5 +54,11 @@ class InvoiceController extends Controller
         }
 
         return view('Main.schedule.detail', compact(['invoice']));
+    }
+
+    public function updateStatus($sku,$status)
+    {
+        Invoice::query()->where('sku',$sku)->update(['status' => $status]);
+        return redirect()->back();
     }
 }

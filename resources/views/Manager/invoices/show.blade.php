@@ -20,6 +20,25 @@
 
                 <div class="content-section">
 
+                    <div class="row">
+                        @if($invoice->status < 5)
+                            @php $next_status = $invoice->status +1 @endphp
+                            <div class="col-12">
+                                <a href="{{route('invoice-update-status',['sku'=>$invoice->sku,'status'=>$next_status])}}" class="col-12 btn {{ config('masterdata')['invoice']['color'][$next_status] }}">
+                                    <strong>{{ config('masterdata')['invoice']['status'][$next_status] }}</strong>
+                                </a>
+                            </div>
+                        @else
+                            <div class="col-12 text-center">
+                                <span class="col-12 d-block rounded {{ $invoice->getColor() }}">
+                                    <strong>{{$invoice->status == 5 ? 'Chờ' : ''}} {{ $invoice->getStatus() }}</strong>
+                                </span>
+                            </div>
+                        @endif
+                    </div>
+
+                    <hr/>
+
                     <div class="row inv--head-section">
 
                         <div class="col-sm-6 col-12">
