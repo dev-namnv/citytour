@@ -236,6 +236,13 @@ Main = {
                 })
             },
             error: (error) => {
+                if (error.status === 401) {
+                    Toastr.show({
+                        "status": "error",
+                        "content": "Bạn cần phải đăng nhập"
+                    })
+                }
+
                 Toastr.show({
                     "status": error.responseJSON.status,
                     "content": error.responseJSON.content

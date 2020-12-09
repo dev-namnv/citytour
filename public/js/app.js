@@ -53627,6 +53627,13 @@ Main = (_Main = {
       });
     },
     error: function error(_error) {
+      if (_error.status === 401) {
+        Toastr.show({
+          "status": "error",
+          "content": "Bạn cần phải đăng nhập"
+        });
+      }
+
       Toastr.show({
         "status": _error.responseJSON.status,
         "content": _error.responseJSON.content
