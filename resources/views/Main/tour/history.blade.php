@@ -1,6 +1,6 @@
 @extends('layouts.main.app')
 
-@section('title', 'Wishlist')
+@section('title', 'Lịch sử')
 
 @section('extra-css')
     <link href="{{asset('libraries/main/css/custom.css')}}" rel="stylesheet">
@@ -79,7 +79,7 @@
 @endsection
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="libraries/main/img/home_bg_1.jpg"
+    <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/hsnmkdasrhwmvng1yrht/V%C3%A9%20C%C3%B4ng%20Vi%C3%AAn%20Su%E1%BB%91i%20Kho%C3%A1ng%20N%C3%B3ng%20N%C3%BAi%20Th%E1%BA%A7n%20T%C3%A0i%20%C4%90%C3%A0%20N%E1%BA%B5ng.jpg"
              data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
@@ -103,7 +103,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     @if (count($invoices) > 0)
-                    @if(today()->toDateString() <= $invoices[0]->end_date)
+                    @if(today()->toDateString() <= $invoices[0]->end_date && $invoices[0]->status < INVOICE_COMPLETE_CONFIRM)
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>Tour hiện tại</h3>
@@ -159,22 +159,36 @@
                                                         <td>{{date_format(new DateTime($invoices[0]->end_date), 'd-m-Y')}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-right"><strong>Trạng thái đi tour:</strong></td>
+                                                        <td class="text-right"><strong>Trạng thái:</strong></td>
                                                         <td>
-                                                            @if(today()->toDateString() < $invoices[0]->start_date)
-                                                                <span class="text-secondary">Sắp khởi hành, còn {{$invoices[0]->calculateDaysDiff()}} ngày</span>
-                                                            @elseif(today()->toDateString() <= $invoices[0]->end_date)
-                                                                <span class="text-primary">Đang đi</span>
-                                                            @else
-                                                                <span class="text-success">Đã kết thúc</span>
-                                                            @endif
+{{--                                                            @if(today()->toDateString() < $invoices[0]->start_date)--}}
+{{--                                                                <span class="text-secondary">Sắp khởi hành, còn {{$invoices[0]->calculateDaysDiff()}} ngày</span>--}}
+{{--                                                            @elseif(today()->toDateString() <= $invoices[0]->end_date)--}}
+{{--                                                                <span class="text-primary">Đang đi</span>--}}
+{{--                                                            @else--}}
+{{--                                                                <span class="text-success">Đã kết thúc</span>--}}
+{{--                                                            @endif--}}
+                                                            <span class="{{$invoices[0]->getColor()}}">{{$invoices[0]->getStatus()}}</span>
                                                         </td>
                                                     </tr>
 
                                                     </tbody>
                                                 </table>
-
                                             </div>
+
+                                            @if($invoices[0]->status == 4)
+                                                <div class="col-12 mt-5 ">
+                                                    <div class="row justify-content-center">
+                                                        <h4>Hiện tại, tour đã kết thúc lịch trình. Hãy bấm vào nút <span class="text-success">xác nhận</span> kể hoàn tất bước cuối cùng.</h4>
+                                                    </div>
+                                                    <div class="row justify-content-center">
+                                                        <form action="{{route('Main.invoice.complete', $invoices[0]->sku)}}" method="POST">
+                                                            @csrf
+                                                            <button class="btn btn-success">Xác nhận</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            @endif
 
                                         </div>
 
@@ -383,11 +397,11 @@
                                     <th>Tên tour</th>
                                     <th>Lịch trình</th>
                                     <th>Hóa đơn</th>
-                                    <th>Trạng thái đi tour</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(today()->toDateString() <= $invoices[0]->end_date)
+                                @if(today()->toDateString() <= $invoices[0]->end_date && $invoices[0]->status < INVOICE_COMPLETE_CONFIRM)
                                     @foreach($invoices->reverse()->take(count($invoices) - 1) as $key => $invoice)
                                         <tr>
                                             <td>{{count($invoices->reverse()->take(5)) - $key}}</td>
@@ -401,7 +415,7 @@
                                                    target="_blank">Chi tiết</a>
                                             </td>
                                             <td>
-                                                <span class="text-success">Đã kết thúc</span>
+                                                <span class="text-success">{{$invoice->getStatus()}}</span>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -419,7 +433,7 @@
                                                    target="_blank">Chi tiết</a>
                                             </td>
                                             <td>
-                                                <span class="text-success">Đã kết thúc</span>
+                                                <span class="text-success">{{$invoice->getStatus()}}</span>
                                             </td>
                                         </tr>
                                     @endforeach

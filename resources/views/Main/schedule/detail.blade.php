@@ -26,7 +26,7 @@
             Hướng dẫn viên: <span class="text-danger">{{$invoice->guide->getFullName() }}</span>
         </h4>
         <h4>
-            Trạng thái: <span class="text-success">Đã kết thúc</span>
+            Trạng thái: <span class="text-success">Hoàn tất</span>
         </h4>
     </div>
     <hr>
