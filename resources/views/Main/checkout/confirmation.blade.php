@@ -9,7 +9,7 @@
             <div class="bs-wizard row">
 
                 <div class="col-4 bs-wizard-step complete">
-                    <div class="text-center bs-wizard-stepnum">{{ \Illuminate\Support\Str::limit($tour->name, 20) }}</div>
+                    <div class="text-center bs-wizard-stepnum">{{ \Illuminate\Support\Str::limit($payment_log->tour->name, 20) }}</div>
                     <div class="progress">
                         <div class="progress-bar"></div>
                     </div>
@@ -96,7 +96,7 @@
                                     <strong>Ngày khởi hành</strong>
                                 </td>
                                 <td>
-                                    {{ date("l jS \of F Y", strtotime($payment_log->batch)) }}
+                                    {{ \Carbon\Carbon::parse($payment_log->batch)->format('d-m-Y') }}
                                 </td>
                             </tr>
                             <tr>
