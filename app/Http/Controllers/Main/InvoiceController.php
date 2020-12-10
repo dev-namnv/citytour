@@ -30,5 +30,19 @@ class InvoiceController extends Controller
         return view('Main.schedule.detail', compact(['invoice']));
     }
 
+    public function complete($sku)
+    {
+        $invoice = Invoice::where('sku', '=', $sku)->first();
+        if (empty($invoice) || $invoice->user_id != auth()->user()->id) {
+            return abort(404);
+        }
+
+        $invoice->update([
+            'status' => INVOICE_COMPLETE_CONFIRM
+        ]);
+
+        session()->flash(TOASTR, json_encode(['status' => TOASTR_SUCCESS, 'title' => 'Xác nhận thành công']));
+        return redirect()->back();
+    }
 
 }

@@ -30,6 +30,7 @@ class Invoice extends Model
         'customer_address',
         'customer_phone',
         'customer_email',
+        'status'
     ];
 
     /**
