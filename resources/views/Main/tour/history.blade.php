@@ -397,7 +397,7 @@
                                     <th>Tên tour</th>
                                     <th>Lịch trình</th>
                                     <th>Hóa đơn</th>
-                                    <th>Trạng thái</th>
+{{--                                    <th>Trạng thái</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -414,9 +414,9 @@
                                                 <a href="{{route('Main.invoice_detail', $invoice->id)}}"
                                                    target="_blank">Chi tiết</a>
                                             </td>
-                                            <td>
-                                                <span class="text-success">{{$invoice->getStatus()}}</span>
-                                            </td>
+{{--                                            <td>--}}
+{{--                                                <span class="text-success">{{$invoice->getStatus()}}</span>--}}
+{{--                                            </td>--}}
                                         </tr>
                                     @endforeach
                                 @else
@@ -432,9 +432,9 @@
                                                 <a href="{{route('Main.invoice_detail', $invoice->id)}}"
                                                    target="_blank">Chi tiết</a>
                                             </td>
-                                            <td>
-                                                <span class="text-success">{{$invoice->getStatus()}}</span>
-                                            </td>
+{{--                                            <td>--}}
+{{--                                                <span class="text-success">{{$invoice->getStatus()}}</span>--}}
+{{--                                            </td>--}}
                                         </tr>
                                     @endforeach
                                 @endif
