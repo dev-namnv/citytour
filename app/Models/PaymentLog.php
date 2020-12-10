@@ -36,4 +36,9 @@ class PaymentLog extends Model
     {
         return $this->belongsTo('App\Models\Tour');
     }
+
+    public function invoice()
+    {
+        return $this->hasOne('App\Models\Invoice', 'payment_code', 'payment_code');
+    }
 }
