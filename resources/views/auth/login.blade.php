@@ -1,5 +1,5 @@
 @extends('layouts.main.app')
-
+@section('title','Đăng Nhập')
 @section('content')
     <main>
         <section id="hero" class="login">
@@ -7,12 +7,11 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
                         <div id="login">
-                            <div class="text-center"><img src="./img/logo.png" alt="Image" data-retina="true" ></div>
+                            <div class="text-center"><img src="/Libraries/Main/img/logo_sticky.png" alt="Image" data-retina="true" ></div>
                             <hr>
                             <form class="form-login" method="post" action="{{ route('login') }}">
                                 @csrf
-                                <a href="#0" class="social_bt facebook">Login with Facebook</a>
-                                <a href="#0" class="social_bt google">Login with Google</a>
+                                <a href="social.google" class="social_bt google">Login with Google</a>
                                 <div class="divider"><span>Or</span></div>
                                 <div class="form-group">
                                     <label>Username</label>
