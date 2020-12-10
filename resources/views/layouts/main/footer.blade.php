@@ -3,31 +3,31 @@
         <div class="row">
             <div class="col-lg-4 col-md-4">
                 <h3>Liên Hệ</h3>
-                <a href="tel://0423445999" id="phone">+84 423 445 999</a>
-                <a href="mailto:help@citytours.com" id="email_footer">help@citytours.com</a>
+                <a href="tel://0423445999" id="phone">@lang('info.hotline')</a>
+                <a href="mailto:help@citytours.com" id="email_footer">help@citytours.top</a>
             </div>
             <div class="col-lg-2 col-md-3 ml-md-auto">
                 <h3>Giới Thiệu</h3>
                 <ul>
                     <li>
-                        <a href="#">Về chúng tôi</a>
+                        <a href="{{ route('about') }}">Về chúng tôi</a>
                     </li>
                     <li>
-                        <a href="#">FAQ</a>
+                        <a href="{{ route('faq') }}">FAQ</a>
                     </li>
                     <li>
-                        <a href="#">Đăng nhập</a>
+                        <a href="{{ route('login') }}">Đăng nhập</a>
                     </li>
                     <li>
-                        <a href="#">Đăng ký</a>
+                        <a href="{{ route('register') }}">Đăng ký</a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-3 ml-md-auto">
                 <h3>Khám Phá</h3>
                 <ul>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Hướng dẫn viên</a></li>
+                    <li><a href="{{ route('articles.index') }}">Blog</a></li>
+                    <li><a href="{{ route('guide.detail', ['guide_id' => \App\Models\User::query()->where('role', GUIDE)->inRandomOrder()->first()]) }}">Hướng dẫn viên</a></li>
                     <li><a href="#">Bộ sưu tập</a></li>
                 </ul>
             </div>

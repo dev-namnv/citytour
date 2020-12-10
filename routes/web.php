@@ -21,9 +21,9 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () {
     Route::get('/', 'AuthenticationController@index')->name('authentication');
     Route::post('/authenticate', 'AuthenticationController@authenticate')->name('authenticate');
-    Route::get('/forgot-password', 'AuthenticationController@forgot')->name('forgot-password');
     Route::post('/recovery', 'AuthenticationController@recovery')->name('recovery');
     Route::get('/confirm', 'AuthenticationController@confirm')->name('confirm');
+    Route::post('/register-guide', 'AuthenticationController@registerGuide')->name('register-guide');
 });
 
 // Manager
@@ -150,6 +150,9 @@ Route::group(['namespace' => 'Main'], function () {
     });
 
     Route::get('/article_categories/{slug}', 'ArticleCategoryController@show')->name('Main.article_category.show');
+
+    Route::get('about', 'AboutController@index')->name('about');
+    Route::get('faqs', 'FaqController@index')->name('faq');
 });
 
 /**

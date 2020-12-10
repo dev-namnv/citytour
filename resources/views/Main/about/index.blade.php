@@ -17,9 +17,9 @@
         <div id="position">
             <div class="container">
                 <ul>
-                    <li><a href="{{route('home')}}">Home</a>
+                    <li><a href="{{route('home')}}">Trang chủ</a>
                     </li>
-                    <li><a href="#">About</a>
+                    <li><a href="{{ route('about') }}">Giới thiệu</a>
                     </li>
                 </ul>
             </div>
@@ -29,26 +29,26 @@
         <div class="container margin_60">
 
             <div class="main_title">
-                <h2>Some <span>good </span>reasons</h2>
-                <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+                <h2>Lý do <span>chọn</span> chúng tôi</h2>
+                <p>Với tiêu chí đặt trải nghiệm của bạn lên làm đầu. Chúng tôi đang nỗ lực để tạo sự thoải mái cho một chuyến du lịch tuyệt vời.</p>
             </div>
 
             <div class="row">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="feature">
                         <i class="icon_set_1_icon-30"></i>
-                        <h3><span>+ 1000</span> Customers</h3>
+                        <h3><span>+{{ \App\Helpers\UserHelper::countUsers() }}</span> Khách hàng</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                            Chúng tôi đang dần nâng cao trải nghiệm của người dùng, đem đến cho bạn những lựa chọn hợp lý nhất. Phù hợp túi tiền với các bạn.
                         </p>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.2s">
                     <div class="feature">
                         <i class="icon_set_1_icon-41"></i>
-                        <h3><span>+120</span> Premium city tours</h3>
+                        <h3><span>+{{ \App\Helpers\TourHelper::count() }}</span> Tour tuyệt vời</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                            Ở bất cứ nơi nào trên thế giới, những đứa trẻ hồn nhiên, vô tư vui đùa với nhau luôn là những khoảnh khắc tuyệt vời nhất.
                         </p>
                     </div>
                 </div>
@@ -58,67 +58,43 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
                     <div class="feature">
                         <i class="icon_set_1_icon-57"></i>
-                        <h3><span>H24</span> Support</h3>
+                        <h3>Hỗ trợ <span>24h</span></h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                            Chúng tôi luôn sẵn sàng giải đáp các thắc mắc của bạn. Tạo cảm giác như đang ở nhà. Nhấc điện thoại lên và liên hệ ngay với chúng tôi.
                         </p>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.4s">
                     <div class="feature">
                         <i class="icon_set_1_icon-61"></i>
-                        <h3><span>10 Languages</span> available</h3>
+                        <h3>Đi bất cứ đâu</h3>
                         <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                            Chúng tôi sẽ giúp bạn tìm kiếm các chuyến du lịch hấp dẫn nhất với giá cực ưu đãi. Đăng ký để nhận ngay thông tin!
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- End row -->
-            <div class="row">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="feature">
-                        <i class="icon_set_1_icon-13"></i>
-                        <h3><span>Accesibility</span> managment</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.6s">
-                    <div class="feature">
-                        <i class="icon_set_1_icon-22"></i>
-                        <h3><span>Pet</span> allowed</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- End row -->
             <hr>
             <div class="row">
                 <div class="col-lg-6">
-                    <h4>Pertinax elaboraret sed</h4>
-                    <p>Ad cum movet fierent assueverit, mei stet legere ne. Mel at vide soluta, ut <a href="#">utamur antiopam inciderint</a> sed. Ut iriure perpetua voluptaria has, vim postea denique in, mollis pertinax elaboraret sed in. Per no vidit timeam, quis omittam sed at. </p>
+                    <h4>Dịch vụ đơn giản</h4>
+                    <p>Các dịch vụ đi kèm mà chúng tôi cung cấp là những cái tưởng chừng như ít được quan tâm nhưng bạn đã nhầm. Chúng tôi luôn cố gắng tạo nên cảm giác thoải mái nhất cho bạn</p>
                     <div class="general_icons">
                         <ul>
-                            <li><i class="icon_set_1_icon-59"></i>Breakfast</li>
-                            <li><i class="icon_set_1_icon-8"></i>Dinner</li>
-                            <li><i class="icon_set_1_icon-32"></i>Photo collection</li>
-                            <li><i class="icon_set_1_icon-50"></i>Personal shopper</li>
+                            @foreach($services[0] as $service)
+                                <li><i class="{{ $service->icon }}"></i>{{ $service->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <h4>Mel at vide soluta</h4>
-                    <p>Ad cum movet fierent assueverit, mei stet legere ne. Mel at vide soluta, ut <strong>utamur antiopam inciderint</strong> sed. Ut iriure perpetua voluptaria has, vim postea denique in, mollis pertinax elaboraret sed in. Per no vidit timeam, quis omittam sed at. </p>
+                    <h4>Nhưng phù hợp với mọi người</h4>
+                    <p>Chúng tôi cũng cấp các dịch vụ thiết thực với mọi người, nơi mà những <b>Tour</b> cố định khác chưa có, bạn có thể tham khảo một số dưới đây.</p>
                     <div class="general_icons">
                         <ul>
-                            <li><i class="icon_set_1_icon-98"></i>Audio guide</li>
-                            <li><i class="icon_set_1_icon-27"></i>Parking</li>
-                            <li><i class="icon_set_1_icon-36"></i>Exchange</li>
-                            <li><i class="icon_set_1_icon-63"></i>Mobile</li>
+                            @foreach($services[1] as $service)
+                                <li><i class="{{ $service->icon }}"></i>{{ $service->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -136,9 +112,13 @@
                 </div>
                 <div class="col-lg-6 nopadding">
                     <div class="features-content">
-                        <h3>"Ex vero mediocrem"</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                        <p><a href="#" class=" btn_1 white">Read more</a>
+                        <h3>"Phổ biến và phải chăng"</h3>
+                        <p>
+                            Bạn có thể tham khảo một số Tour được đánh giá cao với giá cả hợp túi tiền nhất.
+                            <br/> Có thể tìm hiểu và thêm các bộ lọc như ngày khởi hành, địa điểm, đánh giá.
+                            Tìm hiểu thêm tại đây.
+                        </p>
+                        <p><a href="{{ route('Main.tour.index', ['price' => 'lower', 'ranking' => 'higher']) }}" class=" btn_1 white">Xem thêm</a>
                         </p>
                     </div>
                 </div>
@@ -149,28 +129,18 @@
         <div class="container margin_60">
 
             <div class="main_title">
-                <h2>What <span>customers </span>says</h2>
-                <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+                <h2><span>người dùng </span>nói gì về chúng tôi</h2>
+                <p>Những đánh giá nổi bật của người dùng được ghi nhận trên hệ thống của chúng tôi.</p>
             </div>
 
             <div class="row">
                 @foreach ($comments as $c)
                     <div class="col-lg-6">
-                        <div class="review_strip">
-                            <img src="{{$c->avatar}}" alt="Image" class="rounded-circle">
-                            <h4>{{$c->first_name}} {{$c->last_name}}</h4>
-                            <p>{{$c->content}}</p>
-                            <div class="rating">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    @if ($c->rating >= $i)
-                                        <i class="icon-star voted"></i>
-                                    @else
-                                        <i class=" icon-star-empty"></i>
-                                    @endif
-                                @endfor
-                            </div>
+                        <div class="review_strip" style="min-height: 170px">
+                            <img src="{{ $c->user->avatar }}" style="width: 60px; margin-top: 25px" alt="Image" class="rounded-circle">
+                            <h4>{{ $c->user->getFullName() }}</h4>
+                            <p>{{ $c->content }}</p>
                         </div>
-                        <!-- End review strip -->
                     </div>
                 @endforeach
             </div>
@@ -179,24 +149,22 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <img src="{{asset('Libraries\Main\img\laptop.png')}}" alt="Laptop" class="img-fluid laptop">
+                    <img src="libraries/main/img/laptop.png" alt="Laptop" class="img-fluid laptop">
                 </div>
                 <div class="col-md-6">
-                    <h3><span>Get started</span> with CityTours</h3>
+                    <h3><span>Bắt đầu</span> với CityTour</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset.
+                        Hướng dẫn bạn bắt đầu nhanh với City Tour
                     </p>
                     <ul class="list_order">
-                        <li><span>1</span>Select your preferred tours</li>
-                        <li><span>2</span>Purchase tickets and options</li>
-                        <li><span>3</span>Pick them directly from your office</li>
+                        <li><span>1</span>Chọn các chuyến tham quan ưa thích của bạn</li>
+                        <li><span>2</span>Đặt cọc tour và tiến hành thanh toán</li>
+                        <li><span>3</span>Đợi phản hồi và bắt đầu 1 chuyến du lịch tuyệt vời</li>
                     </ul>
-                    <a href="#" class="btn_1">Start now</a>
+                    <a href="{{ route('Main.tour.index') }}" class="btn_1">Bắt đầu ngay</a>
                 </div>
             </div>
-            <!-- End row -->
 
         </div>
-        <!-- End Container -->
     </main>
 @endsection

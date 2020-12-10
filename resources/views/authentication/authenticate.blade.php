@@ -2,71 +2,152 @@
 
 @section('title', 'Authenticate')
 
+@section('extra-js')
+    <script>
+        @if($errors->any())
+            swal.fire({
+                text: '{!! implode('', $errors->all(':message')) !!}',
+                icon: "warning",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, tôi hiểu rồi!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function() {
+                KTUtil.scrollTop();
+            });
+        @endif
+
+        @if(session()->has('forgotPassword') && session('forgotPassword') !== '')
+            swal.fire({
+                text: '{{ session('forgotPassword') }}',
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, tôi hiểu rồi!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function() {
+                KTUtil.scrollTop();
+            });
+        @endif
+
+        @if(session()->has('register'))
+        swal.fire({
+            text: '{{ session('register')['message'] }}',
+            icon: '{{ session('register')['status'] === true ? "success" : "error" }}',
+            buttonsStyling: false,
+            confirmButtonText: "Ok, tôi hiểu rồi!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+            KTUtil.scrollTop();
+        });
+        @endif
+    </script>
+@endsection
+@isset($register)
+    @dd($register)
+@endisset
 @section('content')
-    <div class="form-content">
-
-        <h1 class="pb-lg-4">Log In to <a href="#"><span class="brand-name">CORK</span></a></h1>
-        <form class="text-left form-login" method="post" action="{{ route('authenticate') }}">
-            @csrf
-            <div class="form">
-                <div id="username-field" class="field-wrapper input">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                         stroke-linejoin="round" class="feather feather-user">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    <input id="username" name="username" type="text"
-                           class="form-control @error('username') is-invalid @enderror" autocomplete="username"
-                           autofocus placeholder="Username" value="{{ old('username') }}">
-                    @error('username')
-                        <span id="password-error" class="is-invalid invalid-feedback">{{ $message }}</span>
-                    @enderror
+    <div class="login login-5 login-signin-on d-flex flex-row-fluid" id="kt_login">
+        <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url({{ asset('Libraries/Manager/media/bg/bg-2.jpg') }});">
+            <div class="login-form text-center text-white p-7 position-relative overflow-hidden">
+                <div class="d-flex flex-center mb-15">
+                    <a href="#">
+                        <img src="{{ asset('Libraries/Main/img/logo.png') }}" class="max-h-75px" alt="" />
+                    </a>
                 </div>
-
-                <div id="password-field" class="field-wrapper input mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                         stroke-linejoin="round" class="feather feather-lock">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
-                    <input id="password" name="password" type="password" class="form-control"
-                           autocomplete="current-password" placeholder="Password" data-minlength>
-                </div>
-                <div class="d-sm-flex justify-content-between">
-                    <div class="field-wrapper toggle-pass">
-                        <p class="d-inline-block">Show Password</p>
-                        <label class="switch s-primary">
-                            <input type="checkbox" id="toggle-password" class="d-none">
-                            <span class="slider round"></span>
-                        </label>
+                <div class="login-signin">
+                    <div class="mb-20">
+                        <h3 class="opacity-40 font-weight-normal">Đăng nhập vào Quản trị</h3>
+                        <p class="opacity-40">Điền thông tin của bạn vào biểu mẫu đăng nhập:</p>
                     </div>
-                    <div class="field-wrapper">
-                        <button type="submit" class="btn btn-primary btn-login" value="">Log In</button>
-                    </div>
-
-                </div>
-
-                <div class="field-wrapper text-center keep-logged-in">
-                    <div class="n-chk new-checkbox checkbox-outline-primary">
-                        <label class="new-control new-checkbox checkbox-outline-primary">
-                            <input type="checkbox" class="new-control-input" name="remember"
-                                   id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <span class="new-control-indicator"></span>Keep me logged in
-                        </label>
+                    <form class="form" id="kt_login_signin_form" method="post" action="{{ route('authenticate') }}">
+                        @csrf
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Username" name="username" autocomplete="off" value="{{ old('username') }}" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="password" placeholder="Password" name="password" />
+                        </div>
+                        <div class="form-group d-flex flex-wrap justify-content-between align-items-center px-8 opacity-60">
+                            <div class="checkbox-inline">
+                                <label class="checkbox checkbox-outline checkbox-white text-white m-0">
+                                    <input type="checkbox" name="remember" />
+                                    <span></span>Lưu đăng nhập</label>
+                            </div>
+                            <a href="javascript:;" id="kt_login_forgot" class="text-white font-weight-bold">Quên mật khẩu</a>
+                        </div>
+                        <div class="form-group text-center mt-10">
+                            <button id="kt_login_signin_submit" type="submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3">Đăng nhập</button>
+                        </div>
+                    </form>
+                    <div class="mt-10">
+                        <span class="opacity-40 mr-4">Bạn chưa có tài khoản ?</span>
+                        <a href="javascript:;" id="kt_login_signup" class="text-white opacity-30 font-weight-normal">Đăng ký làm Hướng dẫn viên</a>
                     </div>
                 </div>
-
-                <div class="field-wrapper">
-                    <a href="{{ route('forgot-password') }}" class="forgot-pass-link">Forgot Password?</a>
+                <!--end::Login Sign in form-->
+                <!--begin::Login Sign up form-->
+                <div class="login-signup">
+                    <div class="mb-20">
+                        <h3 class="opacity-40 font-weight-normal">Đăng ký</h3>
+                        <p class="opacity-40">Nhập thông tin tài khoản đăng ký</p>
+                    </div>
+                    <form class="form text-center" id="kt_login_signup_form" action="{{ route('register-guide') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('first_name') is-invalid @enderror" type="text" placeholder="Tên" name="first_name" value="{{ old('first_name') }}" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('email') is-invalid @enderror" type="text" placeholder="Địa chỉ email" name="email" autocomplete="off" value="{{ old('email') }}" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('username') is-invalid @enderror" type="text" placeholder="Tên tài khoản đăng nhập" name="username" autocomplete="off" value="{{ old('username') }}" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('password') is-invalid @enderror" type="password" placeholder="Mật khẩu" name="password" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('password_confirm') is-invalid @enderror" type="password" placeholder="Nhập lại mật khẩu" name="password_confirm" />
+                        </div>
+                        <div class="form-group text-left px-8">
+                            <div class="checkbox-inline">
+                                <label class="checkbox checkbox-outline checkbox-white opacity-60 text-white m-0 @error('agree') is-invalid @enderror">
+                                    <input type="checkbox" name="agree" />
+                                    <span></span>Tôi đồng ý với
+                                    <a href="#" class="text-white font-weight-bold ml-1">các điều khoản và điều kiện</a>.</label>
+                            </div>
+                            <div class="form-text text-muted text-center"></div>
+                        </div>
+                        <div class="form-group">
+                            <button id="kt_login_signup_submit" type="submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3 m-2">Đăng ký</button>
+                            <button id="kt_login_signup_cancel" class="btn btn-pill btn-outline-white opacity-70 px-15 py-3 m-2">Hủy</button>
+                        </div>
+                    </form>
                 </div>
-
+                <!--end::Login Sign up form-->
+                <!--begin::Login forgot password form-->
+                <div class="login-forgot">
+                    <div class="mb-20">
+                        <h3 class="opacity-40 font-weight-normal">Quên mật khẩu?</h3>
+                        <p class="opacity-40">Nhập địa chỉ email của bạn để lấy lại mật khẩu</p>
+                    </div>
+                    <form class="form" id="kt_login_forgot_form" method="post" action="{{ route('recovery') }}">
+                        @csrf
+                        <div class="form-group mb-10">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email" name="email" autocomplete="off" value="{{ old('email') }}" />
+                        </div>
+                        <div class="form-group">
+                            <button id="kt_login_forgot_submit" type="submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3 m-2">Gửi yêu cầu</button>
+                            <button id="kt_login_forgot_cancel" class="btn btn-pill btn-outline-white opacity-70 px-15 py-3 m-2">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+                <!--end::Login forgot password form-->
             </div>
-        </form>
-        <p class="terms-conditions">© 2019 All Rights Reserved. <a href="{{ route('home') }}">CORK</a> is a product
-            of Designreset. <a href="javascript:void(0);">Cookie Preferences</a>, <a
-                href="javascript:void(0);">Privacy</a>, and <a href="javascript:void(0);">Terms</a>.</p>
-
+        </div>
     </div>
 @endsection

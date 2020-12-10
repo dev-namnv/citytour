@@ -90,7 +90,7 @@ class User extends Authenticatable
 
     public function tours()
     {
-        return $this->hasMany('App\Models\Tour');
+        return $this->hasMany('App\Models\Tour', 'guide_id');
     }
 
 

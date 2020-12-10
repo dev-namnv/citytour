@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
 use App\Scopes\GuideBehaviorScope;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -58,9 +59,9 @@ class TourController extends Controller
                 $tours = $tours->where('address', 'like', '%'.$where.'%');
             }
             // Where
-            if ($when && preg_match('/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/',$when)) {
+            if ($when) {
                 $tours = $tours->whereHas('batches', function ($q) use ($when) {
-                    $q->where('batch', '=', date('Y-m-d', strtotime($when)));
+                    $q->where('batch', '=', Carbon::parse($when)->format('Y-m-d'));
                 });
             }
 

@@ -234,7 +234,6 @@
                     <a href="{{ route('Main.tour.index') }}" class="btn_1">Bắt đầu ngay</a>
                 </div>
             </div>
-
         </div>
     </main>
 @endsection

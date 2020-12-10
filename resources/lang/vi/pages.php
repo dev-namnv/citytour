@@ -79,5 +79,12 @@ return [
             ],
             'desc' => 'Cập nhật thông tin cá nhân của bạn'
         ],
+    ],
+    'about' => [
+        'title' => 'Giới thiệu',
+        'section' => [
+            'title' => 'Về chúng tôi',
+            'desc' => 'Những thắc mắc của bạn về các Tour, dịch vụ của chúng tôi sẽ được giải đáp.'
+        ]
     ]
 ];

@@ -28,7 +28,6 @@ class Tour extends Model
         'active',
         'category_id',
         'guide_id',
-        'user_id',
         'note',
         'origin',
         'deleted_at',
@@ -70,7 +69,7 @@ class Tour extends Model
     ];
 
     protected $hidden = [
-//        'active', 'publish', 'deleted_at', 'user_id', 'category_id'
+//        'active', 'publish', 'deleted_at', 'category_id'
     ];
 
     /**

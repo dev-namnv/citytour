@@ -28,14 +28,14 @@ var KTLogin = function() {
 					username: {
 						validators: {
 							notEmpty: {
-								message: 'Username is required'
+								message: 'Tên tài khoản là bắt buộc'
 							}
 						}
 					},
 					password: {
 						validators: {
 							notEmpty: {
-								message: 'Password is required'
+								message: 'Mật khẩu là bắt buộc'
 							}
 						}
 					}
@@ -43,40 +43,26 @@ var KTLogin = function() {
 				plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
                     submitButton: new FormValidation.plugins.SubmitButton(),
-                    //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                    defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
 					bootstrap: new FormValidation.plugins.Bootstrap()
 				}
 			}
 		);
 
-        $('#kt_login_signin_submit').on('click', function (e) {
-            e.preventDefault();
-
+        $('#kt_login_signin_submit').on('click', function () {
             validation.validate().then(function(status) {
-		        if (status == 'Valid') {
+		        if (status !== 'Valid') {
                     swal.fire({
-		                text: "All is cool! Now you submit this form",
-		                icon: "success",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
+                        text: "Xin lỗi, có vẻ như đã phát hiện thấy một số lỗi, vui lòng thử lại.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, tôi hiểu rồi!",
                         customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
-				} else {
-					swal.fire({
-		                text: "Sorry, looks like there are some errors detected, please try again.",
-		                icon: "error",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    }).then(function() {
+                        KTUtil.scrollTop();
+                    });
 				}
 		    });
         });
@@ -103,54 +89,72 @@ var KTLogin = function() {
 			form,
 			{
 				fields: {
-					fullname: {
+					first_name: {
 						validators: {
 							notEmpty: {
-								message: 'Username is required'
+								message: 'Tên không được để trống'
 							}
 						}
 					},
 					email: {
                         validators: {
 							notEmpty: {
-								message: 'Email address is required'
+								message: 'Địa chỉ email không được để trống'
 							},
                             emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'Định dạng email không hợp lệ'
 							}
+						}
+					},
+					username: {
+                        validators: {
+							notEmpty: {
+								message: 'Tên đăng nhập không được để trống'
+							},
+                            stringLength: {
+							    min: 8,
+                                max: 12,
+                                message: 'Nhập từ 8 đến 12 ký tự'
+                            },
+                            regexp: {
+							    regexp: '^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$',
+                                message: 'Định dạng tên đăng nhập không hợp lệ'
+                            }
 						}
 					},
                     password: {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Mật khẩu không được để trống'
                             }
                         }
                     },
-                    cpassword: {
+                    password_confirm: {
                         validators: {
                             notEmpty: {
-                                message: 'The password confirmation is required'
+                                message: 'Vui lòng nhập lại mật khẩu'
                             },
                             identical: {
                                 compare: function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
+                                message: 'Xác thực mật khẩu không trùng khớp'
                             }
                         }
                     },
                     agree: {
                         validators: {
                             notEmpty: {
-                                message: 'You must accept the terms and conditions'
+                                message: 'Bạn phải chấp thuận điều khoản và điều kiện'
                             }
                         }
                     },
 				},
 				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap()
+                    trigger: new FormValidation.plugins.Trigger(),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                    bootstrap: new FormValidation.plugins.Bootstrap()
 				}
 			}
 		);
@@ -159,30 +163,18 @@ var KTLogin = function() {
             e.preventDefault();
 
             validation.validate().then(function(status) {
-		        if (status == 'Valid') {
+		        if (status !== 'Valid') {
                     swal.fire({
-		                text: "All is cool! Now you submit this form",
-		                icon: "success",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
+                        text: "Biểu mẫu đăng ký không chính xác, thử lại",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, tôi hiểu rồi!",
                         customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
-				} else {
-					swal.fire({
-		                text: "Sorry, looks like there are some errors detected, please try again.",
-		                icon: "error",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
-					});
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    }).then(function() {
+                        KTUtil.scrollTop();
+                    });
 				}
 		    });
         });
@@ -206,24 +198,25 @@ var KTLogin = function() {
 					email: {
 						validators: {
 							notEmpty: {
-								message: 'Email address is required'
+								message: 'Địa chỉ email không được để trống'
 							},
                             emailAddress: {
-								message: 'The value is not a valid email address'
+								message: 'Định dạng email không hợp lệ'
 							}
 						}
 					}
 				},
 				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap()
+                    trigger: new FormValidation.plugins.Trigger(),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
+                    bootstrap: new FormValidation.plugins.Bootstrap()
 				}
 			}
 		);
 
         // Handle submit button
-        $('#kt_login_forgot_submit').on('click', function (e) {
-            e.preventDefault();
+        $('#kt_login_forgot_submit').on('click', function () {
 
             validation.validate().then(function(status) {
 		        if (status == 'Valid') {

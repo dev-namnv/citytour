@@ -84,3 +84,6 @@ define('PAYMENT_CODE', 'payment_code');
 // Tour filter
 define('TOUR_POPULAR', 5);
 define('TOUR_RATING', 3);
+
+// Username
+define('REGEX_USERNAME', '/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/');
