@@ -37,7 +37,7 @@
                         {{--If auth invalid--}}
                         @guest
                             <li>
-                                <a href="{{route('login')}}" id="access_link">Đăng nhập</a>
+                                <a href="#sign-in-dialog" id="access_link">Đăng nhập</a>
                             </li>
                             @endguest
                             </li>
