@@ -5,7 +5,7 @@
     <link href="{{asset('libraries/main/css/blog.css')}}" rel="stylesheet">
 @endsection
 
-@section('title', 'Articles')
+@section('title', 'Bài viết')
 
 @section('extra-js')
     <script>
@@ -18,7 +18,7 @@
              data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
-                <h1>{{ __('pages.article.news') }}</h1>
+                <h1>Bài viết</h1>
             </div>
         </div>
     </section>
@@ -28,7 +28,7 @@
                 <ul>
                     <li><a href="/">{{ __('pages.article.home') }}</a>
                     </li>
-                    <li>{{ __('pages.article.news') }}</li>
+                    <li>Bài viết</li>
                 </ul>
             </div>
         </div>
@@ -37,20 +37,6 @@
         <div class="container margin_60">
             <div class="row">
                 <aside class="col-lg-3 add_bottom_30">
-
-                    <div class="widget">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{{ __('pages.article.search') }}...">
-                            <span class="input-group-btn">
-						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
-						</span>
-                        </div>
-                        <!-- /input-group -->
-                    </div>
-                    <!-- End Search -->
-
-                    <hr>
-
                     <div class="widget" id="cat_blog">
                         <h4>{{ __('pages.article.categories') }}</h4>
                         <ul>
@@ -78,15 +64,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <!-- End widget -->
-                    <hr>
-                    <div class="widget tags">
-                        <h4>{{ __('pages.article.tags') }}</h4>
-                        @foreach($article_tags as $key => $article_tag)
-                            <a href="#">{{$article_tag->name}}</a>
-                        @endforeach
-                    </div>
-                    <!-- End widget -->
+
 
                 </aside>
                 <!-- End aside -->
@@ -109,7 +87,8 @@
                                             <li>
                                                 <i class="icon-inbox-alt"></i> {{ __('pages.article.in') }}
                                                 @foreach($article->categories->take(2) as $key => $category)
-                                                    <a href="#{{$category->id}}">{{$category->name}}</a>,
+
+                                                    <a href="#{{$category->id}}">{{$category->name}} </a>,
                                                 @endforeach
                                                 @if(count($article->categories) > 2)
                                                     ...

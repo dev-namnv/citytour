@@ -7,9 +7,36 @@
 
         <div class="row layout-top-spacing">
             <div class="widget-content widget-content-area br-6 ml-3">
-
+                <ul class="nav">
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][0] }}">
+                        <a class="nav-link text-white" href="?status=0">{{ config('masterdata')['invoice']['status'][0] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][1] }}">
+                        <a class="nav-link text-white" href="?status=1">{{ config('masterdata')['invoice']['status'][1] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][2] }}">
+                        <a class="nav-link text-white" href="?status=2">{{ config('masterdata')['invoice']['status'][2] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][3] }}">
+                        <a class="nav-link" href="?status=3">{{ config('masterdata')['invoice']['status'][3] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][4] }}">
+                        <a class="nav-link text-white" href="?status=4">{{ config('masterdata')['invoice']['status'][4] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][5] }}">
+                        <a class="nav-link text-white" href="?status=5">{{ config('masterdata')['invoice']['status'][5] }}</a>
+                    </li>
+                    <li class="nav-item m-3 {{ config('masterdata')['invoice']['color'][6] }}">
+                        <a class="nav-link text-white" href="?status=6">{{ config('masterdata')['invoice']['status'][6] }}</a>
+                    </li>
+                    <li class="nav-item m-3">
+                        <a class="nav-link text-dark" href="{{ route('invoice-index') }}">Tất cả</a>
+                    </li>
+                </ul>
             </div>
         </div>
+
+        <hr/>
 
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
@@ -19,7 +46,7 @@
                             <thead>
                             <tr class="text-center">
                                 <th>Tên tour</th>
-                                <th>Thumbnail</th>
+                                <th>Ảnh thu nhỏ</th>
                                 <th>Tên khách hàng</th>
                                 <th>Địa chỉ khách hàng</th>
                                 <th>Số người </th>

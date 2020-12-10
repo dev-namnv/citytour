@@ -3,7 +3,7 @@
 @section('title', __('pages.contact.title'))
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="Libraries/Main/img/header_bg.jpg" data-natural-width="1400" data-natural-height="470">
+    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('Libraries/Main/img/slides_bg/banner-contact.png')}}" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
                 <h1>{!! __('pages.contact.section.title') !!}</h1>

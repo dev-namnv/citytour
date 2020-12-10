@@ -22,7 +22,7 @@
                                             @endif
                                             <li><a href="#">{{ __('button.profile') }}</a>
                                             </li>
-                                            <li><a href="#">{{ __('button.history') }}</a>
+                                            <li><a href="{{route('Main.history')}}">Lịch sử</a>
                                             </li>
                                             <li><a href="#" onclick="Main.logoutGlobal(this)">{{ __('button.sign_out') }}</a>
                                             </li>
@@ -31,7 +31,7 @@
                                 </div>
                                 <!-- End Dropdown access -->
                             </li>
-                            <li><a href="wishlist.html" id="wishlist_link">{{ __('button.wishlist') }}</a></li>
+                            <li><a href="{{route('wishlist.list')}}" id="wishlist_link">{{ __('button.wishlist') }}</a></li>
                         @endauth
 
                         {{--If auth invalid--}}
@@ -73,6 +73,9 @@
                         </li>
                         <li class="submenu">
                             <a href="{{ route('Main.tour.index') }}" class="show-submenu">Tours</a>
+                        </li>
+                        <li class="submenu">
+                            <a href="{{ route('contact.index') }}" class="show-submenu">Liên hệ</a>
                         </li>
                     </ul>
                 </div><!-- End main-menu -->

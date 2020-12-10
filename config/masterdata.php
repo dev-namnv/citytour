@@ -23,7 +23,7 @@ return [
             TICKET_CUSTOMER_REPLY => 'bg-success',
             TICKET_WAITING_FOR_PROGRESS => 'bg-info',
             TICKET_PROCESSING => 'bg-danger',
-            TICKET_CLOSED => 'bg-secondary',
+            TICKET_CLOSED => 'bg-secondary text-dark',
         ]
     ],
     'tour' => [
@@ -47,13 +47,13 @@ return [
             INVOICE_SUCCESS => 'Hoàn tất',
         ],
         'color' => [
-            INVOICE_NEW => 'bg-light',
-            INVOICE_CONFIRM => 'bg-info',
-            INVOICE_HAS_PAID => 'bg-primary',
-            INVOICE_IN_PROGRESS => 'bg-secondary',
-            INVOICE_COMPLETE => 'bg-danger',
-            INVOICE_COMPLETE_CONFIRM => 'bg-warning',
-            INVOICE_SUCCESS => 'bg-success',
+            INVOICE_NEW => 'text-primary',
+            INVOICE_CONFIRM => 'text-primary',
+            INVOICE_HAS_PAID => 'text-success',
+            INVOICE_IN_PROGRESS => 'text-success',
+            INVOICE_COMPLETE => 'text-success',
+            INVOICE_COMPLETE_CONFIRM => 'text-success',
+            INVOICE_SUCCESS => 'text-success',
 
         ]
     ],

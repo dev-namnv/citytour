@@ -11,7 +11,7 @@
              data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
-                <h1>{{ __('pages.article.news') }}</h1>
+                <h1>Bài viết</h1>
                 <p>{{$article->title}}</p>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <ul>
                     <li><a href="#">{{ __('pages.article.home') }}</a>
                     </li>
-                    <li><a href="#">{{ __('pages.article.news') }}</a>
+                    <li><a href="#">Bài viết</a>
                     </li>
                     <li>{{ __('pages.article.detail') }}</li>
                 </ul>
@@ -33,24 +33,12 @@
         <div class="container margin_60">
             <div class="row">
                 <aside class="col-lg-3 add_bottom_30">
-
-                    <div class="widget">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{{ __('pages.article.search') }}...">
-                            <span class="input-group-btn">
-						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
-						</span>
-                        </div>
-                        <!-- /input-group -->
-                    </div>
-                    <!-- End Search -->
-                    <hr>
                     <div class="widget" id="cat_blog">
                         <h4>{{ __('pages.article.categories') }}</h4>
                         <ul>
                             @foreach($article_categories as $key => $article_category)
                                 <li>
-                                    <a href="#">{{$article_category->name}}</a>
+                                    <a href="{{route('Main.article_category.show', $article_category->slug)}}">{{$article_category->name}}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -72,15 +60,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <!-- End widget -->
-                    <hr>
-                    <div class="widget tags">
-                        <h4>{{ __('pages.article.tags') }}</h4>
-                        @foreach($article_tags as $key => $article_tag)
-                            <a href="#">{{$article_tag->name}}</a>
-                        @endforeach
-                    </div>
-                    <!-- End widget -->
+
 
                 </aside>
                 <!-- End aside -->
@@ -99,7 +79,7 @@
                                         </li>
                                         <li><i class="icon-inbox-alt"></i>{{ __('pages.article.in') }}
                                             @foreach($article->categories->take(2) as $key => $category)
-                                                <a href="#{{$category->id}}">{{$category->name}}</a>,
+                                                <a href="{{route('Main.article_category.show', $category->slug)}}">{{$category->name}}</a>,
                                             @endforeach
                                             @if(count($article->categories) > 2)
                                                 ...
@@ -137,7 +117,7 @@
                                 @if($comment->reply_for === null)
                                     <li>
                                         <div class="avatar">
-                                            <a href="#"><img src="{{$comment->user->avatar}}" alt="Image">
+                                            <a href="#"><img src="{{$comment->user->avatar}}" width="50" alt="Image">
                                             </a>
                                         </div>
 
@@ -154,7 +134,7 @@
                                                 <ul>
                                                     <li>
                                                         <div class="avatar">
-                                                            <a href="#"><img src="{{$reply_comment->user->avatar}}" alt="Image">
+                                                            <a href="#"><img width="50" src="{{$reply_comment->user->avatar}}" alt="Image">
                                                             </a>
                                                         </div>
 

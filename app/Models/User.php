@@ -31,7 +31,10 @@ class User extends Authenticatable
         'city',
         'zipcode',
         'country',
-        'google_map'
+        'google_map',
+        'status',
+        'behavior_score',
+        'google_id'
     ];
 
     /**
@@ -89,5 +92,6 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Tour');
     }
+
 
 }
