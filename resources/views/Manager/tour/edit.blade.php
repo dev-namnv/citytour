@@ -156,7 +156,7 @@
                             <div class="col-lg-8 col-xl-8">
                                 {{--                                <textarea class="form-control form-control-lg form-control-solid" id="note" name="tour_note" required data-label="Ghi chú">--}}
                                 {{--                                </textarea>--}}
-                                {!! Form::textarea('note',$tour->note,['id'=>'note','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ghi chú','required']) !!}
+                                {!! Form::textarea('note',$tour->note,['id'=>'note','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ghi chú']) !!}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -412,7 +412,7 @@
 
         $(`#submit`).on('click', function () {
             $(`.error_message`).text('');
-            $(`input[required],select[required],textarea[required]`).each(function () {
+            $(`input[required],select[required]`).each(function () {
                 let label = $(this).data('label') ?? 'TextArea';
                 if ($(this).val() == '') {
                     $(`.error_message`).append(`
