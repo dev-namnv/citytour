@@ -135,7 +135,7 @@
                         <h3 class="inner">Cảm ơn!</h3>
                         {{ $message }}
                         <hr>
-                        <a class="btn_full_outline" href="{{ route('Main.invoice_detail', ['id' => $payment_log->invoice->id]) }}" target="_blank">View your invoice</a>
+                        <a class="btn_full_outline" href="{{ route('Main.invoice_detail', ['id' => $payment_log->invoice->id]) }}" target="_blank">Xem hóa đơn</a>
                     </div>
                     <div class="box_style_4">
                         <i class="icon_set_1_icon-89"></i>
