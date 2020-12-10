@@ -77,6 +77,12 @@
                         <li class="submenu">
                             <a href="{{ route('contact.index') }}" class="show-submenu">Liên hệ</a>
                         </li>
+                        <li class="submenu">
+                            <a href="{{ route('about') }}" class="show-submenu">Giới thiệu</a>
+                        </li>
+                        <li class="submenu">
+                            <a href="{{ route('faq') }}" class="show-submenu">Faq</a>
+                        </li>
                     </ul>
                 </div><!-- End main-menu -->
                 <ul id="top_tools">
