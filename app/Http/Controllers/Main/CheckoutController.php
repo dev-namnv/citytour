@@ -40,7 +40,7 @@ class CheckoutController extends Controller
 
     public function payment(PaymentRequest $request)
     {
-        try {
+//        try {
             $tour = Tour::query()->find($request->tour_id);
             $batch = Batch::query()->where('batch', $request->batch)->first();
 
@@ -107,6 +107,46 @@ class CheckoutController extends Controller
                 }
 
                 /**
+                 * Kiểm tra tài khoản tồn tại tạo tài khoản định danh
+                 */
+                $user = User::query()->where('email', $request->customer_email)->first();
+                if (Auth::check()) {
+                    $new_user_log = new UserLog([
+                        'title' => $vnp_OrderInfo,
+                        'points' => $total_cost/100,
+                        'user_id' => Auth::id()
+                    ]);
+                } else {
+                    if ($user) {
+                        $new_user_log = new UserLog([
+                            'title' => $vnp_OrderInfo,
+                            'points' => $total_cost/100,
+                            'user_id' => $user->id
+                        ]);
+                    } else {
+                        $user = new User([
+                            'first_name' => $request->customer_name,
+                            'last_name' => '',
+                            'email' => $request->customer_email,
+                            'phone' => $request->customer_phone,
+                            'address' => $request->customer_address,
+                            'city' => $request->city,
+                            'zipcode' => $request->zipcode,
+                            'country' => $request->country,
+                            'password' => Hash::make($request->customer_email),
+                            'state' => $request->state
+                        ]);
+                        $new_user->save();
+
+                        $new_user_log = new UserLog([
+                            'title' => $vnp_OrderInfo,
+                            'point' => $total_cost/100,
+                            'user_id' => $new_user->id
+                        ]);
+                    }
+                }
+
+                /**
                  * Tạo hóa đơn
                  */
                 $new_invoice = new Invoice([
@@ -129,7 +169,7 @@ class CheckoutController extends Controller
                     'status' => INVOICE_NEW,
                     'tour_id' => $tour->id,
                     'guide_id' => $tour->guide_id,
-                    'user_id' => Auth::check() ? Auth::id() : null
+                    'user_id' => Auth::check() ? Auth::id() : $user->id
                 ]);
                 $new_invoice->save();
 
@@ -147,45 +187,6 @@ class CheckoutController extends Controller
                 ]);
                 $invoice_detail->save();
 
-                /**
-                 * Kiểm tra tài khoản tồn tại tạo tài khoản định danh
-                 */
-                if (Auth::check()) {
-                    $new_user_log = new UserLog([
-                        'title' => $vnp_OrderInfo,
-                        'points' => $total_cost/100,
-                        'user_id' => Auth::id()
-                    ]);
-                } else {
-                    $user = User::query()->where('email', $request->customer_email)->first();
-                    if ($user) {
-                        $new_user_log = new UserLog([
-                            'title' => $vnp_OrderInfo,
-                            'points' => $total_cost/100,
-                            'user_id' => $user->id
-                        ]);
-                    } else {
-                        $new_user = new User([
-                            'first_name' => $request->customer_name,
-                            'last_name' => '',
-                            'email' => $request->customer_email,
-                            'phone' => $request->customer_phone,
-                            'address' => $request->customer_address,
-                            'city' => $request->city,
-                            'zipcode' => $request->zipcode,
-                            'country' => $request->country,
-                            'password' => Hash::make($request->customer_email),
-                            'state' => $request->state
-                        ]);
-                        $new_user->save();
-
-                        $new_user_log = new UserLog([
-                            'title' => $vnp_OrderInfo,
-                            'point' => $total_cost/100,
-                            'user_id' => $new_user->id
-                        ]);
-                    }
-                }
                 $new_user_log->save();
 
                 /**
@@ -219,9 +220,9 @@ class CheckoutController extends Controller
             $new_payment_log->save();
             session()->put(PAYMENT_CODE, $payment_code);
             return redirect($vnp_Url);
-        } catch (\Exception $exception) {
+        /*} catch (\Exception $exception) {
             return back()->withErrors($exception->getMessage());
-        }
+        }*/
     }
 
     public function confirmation(Request $request)
