@@ -101,7 +101,7 @@
                             @endforeach
                         </div>
                         <div class="col-lg-12 text-center">
-                            <a href="#booking" style="color: #ffffff" class="bg-info p-2 d-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="booking">Đặt Lịch</a>
+                            <a href="{{ route('checkout.detail', ['slug' => $tour->slug]) }}" style="color: #ffffff" class="bg-info p-2 d-block">Đặt Lịch</a>
                         </div>
                     </div>
                     <div class="collapse" id="booking">

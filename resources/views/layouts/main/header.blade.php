@@ -20,7 +20,7 @@
                                                 <li><a href="{{ route('manager') }}">{{ __('button.manager') }}</a>
                                                 </li>
                                             @endif
-                                            <li><a href="#">{{ __('button.profile') }}</a>
+                                            <li><a href="{{ route('profile') }}">{{ __('button.profile') }}</a>
                                             </li>
                                             <li><a href="{{route('Main.history')}}">Lịch sử</a>
                                             </li>
