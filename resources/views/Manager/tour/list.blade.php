@@ -649,7 +649,7 @@
 \t                      <button data-record-id="${row.id}" class="btn btn-sm btn-clean" title="Xem chi tiết">
 \t                          <i class="flaticon2-document"></i>
 \t                       </button>
-\t                        <a href="javascript:void(0)" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
+\t                        <a href="tour/edit/${row.slug}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
 \t                            <span class="svg-icon svg-icon-md">
 \t                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 \t                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

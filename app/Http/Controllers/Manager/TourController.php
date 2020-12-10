@@ -168,7 +168,8 @@ class TourController extends Controller
      *
      * @return View
      */
-    public function detail() {
-        return view('Manager.tour.detail');
+    public function detail($id) {
+        $tour = Tour::query()->withoutGlobalScope(new ActiveScope)->findOrFail($id);
+        return view('Manager.tour.detail', compact('tour'));
     }
 }
