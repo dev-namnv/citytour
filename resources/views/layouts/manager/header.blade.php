@@ -6,23 +6,6 @@
             <!--begin::Header Menu-->
             <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
                 <!--begin::Header Nav-->
-                <ul class="menu-nav">
-                    <li class="menu-item ">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="menu-text">Pages</span>
-                        </a>
-                    </li>
-                    <li class="menu-item ">
-                        <a href="{{route('account')}}" class="menu-link menu-toggle">
-                            <span class="menu-text">Users</span>
-                        </a>
-                    </li>
-                    <li class="menu-item ">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="menu-text">Contact</span>
-                        </a>
-                    </li>
-                </ul>
                 <!--end::Header Nav-->
             </div>
             <!--end::Header Menu-->

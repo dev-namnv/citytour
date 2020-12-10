@@ -11,5 +11,4 @@
 @endsection
 
 @section('content')
-    <p>Detail</p>
 @endsection
