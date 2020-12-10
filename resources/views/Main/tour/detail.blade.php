@@ -299,6 +299,9 @@
                             <li class="navbar-item p-2 border-bottom">
                                 <a href="#recommend" class="navbar-link text-dark-75">Tour liên quan</a>
                             </li>
+                            <li class="navbar-item p-2 border-bottom">
+                                <a href="{{route('Main.tour.pdf',['slug'=> $tour->slug])}}" class="navbar-link text-dark-75">In Lịch Trình</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="box_style_4 mt-3">

@@ -104,6 +104,7 @@ Route::group(['namespace' => 'Main'], function () {
     Route::group(['prefix' => 'tours'], function () {
         Route::get('/','TourController@index')->name('Main.tour.index');
         Route::get('/show/{slug}','TourController@show')->name('Main.tour.show');
+        Route::get('/pdf/{slug}','TourController@printPdf')->name('Main.tour.pdf');
     });
 
     Route::group(['prefix' => 'articles'], function () {

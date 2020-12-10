@@ -128,7 +128,17 @@ class TourController extends Controller
         $customer_total = $invoices->sum('adult_count') + $invoices->sum('child_count');
         return view('Main.tour.detail', compact('tour','customer_total','tour_recommend'));
     }
-
+    public function printPdf($slug) {
+        $tour = Tour::query()
+            ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
+            ->with('albums','reviews','category','schedules')
+            ->with(['batches'=>function($q){
+                $q->where('batch','>',now())->select();
+            }])
+            ->where('slug',$slug)
+            ->firstOrFail();
+        return view('Main.tour.printpdf', compact('tour'));
+    }
     public function history()
     {
         $user_id = auth()->user()->id;
