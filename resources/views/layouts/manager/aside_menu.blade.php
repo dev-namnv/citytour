@@ -110,6 +110,7 @@
                 </ul>
             </div>
         </li>
+        @if(auth()->user()->role == ADMIN)
         <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
             <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
@@ -196,6 +197,7 @@
                 </ul>
             </div>
         </li>
+        @endif
     </ul>
     <!--end::Menu Nav-->
 </div>
