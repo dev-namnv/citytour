@@ -47,13 +47,13 @@ return [
             INVOICE_SUCCESS => 'Hoàn tất',
         ],
         'color' => [
-            INVOICE_NEW => 'text-primary',
-            INVOICE_CONFIRM => 'text-primary',
-            INVOICE_HAS_PAID => 'text-success',
-            INVOICE_IN_PROGRESS => 'text-success',
-            INVOICE_COMPLETE => 'text-success',
-            INVOICE_COMPLETE_CONFIRM => 'text-success',
-            INVOICE_SUCCESS => 'text-success',
+            INVOICE_NEW => 'bg-primary',
+            INVOICE_CONFIRM => 'bg-primary',
+            INVOICE_HAS_PAID => 'bg-success',
+            INVOICE_IN_PROGRESS => 'bg-success',
+            INVOICE_COMPLETE => 'bg-success',
+            INVOICE_COMPLETE_CONFIRM => 'bg-success',
+            INVOICE_SUCCESS => 'bg-success',
 
         ]
     ],
