@@ -18,7 +18,7 @@ class TourController extends Controller
 
     public function index(Request $request)
     {
-//        try {
+        try {
             // Param query
             $price = $request->get('price');
             $ranking = $request->get('ranking');
@@ -103,10 +103,9 @@ class TourController extends Controller
                 return view('Main.tour.list-grid', compact('tours','categories', 'category'));
             }
             return view('Main.tour.list', compact('tours','categories', 'category'));
-//        } catch (\Exception $exception) {
-//            die('ok');
-//            return view('Main.tour.list', compact(['tours' => [], 'categories' => [], 'category' => null]));
-//        }
+        } catch (\Exception $exception) {
+            return view('Main.tour.list', compact(['tours' => [], 'categories' => [], 'category' => null]));
+        }
     }
 
     public function show($slug)
