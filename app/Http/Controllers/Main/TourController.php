@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Batch;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
@@ -10,13 +11,14 @@ use App\Scopes\GuideBehaviorScope;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Builder;
 
 class TourController extends Controller
 {
 
     public function index(Request $request)
     {
-        try {
+//        try {
             // Param query
             $price = $request->get('price');
             $ranking = $request->get('ranking');
@@ -31,6 +33,9 @@ class TourController extends Controller
             $tours = Tour::query()
                 ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
                 ->with('category','reviews','schedules')
+                ->whereHas('batches',function ($query){
+                    $query->where('batch','>',date('Y-m-d'));
+                })
                 ->with(['batches' => function ($q) {
                     $q->select()->where('batch','>',date('Y-m-d'));
                 }]);
@@ -98,15 +103,19 @@ class TourController extends Controller
                 return view('Main.tour.list-grid', compact('tours','categories', 'category'));
             }
             return view('Main.tour.list', compact('tours','categories', 'category'));
-        } catch (\Exception $exception) {
-            return view('Main.tour.list', compact(['tours' => [], 'categories' => [], 'category' => null]));
-        }
+//        } catch (\Exception $exception) {
+//            die('ok');
+//            return view('Main.tour.list', compact(['tours' => [], 'categories' => [], 'category' => null]));
+//        }
     }
 
     public function show($slug)
     {
         $tour = Tour::query()
             ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
+            ->whereHas('batches',function ($query){
+                $query->where('batch','>',date('Y-m-d'));
+            })
             ->with('albums','reviews','category','schedules')
             ->with(['batches'=>function($q){
                 $q->where('batch','>',now())->select();
