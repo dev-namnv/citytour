@@ -73,7 +73,7 @@
                                 {{ \App\Helpers\ReviewHelper::rating($tour->reviews) }}<small>({{ $tour->reviews->count() }})</small>
                             </div>
                             <div class="wishlist">
-                                <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+                                <a @if(!auth()->guest()) onclick="Main.addToWishlist({{$tour->id}})" @else onclick="Toastr.show({'status': 'error', 'content': 'Bạn cần phải đăng nhập'})" @endif class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                             </div>
                         </div>
                     </div>
