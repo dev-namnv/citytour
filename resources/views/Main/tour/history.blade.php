@@ -168,7 +168,7 @@
 {{--                                                            @else--}}
 {{--                                                                <span class="text-success">Đã kết thúc</span>--}}
 {{--                                                            @endif--}}
-                                                            <span class="{{$invoices[0]->getColor()}}">{{$invoices[0]->getStatus()}}</span>
+                                                            <span class="text-success">{{$invoices[0]->getStatus()}}</span>
                                                         </td>
                                                     </tr>
 
