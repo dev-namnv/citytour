@@ -123,6 +123,9 @@ class TourController extends Controller
             ->firstOrFail();
 
         $tour_recommend = Tour::query()->where('category_id',$tour->category->id)
+            ->whereHas('batches',function ($query){
+                $query->where('batch','>',date('Y-m-d'));
+            })
             ->orWhere('origin','like','%'.$tour->origin.'%')
             ->where('id','!=',$tour->id)
             ->limit(8)
