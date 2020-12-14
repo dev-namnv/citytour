@@ -285,31 +285,33 @@
                 </div>
                 <!--End  single_tour_desc-->
                 <div class="col-lg-3">
-                    <div class="sidebar border">
-                        <ul class="navbar-nav bg-white">
-                            <li class="navbar-item p-2 border-bottom">
-                                <a href="#description" class="navbar-link text-dark-75">Mô tả</a>
-                            </li>
-                            <li class="navbar-item p-2 border-bottom">
-                                <a href="#schedule" class="navbar-link text-dark-75">Lịch trình</a>
-                            </li>
-                            <li class="navbar-item p-2 border-bottom">
-                                <a href="#review" class="navbar-link text-dark-75">Đánh giá</a>
-                            </li>
-                            <li class="navbar-item p-2 border-bottom">
-                                <a href="#recommend" class="navbar-link text-dark-75">Tour liên quan</a>
-                            </li>
-                            <li class="navbar-item p-2 border-bottom">
-                                <a href="{{route('Main.tour.pdf',['slug'=> $tour->slug])}}" class="navbar-link text-dark-75">In Lịch Trình</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="box_style_4 mt-3">
-                        <a href="tel://004542344599" class="phone">
-                            <i class="icon_set_1_icon-90"></i>
-                            <h4>Hỗ Trợ</h4>
-                            {{ __('info.hotline') }}
-                        </a>
+                    <div style="position: sticky; top: 100px;">
+                        <div class="sidebar border" style="">
+                            <ul class="navbar-nav bg-white">
+                                <li class="navbar-item p-2 border-bottom">
+                                    <a href="#description" class="navbar-link text-dark-75">Mô tả</a>
+                                </li>
+                                <li class="navbar-item p-2 border-bottom">
+                                    <a href="#schedule" class="navbar-link text-dark-75">Lịch trình</a>
+                                </li>
+                                <li class="navbar-item p-2 border-bottom">
+                                    <a href="#review" class="navbar-link text-dark-75">Đánh giá</a>
+                                </li>
+                                <li class="navbar-item p-2 border-bottom">
+                                    <a href="#recommend" class="navbar-link text-dark-75">Tour liên quan</a>
+                                </li>
+                                <li class="navbar-item p-2 border-bottom">
+                                    <a href="{{route('Main.tour.pdf',['slug'=> $tour->slug])}}" class="navbar-link text-dark-75">In Lịch Trình</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="box_style_4 mt-3">
+                            <a href="tel://004542344599" class="phone">
+                                <i class="icon_set_1_icon-90"></i>
+                                <h4>Hỗ Trợ</h4>
+                                {{ __('info.hotline') }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

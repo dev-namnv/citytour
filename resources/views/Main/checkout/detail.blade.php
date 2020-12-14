@@ -219,7 +219,7 @@
                 </div>
 
                 <aside class="col-lg-4">
-                    <div class="box_style_1 expose">
+                    <div class="box_style_1 expose" style="position: sticky; top: 100px">
                         <h3 class="inner">- Đặt lịch -</h3>
                         <div class="row">
                             <div class="col-sm-6">
