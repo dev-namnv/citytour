@@ -117,6 +117,22 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <strong>Tổng tiền</strong>
+                                </td>
+                                <td>
+                                    {{ number_format($payment_log->total_cost) . ' ' . 'VND' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Đã thanh toán</strong>
+                                </td>
+                                <td>
+                                    {{ number_format($payment_log->deposit_cost) . ' ' . 'VND' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <strong>Phương thức thanh toán</strong>
                                 </td>
                                 <td>
