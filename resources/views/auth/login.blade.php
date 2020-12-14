@@ -11,10 +11,10 @@
                             <hr>
                             <form class="form-login" method="post" action="{{ route('login') }}">
                                 @csrf
-                                <a href="social.google" class="social_bt google">Login with Google</a>
+                                <a href="social.google" class="social_bt google">Đăng nhập với Google</a>
                                 <div class="divider"><span>Or</span></div>
                                 <div class="form-group">
-                                    <label>Username</label>
+                                    <label>Email</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -23,21 +23,21 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label>Mật khẩu</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" autocomplete="current-password">
                                 </div>
                                 <div class="clearfix add_bottom_15">
                                     <div class="checkboxes float-left">
                                         <input id="remember-me" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                                        <label for="remember-me">Remember Me</label>
+                                        <label for="remember-me">Lưu tài khoản</label>
                                     </div>
                                     @if (Route::has('password.request'))
-                                        <div class="float-right"><a id="forgot" href="#">Forgot Password?</a></div>
+                                        <div class="float-right"><a id="forgot" href="#">Quên mật khẩu?</a></div>
                                     @endif
                                 </div>
-                                <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+                                <div class="text-center"><input type="submit" value="Đăng nhập" class="btn_login"></div>
                                 <div class="text-center">
-                                    Don’t have an account? <a href="{{route('register')}}">Sign up</a>
+                                    Bạn chưa có tài khoản? <a href="{{route('register')}}">Đăng ký</a>
                                 </div>
                             </form>
                         </div>

@@ -2405,8 +2405,9 @@ ul#contact-info {
 	display: block;
 	text-transform: none;
 	font-size: 12px;
-	background: url(../img/bg_login.jpg) no-repeat center center;
+	background: url(https://hellovietnam24h.com/wp-content/uploads/2018/04/sh5.jpg) no-repeat center center;
 	background-size: cover;
+    height: 100vh;
 }
 
 #login {
