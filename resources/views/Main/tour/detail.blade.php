@@ -97,7 +97,7 @@
                         <strong class="ml-3">Ngày khởi hành: </strong>
                         <div class="col-lg-12 text-center mb-2">
                             @foreach($tour->batches as $batch)
-                                <span class="d-inline-block p-1 bg-secondary rounded text-white">{{ $batch->batch }}</span>
+                                <span class="d-inline-block p-1 bg-secondary rounded text-white">{{ date('d-m-Y', strtotime($batch->batch)) }}</span>
                             @endforeach
                         </div>
                         <div class="col-lg-12 text-center">
@@ -119,7 +119,7 @@
                                         <div class="form-group">
                                             <select name="start_date" class="form-control">
                                                 @foreach($tour->batches as $batch)
-                                                    <option value="{{ $batch->batch }}">{{ $batch->batch }}</option>
+                                                    <option value="{{ $batch->batch }}">{{ date('d-m-Y', strtotime($batch->batch)) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

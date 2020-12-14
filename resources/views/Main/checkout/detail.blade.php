@@ -231,7 +231,7 @@
                                 <div class="form-group">
                                     <select name="batch" class="form-control @error('batch') input-invalid @enderror" id="js-tour-batch">
                                         @foreach($tour->batches as $batch)
-                                            <option value="{{ $batch->batch }}">{{ $batch->batch }}</option>
+                                            <option value="{{ $batch->batch }}">{{ date('d-m-Y', strtotime($batch->batch)) }}</option>
                                         @endforeach
                                     </select>
                                     @error('batch')
