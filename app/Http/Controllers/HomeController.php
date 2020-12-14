@@ -30,6 +30,9 @@ class HomeController extends Controller
     public function index()
     {
         $tours = Tour::query()
+            ->whereHas('batches',function ($query){
+                $query->where('batch','>',date('Y-m-d'));
+            })
             ->withCount(['populars as top' => function ($q) {
                 $q->select(DB::raw("COUNT('payment_log.id') AS top"));
             }])->orderBy('top', 'desc')

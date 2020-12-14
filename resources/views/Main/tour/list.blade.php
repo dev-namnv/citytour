@@ -41,7 +41,7 @@
                                     <li>
                                         <div class="tooltip_styled tooltip-effect-4">
                                         <span class="tooltip-item">
-                                            {{ $batch->batch }}
+                                            {{ date('d-m-Y', strtotime($batch->batch)) }}
                                         </span>
                                         </div>
                                     </li>
