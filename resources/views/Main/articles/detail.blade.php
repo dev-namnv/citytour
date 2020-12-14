@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('Libraries/Main/img/bg_blog.jpg')}}"
+    <section class="parallax-window" data-parallax="scroll" data-image-src="{{ 'https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/hsnmkdasrhwmvng1yrht/V%C3%A9%20C%C3%B4ng%20Vi%C3%AAn%20Su%E1%BB%91i%20Kho%C3%A1ng%20N%C3%B3ng%20N%C3%BAi%20Th%E1%BA%A7n%20T%C3%A0i%20%C4%90%C3%A0%20N%E1%BA%B5ng.jpg' }}"
              data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
@@ -95,7 +95,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="post-right"><i class="icon-comment"></i><a href="#comments">{{count($article->comments)}} </a>{{ __('pages.article.comments') }}</div>
                             </div>
                             <h2>{{$article->title}}</h2>
                             <p>
@@ -110,72 +109,9 @@
                     </div>
                     <!-- end box_style_1 -->
 
-                    <h4>{{count($article->comments)}} {{ __('pages.article.comments') }}</h4>
-                    <div id="comments">
-                        <ol>
-                            @foreach($article->comments as $key => $comment)
-                                @if($comment->reply_for === null)
-                                    <li>
-                                        <div class="avatar">
-                                            <a href="#"><img src="{{$comment->user->avatar}}" width="50" alt="Image">
-                                            </a>
-                                        </div>
 
-                                        <div class="comment_right clearfix">
-                                            <div class="comment_info">
-                                                {{ __('pages.article.posted_by') }} <a href="#">{{$comment->user->getFullName()}}</a><span>|</span> {{$comment->created_at}} <span>|</span><a href="#">{{ __('pages.article.reply') }}</a>
-                                            </div>
-                                            <p>
-                                                Cursus tellus quis magna porta adipiscin
-                                            </p>
-                                        </div>
-                                        @foreach($article->comments as $key => $reply_comment)
-                                            @if($comment->id == $reply_comment->reply_for)
-                                                <ul>
-                                                    <li>
-                                                        <div class="avatar">
-                                                            <a href="#"><img width="50" src="{{$reply_comment->user->avatar}}" alt="Image">
-                                                            </a>
-                                                        </div>
 
-                                                        <div class="comment_right clearfix">
-                                                            <div class="comment_info">
-                                                                {{ __('pages.article.posted_by') }} <a href="#">{{$reply_comment->user->getFullName()}}</a><span>|</span> 25 apr 2019 <span>|</span><a href="#">{{ __('pages.article.reply') }}</a>
-                                                            </div>
-                                                            <p>
-                                                                Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
-                                                            </p>
-                                                            <p>
-                                                                Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque ullamcorper venenatis elit idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum nec urna. Suspendisse pretium laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus. Aliquam erat volutpat.
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            @endif
-                                        @endforeach
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ol>
-                    </div>
-                    <!-- End Comments -->
 
-                    <h4 class="text-success">Chức năng bình luận hiện đang bảo trì</h4>
-{{--                    <form action="#" method="post">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <input class="form-control style_2" type="text" name="name" placeholder="{{ __('pages.article.enter_name') }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group">--}}
-{{--                            <input class="form-control style_2" type="text" name="mail" placeholder="{{ __('pages.article.enter_email') }}">--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group">--}}
-{{--                            <textarea name="message" class="form-control style_2" style="height:150px;" placeholder="{{ __('pages.article.message') }}"></textarea>--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group">--}}
-{{--                            <input type="reset" class="btn_1" value="{{ __('pages.article.clear_form') }}">--}}
-{{--                            <input type="submit" class="btn_1" value="{{ __('pages.article.post_comment') }}">--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
                 </div>
                 <!-- End col-md-9-->
 
