@@ -1,9 +1,9 @@
 @extends('layouts.main.app')
 
-@section('title', __('pages.about.title'))
+@section('title', __('About'))
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('Libraries\Main\img\header_bg.jpg')}}" data-natural-width="1400" data-natural-height="470">
+    <section class="parallax-window" data-parallax="scroll" data-image-src="https://saigonriders.com/wp-content/uploads/2018/11/an-arial-view-of-charming-da-nang-by-evening-saigon-riders.jpg" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
                 <h1>{!! __('pages.about.section.title') !!}</h1>
