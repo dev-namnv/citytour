@@ -28,7 +28,7 @@
 </head>
 <body>
 <!-- Mình sẽ chỉ in lịch trình và các ảnh thôi, còn booking ko cho vào nên anh em cho ảnh và mô tả lịch trình vào 1 cái div nhé -->
-<div id="section-to-print">
+<div id="section-to-print" style="width: 40%; margin: auto">
     <h2>{{$tour->name}}</h2>
     <div class="row">
         <div class="col-lg-3">
@@ -47,9 +47,9 @@
             @endif
         </div>
     </div>
-
+    <button id="printButton" style="width: 150px; height: 50px; background: gray; border: none; cursor: pointer; font-size: 16px; color: white">In ra</button>
 </div>
-<button id="printButton">In ra</button>
+
 <script>
     $('#printButton').on('click', () => {
         window.print()
