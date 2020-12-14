@@ -21,7 +21,7 @@ class ArticleController extends Controller
 
     public function detail($slug)
     {
-        $article = Article::with('user', 'comments', 'tags', 'categories')->findBySlug($slug);
+        $article = Article::with('user', 'tags', 'categories')->findBySlug($slug);
         $article_categories = ArticleCategory::orderBy('id', 'desc')->get();
         $article_tags = ArticleTag::orderBy('id', 'desc')->limit(10)->get();
         $recent_articles = Article::recentArticles()->get();
