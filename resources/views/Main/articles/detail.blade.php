@@ -160,22 +160,22 @@
                     </div>
                     <!-- End Comments -->
 
-                    <h4>{{ __('pages.article.leave_a_comment') }}</h4>
-                    <form action="#" method="post">
-                        <div class="form-group">
-                            <input class="form-control style_2" type="text" name="name" placeholder="{{ __('pages.article.enter_name') }}">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control style_2" type="text" name="mail" placeholder="{{ __('pages.article.enter_email') }}">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" class="form-control style_2" style="height:150px;" placeholder="{{ __('pages.article.message') }}"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="reset" class="btn_1" value="{{ __('pages.article.clear_form') }}">
-                            <input type="submit" class="btn_1" value="{{ __('pages.article.post_comment') }}">
-                        </div>
-                    </form>
+                    <h4 class="text-success">Chức năng bình luận hiện đang bảo trì</h4>
+{{--                    <form action="#" method="post">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <input class="form-control style_2" type="text" name="name" placeholder="{{ __('pages.article.enter_name') }}">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <input class="form-control style_2" type="text" name="mail" placeholder="{{ __('pages.article.enter_email') }}">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <textarea name="message" class="form-control style_2" style="height:150px;" placeholder="{{ __('pages.article.message') }}"></textarea>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <input type="reset" class="btn_1" value="{{ __('pages.article.clear_form') }}">--}}
+{{--                            <input type="submit" class="btn_1" value="{{ __('pages.article.post_comment') }}">--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
                 </div>
                 <!-- End col-md-9-->
 

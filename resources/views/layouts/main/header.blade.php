@@ -81,6 +81,9 @@
                             <a href="{{ route('about') }}" class="show-submenu">Giới thiệu</a>
                         </li>
                         <li class="submenu">
+                            <a href="{{ route('articles.list') }}" class="show-submenu">Bài viết</a>
+                        </li>
+                        <li class="submenu">
                             <a href="{{ route('faq') }}" class="show-submenu">Faq</a>
                         </li>
                     </ul>
