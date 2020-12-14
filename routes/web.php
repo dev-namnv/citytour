@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Article;
+use App\Models\Tour;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,6 +100,11 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('change-password', 'AccountController@changePassword')->name('account.change-password');
         Route::get('email-setting', 'AccountController@emailSetting')->name('account.email-setting');
     });
+
+    // Error
+    Route::fallback(function () {
+        return view('Manager.error.index');
+    });
 });
 
 // Main
@@ -154,6 +162,17 @@ Route::group(['namespace' => 'Main'], function () {
 
     Route::get('about', 'AboutController@index')->name('about');
     Route::get('faqs', 'FaqController@index')->name('faq');
+
+    Route::fallback(function () {
+        $tour_min = Tour::query()
+            ->withCount(['reviews as rating' => function ($q) {
+                $q->select(DB::raw('coalesce(avg(star),0)'));
+            }])->orderBy('rating', 'desc')
+            ->orderBy('adult_price', 'asc')->first();
+
+        $articles = Article::query()->inRandomOrder()->limit(4)->get();
+        return view('Main.error.index', compact('tour_min', 'articles'));
+    });
 });
 
 /**
