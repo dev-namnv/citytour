@@ -1,13 +1,13 @@
 @extends('layouts.main.app')
 
-@section('title', __('pages.faq.title'))
+@section('title', __('FAQ'))
 
 @section('content')
-    <section class="parallax-window" data-parallax="scroll" data-image-src="{{asset('Libraries\Main\img\header_bg.jpg')}}" data-natural-width="1400" data-natural-height="470">
+    <section class="parallax-window" data-parallax="scroll" data-image-src="https://cdn.vietnambiz.vn/171464876016439296/2020/10/20/anh-1603189635999219727010.png" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-1">
             <div class="animated fadeInDown">
-                <h1>{!! __('pages.faq.section.title') !!}</h1>
-                <p>{!! __('pages.faq.section.desc') !!}</p>
+                <h1>{!! __('pages.faq.title') !!}</h1>
+                <p>{!! __('pages.faq.desc') !!}</p>
             </div>
         </div>
     </section>

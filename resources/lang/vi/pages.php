@@ -86,5 +86,9 @@ return [
             'title' => 'Về chúng tôi',
             'desc' => 'Những thắc mắc của bạn về các Tour, dịch vụ của chúng tôi sẽ được giải đáp.'
         ]
+    ],
+    'faq' => [
+        'title' => 'Các câu hỏi thường gặp',
+        'desc' => 'Các câu hỏi thường gặp khi khách hàng sử dụng dịch vụ của City Tours.'
     ]
 ];
