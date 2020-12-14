@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Helpers\VNPayHelper;
+use App\Jobs\SendMailConfirmOrder;
 use App\Models\CancelPolicy;
 use App\Models\PaymentLog;
 use App\Models\TourLog;
@@ -18,6 +19,8 @@ use App\Models\User;
 use App\Models\UserLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class CheckoutController extends Controller
 {
@@ -271,6 +274,12 @@ class CheckoutController extends Controller
             ->where('user_id', Auth::id())
             ->where('batch', $batch)
             ->first();
+
+        $invoice = Invoice::query()->orderBy('id','desc')
+            ->with('invoice_detail','guide')
+            ->firstOrFail();
+        $data = $invoice->toArray();
+        $this->dispatch(new SendMailConfirmOrder($data));
         return $checkTourExist ? response()->json(['exist' => true, 'invoice' => $checkTourExist], 409) : response()->json(['exist' => false, 'invoice' => $checkTourExist]);
     }
 }

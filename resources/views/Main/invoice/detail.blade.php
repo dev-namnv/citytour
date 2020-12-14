@@ -4,31 +4,76 @@
 
 <!-- CUSTOM CSS -->
 <link href="{{ asset('libraries/main/css/custom.css') }}" rel="stylesheet">
-
+<style>
+    @media print {
+        #printButton {
+            visibility: hidden;
+        }
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="invoice-title">
-                <h2>Hóa đơn</h2><h3 class="pull-right">Đơn hàng # {{$invoice->id}}</h3>
+                <h2>Hóa đơn</h2><h3 class="pull-right">Tour <strong>#{{$invoice->sku}}</strong></h3>
+                <button onclick="window.print()" class="btn btn-success" id="printButton"><i class="icon_printer"></i> In hóa đơn</button>
             </div>
             <hr>
             <div class="row">
                 <div class="col-6">
+
                     <address>
                         <h3>Thông tin người thanh toán:</h3><br>
-                        <strong>Họ tên:</strong> {{$invoice->customer_name}}<br>
-                        <strong>Địa chỉ:</strong> {{$invoice->customer_address}}<br>
-                        <strong>Email:</strong> {{$invoice->customer_email}}<br>
-                        <strong>Số điện thoại:</strong> {{$invoice->customer_phone}} <br>
-                        <strong>Lời nhắn:</strong> {{$invoice->customer_message}} <br>
-                        <strong>Ngày thanh toán:</strong> {{empty($invoice->created_at) ? null : date_format($invoice->created_at, 'H:i:s m-d-Y')}}
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <th width="50%">Họ tên:</th>
+                                    <td>{{$invoice->customer_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Địa chỉ:</th>
+                                    <td>{{$invoice->customer_address}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Email:</th>
+                                    <td>{{$invoice->customer_email}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Số điện thoại:</th>
+                                    <td>{{$invoice->customer_phone}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Lời nhắn:</th>
+                                    <td>{{$invoice->customer_message}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Ngày thanh toán:</th>
+                                    <td>{{empty($invoice->created_at) ? null : date_format($invoice->created_at, 'H:i:s m-d-Y')}}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Trạng thái thanh toán:</th>
+                                    <td><span class="text-success">{{$invoice->getStatus()}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </address>
                 </div>
                 <div class="col-6">
                     <address>
                         <h3>Hình thức thanh toán:</h3><br>
-                        <strong>Loại thẻ:</strong> {{$invoice->payment_type}}<br>
-                        <strong>Mã thanh toán:</strong> {{$invoice->payment_code}}
+                        <table class="table table-condensed">
+                            <tbody>
+                            <tr>
+                                <th width="50%">Loại thẻ:</th>
+                                <td>{{$invoice->payment_type}}</td>
+                            </tr>
+                            <tr>
+                                <th width="50%">Mã thanh toán:</th>
+                                <td>{{$invoice->payment_code}}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
                     </address>
                 </div>
             </div>

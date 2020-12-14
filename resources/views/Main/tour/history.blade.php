@@ -168,7 +168,7 @@
 {{--                                                            @else--}}
 {{--                                                                <span class="text-success">Đã kết thúc</span>--}}
 {{--                                                            @endif--}}
-                                                            <span class="{{$invoices[0]->getColor()}}">{{$invoices[0]->getStatus()}}</span>
+                                                            <span class="text-success">{{$invoices[0]->getStatus()}}</span>
                                                         </td>
                                                     </tr>
 
@@ -404,7 +404,7 @@
                                 @if(today()->toDateString() <= $invoices[0]->end_date && $invoices[0]->status < INVOICE_COMPLETE_CONFIRM)
                                     @foreach($invoices->reverse()->take(count($invoices) - 1) as $key => $invoice)
                                         <tr>
-                                            <td>{{count($invoices->reverse()->take(5)) - $key}}</td>
+                                            <td>{{count($invoices->reverse()->take(5)) - $key + 1}}</td>
                                             <td>{{$invoice->tour->name}}</td>
                                             <td>
                                                 <a href="{{route('Main.invoice_schedule', $invoice->id)}}"

@@ -315,7 +315,7 @@
                             </tbody>
                         </table>
                         <button class="btn_full" type="submit">Đặt ngay</button>
-                        <a class="btn_full_outline" href="javascript:void(0)"><i class=" icon-heart"></i> Yêu thích</a>
+                        <a @if(!auth()->guest()) onclick="Main.addToWishlist({{$tour->id}})" @else onclick="Toastr.show({'status': 'error', 'content': 'Bạn cần phải đăng nhập'})" @endif class="btn_full_outline" href="javascript:void(0)"><i class=" icon-heart"></i> Yêu thích</a>
                     </div>
 
                 </aside>
