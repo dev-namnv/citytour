@@ -11,7 +11,7 @@ class GuideController extends Controller
 {
     public function list()
     {
-        $guides = User::withoutGlobalScopes()->where('role', '=', GUIDE)->get();
+        $guides = User::withoutGlobalScopes()->where('role', '=', GUIDE)->paginate(5);
         return view('Manager.guide.list', compact(['guides']));
     }
 
