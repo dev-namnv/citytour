@@ -332,6 +332,10 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+
+                                <div class="row justify-content-center">
+                                    {{$guides->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>
