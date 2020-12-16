@@ -18,7 +18,9 @@
                     <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
                         <div class="widget-content widget-content-area br-6">
                             <div class="table-responsive mb-4 mt-4">
-                                <table class="table table-hover non-hover text-center" style="width:100%">
+                                <table class="table table-bordered table-checkable dataTable no-footer dtr-inline"
+                                id="kt_datatable" role="grid" aria-describedby="kt_datatable_info"
+                                style="width: 100%">
                                     <thead>
                                     <tr class="text-center">
                                         <th>Tên khách hàng</th>
@@ -33,7 +35,7 @@
                                     @foreach($profile as $item)
                                         <tr>
                                             <td>
-                                                <p><a href="profile-detail/{{$item['id']}}">{{$item['first_name']}} {{$item['last_name']}}</a></p>
+                                                <p>{{$item['first_name']}} {{$item['last_name']}}</p>
                                             </td>
                                             <td>
                                                 <img src="{{$item['avatar']}}" alt="{{$item['first_name']}} {{$item['last_name']}}" width="80"/>
