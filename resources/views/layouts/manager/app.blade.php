@@ -146,12 +146,17 @@
             type: 'get',
             success: function (res) {
                 let notification = res.data.map(function (val,index){
+                    date = val.created_at ? val.created_at.split("T")[0] : ''
+                    if (date != ''){
+                        date = date.split("-")
+                        date = date[2] + '-' + date[1] + '-' + date[0]
+                    }
                     return `<div class="p-2">
                         <strong class="d-block">
                             <a href="/manager/invoices/${val.sku}">${val.invoice_detail.name}</a>
                         </strong>
                         <small>${val.sku}</small></br>
-                        <span>--${val.created_at}--</span>
+                        <span>${date}</span>
                     </div><hr>`;
                 })
                 $(`.total-notification`).text(res.data.length)
