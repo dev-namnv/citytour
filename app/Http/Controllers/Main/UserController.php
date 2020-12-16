@@ -18,23 +18,28 @@ class UserController extends Controller
 
     public function editProfile(ProfileRequest $request)
     {
-        $user = User::findOrFail(Auth::id());
+        try {
+            $user = User::query()->findOrFail(Auth::id());
 
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->phone = $request->phone;
-        $user->birthday = $request->birthday;
-        $user->address = $request->address;
-        $user->city = $request->city;
-        $user->zipcode = $request->zipcode;
-        $user->country = $request->country;
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->phone = $request->phone;
+            $user->birthday = $request->birthday;
+            $user->address = $request->address;
+            $user->city = $request->city;
+            $user->zipcode = $request->zipcode;
+            $user->country = $request->country;
 
-        if ($request->hasFile('avatar')) {
-            $urlImage = StorageS3Helper::getUrlAfterUpload('images/avatar', $request->avatar);
-            $user->avatar = $urlImage;
+            if ($request->hasFile('avatar')) {
+                $urlImage = StorageS3Helper::getUrlAfterUpload('images/avatar', $request->avatar);
+                $user->avatar = $urlImage;
+            }
+
+            $user->save();
+            session()->flash(TOASTR, json_encode(['status' => TOASTR_SUCCESS,'content' => 'Cập nhật thông tin thành công']));
+        } catch (\Exception $exception) {
+            session()->flash(TOASTR, json_encode(['status' => TOASTR_ERROR,'content' => 'Có lỗi xảy ra']));
         }
-
-        $user->save();
         return redirect()->back();
     }
 }
