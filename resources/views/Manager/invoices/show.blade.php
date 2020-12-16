@@ -63,8 +63,8 @@
                         </div>
                         <div class="col-sm-5 align-self-center  text-sm-right order-2">
                             <p class="inv-list-number"><span class="inv-title">Invoice Number : </span> <span class="inv-number">{{ $invoice->sku }}</span></p>
-                            <p class="inv-created-date"><span class="inv-title">Ngày tạo : </span> <span class="inv-date">{{ $invoice->created_at }}</span></p>
-                            <p class="inv-due-date"><span class="inv-title">Cập nhật lần cuối : </span> <span class="inv-date">{{ $invoice->updated_at }}</span></p>
+                            <p class="inv-created-date"><span class="inv-title">Ngày tạo : </span> <span class="inv-date">{{ \Carbon\Carbon::parse($invoice->created_at)->format('H:i:s - d/m/Y') }}</span></p>
+                            <p class="inv-due-date"><span class="inv-title">Cập nhật lần cuối : </span> <span class="inv-date">{{ \Carbon\Carbon::parse($invoice->updated_at)->format('H:i:s - d/m/Y') }}</span></p>
                         </div>
                     </div>
 
