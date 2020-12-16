@@ -93,6 +93,8 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/', function () {
             return redirect()->route('account.overview');
         })->name('account');
+        Route::get('/user-list', 'UserController@profile')->name('user.list');
+        Route::get('profile-detail/{id}', 'UserController@detailProfile')->name('user.detail');
         Route::get('overview', 'AccountController@overview')->name('account.overview');
         Route::get('personal-information', 'AccountController@personalInformation')->name('account.personal-information');
         Route::post('update', 'AccountController@updateInformation')->name('account.update');
