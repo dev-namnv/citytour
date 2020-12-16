@@ -21,19 +21,44 @@
                 <div class="content-section">
 
                     <div class="row">
-                        @if($invoice->status < 5)
-                            @php $next_status = $invoice->status +1 @endphp
-                            <div class="col-12">
-                                <a href="{{route('invoice-update-status',['sku'=>$invoice->sku,'status'=>$next_status])}}" class="col-12 btn {{ config('masterdata')['invoice']['color'][$next_status] }}">
-                                    <strong>{{ config('masterdata')['invoice']['status'][$next_status] }}</strong>
-                                </a>
-                            </div>
+                        @if(Auth::user()->role == GUIDE)
+                            @if($invoice->status >= 5)
+                                <div class="col-12 text-center">
+                                    <span class="col-12 d-block rounded p-3 {{ $invoice->getColor() }}">
+                                        <strong>{{ $invoice->getStatus() }}</strong>
+                                    </span>
+                                </div>
+                            @endif
+                            @if($invoice->status < 4 )
+                                @php $next_status = $invoice->status +1 @endphp
+                                <div class="col-12">
+                                    <a href="{{route('invoice-update-status',['sku'=>$invoice->sku,'status'=>$next_status])}}" class="col-12 btn {{ config('masterdata')['invoice']['color'][$next_status] }}">
+                                        <strong>{{ config('masterdata')['invoice']['status'][$next_status] }}</strong>
+                                        <i style="color: green" class="fas fa-bullseye"></i>
+                                    </a>
+                                </div>
+                            @elseif($invoice->status == 4)
+                                <div class="col-12 text-center">
+                                    <span class="col-12 d-block rounded p-3 {{ config('masterdata')['invoice']['color'][5] }}-o-80">
+                                        <strong>Chờ {{ config('masterdata')['invoice']['status'][5] }}</strong>
+                                    </span>
+                                </div>
+                            @endif
                         @else
-                            <div class="col-12 text-center">
-                                <span class="col-12 d-block rounded {{ $invoice->getColor() }}">
-                                    <strong>{{$invoice->status == 5 ? 'Chờ' : ''}} {{ $invoice->getStatus() }}</strong>
-                                </span>
-                            </div>
+                            @if($invoice->status < 5 || $invoice->status == 6)
+                                <div class="col-12 text-center">
+                                    <p class="col-12 d-block rounded p-3 {{ $invoice->getColor() }}">
+                                        <strong>{{ $invoice->getStatus()}}</strong>
+                                    </p>
+                                </div>
+                            @else
+                                <div class="col-12 text-center">
+                                    <a href="{{route('invoice-update-status',['sku'=>$invoice->sku,'status'=>6])}}" class="col-12 btn {{ config('masterdata')['invoice']['color'][6] }}-o-80">
+                                        <strong>{{ config('masterdata')['invoice']['status'][6] }}</strong>
+                                        <i style="color: green" class="fas fa-bullseye"></i>
+                                    </a>
+                                </div>
+                            @endif
                         @endif
                     </div>
 
