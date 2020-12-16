@@ -26,9 +26,8 @@
             <div class="col-md-3 ml-md-auto">
                 <h3>Khám Phá</h3>
                 <ul>
-                    <li><a href="{{ route('articles.index') }}">Blog</a></li>
-                    <li><a href="{{ route('guide.detail', ['guide_id' => \App\Models\User::query()->where('role', GUIDE)->inRandomOrder()->first()]) }}">Hướng dẫn viên</a></li>
-                    <li><a href="#">Bộ sưu tập</a></li>
+                    <li><a href="{{ route('articles.list') }}">Bài viết</a></li>
+                    <li><a href="{{ route('guide.detail', ['guide_id' => \App\Models\User::query()->where('role', GUIDE)->inRandomOrder()->first()]) }}">Hướng dẫn viên (Ngẫu nhiên)</a></li>
                 </ul>
             </div>
             <div class="col-lg-2 ml-lg-auto">
@@ -36,7 +35,6 @@
                 <div class="styled-select">
                     <select name="lang" id="lang">
                         <option value="VI" selected>VietNam</option>
-                        <option value="EN">English</option>
                     </select>
                 </div>
             </div>
@@ -46,11 +44,11 @@
             <div class="col-lg-12">
                 <div id="social_footer">
                     <ul>
-                        <li><a href="#"><i class="icon-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/City-Tours-100149461997048/" target="_blank"><i class="icon-facebook"></i></a>
                         </li>
-                        <li><a href="#"><i class="icon-twitter"></i></a>
+                        <li><a href="https://twitter.com/tweeter" target="_blank"><i class="icon-twitter"></i></a>
                         </li>
-                        <li><a href="#"><i class="icon-google"></i></a>
+                        <li><a href="mailto:help@citytours.top"><i class="icon-google"></i></a>
                         </li>
                     </ul>
                     <p>© Citytours 2020</p>
