@@ -18,14 +18,4 @@ class DashboardController extends Controller
         return view('Manager.dashboard.sale');
     }
 
-    public function profile()
-    {
-        $profile = User::all();
-        return view('Manager.dashboard.profile', ['profile' => $profile]);
-    }
-    public function detailProfile($id)
-    {
-        $profile = User::find($id);
-        return view('Manager.dashboard.profiledetail', ['profile' => $profile]);
-    }
 }

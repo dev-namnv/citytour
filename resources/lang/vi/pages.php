@@ -76,6 +76,7 @@ return [
                 'city' => 'Thành phố',
                 'zipcode' => 'Zip code',
                 'country' => 'Quốc gia',
+                'invoice' => 'Hóa đơn'
             ],
             'desc' => 'Cập nhật thông tin cá nhân của bạn'
         ],
