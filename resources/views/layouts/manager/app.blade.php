@@ -146,12 +146,13 @@
             type: 'get',
             success: function (res) {
                 let notification = res.data.map(function (val,index){
+                    let date = new Date(val.created_at);
                     return `<div class="p-2">
                         <strong class="d-block">
                             <a href="/manager/invoices/${val.sku}">${val.invoice_detail.name}</a>
                         </strong>
                         <small>${val.sku}</small></br>
-                        <span>--${val.created_at}--</span>
+                        <span>** ${date.toLocaleTimeString()} - ${date.toLocaleDateString("vi")} **</span>
                     </div><hr>`;
                 })
                 $(`.total-notification`).text(res.data.length)
