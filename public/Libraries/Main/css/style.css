@@ -5758,7 +5758,7 @@ div.datedropper.primary .pick-btn {
   top: 0;
   width: 100%;
   z-index: 99;
-  min-height: 430px;
+  min-height: 380px;
   display: none;
 }
 

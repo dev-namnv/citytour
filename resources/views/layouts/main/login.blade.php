@@ -1,6 +1,6 @@
 <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
     <div class="small-dialog-header">
-        <h3>Sign In</h3>
+        <h3>Đăng nhập</h3>
     </div>
 
         <div class="sign-in-wrapper">
@@ -42,8 +42,8 @@
             <form class="form-forgot-password" method="post" action="{{ route('password.email') }}">
                 @csrf
                 <div id="forgot_pw">
-                    <div class="form-group">
-                        <label>Xác nhận lại email/label>
+                    <div class="form-group pb-3">
+                        <label>Vui lòng xác thực email đăng nhập</label>
                         <input type="email" class="form-control @error('email') is-invalid @enderror"
                                id="email_forgot" name="email" value="{{ old('email') }}" autocomplete="email">
                         <i class="icon_mail_alt"></i>
@@ -53,8 +53,9 @@
                         </span>
                         @enderror
                     </div>
+                    <p>Bạn sẽ nhận được một email có chứa liên kết cho phép bạn đặt lại mật khẩu của mình thành mật khẩu mới.</p>
                     <div class="text-center">
-                        <button type="submit" class="btn_1">Quên mật khẩu</button>
+                        <button type="submit" class="btn_1">Gửi liên kết</button>
                     </div>
                 </div>
             </form>
