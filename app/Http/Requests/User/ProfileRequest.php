@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -26,8 +27,8 @@ class ProfileRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'phone' => 'required|regex:/(01)[0-9]{9}/',
-            'birthday' => 'nullable|date',
+            'phone' => 'required|string|min:9|max:14',
+            'birthday' => 'nullable|date|before:'.Carbon::parse(now())->format('d-m-Y'),
             'address' => 'required|string',
             'city' => 'required',
             'zipcode' => 'nullable|regex:/\b\d{5}\b/',
