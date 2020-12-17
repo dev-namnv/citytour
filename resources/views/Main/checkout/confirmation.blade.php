@@ -141,6 +141,41 @@
                             </tr>
                             </tbody>
                         </table>
+                        <table class="table table-striped confirm">
+                            <thead>
+                            <tr>
+                                <th colspan="2">
+                                    Thông tin hướng dẫn viên
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong>Họ tên</strong>
+                                </td>
+                                <td>
+                                    <b>{{ $payment_log->tour->guide->getFullName() }}</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Địa chỉ email</strong>
+                                </td>
+                                <td>
+                                    <a href="mailto:{{ $payment_log->tour->guide->email }}">{{ $payment_log->tour->guide->email }}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Số điện thoại</strong>
+                                </td>
+                                <td>
+                                    <a href="tel:{{ $payment_log->tour->guide->phone }}">{{ $payment_log->tour->guide->phone }}</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <!--End step -->
                 </div>
@@ -153,10 +188,27 @@
                         <hr>
                         <a class="btn_full_outline" href="{{ route('Main.invoice_detail', ['id' => $payment_log->invoice->id]) }}" target="_blank">Xem hóa đơn</a>
                     </div>
+                    @auth
+                        <div class="box_style_4">
+                            <h6 class="text-primary">Bạn có thể đăng nhập với:</h6>
+                            <table class="table mt-2">
+                                <tbody>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{ $payment_log->customer_email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mật khẩu</td>
+                                    <td>{{ $payment_log->customer_email }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    @endauth
                     <div class="box_style_4">
                         <i class="icon_set_1_icon-89"></i>
-                        <h4>Bạn có thắc mắc về <span>Tour?</span></h4>
-                        <a href="{{ 'tel://'.$payment_log->tour->guide->phone }}" class="phone">{{ $payment_log->tour->guide->phone }}</a>
+                        <h4>Liên hệ <span>hướng dẫn viên?</span></h4>
+                        <a href="{{ 'tel:'.$payment_log->tour->guide->phone }}" class="phone">{{ $payment_log->tour->guide->phone }}</a>
                     </div>
                 </aside>
 

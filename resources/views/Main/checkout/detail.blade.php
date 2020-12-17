@@ -54,6 +54,9 @@
 
 
         <div class="container margin_60">
+            @if(session()->has(TOASTR))
+                <div class="col-lg-12 alert alert-danger">{{ json_decode(session(TOASTR))->content }}</div>
+            @endif
             @isset($error)
                 <div class="alert alert-danger" role="alert">{!! $error !!}</div>
             @endisset

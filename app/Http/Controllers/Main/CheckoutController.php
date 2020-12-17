@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Main;
 
 use App\Helpers\VNPayHelper;
 use App\Jobs\SendMailConfirmOrder;
+use App\Mail\InvoiceMail;
 use App\Models\CancelPolicy;
+use App\Models\GuideLog;
 use App\Models\PaymentLog;
 use App\Models\TourLog;
 use App\Scopes\GuideBehaviorScope;
+use App\Scopes\GuideBusyScope;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Checkout\PaymentRequest;
@@ -24,17 +28,26 @@ use Illuminate\Support\Facades\Notification;
 
 class CheckoutController extends Controller
 {
+    public function __construct()
+    {
+        if (Auth::check() && Auth::user()->role === GUIDE) {
+            session()->flash(TOASTR, json_encode(['status' => TOASTR_WARNING, 'content' => 'Hướng dẫn viên không thể đặt Tour']));
+            return redirect()->back();
+        }
+    }
+
     public function detail($slug)
     {
-        $tour = Tour::query()->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)->with('albums','reviews','category','schedules')
-            ->with(['batches'=>function($q){
-                $q->where('batch','>',now())->select();
+        $tour = Tour::query()->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
+            ->with('albums', 'reviews', 'category', 'schedules')
+            ->with(['batches' => function ($q) {
+                $q->where('batch', '>', now())->select();
             }])
-            ->where('slug',$slug)
+            ->where('slug', $slug)
             ->firstOrFail();
-        $invoices = Invoice::query()->where('tour_id',$tour->id)
-            ->where('start_date',$tour->batches->first()->batch)
-            ->get(['adult_count','child_count']);
+        $invoices = Invoice::query()->where('tour_id', $tour->id)
+            ->where('start_date', $tour->batches->first()->batch)
+            ->get(['adult_count', 'child_count']);
         $customer_total = $invoices->sum('adult_count') + $invoices->sum('child_count');
         $cancel_policies = CancelPolicy::all();
 
@@ -43,16 +56,35 @@ class CheckoutController extends Controller
 
     public function payment(PaymentRequest $request)
     {
-//        try {
+        try {
             $tour = Tour::query()->find($request->tour_id);
             $batch = Batch::query()->where('batch', $request->batch)->first();
+            foreach ($tour->guide->busyTime as $item) {
+                if ($item->tour_id !== $tour->id) {
+                    if (Carbon::parse($request->batch) >= $item->busy_start_at
+                        && Carbon::parse($request->batch) <= $item->busy_end_at
+                    ) {
+                        session()->flash(TOASTR, json_encode([
+                            'status' => TOASTR_WARNING,
+                            'content' => 'Bạn không thể đặt Tour vào ngày '
+                                .Carbon::parse($request->batch)->format('d-m-Y')
+                                .'. Hướng dẫn viên này đang có lịch Tour khác từ '
+                                . Carbon::parse($item->busy_start_at)->format('d-m-Y')
+                                .' đến hết ngày '
+                                . Carbon::parse($item->busy_end_at)->format('d-m-Y')
+                        ]));
+                        return redirect()->back()->withInput();
+                    }
+                };
+            }
 
             if ($tour && $batch) {
                 $adult_cost = $tour->getRawOriginal('adult_price') * $request->adult_count;
                 $child_cost = $tour->getRawOriginal('child_price') * $request->child_count;
                 $total_cost = $adult_cost + $child_cost;
-                $deposit_cost = $total_cost * 30/100; // Phí đặt cọc 30%
+                $deposit_cost = $total_cost * 30 / 100; // Phí đặt cọc 30%
                 $payment_code = strtoupper(uniqid());
+
 
                 /**
                  * VNPay
@@ -116,17 +148,11 @@ class CheckoutController extends Controller
                 if (Auth::check()) {
                     $new_user_log = new UserLog([
                         'title' => $vnp_OrderInfo,
-                        'points' => $total_cost/100,
+                        'points' => $total_cost / 100,
                         'user_id' => Auth::id()
                     ]);
                 } else {
-                    if ($user) {
-                        $new_user_log = new UserLog([
-                            'title' => $vnp_OrderInfo,
-                            'points' => $total_cost/100,
-                            'user_id' => $user->id
-                        ]);
-                    } else {
+                    if (!$user) {
                         $user = new User([
                             'first_name' => $request->customer_name,
                             'last_name' => '',
@@ -139,14 +165,13 @@ class CheckoutController extends Controller
                             'password' => Hash::make($request->customer_email),
                             'state' => $request->state
                         ]);
-                        $new_user->save();
-
-                        $new_user_log = new UserLog([
-                            'title' => $vnp_OrderInfo,
-                            'point' => $total_cost/100,
-                            'user_id' => $new_user->id
-                        ]);
+                        $user->save();
                     }
+                    $new_user_log = new UserLog([
+                        'title' => $vnp_OrderInfo,
+                        'points' => $total_cost / 100,
+                        'user_id' => $user->id
+                    ]);
                 }
 
                 /**
@@ -197,7 +222,7 @@ class CheckoutController extends Controller
                  */
                 $new_tour_log = new TourLog([
                     'tour_id' => $tour->id,
-                    'user_id' => Auth::check() ? Auth::id() : ($user ? $user->id : $new_user->id)
+                    'user_id' => Auth::check() ? Auth::id() : ($user ? $user->id : $user->id)
                 ]);
                 $new_tour_log->save();
             }
@@ -218,28 +243,28 @@ class CheckoutController extends Controller
                 'customer_phone' => $request->customer_phone,
                 'tour_id' => $tour->id,
                 'guide_id' => $tour->guide_id,
-                'user_id' => Auth::check() ? Auth::id() : ($user ? $user->id : $new_user->id)
+                'user_id' => Auth::check() ? Auth::id() : ($user ? $user->id : $user->id)
             ]);
             $new_payment_log->save();
             session()->put(PAYMENT_CODE, $payment_code);
             return redirect($vnp_Url);
-        /*} catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return back()->withErrors($exception->getMessage());
-        }*/
+        }
     }
 
     public function confirmation(Request $request)
     {
         $payment_log = PaymentLog::query()
-            ->where('payment_code', session(PAYMENT_CODE))
+            ->where('payment_code', $request->get('vnp_TxnRef'))
             ->first();
         $tour = Tour::query()->findOrFail($payment_log->tour_id);
         try {
-            if ($request->get('vnp_ResponseCode') == '00') {
-                if (session()->has(PAYMENT_CODE)) {
+                if ($request->has('vnp_TxnRef')) {
                     $invoice = Invoice::query()
-                        ->where('payment_code', session(PAYMENT_CODE))
+                        ->where('payment_code', $request->get('vnp_TxnRef'))
                         ->first();
+
                     $invoice->payment_status = PAYMENT_STATUS_SUCCESS;
                     $invoice->save();
                     $payment_log->vnp_Amount = $request->get('vnp_Amount');
@@ -254,15 +279,36 @@ class CheckoutController extends Controller
                         ? VNPayHelper::getPaymentMessage($request->get('vnp_Command'), $request->get('vnp_ResponseCode'))
                         : 'Thanh toán thành công';
                     $payment_log->save();
+
+                    $guide_log = GuideLog::query()
+                        ->where('tour_id', $invoice->tour_id)
+                        ->where('busy_end_at', '>=', $invoice->start_date)
+                        ->where('busy_end_at', '<=', Carbon::parse($invoice->getEndDateAttribute())->addDays()->format('Y-m-d'))
+                        ->first();
+                    if (!$guide_log) {
+                        $new_guide_log = new GuideLog([
+                            'guide_id' => $invoice->guide_id,
+                            'tour_id' => $invoice->tour_id,
+                            'busy_start_at' => $invoice->start_date,
+                            'busy_end_at' => Carbon::parse($invoice->getEndDateAttribute())->addDays()->format('Y-m-d'),
+                        ]);
+                        $new_guide_log->save();
+                    }
+                    if (session()->has(PAYMENT_CODE)) {
+                        Mail::to($invoice->customer_email)->send(new InvoiceMail($invoice));
+                        session()->forget(PAYMENT_CODE);
+                    } else {
+                        $error = ['status' => TOASTR_INFO, 'content' => 'Phiên làm việc đã hết hạn'];
+                        session()->flash(TOASTR, json_encode($error));
+                    }
                 }
-                $message = 'Giao dịch thành công';
-            } else {
-                $message = 'Giao dịch thất bại';
-            }
+
+            $message = $request->get('vnp_ResponseCode') == '00' ?  'Giao dịch thành công':  'Giao dịch thất bại';
             return view('Main.checkout.confirmation', compact('message', 'payment_log'));
         } catch (\Exception $exception) {
-            $error = 'Có lỗi xảy ra trong quá trình thanh toán';
-            return redirect()->route('checkout.detail', ['slug' => $tour->slug, 'error' => $error]);
+            $error = ['status' => TOASTR_ERROR, 'content' => 'Có lỗi xảy ra trong quá trình thanh toán'];
+            session()->flash(TOASTR, json_encode($error));
+            return redirect()->route('checkout.detail', ['slug' => $tour->slug]);
         }
     }
 
@@ -275,8 +321,8 @@ class CheckoutController extends Controller
             ->where('batch', $batch)
             ->first();
 
-        $invoice = Invoice::query()->orderBy('id','desc')
-            ->with('invoice_detail','guide')
+        $invoice = Invoice::query()->orderBy('id', 'desc')
+            ->with('invoice_detail', 'guide')
             ->firstOrFail();
         $data = $invoice->toArray();
         $this->dispatch(new SendMailConfirmOrder($data));

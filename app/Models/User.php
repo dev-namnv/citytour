@@ -92,5 +92,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Tour', 'guide_id');
     }
 
-
+    public function busyTime()
+    {
+        return $this->hasMany('App\Models\GuideLog', 'guide_id');
+    }
 }
