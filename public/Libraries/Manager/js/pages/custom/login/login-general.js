@@ -29,7 +29,11 @@ var KTLogin = function() {
 						validators: {
 							notEmpty: {
 								message: 'Tên tài khoản là bắt buộc'
-							}
+							},
+                            regexp: {
+                                regexp: '^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$',
+                                message: 'Định dạng tên đăng nhập không hợp lệ'
+                            }
 						}
 					},
 					password: {
