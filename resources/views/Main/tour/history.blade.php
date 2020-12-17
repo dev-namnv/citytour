@@ -186,6 +186,9 @@
                                                             @csrf
                                                             <button class="btn btn-success">Xác nhận</button>
                                                         </form>
+                                                        <div class="ml-2">
+                                                            <a href="#Review" class="btn_1 add_bottom_30 review" data-id="{{$invoices[0]->tour->id}}" data-tour="{{$invoices[0]->tour->name}}" data-toggle="modal" data-target="#myReview">Viết đánh giá</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @endif
@@ -397,7 +400,7 @@
                                     <th>Tên tour</th>
                                     <th>Lịch trình</th>
                                     <th>Hóa đơn</th>
-{{--                                    <th>Trạng thái</th>--}}
+                                    <th>Đánh giá</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -414,9 +417,9 @@
                                                 <a href="{{route('Main.invoice_detail', $invoice->id)}}"
                                                    target="_blank">Chi tiết</a>
                                             </td>
-{{--                                            <td>--}}
-{{--                                                <span class="text-success">{{$invoice->getStatus()}}</span>--}}
-{{--                                            </td>--}}
+                                            <td>
+                                                <a href="#Review" class="btn_1 bg-success review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -432,9 +435,9 @@
                                                 <a href="{{route('Main.invoice_detail', $invoice->id)}}"
                                                    target="_blank">Chi tiết</a>
                                             </td>
-{{--                                            <td>--}}
-{{--                                                <span class="text-success">{{$invoice->getStatus()}}</span>--}}
-{{--                                            </td>--}}
+                                            <td>
+                                                <a href="#Review" class="btn_1 review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -453,4 +456,64 @@
 
         <!-- End container -->
     </main>
+    <!--Modal Review-->
+    <div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myReviewLabel">Viết đánh giá</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id="message-review">
+                    </div>
+                    <form method="post" action="{{route('Main.tour.review')}}" name="review_tour" id="review_tour">
+                        @csrf
+                        <div class="row pl-3">
+                            <input type="text" name="name" class="border-0 bg-white" disabled>
+                            <input type="hidden" name="id">
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Chất lượng dịch vụ</label>
+                                    <select class="form-control" name="star" id="position_review">
+                                        <option value="10">10 điểm</option>
+                                        <option value="9">9 điểm</option>
+                                        <option value="8">8 điểm</option>
+                                        <option value="7">7 điểm</option>
+                                        <option value="6">6 điểm</option>
+                                        <option value="5">5 điểm</option>
+                                        <option value="4">4 điểm</option>
+                                        <option value="3">3 điểm</option>
+                                        <option value="2">2 điểm</option>
+                                        <option value="1">1 điểm</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End row -->
+                        <div class="form-group">
+                            <textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Nội dung"></textarea>
+                        </div>
+                        <input type="submit" value="Gửi đi" class="btn_1" id="submit-review">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('extra-js')
+    <script>
+        $(document).ready(function (){
+            $(`.review`).click(function (){
+                let tour = $(this).data('tour')
+                let id = $(this).data('id')
+                let input_name = $(`input[name='name']`).val(tour)
+                let input_id = $(`input[name='id']`).val(id)
+            })
+        })
+    </script>
 @endsection

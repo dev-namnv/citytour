@@ -250,9 +250,6 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <h3>Đánh giá </h3>
-                            @if(Auth::user())
-                                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Viết đánh giá</a>
-                            @endif
                         </div>
                         <div class="col-lg-9">
                             <div class="text-right" id="general_rating">
@@ -354,53 +351,6 @@
 
     <div id="toTop"></div><!-- Back to top button -->
 
-    <!-- Modal Review -->
-    @if(Auth::user())
-        <div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myReviewLabel">Viết đánh giá</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="message-review">
-                        </div>
-                        <form method="post" action="assets/review_tour.php" name="review_tour" id="review_tour">
-                            <input name="tour_name" id="tour_name" type="hidden" value="Paris Arch de Triomphe Tour">
-                            <h4>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</h4>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Chất lượng dịch vụ</label>
-                                        <select class="form-control" name="star" id="position_review">
-                                            <option value="1">1 điểm</option>
-                                            <option value="2">2 điểm</option>
-                                            <option value="3">3 điểm</option>
-                                            <option value="4">4 điểm</option>
-                                            <option value="5">5 điểm</option>
-                                            <option value="6">6 điểm</option>
-                                            <option value="7">7 điểm</option>
-                                            <option value="8">8 điểm</option>
-                                            <option value="9">9 điểm</option>
-                                            <option value="10">10 điểm</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End row -->
-                            <div class="form-group">
-                                <textarea name="review_text" id="review_text" class="form-control" style="height:100px" placeholder="Nội dung"></textarea>
-                            </div>
-                            <input type="submit" value="Submit" class="btn_1" id="submit-review">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-    <!-- End modal review -->
 @endsection
 
 @section('extra-js')

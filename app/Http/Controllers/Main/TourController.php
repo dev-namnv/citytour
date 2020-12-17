@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Batch;
 use App\Models\Category;
 use App\Models\Invoice;
+use App\Models\Review;
 use App\Models\Tour;
 use App\Scopes\GuideBehaviorScope;
 use App\Scopes\GuideBusyScope;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Builder;
 
@@ -153,10 +155,24 @@ class TourController extends Controller
     public function history()
     {
         $user_id = auth()->user()->id;
-        $invoices = Invoice::where('user_id', '=', $user_id)->orderBy('id', 'desc')->get();
+        $invoices = Invoice::query()->where('user_id', '=', $user_id)
+            ->with('tour')
+            ->orderBy('id', 'desc')
+            ->get();
         return view('Main.tour.history', compact(['invoices']));
     }
 
-
+    public function review(Request $request)
+    {
+        Review::query()->updateOrCreate([
+            'tour_id' => $request->id,
+            'user_id' => Auth::id(),
+        ],[
+            'content' => $request->review_text,
+            'star' => $request->star,
+        ]);
+        session()->flash(TOASTR, json_encode(['status' => TOASTR_SUCCESS, 'title' => ' Gửi Review thành công !']));
+        return redirect()->back();
+    }
 
 }
