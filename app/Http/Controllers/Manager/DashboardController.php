@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\Category;
+use App\Models\Invoice;
+use App\Models\Tour;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,7 +15,59 @@ class DashboardController extends Controller
 {
     public function analytic()
     {
-        return view('Manager.dashboard.analytic');
+        $users = User::all();
+        $invoices = Invoice::all();
+        $articles = Article::all();
+        $article_categories = ArticleCategory::all();
+        $categories = Category::all();
+        $tours = Tour::where('guide_id', '=', auth()->user()->id)->get();
+
+        if (auth()->user()->role == ADMIN) {
+            $countCategories = $countArticleCategories = $countArticles = $countUsers = $countGuides = $totalIncome = $countInvoices = 0;
+
+            for ($i = 0; $i < count($users); $i++) {
+                if ($users[$i]->role == \USER) {
+                    $countUsers++;
+                }
+
+                if ($users[$i]->role == GUIDE) {
+                    $countGuides++;
+                }
+            }
+
+            for ($i = 0; $i < count($invoices); $i++) {
+                $countInvoices++;
+                $totalIncome += $invoices[$i]->getRawOriginal('total_cost');
+            }
+
+            for ($i = 0; $i < count($articles); $i++) {
+                $countArticles++;
+            }
+
+            for ($i = 0; $i < count($article_categories); $i++) {
+                $countArticleCategories++;
+            }
+
+            for ($i = 0; $i < count($categories); $i++) {
+                $countCategories++;
+            }
+
+            return view('Manager.dashboard.analytic', compact(['countGuides', 'countUsers', 'countInvoices', 'totalIncome', 'countArticles', 'countArticleCategories', 'countCategories']));
+        }
+
+        if (auth()->user()->role == GUIDE) {
+            $invoices = $invoices->where('guide_id', '=', auth()->user()->id);
+            $countUsers = $invoices->groupBy('user_id')->count();
+            $countInvoices = $invoices->count();
+            $countTours = $tours->count();
+
+            $totalIncome = $invoices->sum(function ($invoice) {
+                return $invoice->getRawOriginal('total_cost');
+            });
+
+            return view('Manager.dashboard.analytic', compact(['countUsers', 'countInvoices', 'totalIncome', 'countTours']));
+        }
+
     }
 
     public function sale()
