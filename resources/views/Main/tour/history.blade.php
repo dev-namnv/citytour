@@ -400,7 +400,7 @@
                                     <th>Tên tour</th>
                                     <th>Lịch trình</th>
                                     <th>Hóa đơn</th>
-{{--                                    <th>Trạng thái</th>--}}
+                                    <th>Đánh giá</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -417,9 +417,9 @@
                                                 <a href="{{route('Main.invoice_detail', $invoice->id)}}"
                                                    target="_blank">Chi tiết</a>
                                             </td>
-{{--                                            <td>--}}
-{{--                                                <span class="text-success">{{$invoice->getStatus()}}</span>--}}
-{{--                                            </td>--}}
+                                            <td>
+                                                <a href="#Review" class="btn_1 bg-success review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -435,9 +435,9 @@
                                                 <a href="{{route('Main.invoice_detail', $invoice->id)}}"
                                                    target="_blank">Chi tiết</a>
                                             </td>
-{{--                                            <td>--}}
-{{--                                                <span class="text-success">{{$invoice->getStatus()}}</span>--}}
-{{--                                            </td>--}}
+                                            <td>
+                                                <a href="#Review" class="btn_1 review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif

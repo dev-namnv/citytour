@@ -164,11 +164,12 @@ class TourController extends Controller
 
     public function review(Request $request)
     {
-        Review::query()->create([
-            'content' => $request->review_text,
-            'star' => $request->star,
+        Review::query()->updateOrCreate([
             'tour_id' => $request->id,
             'user_id' => Auth::id(),
+        ],[
+            'content' => $request->review_text,
+            'star' => $request->star,
         ]);
         session()->flash(TOASTR, json_encode(['status' => TOASTR_SUCCESS, 'title' => ' Gửi Review thành công !']));
         return redirect()->back();
