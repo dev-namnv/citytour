@@ -116,6 +116,7 @@ Route::group(['namespace' => 'Main'], function () {
         Route::get('/','TourController@index')->name('Main.tour.index');
         Route::get('/show/{slug}','TourController@show')->name('Main.tour.show');
         Route::get('/pdf/{slug}','TourController@printPdf')->name('Main.tour.pdf');
+        Route::post('/tour/review','TourController@review')->name('Main.tour.review');
     });
 
     Route::group(['prefix' => 'articles'], function () {
