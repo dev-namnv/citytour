@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
 use App\Scopes\GuideBehaviorScope;
+use App\Scopes\GuideBusyScope;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class TourController extends Controller
 
     public function index(Request $request)
     {
-        try {
+//        try {
             // Param query
             $price = $request->get('price');
             $ranking = $request->get('ranking');
@@ -103,9 +104,9 @@ class TourController extends Controller
                 return view('Main.tour.list-grid', compact('tours','categories', 'category'));
             }
             return view('Main.tour.list', compact('tours','categories', 'category'));
-        } catch (\Exception $exception) {
+        /*} catch (\Exception $exception) {
             return view('Main.tour.list', compact(['tours' => [], 'categories' => [], 'category' => null]));
-        }
+        }*/
     }
 
     public function show($slug)

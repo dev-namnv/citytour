@@ -29,13 +29,24 @@ class TourHelper
 
     public static function count()
     {
-        return Tour::all()->count();
+        return Tour::query()
+            ->whereHas('batches',function ($query){
+                $query->where('batch','>',date('Y-m-d'));
+            })
+            ->get()
+            ->count();
     }
 
     public static function countOfCategory($category_id)
     {
-        return Tour::query()->whereHas('category', function ($q) use ($category_id) {
-            $q->where('id', $category_id);
-        })->get()->count();
+        return Tour::query()
+            ->whereHas('category', function ($q) use ($category_id) {
+                $q->where('id', $category_id);
+            })
+            ->whereHas('batches',function ($query){
+                $query->where('batch','>',date('Y-m-d'));
+            })
+            ->get()
+            ->count();
     }
 }
