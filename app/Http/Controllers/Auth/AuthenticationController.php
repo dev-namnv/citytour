@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationNewGuide;
 use App\Mail\RegisterGuide;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -79,6 +80,7 @@ class AuthenticationController extends Controller
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->save();
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NotificationNewGuide($user));
         Mail::to($request->email)->send(new RegisterGuide($user));
 
         session()->flash('register', ['status' => true, 'message' => 'Đăng ký thành công, vui lòng đợi xác thực đăng ký từ chúng tôi.']);
