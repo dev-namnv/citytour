@@ -16,24 +16,25 @@
                     <div class="col-md-6">
                         <h3>{{ $profile->last_name }} {{ $profile->first_name }}</h3>
                         <ul id="profile_summary">
-                            <li>@lang('pages.user.profile.label.phone')
+                            <li><b>@lang('pages.user.profile.label.phone') :</b>
                                 <span>{{ $profile->phone }}</span>
                             </li>
-                            <li>@lang('pages.user.profile.label.birthday')
+                            <li><b>@lang('pages.user.profile.label.birthday') :</b>
                                 <span>{{ $profile->birthday }}</span>
                             </li>
-                            <li>@lang('pages.user.profile.label.address')
+                            <li><b>@lang('pages.user.profile.label.address') :</b>
                                 <span>{{ $profile->address }}</span>
                             </li>
-                            <li>@lang('pages.user.profile.label.city')<span>{{ $profile->city }}</span>
+                            <li><b>@lang('pages.user.profile.label.city') :</b>
+                                <span>{{ $profile->city }}</span>
                             </li>
-                            <li>@lang('pages.user.profile.label.zipcode')
+                            <li><b>@lang('pages.user.profile.label.zipcode') :</b>
                                 <span>{{ $profile->zipcode }}</span>
                             </li>
-                            <li>@lang('pages.user.profile.label.country')
+                            <li><b>@lang('pages.user.profile.label.country') :</b>
                                 <span>{{ $profile->country }}</span>
                             </li>
-                            <li>Trạng thái
+                            <li><b>Trạng thái :</b>
                                 @if ($profile->status === 1)
                                     <span class=" shadow-none badge outline-badge-primary">Active</span>
                                 @elseif ($profile->status === 0)
