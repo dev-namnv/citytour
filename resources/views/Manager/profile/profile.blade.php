@@ -1,7 +1,68 @@
 @extends('layouts.manager.app')
 
-@section('title', 'Users')
+@section('title', 'Người dùng')
 
+@section('extra-js')
+    <script>
+        const showNotify = (message, status) => {
+            $.notify({
+                message,
+            }, {
+                type: status,
+                allow_dismiss: false,
+                newest_on_top: true,
+                mouse_over: false,
+                showProgressbar: false,
+                spacing: 10,
+                timer: 2000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                },
+                offset: {
+                    x: 30,
+                    y: 30
+                },
+                delay: 1000,
+                z_index: 10000,
+                animate: {
+                    enter: 'animate__animated animate__bounceIn',
+                    exit: 'animate__animated animate__bounceOut'
+                }
+            })
+        }
+
+        @if(session()->has('flash_message') && session()->has('status'))
+        console.log(`{{ session()->get('flash_message') . " with " .session()->get('status')}} `)
+        showNotify("{{session()->get('flash_message')}}", "{{session()->get('status')}}")
+        @endif
+
+        const updateStatus = user_id => {
+            $.ajax({
+                type: "POST",
+                url: `${window.location.origin}/manager/account/${user_id}/updateStatus`,
+                data: {
+                    _method: "PUT",
+                    _token: "{{csrf_token()}}",
+                    status: $(`#radio_user_${user_id}`).children().children('[name="status"]:checked').val()
+                },
+                success: data => {
+                    showNotify(data.flash_message, 'success')
+                    $(`#update_status_modal_${user_id}`).modal('toggle')
+                    if (data.status == 0) {
+                        $(`#status_user_${user_id}`).removeClass('text-success').addClass('text-danger').text('Khóa')
+                    } else {
+                        $(`#status_user_${user_id}`).removeClass('text-danger').addClass('text-success').text('Mở')
+                    }
+                },
+                error: () => {
+                    showNotify('Có lỗi xảy ra', 'danger')
+                }
+            })
+        }
+
+    </script>
+@endsection
 
 @section('content')
     <div id="tableCaption" class="col-lg-12 col-12 layout-spacing ">
@@ -27,7 +88,6 @@
                                         <th>Avatar</th>
                                         <th>Địa chỉ khách hàng</th>
                                         <th>Trạng Thái</th>
-                                        <th>Vị trí</th>
                                         <th>Hành Động</th>
                                     </tr>
                                     </thead>
@@ -43,26 +103,89 @@
                                             <td>
                                                 {{$item['address']}}
                                             </td>
-                                            @if ($item['status'] === 1)
-                                                <td class=""><span class=" shadow-none badge outline-badge-primary">Active</span>
-                                                </td>
-                                            @elseif ($item['status'] === 0)
-                                                <td class=""><span class=" shadow-none badge outline-badge-primary">deactive</span>
-                                                </td>
-                                            @endif
-                                            @if ($item['role'] === ADMIN)
-                                                <td>Admin</td>
-                                            @elseif ($item['role'] === GUIDE)
-                                                <td>Guide</td>
-                                            @else
-                                                <td>User</td>
-                                            @endif
+                                            <td>
+                                                <span id="status_user_{{$item['id']}}"
+                                                      class="{{$item['status'] == 0 ? 'text-danger' : 'text-success'}}">
+                                                    {{$item['status'] == 0 ? 'Khóa' : 'Mở'}}
+                                                </span>
+                                                <a href="javascript:;"
+                                                   class="btn btn-sm btn-clean btn-icon mr-2"
+                                                   title="Sửa trạng thái" data-toggle="modal"
+                                                   data-target="#update_status_modal_{{$item['id']}}">
+                                                    <span class="svg-icon svg-icon-md">
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                            height="24px"
+                                                            viewBox="0 0 24 24" version="1.1">
+                                                            <g
+                                                                stroke="none" stroke-width="1" fill="none"
+                                                                fill-rule="evenodd">
+                                                                <rect
+                                                                    x="0" y="0" width="24" height="24">
+                                                                </rect>
+                                                                <path
+                                                                    d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                                                                    fill="#000000" fill-rule="nonzero"
+                                                                    transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "></path>	                                        <rect
+                                                                    fill="#000000" opacity="0.3" x="5" y="20" width="15"
+                                                                    height="2"
+                                                                    rx="1">
+                                                                </rect>
+                                                            </g>
+                                                        </svg>
+                                                    </span>
+                                                </a>
+                                            </td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <a href="{{route('user.detail',$item['id'])}}" class="btn btn-sm btn-light">Chi tiết</a>
                                                     </div>
                                                 </td>
                                         </tr>
+                                        <div class="modal fade" id="update_status_modal_{{$item['id']}}"
+                                             style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Sửa trạng thái</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="form">
+                                                            <div class="form-group row">
+                                                                <label class="text-right col-lg-3 col-sm-12">Trạng
+                                                                    thái</label>
+                                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                                    <div class="radio-inline"
+                                                                         id="radio_user_{{$item['id']}}">
+                                                                        <label class="radio">
+                                                                            <input type="radio" value="0" name="status"
+                                                                                   @if($item['status'] == 0) checked @endif>
+                                                                            <span></span>Khóa</label>
+                                                                        <label class="radio">
+                                                                            <input type="radio" value="1" name="status"
+                                                                                   @if($item['status'] == 1) checked @endif>
+                                                                            <span></span>Mở</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary mr-2"
+                                                                data-dismiss="modal">Đóng
+                                                        </button>
+                                                        <button type="submit" class="btn btn-secondary"
+                                                                onclick="updateStatus({{$item['id']}})">Lưu
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                     </tbody>
 
