@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Contacts\SendContactRequest;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Tour;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
