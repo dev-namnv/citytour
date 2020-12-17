@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Invoice;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class UpdateCompleteInvoice extends Command
@@ -39,5 +40,11 @@ class UpdateCompleteInvoice extends Command
     public function handle()
     {
         Invoice::query()->where('status',5)->update(['status'=>6]);
+
+        $date = date('Y-m-d H:i:s', strtotime('-3 days',Carbon::now()->timestamp));
+        Invoice::query()->where('status',4)
+            ->where('updated_at','<',$date)
+            ->update(['status'=>6]);
+        return true;
     }
 }
