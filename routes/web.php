@@ -177,6 +177,10 @@ Route::group(['namespace' => 'Main'], function () {
         $articles = Article::query()->inRandomOrder()->limit(4)->get();
         return view('Main.error.index', compact('tour_min', 'articles'));
     });
+
+    Route::group(['prefix' => 'pay'], function () {
+        Route::post('request/{id}', 'PayController@request')->name('pay.request');
+    });
 });
 
 /**

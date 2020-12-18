@@ -188,7 +188,7 @@
                         <hr>
                         <a class="btn_full_outline" href="{{ route('Main.invoice_detail', ['id' => $payment_log->invoice->id]) }}" target="_blank">Xem hóa đơn</a>
                     </div>
-                    @auth
+                    @guest
                         <div class="box_style_4">
                             <h6 class="text-primary">Bạn có thể đăng nhập với:</h6>
                             <table class="table mt-2">
@@ -204,7 +204,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    @endauth
+                    @endguest
                     <div class="box_style_4">
                         <i class="icon_set_1_icon-89"></i>
                         <h4>Liên hệ <span>hướng dẫn viên?</span></h4>

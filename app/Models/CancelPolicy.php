@@ -10,6 +10,7 @@ class CancelPolicy extends Model
 
     protected $fillable = [
         'name',
+        'date',
         'refunds',
         'behavioral_points_deduction'
     ];

@@ -8,7 +8,7 @@
 
 
     <meta content="IE=9; IE=8; IE=7; IE=EDGE;" http-equiv="X-UA-Compatible"/>
-    <title>Your title</title>
+    <title>Chào mừng bạn đến với City Tours</title>
 
     <!-- GOOGLE WEB FONT -->
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">

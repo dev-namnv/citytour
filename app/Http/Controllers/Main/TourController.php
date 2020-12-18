@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Models\Batch;
+use App\Models\CancelPolicy;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Review;
@@ -156,10 +157,11 @@ class TourController extends Controller
     {
         $user_id = auth()->user()->id;
         $invoices = Invoice::query()->where('user_id', '=', $user_id)
-            ->with('tour')
+            ->with('tour', 'refund')
             ->orderBy('id', 'desc')
             ->get();
-        return view('Main.tour.history', compact(['invoices']));
+        $cancel_policies = CancelPolicy::query()->orderBy('date', 'desc')->get();
+        return view('Main.tour.history', compact('invoices', 'cancel_policies'));
     }
 
     public function review(Request $request)

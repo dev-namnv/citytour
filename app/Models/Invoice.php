@@ -49,7 +49,7 @@ class Invoice extends Model
     public function getColor()
     {
         $masterData = config('masterdata')['invoice'];
-        return$masterData['color'][$this->status];
+        return $masterData['color'][$this->status];
     }
 
     /**
@@ -79,7 +79,7 @@ class Invoice extends Model
 
     public function tour()
     {
-        return $this->belongsTo('App\Models\Tour','tour_id')->withoutGlobalScopes();
+        return $this->belongsTo('App\Models\Tour', 'tour_id')->withoutGlobalScopes();
     }
 
     public function guide()
@@ -105,5 +105,10 @@ class Invoice extends Model
     public function batch()
     {
         return $this->belongsTo('App\Models\Batch', 'start_date', 'id');
+    }
+
+    public function refund()
+    {
+        return $this->hasOne('App\Models\Pay', 'invoice_id', 'id');
     }
 }

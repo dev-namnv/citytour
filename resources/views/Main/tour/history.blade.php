@@ -78,6 +78,33 @@
     </style>
 @endsection
 
+@section('extra-js')
+    <script>
+        buttonPayRefund = $('.pay-refund')
+        buttonPayRefund.on('click', async function (e) {
+            $("body").css("cursor", "progress");
+            await axios.post(`${BASE_URL}/pay/request/${buttonPayRefund.attr('invoice-id')}`)
+                    .then((res) => {
+                        $("body").css("cursor", "default");
+                        $(this).attr('disabled', 'disabled')
+                        $(this).html('Đã gửi yêu cầu')
+                        Toastr.show(res.data)
+                    })
+                    .catch((err) => console.log(err))
+        })
+    </script>
+    <script>
+        $(document).ready(function (){
+            $(`.review`).click(function (){
+                let tour = $(this).data('tour')
+                let id = $(this).data('id')
+                let input_name = $(`input[name='name']`).val(tour)
+                let input_id = $(`input[name='id']`).val(id)
+            })
+        })
+    </script>
+@endsection
+
 @section('content')
     <section class="parallax-window" data-parallax="scroll" data-image-src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/hsnmkdasrhwmvng1yrht/V%C3%A9%20C%C3%B4ng%20Vi%C3%AAn%20Su%E1%BB%91i%20Kho%C3%A1ng%20N%C3%B3ng%20N%C3%BAi%20Th%E1%BA%A7n%20T%C3%A0i%20%C4%90%C3%A0%20N%E1%BA%B5ng.jpg"
              data-natural-width="1400" data-natural-height="470">
@@ -171,9 +198,52 @@
                                                             <span class="text-success">{{$invoices[0]->getStatus()}}</span>
                                                         </td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="float: right">
+                                                            @if(\Carbon\Carbon::parse($invoices[0]->start_date)->diffInDays(\Carbon\Carbon::now()) >= 0 && !$invoices[0]->refund)
+                                                                <button class="btn btn-danger pay-refund" invoice-id="{{ $invoices[0]->id }}">Hủy tour</button>
+                                                            @elseif($invoices[0]->refund)
+                                                                <button class="btn btn-danger" style="cursor: not-allowed" disabled="disabled">Đã gửi yêu cầu</button>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
+                                                <div id="policy" class="col-lg-8 float-right">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Vui lòng đọc
+                                                            <a href="#cancel-policy" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="cancel-policy" data-parent="#cancel-policy">chính sách hủy chuyến</a>
+                                                            trước khi xác nhận
+                                                            .</label>
+                                                        @error('policy_terms')
+                                                        <small class="text-sm-left text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                    <div id="cancel-policy">
+                                                        <div class="card card-body">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Thời gian</th>
+                                                                    <th scope="col">Phần trăm hoàn trả</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                @foreach($cancel_policies as $key => $policy)
+                                                                    <tr>
+                                                                        <th scope="row">{{ $key + 1 }}</th>
+                                                                        <td>{{ $policy->name }}</td>
+                                                                        <td>{{ $policy->refunds }}%</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             @if($invoices[0]->status == 4)
@@ -222,7 +292,7 @@
                                                                     Ngày thứ {{$key+1}}
                                                                 @endif
                                                             </h2>
-                                                            <p>{{$schedule->description}}</p>
+                                                            <p>{!! $schedule->description !!}</p>
                                                             <img src="{{$schedule->image}}" alt="">
                                                         </div>
                                                     </li>
@@ -248,7 +318,7 @@
                                                                     Ngày thứ {{$key+1}}
                                                                 @endif
                                                             </h2>
-                                                            <p>{{$schedule->description}}</p>
+                                                            <p>{!! $schedule->description !!}</p>
                                                             <img src="{{$schedule->image}}" alt="">
                                                         </div>
                                                     </li>
@@ -290,7 +360,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Ngày thanh toán:</strong></td>
-                                                        <td>{{empty($invoices[0]->created_at) ? null : date_format($invoices[0]->created_at, 'H:i:s m-d-Y')}}</td>
+                                                        <td>{{ empty($invoices[0]->created_at) ? null : \Carbon\Carbon::parse($invoices[0]->created_at)->format('m/d/Y H:i:s') }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Trạng thái thanh toán</strong></td>
@@ -304,7 +374,7 @@
                                             <div class="col-6">
                                                 <address>
                                                     <h3>Hình thức thanh toán:</h3><br>
-                                                    <strong>Loại thẻ:</strong> Credit card<br>
+                                                    <strong>Loại thẻ:</strong> VNPay<br>
                                                     <strong>Mã thanh toán:</strong> 5FC3C6A8960CA
                                                 </address>
                                             </div>
@@ -401,6 +471,7 @@
                                     <th>Lịch trình</th>
                                     <th>Hóa đơn</th>
                                     <th>Đánh giá</th>
+                                    <th>Hủy tour</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -420,6 +491,15 @@
                                             <td>
                                                 <a href="#Review" class="btn_1 bg-success review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
                                             </td>
+                                            @if(\Carbon\Carbon::parse($invoices[0]->start_date)->diffInDays(\Carbon\Carbon::now()) >= 0 && !$invoices[0]->refund)
+                                                <td>
+                                                    <button class="btn btn-danger pay-refund pay-refund" invoice-id="{{ $invoice->id }}">Hủy tour</button>
+                                                </td>
+                                            @elseif($invoice->refund)
+                                                <td>
+                                                    <button class="btn btn-danger pay-refund" style="cursor: not-allowed" disabled="disabled">Đã gửi yêu cầu</button>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 @else
@@ -438,6 +518,15 @@
                                             <td>
                                                 <a href="#Review" class="btn_1 review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
                                             </td>
+                                            @if(\Carbon\Carbon::parse($invoices[0]->start_date)->diffInDays(\Carbon\Carbon::now()) >= 0 && !$invoices[0]->refund)
+                                                <td>
+                                                    <button class="btn btn-danger pay-refund pay-refund" invoice-id="{{ $invoice->id }}">Hủy tour</button>
+                                                </td>
+                                            @elseif($invoice->refund)
+                                                <td>
+                                                    <button class="btn btn-danger pay-refund" style="cursor: not-allowed" disabled="disabled">Đã gửi yêu cầu</button>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 @endif
@@ -503,17 +592,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('extra-js')
-    <script>
-        $(document).ready(function (){
-            $(`.review`).click(function (){
-                let tour = $(this).data('tour')
-                let id = $(this).data('id')
-                let input_name = $(`input[name='name']`).val(tour)
-                let input_id = $(`input[name='id']`).val(id)
-            })
-        })
-    </script>
 @endsection
