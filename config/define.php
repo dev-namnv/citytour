@@ -87,3 +87,9 @@ define('TOUR_RATING', 3);
 
 // Username
 define('REGEX_USERNAME', '/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/');
+
+// Payment
+define('PAY_TYPE_PAYMENT_TO_GUIDE', 100);
+define('PAY_TYPE_REFUND_TO_USER', 200);
+define('PAY_STATUS_REQUEST', 100);
+define('PAY_STATUS_CONFIRM', 200);

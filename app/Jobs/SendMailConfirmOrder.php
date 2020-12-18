@@ -30,10 +30,6 @@ class SendMailConfirmOrder implements ShouldQueue
      */
     public function handle()
     {
-        Mail::send('mail.confirmOrder',$this->data, function ($msg) {
-            $msg->to($this->data['customer_email'], $this->data['customer_name'])
-                ->from('citytour1@admin.com','city tours')
-                ->setSubject('Đặt Tour du lịch thành công - City Tours');
-        });
+
     }
 }
