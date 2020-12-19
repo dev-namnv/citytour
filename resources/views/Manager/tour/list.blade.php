@@ -365,40 +365,10 @@
                     });
                 };
 
-                const eventsCapture = function () {
-                    $('#kt_datatable').on('datatable-on-init', function () {
-                        eventsWriter('Datatable init');
-                    }).on('datatable-on-layout-updated', function () {
-                        eventsWriter('Layout render updated');
-                    }).on('datatable-on-ajax-done', function () {
-                        eventsWriter('Ajax data successfully updated');
-                    }).on('datatable-on-ajax-fail', function (e, jqXHR) {
-                        eventsWriter('Ajax error');
-                    }).on('datatable-on-goto-page', function (e, args) {
-                        eventsWriter('Goto to pagination: ' + args.page);
-                    }).on('datatable-on-update-perpage', function (e, args) {
-                        eventsWriter('Update page size: ' + args.perpage);
-                    }).on('datatable-on-reloaded', function (e) {
-                        eventsWriter('Datatable reloaded');
-                    }).on('datatable-on-check', function (e, args) {
-                        eventsWriter('Checkbox active: ' + args.toString());
-                    }).on('datatable-on-uncheck', function (e, args) {
-                        eventsWriter('Checkbox inactive: ' + args.toString());
-                    }).on('datatable-on-sort', function (e, args) {
-                        eventsWriter('Datatable sorted by ' + args.field + ' ' + args.sort);
-                    });
-                };
-
-                const eventsWriter = function (string) {
-                    var console = $('#kt_datatable_console').append(string + '\t\n');
-                    $(console).scrollTop(console[0].scrollHeight - $(console).height());
-                };
-
                 return {
                     // public functions
                     init: function () {
                         demo();
-                        eventsCapture();
                     },
                 };
             }();
@@ -760,40 +730,10 @@
                     });
                 };
 
-                const eventsCapture = function () {
-                    $('#kt_datatable').on('datatable-on-init', function () {
-                        eventsWriter('Datatable init');
-                    }).on('datatable-on-layout-updated', function () {
-                        eventsWriter('Layout render updated');
-                    }).on('datatable-on-ajax-done', function () {
-                        eventsWriter('Ajax data successfully updated');
-                    }).on('datatable-on-ajax-fail', function (e, jqXHR) {
-                        eventsWriter('Ajax error');
-                    }).on('datatable-on-goto-page', function (e, args) {
-                        eventsWriter('Goto to pagination: ' + args.page);
-                    }).on('datatable-on-update-perpage', function (e, args) {
-                        eventsWriter('Update page size: ' + args.perpage);
-                    }).on('datatable-on-reloaded', function (e) {
-                        eventsWriter('Datatable reloaded');
-                    }).on('datatable-on-check', function (e, args) {
-                        eventsWriter('Checkbox active: ' + args.toString());
-                    }).on('datatable-on-uncheck', function (e, args) {
-                        eventsWriter('Checkbox inactive: ' + args.toString());
-                    }).on('datatable-on-sort', function (e, args) {
-                        eventsWriter('Datatable sorted by ' + args.field + ' ' + args.sort);
-                    });
-                };
-
-                const eventsWriter = function (string) {
-                    var console = $('#kt_datatable_console').append(string + '\t\n');
-                    $(console).scrollTop(console[0].scrollHeight - $(console).height());
-                };
-
                 return {
                     // public functions
                     init: function () {
                         demo();
-                        eventsCapture();
                     },
                 };
             }();
@@ -966,18 +906,6 @@
                 <!--begin: Datatable-->
                 <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
                 <!--end: Datatable-->
-                <div class="mt-10">
-                    <textarea id="kt_datatable_console" class="form-control" cols="100" rows="10" title="Console"
-                              readonly="readonly"></textarea>
-                    <div class="mt-5">
-                        <button class="btn btn-light-primary font-weight-bold mr-2" type="button"
-                                id="kt_datatable_clear">Clear Console
-                        </button>
-                        <button class="btn btn-light-success font-weight-bold" type="button" id="kt_datatable_reload">
-                            Reload Data
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- start:Schedule tour -->

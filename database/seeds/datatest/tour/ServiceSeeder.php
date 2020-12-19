@@ -16,20 +16,20 @@ class ServiceSeeder extends Seeder
         $faker = \Faker\Factory::create('vi_VN');
 
         $services = [
-            0 => ['name' => 'Museum', 'icon' => 'icon_set_1_icon-4'],
-            1 => ['name' => 'Accessibility', 'icon' => 'icon_set_1_icon-13'],
-            2 => ['name' => 'Pet allowed', 'icon' => 'icon_set_1_icon-22'],
-            3 => ['name' => 'Audio guide', 'icon' => 'icon_set_1_icon-97'],
-            4 => ['name' => 'Tour guide', 'icon' => 'icon_set_1_icon-29'],
+            0 => ['name' => 'Viện bảo tàng', 'icon' => 'icon_set_1_icon-4'],
+            1 => ['name' => 'Khả năng tiếp cận', 'icon' => 'icon_set_1_icon-13'],
+            2 => ['name' => 'Cho phép vật nuôi', 'icon' => 'icon_set_1_icon-22'],
+            3 => ['name' => 'Hướng dẫn âm thanh', 'icon' => 'icon_set_1_icon-97'],
+            4 => ['name' => 'Hướng dẫn viên du lịch', 'icon' => 'icon_set_1_icon-29'],
             5 => ['name' => 'Plasma TV', 'icon' => 'icon_set_2_icon-116'],
-            6 => ['name' => 'Free Wifi', 'icon' => 'icon_set_1_icon-86'],
-            7 => ['name' => 'Poll', 'icon' => 'icon_set_2_icon-110'],
-            8 => ['name' => 'Breakfast', 'icon' => 'icon_set_1_icon-59'],
-            9 => ['name' => 'Parking', 'icon' => 'icon_set_1_icon-27'],
-            10 => ['name' => 'Hotel Pick up', 'icon' => 'icon_set_1_icon-6'],
-            11 => ['name' => 'Large baggage', 'icon' => 'icon_set_1_icon-33'],
-            12 => ['name' => 'Pizza /Italian', 'icon' => 'icon_set_3_restaurant-1'],
-            13 => ['name' => 'No smoking area', 'icon' => 'icon_set_1_icon-47']
+            6 => ['name' => 'TV Plasma', 'icon' => 'icon_set_1_icon-86'],
+            7 => ['name' => 'Thăm dò ý kiến', 'icon' => 'icon_set_2_icon-110'],
+            8 => ['name' => 'Bữa ăn sáng', 'icon' => 'icon_set_1_icon-59'],
+            9 => ['name' => 'Đậu xe', 'icon' => 'icon_set_1_icon-27'],
+            10 => ['name' => 'Đón khách tại khách sạn', 'icon' => 'icon_set_1_icon-6'],
+            11 => ['name' => 'Hành lý lớn', 'icon' => 'icon_set_1_icon-33'],
+            12 => ['name' => 'Pizza / Ý', 'icon' => 'icon_set_3_restaurant-1'],
+            13 => ['name' => 'Khu vực không hút thuốc lá', 'icon' => 'icon_set_1_icon-47']
         ];
 
         foreach ($services as $item) {
