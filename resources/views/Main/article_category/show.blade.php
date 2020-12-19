@@ -77,7 +77,7 @@
                                 <div class="post">
                                     <div class="text-center">
                                         <a href="{{route('articles.detail', $article->slug)}}" title="{{$article->image}}">
-                                            <img src="{{$article->image}}" alt="Image" class="img-fluid rounded">
+                                            <img src="{{$article->image}}" alt="Image" class="img-fluid rounded" style="height: 300px;">
                                         </a>
                                     </div>
                                     <div class="post_info clearfix">
