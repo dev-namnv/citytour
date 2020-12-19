@@ -5,7 +5,7 @@
     <link href="{{asset('Libraries/Main/css/blog.css')}}" rel="stylesheet">
 @endsection
 
-@section('title', 'Bài viết')
+@section('title', 'Chuyên mục bài viết')
 
 @section('extra-js')
     <script>
@@ -28,7 +28,7 @@
                 <ul>
                     <li><a href="/">{{ __('pages.article.home') }}</a>
                     </li>
-                    <li>Danh mục bài viết</li>
+                    <li>Chuyên mục bài viết</li>
                     <li>{{$article_category->name}}</li>
                 </ul>
             </div>
@@ -87,10 +87,10 @@
                                                     <span>{{$article->release_day}}</span>
                                                 </li>
                                                 <li>
-                                                    <i class="icon-inbox-alt"></i> {{ __('pages.article.in') }}
+                                                    <i class="icon-inbox-alt"></i> Chuyên mục
                                                     @foreach($article->categories->take(2) as $key => $category)
 
-                                                        <a href="#{{$category->id}}">{{$category->name}} </a>,
+                                                        <a href="{{route('Main.article_category.show', $category->slug)}}">{{$category->name}} </a>,
                                                     @endforeach
                                                     @if(count($article->categories) > 2)
                                                         ...
@@ -108,8 +108,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="post-right"><i class="icon-comment"></i><a href="#">{{count($article->comments)}}</a>
-                                        </div>
+
                                     </div>
                                     <h2>{{$article->title}}</h2>
 

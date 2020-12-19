@@ -69,9 +69,9 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="article_category">Danh mục bài viết</label>
+                        <label for="article_category">Chuyên mục bài viết</label>
                         <div></div>
-                        <select title="Hãy chọn danh mục bài viết" name="category_ids[]" id="article_category"
+                        <select title="Hãy chọn chuyên mục bài viết" name="category_ids[]" id="article_category"
                                 class="selectpicker custom-select form-control @error('category_ids') is-invalid @enderror"
                                 multiple>
                             @foreach($article_categories as $key => $category)

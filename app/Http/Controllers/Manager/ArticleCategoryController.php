@@ -124,12 +124,11 @@ class ArticleCategoryController extends Controller
         try {
             foreach ($article_category->articles as $key => $article) {
                 $article->tags()->detach();
-                $article->comments()->delete();
             }
 
             $article_category->articles()->detach();
             $article_category->delete();
-            return redirect()->back()->with('flash_message', 'Xóa danh mục bài viết thành công')->with('status', 'success');
+            return redirect()->back()->with('flash_message', 'Xóa chuyên mục bài viết thành công')->with('status', 'success');
         } catch(\Exception $e) {
             return redirect()->back()->with('flash_message', $e->getMessage())->with('status', 'danger');
         }

@@ -38,11 +38,11 @@
             <div class="row">
                 <aside class="col-lg-3 add_bottom_30">
                     <div class="widget" id="cat_blog">
-                        <h4>{{ __('pages.article.categories') }}</h4>
+                        <h4>Chuyên mục bài viết</h4>
                         <ul>
                             @foreach($article_categories as $key => $article_category)
                                 <li>
-                                    <a href="#">{{$article_category->name}}</a>
+                                    <a href="{{route('Main.article_category.show', $article_category->slug)}}">{{$article_category->name}}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -74,8 +74,8 @@
                         @foreach($articles as $key => $article)
                             <div class="post">
                                 <div class="text-center">
-                                    <a href="{{route('articles.detail', $article->slug)}}" title="{{$article->image}}">
-                                        <img src="{{$article->image}}" alt="Image" class="img-fluid rounded">
+                                    <a href="{{route('articles.detail', $article->slug)}}" title="{{$article->title}}">
+                                        <img src="{{$article->image}}" alt="Image" class="img-fluid rounded" style="height: 300px">
                                     </a>
                                 </div>
                                 <div class="post_info clearfix">
@@ -85,10 +85,10 @@
                                                 <span>{{$article->release_day}}</span>
                                             </li>
                                             <li>
-                                                <i class="icon-inbox-alt"></i> {{ __('pages.article.in') }}
+                                                <i class="icon-inbox-alt"></i> Chuyên mục
                                                 @foreach($article->categories->take(2) as $key => $category)
 
-                                                    <a href="#{{$category->id}}">{{$category->name}} </a>,
+                                                    <a href="{{route('Main.article_category.show', $category->slug)}}">{{$category->name}} </a>,
                                                 @endforeach
                                                 @if(count($article->categories) > 2)
                                                     ...

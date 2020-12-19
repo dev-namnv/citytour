@@ -182,7 +182,6 @@ class ArticleController extends Controller
             $article->categories()->detach();
             ArticleTag::whereIn('id', $article->tags->pluck('id'))->delete();
             $article->tags()->detach();
-            $article->comments()->delete();
             $article->delete();
             return redirect()->back()->with('flash_message', 'Xóa bài viết thành công')->with('status', 'success');
         } catch (\Exception $e) {

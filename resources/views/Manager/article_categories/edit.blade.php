@@ -2,22 +2,23 @@
 
 
 
-@section('title', 'Sửa danh mục bài viết')
+@section('title', 'Sửa chuyên mục bài viết')
 
 @section('content')
     <div class="container">
         <div class="card card-custom gutter-b example example-compact">
             <div class="card-header">
-                <h3 class="card-title">Sửa danh mục bài viết</h3>
+                <h3 class="card-title">Sửa chuyên mục bài viết</h3>
             </div>
             <!--begin::Form-->
             <form method="POST" class="form-edit-article-category" action="{{route('article_categories.update', $article_category->id)}}">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="id" value="{{$article_category->id}}">
                 <div class="card-body">
                     <div class="col-6">
                         <div class="form-group ">
-                            <label for="article_category_name">Tên danh mục</label>
+                            <label for="article_category_name">Tên chuyên mục</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="article_title" name="name" value="{{old('name', $article_category->name)}}">
                             @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
