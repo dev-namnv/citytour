@@ -9,13 +9,13 @@
     </style>
 @endsection
 
-@section('title', 'Thêm danh mục bài viết')
+@section('title', 'Thêm chuyên mục bài viết')
 
 @section('content')
     <div class="container">
         <div class="card card-custom gutter-b example example-compact">
             <div class="card-header">
-                <h3 class="card-title">Thêm danh mục bài viết</h3>
+                <h3 class="card-title">Thêm chuyên mục bài viết</h3>
             </div>
             <!--begin::Form-->
             <form method="POST" action="{{route('article_categories.store')}}" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
                 <div class="card-body ">
                     <div class="col-6">
                         <div class="form-group ">
-                            <label for="article_category_name">Tên danh mục</label>
+                            <label for="article_category_name">Tên chuyên mục</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="article_category_name" name="name" value="{{old('name')}}">
                             @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>

@@ -1,6 +1,6 @@
 @extends('layouts.manager.app')
 
-@section('title', 'Danh mục bài viết')
+@section('title', 'Chuyên mục bài viết')
 
 @section('extra-js')
     <script>
@@ -45,7 +45,7 @@
             <div class="card card-custom">
                 <div class="card-header flex-wrap py-5">
                     <div class="card-title">
-                        <h3 class="card-label">Danh sách danh mục bài viết
+                        <h3 class="card-label">Danh sách chuyên mục bài viết
                         </h3>
                     </div>
                     <div class="card-toolbar">
@@ -84,7 +84,7 @@
 
                                                 <a href="{{route('article_categories.edit', $article_category->id)}}"
                                                    class="btn btn-sm btn-clean btn-icon mr-2"
-                                                   title="Sửa bài viết">
+                                                   title="Sửa chuyên mục">
                                                     <span class="svg-icon svg-icon-md">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@
                                                                     document.getElementById('delete-form-{{$article_category->id}}').submit()
                                                                 }"
                                                         class="btn btn-sm btn-clean btn-icon"
-                                                        title="Xóa bài viết">
+                                                        title="Xóa chuyên mục">
                                                     <span class="svg-icon svg-icon-md">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"

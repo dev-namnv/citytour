@@ -230,7 +230,7 @@
                                 <i class="menu-bullet menu-bullet-line">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">Danh mục bài viết</span>
+                                <span class="menu-text">Chuyên mục bài viết</span>
                             </a>
                         </li>
                     </ul>
