@@ -219,7 +219,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <img src="libraries/main/img/laptop.png" alt="Laptop" class="img-fluid laptop">
+                    <img src="{{ asset('Libraries/Main/img/laptop.png') }}" alt="Laptop" class="img-fluid laptop">
                 </div>
                 <div class="col-md-6">
                     <h3><span>Bắt đầu</span> với CityTour</h3>
