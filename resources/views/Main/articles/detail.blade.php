@@ -77,7 +77,7 @@
                         <div class="post nopadding">
 {{--                            <img src="{{asset('Libraries/Main/img/blog-1.jpg')}}" alt="Image" class="img-fluid">--}}
                             <div class="text-center mb-3">
-                                <img src="{{$article->image}}" alt="{{$article->image}}" class="img-fluid rounded">
+                                <img src="{{$article->image}}" alt="{{$article->image}}" class="img-fluid rounded" style="height: 300px;">
                             </div>
                             <div class="post_info clearfix">
                                 <div class="post-left">
