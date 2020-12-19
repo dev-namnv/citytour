@@ -4,6 +4,13 @@
 
 @section('extra-css')
     <link href="{{asset('Libraries/Main/css/blog.css')}}" rel="stylesheet">
+    <style>
+        #article-content img {
+            height: 300px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -34,7 +41,7 @@
             <div class="row">
                 <aside class="col-lg-3 add_bottom_30">
                     <div class="widget" id="cat_blog">
-                        <h4>{{ __('pages.article.categories') }}</h4>
+                        <h4>Chuyên mục bài viết</h4>
                         <ul>
                             @foreach($article_categories as $key => $article_category)
                                 <li>
@@ -77,7 +84,7 @@
                                     <ul>
                                         <li><i class="icon-calendar-empty"></i>{{ __('pages.article.on') }} <span>{{$article->release_day}}</span>
                                         </li>
-                                        <li><i class="icon-inbox-alt"></i>{{ __('pages.article.in') }}
+                                        <li><i class="icon-inbox-alt"></i>Chuyên mục
                                             @foreach($article->categories->take(2) as $key => $category)
                                                 <a href="{{route('Main.article_category.show', $category->slug)}}">{{$category->name}}</a>,
                                             @endforeach
@@ -101,7 +108,7 @@
                                 {{$article->heading}}
                             </p>
 
-                            <div>
+                            <div id="article-content">
                                 {!! $article->content !!}
                             </div>
                         </div>
