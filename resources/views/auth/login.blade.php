@@ -7,11 +7,11 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
                         <div id="login">
-                            <div class="text-center"><img src="/Libraries/Main/img/logo_sticky.png" alt="Image" data-retina="true" ></div>
+                            <div class="text-center"><img src="{{ asset('/Libraries/Main/img/logo_sticky.png') }}" alt="Image" data-retina="true" ></div>
                             <hr>
                             <form class="form-login" method="post" action="{{ route('login') }}">
                                 @csrf
-                                <a href="social.google" class="social_bt google">Đăng nhập với Google</a>
+                                <a href="{{ route('social.google') }}" class="social_bt google">Đăng nhập với Google</a>
                                 <div class="divider"><span>Or</span></div>
                                 <div class="form-group">
                                     <label>Email</label>
