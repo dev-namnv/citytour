@@ -37,7 +37,16 @@
     <link href="{{ asset('Libraries/Manager/css/themes/layout/aside/light.css') }}" rel="stylesheet" type="text/css"/>
     <!--end::Layout Themes-->
 
-    <link rel="shortcut icon" href="{{ asset('Libraries/Manager/media/logos/favicon.ico') }}"/>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{{ asset('Libraries/Main/img/favicon.ico') }}" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon"
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-57x57-precomposed.png') }}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-72x72-precomposed.png') }}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-114x114-precomposed.png') }}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-144x144-precomposed.png') }}">
 
     <!-- Extra css -->
     @yield('extra-css')

@@ -38,7 +38,7 @@ class TourController extends Controller
     public function create()
     {
         $categories = Category::query()->get()->toArray();
-        return view('manager.tour.create',compact('categories'));
+        return view('Manager.tour.create',compact('categories'));
     }
 
     public function store(TourCreateRequest $request)

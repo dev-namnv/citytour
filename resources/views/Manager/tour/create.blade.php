@@ -1,6 +1,6 @@
 @extends('layouts.manager.app')
 
-@section('title', 'Create Tour')
+@section('title', 'Tạo Tour')
 
 @section('extra-css')
     <link href="{{ asset('Libraries/Manager/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
