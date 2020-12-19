@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-<link href="{{ asset('libraries/main/css/style.css') }}" rel="stylesheet">
-<link href="{{ asset('libraries/main/css/vendors.css') }}" rel="stylesheet">
+<link href="{{ asset('Libraries/Main/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('Libraries/Main/css/vendors.css') }}" rel="stylesheet">
 
 <!-- CUSTOM CSS -->
-<link href="{{ asset('libraries/main/css/custom.css') }}" rel="stylesheet">
+<link href="{{ asset('Libraries/Main/css/custom.css') }}" rel="stylesheet">
 <style>
     @media print {
         #printButton {

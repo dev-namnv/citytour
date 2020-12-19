@@ -3,7 +3,7 @@
 @section('title', 'Wishlist')
 
 @section('extra-css')
-    <link href="{{asset('libraries/main/css/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('Libraries/Main/css/custom.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')

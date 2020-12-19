@@ -3,8 +3,8 @@
 @section('title', 'Lịch sử')
 
 @section('extra-css')
-    <link href="{{asset('libraries/main/css/custom.css')}}" rel="stylesheet">
-    <link href="{{ asset('libraries/main/css/timeline.css') }}" rel="stylesheet">
+    <link href="{{asset('Libraries/Main/css/custom.css')}}" rel="stylesheet">
+    <link href="{{ asset('Libraries/Main/css/timeline.css') }}" rel="stylesheet">
 
     <style>
         .cbp_tmtimeline:before {

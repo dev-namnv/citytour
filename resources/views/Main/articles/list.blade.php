@@ -2,7 +2,7 @@
 
 
 @section('extra-css')
-    <link href="{{asset('libraries/main/css/blog.css')}}" rel="stylesheet">
+    <link href="{{asset('Libraries/Main/css/blog.css')}}" rel="stylesheet">
 @endsection
 
 @section('title', 'Bài viết')

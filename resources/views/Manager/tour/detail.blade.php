@@ -3,12 +3,12 @@
 @section('title', $tour->name)
 
 @section('extra-css')
-    <link href="{{ asset('libraries/manager/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('libraries/manager/assets/css/forms/switches.css') }}">
+    <link href="{{ asset('Libraries/Manager/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('Libraries/Manager/assets/css/forms/switches.css') }}">
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('libraries/manager/assets/js/scrollspyNav.js') }}"></script>
+    <script src="{{ asset('Libraries/Manager/assets/js/scrollspyNav.js') }}"></script>
     <script>
         CKEDITOR.replace('service_desc_editor', {
             extraPlugins: ['easyimage'],

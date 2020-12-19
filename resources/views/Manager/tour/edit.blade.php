@@ -343,7 +343,7 @@
 @section('extra-js')
     <!-- include summernote css/js -->
 
-    <script src="{{asset('libraries/manager/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
+    <script src="{{asset('Libraries/Manager/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
     <script
         src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
     <script>

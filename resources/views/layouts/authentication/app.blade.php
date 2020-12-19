@@ -14,7 +14,7 @@
         <title>{{ env('APP_NAME') }}</title>
     @endif
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('libraries/manager/assets/img/favicon.ico') }} "/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('Libraries/Manager/assets/img/favicon.ico') }} "/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <!--begin::Page Custom Styles(used by this page)-->
     <link href="{{ asset('Libraries/Manager/css/pages/login/classic/login-5.css') }}" rel="stylesheet" type="text/css" />

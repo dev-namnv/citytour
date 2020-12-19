@@ -1,7 +1,7 @@
 @extends('layouts.manager.app')
 
 @section('extra-css')
-    <link href="{{asset('libraries/manager/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('Libraries/Manager/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css">
     <style>
         .invalid-feedback {
             display: block;

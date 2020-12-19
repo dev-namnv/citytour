@@ -3,8 +3,8 @@
 
 
 @section('extra-js')
-    <script src="{{asset('libraries/manager/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
-    <script src="{{asset('libraries/manager/js/pages/crud/forms/widgets/tagify.js')}}"></script>
+    <script src="{{asset('Libraries/Manager/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
+    <script src="{{asset('Libraries/Manager/js/pages/crud/forms/widgets/tagify.js')}}"></script>
 
     <script>
         // Class definition

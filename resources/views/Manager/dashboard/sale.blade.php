@@ -548,7 +548,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content customer-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/profile-7.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/profile-7.jpg') }}"
                                                 alt="avatar">Andy King
                                         </div>
                                     </td>
@@ -569,7 +569,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content customer-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/profile-4.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/profile-4.jpg') }}"
                                                 alt="avatar">Irene Collins
                                         </div>
                                     </td>
@@ -590,7 +590,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content customer-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/profile-10.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/profile-10.jpg') }}"
                                                 alt="avatar">Laurie Fox
                                         </div>
                                     </td>
@@ -611,7 +611,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content customer-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/profile-13.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/profile-13.jpg') }}"
                                                 alt="avatar">Luke Ivory
                                         </div>
                                     </td>
@@ -632,7 +632,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content customer-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/profile-5.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/profile-5.jpg') }}"
                                                 alt="avatar">Ryan Collins
                                         </div>
                                     </td>
@@ -653,7 +653,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content customer-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/profile-6.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/profile-6.jpg') }}"
                                                 alt="avatar">Nia Hillyer
                                         </div>
                                     </td>
@@ -674,7 +674,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content customer-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/profile-11.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/profile-11.jpg') }}"
                                                 alt="avatar">Sonia Shaw
                                         </div>
                                     </td>
@@ -732,7 +732,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content product-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/speaker.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/speaker.jpg') }}"
                                                 alt="product">Speakers
                                         </div>
                                     </td>
@@ -753,7 +753,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content product-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/sunglass.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/sunglass.jpg') }}"
                                                 alt="product">Sunglasses
                                         </div>
                                     </td>
@@ -774,7 +774,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content product-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/watch.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/watch.jpg') }}"
                                                 alt="product">Watch
                                         </div>
                                     </td>
@@ -794,7 +794,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content product-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/laptop.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/laptop.jpg') }}"
                                                 alt="product">Laptop
                                         </div>
                                     </td>
@@ -815,7 +815,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content product-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/camera.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/camera.jpg') }}"
                                                 alt="product">Camera
                                         </div>
                                     </td>
@@ -836,7 +836,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content product-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/shoes.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/shoes.jpg') }}"
                                                 alt="product">Shoes
                                         </div>
                                     </td>
@@ -857,7 +857,7 @@
                                 <tr>
                                     <td>
                                         <div class="td-content product-name"><img
-                                                src="{{ asset('libraries/manager/assets/img/headphones.jpg') }}"
+                                                src="{{ asset('Libraries/Manager/assets/img/headphones.jpg') }}"
                                                 alt="product">Headphone
                                         </div>
                                     </td>
@@ -886,11 +886,11 @@
 @endsection
 
 @section('extra-css')
-    <link href="{{ asset('libraries/manager/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('libraries/manager/assets/css/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('Libraries/Manager/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('Libraries/Manager/assets/css/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('libraries/manager/plugins/apex/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('libraries/manager/assets/js/dashboard/dash_1.js') }}"></script>
+    <script src="{{ asset('Libraries/Manager/plugins/apex/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('Libraries/Manager/assets/js/dashboard/dash_1.js') }}"></script>
 @endsection

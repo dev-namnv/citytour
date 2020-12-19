@@ -63,7 +63,7 @@
                 </a>
                 <div class="main-menu">
                     <div id="header_menu">
-                        <img src="{{ asset('libraries/main/img/logo_sticky.png') }}" width="160" height="34"
+                        <img src="{{ asset('Libraries/Main/img/logo_sticky.png') }}" width="160" height="34"
                              alt="City tours" data-retina="true">
                     </div>
                     <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>

@@ -18,15 +18,15 @@
     @endif
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="{{ asset('libraries/main/img/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('Libraries/Main/img/favicon.ico') }}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon"
-          href="{{ asset('libraries/main/img/apple-touch-icon-57x57-precomposed.png') }}">
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-57x57-precomposed.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
-          href="{{ asset('libraries/main/img/apple-touch-icon-72x72-precomposed.png') }}">
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-72x72-precomposed.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-          href="{{ asset('libraries/main/img/apple-touch-icon-114x114-precomposed.png') }}">
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-114x114-precomposed.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-          href="{{ asset('libraries/main/img/apple-touch-icon-144x144-precomposed.png') }}">
+          href="{{ asset('Libraries/Main/img/apple-touch-icon-144x144-precomposed.png') }}">
 
     <!-- GOOGLE WEB FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -34,11 +34,11 @@
 
     <!-- COMMON CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link href="{{ asset('libraries/main/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('libraries/main/css/vendors.css') }}" rel="stylesheet">
+    <link href="{{ asset('Libraries/Main/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('Libraries/Main/css/vendors.css') }}" rel="stylesheet">
 
     <!-- CUSTOM CSS -->
-    <link href="{{ asset('libraries/main/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('Libraries/Main/css/custom.css') }}" rel="stylesheet">
 
     <!-- Extra Css -->
     @yield('extra-css')
@@ -104,10 +104,10 @@
     <!-- Common scripts -->
     <script>var BASE_URL = "{{ env('APP_URL') }}"</script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('libraries/main/js/common_scripts_min.js') }}"></script>
-    <script src="{{ asset('libraries/main/js/functions.js') }}"></script>
+    <script src="{{ asset('Libraries/Main/js/common_scripts_min.js') }}"></script>
+    <script src="{{ asset('Libraries/Main/js/functions.js') }}"></script>
 
-    <script src="{{ asset('libraries/main/js/jquery.selectbox-0.2.js') }}"></script>
+    <script src="{{ asset('Libraries/Main/js/jquery.selectbox-0.2.js') }}"></script>
     <script>
         // ----------------------- SELECTBOX --------------------------- //
         // change style for select box

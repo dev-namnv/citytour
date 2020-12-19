@@ -3,7 +3,7 @@
 @section('title', $article->title)
 
 @section('extra-css')
-    <link href="{{asset('libraries/main/css/blog.css')}}" rel="stylesheet">
+    <link href="{{asset('Libraries/Main/css/blog.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -68,7 +68,7 @@
                 <div class="col-lg-9">
                     <div class="box_style_1">
                         <div class="post nopadding">
-{{--                            <img src="{{asset('libraries/main/img/blog-1.jpg')}}" alt="Image" class="img-fluid">--}}
+{{--                            <img src="{{asset('Libraries/Main/img/blog-1.jpg')}}" alt="Image" class="img-fluid">--}}
                             <div class="text-center mb-3">
                                 <img src="{{$article->image}}" alt="{{$article->image}}" class="img-fluid rounded">
                             </div>
