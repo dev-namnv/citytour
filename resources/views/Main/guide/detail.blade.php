@@ -45,6 +45,7 @@
                 </p>
             </div>
 
+            @if($chunkReviews)
             <div class="row">
                 @foreach($chunkReviews[0] as $key => $review)
                     <div class="col-md-6">
@@ -93,6 +94,11 @@
                     </div>
             @endforeach
             </div>
+            @else
+                <div>
+                    <p>Chưa có đánh giá nào về Hướng dẫn viên này</p>
+                </div>
+            @endif
         </div>
     </main>
 @endsection
