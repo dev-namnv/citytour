@@ -26,8 +26,8 @@ class TourUpdateRequest extends FormRequest
         return [
             'name' => 'required|min:10|max:255',
             'address' => 'required|max:255',
-            'thumbnail' => 'mimes:png,jpg,jpeg|max:5000',
-            'banner' => 'mimes:png,jpg,jpeg|max:5000',
+            'thumbnail' => 'mimes:png,jpg,jpeg,gif|max:5000',
+            'banner' => 'mimes:png,jpg,jpeg,gif|max:5000',
             'slide.*' => 'mimes:png,jpg,jpeg|max:5000',
             'adult_price' => 'required|numeric|min:0|max:20000000',
             'child_price' => 'required|numeric|min:0|max:20000000',
