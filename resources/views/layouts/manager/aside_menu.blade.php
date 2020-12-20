@@ -60,14 +60,16 @@
                             <span class="menu-text">Danh sách</span>
                         </a>
                     </li>
-                    <li class="menu-item" aria-haspopup="true">
-                        <a href="{{route('tour-create')}}" class="menu-link">
-                            <i class="menu-bullet menu-bullet-line">
-                                <span></span>
-                            </i>
-                            <span class="menu-text">Tạo tour</span>
-                        </a>
-                    </li>
+                    @if(auth()->user()->role === GUIDE)
+                        <li class="menu-item" aria-haspopup="true">
+                            <a href="{{route('tour-create')}}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-line">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">Tạo tour</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </li>
