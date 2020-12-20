@@ -45,58 +45,54 @@
                 </p>
             </div>
 
-            @if($chunkReviews)
-            <div class="row">
-                @foreach($chunkReviews[0] as $key => $review)
-                    <div class="col-md-6">
-                        <div class="review_strip">
-                            <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
-                                 class="rounded-circle">
-                            <h4>{{$review->user->getFullName()}}</h4>
-                            <p>
-                                {{$review->content}}
-                            </p>
-                            <div class="rating">
-                                @for($i = 0; $i < 5; $i++)
-                                    @if ($i < $review->star)
-                                        <i class="icon-star voted"></i>
-                                    @else
-                                        <i class=" icon-star-empty"></i>
-                                    @endif
-                                @endfor
+            @if($reviews[0]->count() > 0)
+                <div class="row">
+                    @foreach($reviews[0] as $key => $review)
+                        <div class="col-md-6">
+                            <div class="review_strip">
+                                <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
+                                     class="rounded-circle">
+                                <h4>{{$review->user->getFullName()}}</h4>
+                                <p>
+                                    {{$review->content}}
+                                </p>
+                                <div class="rating">
+                                    @for($i = 0; $i < 5; $i++)
+                                        @if ($i < $review->star)
+                                            <i class="icon-star voted"></i>
+                                        @else
+                                            <i class=" icon-star-empty"></i>
+                                        @endif
+                                    @endfor
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+                </div>
+            @endif
+            @if($reviews[1]->count() > 0)
+                <div class="row">
+                    @foreach($reviews[1] as $key => $review)
+                        <div class="col-md-6">
+                            <div class="review_strip">
+                                <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
+                                     class="rounded-circle">
+                                <h4>{{$review->user->getFullName()}}</h4>
+                                <p>
+                                    {{$review->content}}
+                                </p>
+                                <div class="rating">
+                                    @for($i = 0; $i < 5; $i++)
+                                        @if ($i < $review->star)
+                                            <i class="icon-star voted"></i>
+                                        @else
+                                            <i class=" icon-star-empty"></i>
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
+                        </div>
                 @endforeach
-
-            </div>
-
-            <div class="row">
-                @foreach($chunkReviews[1] as $key => $review)
-                    <div class="col-md-6">
-                        <div class="review_strip">
-                            <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
-                                 class="rounded-circle">
-                            <h4>{{$review->user->getFullName()}}</h4>
-                            <p>
-                                {{$review->content}}
-                            </p>
-                            <div class="rating">
-                                @for($i = 0; $i < 5; $i++)
-                                    @if ($i < $review->star)
-                                        <i class="icon-star voted"></i>
-                                    @else
-                                        <i class=" icon-star-empty"></i>
-                                    @endif
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
-            @endforeach
-            </div>
-            @else
-                <div>
-                    <p>Chưa có đánh giá nào về Hướng dẫn viên này</p>
                 </div>
             @endif
         </div>
