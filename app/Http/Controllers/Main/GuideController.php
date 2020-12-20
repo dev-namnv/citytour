@@ -25,6 +25,6 @@ class GuideController extends Controller
             abort(404);
         }
 
-        return view("Main.guide.detail", compact(['guide', 'chunkReviews']));
+        return view("Main.guide.detail", compact('guide', 'chunkReviews'));
     }
 }

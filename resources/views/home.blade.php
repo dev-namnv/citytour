@@ -151,7 +151,7 @@
                                 </a>
                             </p>
                             <h4><span>{{ \Illuminate\Support\Str::limit($article->title, 20) }}</span> {{ \Illuminate\Support\Str::limit($article->heading, 10) }}</h4>
-                            <p>{{ \Illuminate\Support\Str::limit($article->content) }}</p>
+                            <p>{!! \Illuminate\Support\Str::limit($article->content) !!}</p>
                         </div>
                     @endforeach
                 </div>
