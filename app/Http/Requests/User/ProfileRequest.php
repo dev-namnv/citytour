@@ -31,9 +31,8 @@ class ProfileRequest extends FormRequest
             'birthday' => 'nullable|date|before:'.Carbon::parse(now())->format('d-m-Y'),
             'address' => 'required|string',
             'city' => 'required',
-            'zipcode' => 'nullable|regex:/\b\d{5}\b/',
+            'zipcode' => 'nullable',
             'country' => 'required',
-
         ];
     }
 
