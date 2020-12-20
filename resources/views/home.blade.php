@@ -150,7 +150,7 @@
                                     <img src="{{ $article->image }}" alt="Pic" class="img-fluid">
                                 </a>
                             </p>
-                            <h4><span>{!! \Illuminate\Support\Str::limit($article->title, 20) !!}</span> {{ \Illuminate\Support\Str::limit($article->heading, 10) }}</h4>
+                            <h4><span>{{ \Illuminate\Support\Str::limit($article->title, 20) }}</span> {{ \Illuminate\Support\Str::limit($article->heading, 10) }}</h4>
                             <p>{!! \Illuminate\Support\Str::limit($article->content) !!}</p>
                         </div>
                     @endforeach
