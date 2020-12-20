@@ -68,13 +68,9 @@ class TourController extends Controller
             $perPage = (int)$pagination['perpage'];
         }
 
-        if (Auth::user()->role === ADMIN) { // Nếu là ADMIN đăng nhập
-            $docs = Tour::query()
-                ->withoutGlobalScopes([ActiveScope::class, PublishScope::class]);
-        } else { // Nếu là GUIDE đăng nhập
-            $docs = Tour::query()
-                ->withoutGlobalScope(PublishScope::class)
-                ->ofGuide();
+        $docs = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class]);
+        if (Auth::user()->role === GUIDE) { // Nếu là ADMIN đăng nhập
+            $docs = $docs->ofGuide();
         }
 
         // Nếu có sort order

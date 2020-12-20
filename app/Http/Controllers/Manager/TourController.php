@@ -14,6 +14,9 @@ use App\Models\Schedule;
 use App\Models\Tour;
 use App\Scopes\ActiveScope;
 use App\Scopes\PublishScope;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -33,10 +36,13 @@ class TourController extends Controller
     /**
      * Screen create tour
      *
-     * @return View
+     * @return Application|Factory|RedirectResponse|View
      */
     public function create()
     {
+        if (Auth::user()->role !== GUIDE) {
+            return redirect()->back();
+        }
         $categories = Category::query()->get()->toArray();
         return view('Manager.tour.create',compact('categories'));
     }
@@ -119,6 +125,9 @@ class TourController extends Controller
 
     public function update(TourUpdateRequest $request)
     {
+        if (Auth::user()->role !== GUIDE) {
+            return redirect()->back();
+        }
         $tour_slug = $request->slug;
         $tour_data = $request->all();
         $tour_data['publish'] = empty($request->publish) ? '0':'1';
