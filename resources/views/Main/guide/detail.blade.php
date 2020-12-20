@@ -45,7 +45,7 @@
                 </p>
             </div>
 
-            @if($reviews[0]->count() > 0)
+            @if($reviews->count() > 0)
                 <div class="row">
                     @foreach($reviews[0] as $key => $review)
                         <div class="col-md-6">
@@ -69,8 +69,6 @@
                         </div>
                     @endforeach
                 </div>
-            @endif
-            @if($reviews[1]->count() > 0)
                 <div class="row">
                     @foreach($reviews[1] as $key => $review)
                         <div class="col-md-6">
