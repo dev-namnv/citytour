@@ -45,7 +45,7 @@
         <div class="container margin_60">
 
             <div class="main_title">
-                <h2><span>Top</span> Tours </h2>
+                <h2><span>Tour</span> Mới</h2>
                 <p>Top những chuyến du lịch tuyệt vời nhất dành cho bạn</p>
             </div>
 
@@ -55,9 +55,9 @@
                 <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.{{ ++$key }}s">
                     <div class="tour_container">
                         @if($tour->top > TOUR_POPULAR)
-                            <div class="ribbon_3 popular"><span>Popular</span></div>
+                            <div class="ribbon_3 popular"><span>Phổ biến</span></div>
                         @elseif($tour->rating >= TOUR_RATING)
-                            <div class="ribbon_3 rating"><span>Rate</span></div>
+                            <div class="ribbon_3 rating"><span>Yêu thích</span></div>
                         @endif
                         <div class="img_container">
                             <a href="{{ route('Main.tour.show', ['slug' => $tour->slug]) }}">

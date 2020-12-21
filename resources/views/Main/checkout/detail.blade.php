@@ -1,4 +1,4 @@
-@extends('layouts.Main.app')
+@extends('layouts.main.app')
 
 @section('title', 'Chi tiết thanh toán')
 
