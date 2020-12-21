@@ -116,14 +116,14 @@ class InvoiceController extends Controller
             $docs = $docs->orderBy($sort['field'], $sort['sort']);
         } else {
             // Nếu không mặc định sort order theo created_at
-            $docs = $docs->orderBy('created_at', 'desc');
+            $docs = $docs->orderBy('start_date', 'desc');
         }
 
         if (!$pagination) {
             $pagination['page'] = 1;
         }
 
-        $invoices = $docs->orderBy('start_date', 'desc')->paginate($perPage, '*', 'pagination[page]', $pagination['page']);
+        $invoices = $docs->paginate($perPage, '*', 'pagination[page]', $pagination['page']);
         return response()->json($invoices);
     }
 }
