@@ -108,6 +108,15 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     Route::fallback(function () {
         return view('Manager.error.index');
     });
+
+    Route::group(['prefix' => 'category', 'middleware' => 'admin'], function () {
+        Route::get('/', 'CategoryController@list')->name('category.list');
+        Route::get('create', 'CategoryController@create')->name('category.create');
+        Route::post('store', 'CategoryController@store')->name('category.store');
+        Route::get('{id}', 'CategoryController@edit')->name('category.edit');
+        Route::post('{id}/update', 'CategoryController@update')->name('category.update');
+        Route::delete('{id}/delete', 'CategoryController@delete')->name('category.delete');
+    });
 });
 
 // Main
@@ -206,4 +215,7 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
         Route::get('category', 'CategoryController@list');
     });
 
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/', 'CategoryController@list');
+    });
 });
