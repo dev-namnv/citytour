@@ -61,7 +61,7 @@
                         @endif
                         <div class="img_container">
                             <a href="{{ route('Main.tour.show', ['slug' => $tour->slug]) }}">
-                                <img src="{{ $tour->thumbnail }}" width="800" height="533" class="img-fluid" alt="Image">
+                                <img src="{{ $tour->thumbnail }}" width="800" height="219px" class="img-fluid" alt="Image">
                                 <div class="short_info">
                                     <i class="icon_set_1_icon-44"></i>{{ $tour->category->name }}<span class="price">{{ $tour->getCurrentPrice() }}</span>
                                 </div>
