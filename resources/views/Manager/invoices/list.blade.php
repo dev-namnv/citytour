@@ -67,7 +67,9 @@
                                         <div class="symbol-label" style="background-image:url(${row.thumbnail})"></div>
                                     </div>
                                     <div class="ml-2">
-                                        <div class="text-dark-75 font-weight-bold line-height-sm">${row.name.length >= 25 ? `${row.name.substring(0, 25)}...`: row.name}</div>
+                                        <div class="text-dark-75 font-weight-bold line-height-sm">
+                                            <a href="{{ route('Main.tour.show', ['slug' => '/']) }}/${row.slug}">${row.name.length >= 50 ? `${row.name.substring(0, 50)}...`: row.name}</a>
+                                        </div>
                                     </div>
                                 </div>`
                             }
