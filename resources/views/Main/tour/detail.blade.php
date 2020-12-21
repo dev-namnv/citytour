@@ -136,7 +136,7 @@
                         <div class="col-lg-3">
                             <h3>Lịch trình</h3>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9 image-schedule">
                            @if(count($tour->schedules) > 1)
                                 @foreach($tour->schedules as $key => $schedule)
                                     <h4><strong>Ngày {{ $key + 1 }}</strong></h4>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
                 <!--End  single_tour_desc-->
-                <div class="col-lg-3" style="z-index: -1">
+                <div class="col-lg-3">
                     <div style="position: sticky; top: 100px;">
                         <div class="sidebar border" style="">
                             <ul class="navbar-nav bg-white">
@@ -327,6 +327,10 @@
             })
         })
     </script>
-
+<style>
+    .image-schedule img{
+        width: 100%;
+    }
+</style>
 @endsection
 
