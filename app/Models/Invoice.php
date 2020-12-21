@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Casts\Currency;
+use App\Scopes\InvoiceSuccessScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Invoice extends Model
 {
@@ -74,7 +76,7 @@ class Invoice extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id')->withoutGlobalScopes();
     }
 
     public function tour()
@@ -84,7 +86,7 @@ class Invoice extends Model
 
     public function guide()
     {
-        return $this->belongsTo('App\Models\User', 'guide_id');
+        return $this->belongsTo('App\Models\User', 'guide_id')->withoutGlobalScopes();
     }
 
     public function getEndDateAttribute()
@@ -104,11 +106,24 @@ class Invoice extends Model
 
     public function batch()
     {
-        return $this->belongsTo('App\Models\Batch', 'start_date', 'id');
+        return $this->belongsTo('App\Models\Batch', 'start_date', 'batch');
     }
 
     public function refund()
     {
         return $this->hasOne('App\Models\Pay', 'invoice_id', 'id');
+    }
+
+    public function scopeOfGuide($query)
+    {
+        return $query->where('guide_id', '=', Auth::id());
+    }
+
+    /**
+     * Add global scope in query
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new InvoiceSuccessScope);
     }
 }
