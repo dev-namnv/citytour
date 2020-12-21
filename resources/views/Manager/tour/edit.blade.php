@@ -73,7 +73,7 @@
                             <div class="col-lg-5 col-xl-5">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="inputThumb" name="thumbnail"
-                                           placeholder="thumbnail" data-label="thumbnail" accept=".png, .jpg, .jpeg">
+                                           placeholder="thumbnail" data-label="thumbnail" accept=".png, .jpg, .jpeg, .gif">
                                     <label class="custom-file-label" for="inputThumb"
                                            aria-describedby="inputGroupFileAddon">Choose image</label>
                                 </div>
@@ -87,7 +87,7 @@
                             <div class="col-lg-5 col-xl-5">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="Banner" name="banner"
-                                           accept=".png, .jpg, .jpeg" placeholder="banner" data-label="banner">
+                                           accept=".png, .jpg, .jpeg, .gif" placeholder="banner" data-label="banner">
                                     <label class="custom-file-label" for="Banner"
                                            aria-describedby="inputGroupFileAddon">Choose image</label>
                                 </div>
@@ -181,7 +181,7 @@
                                     <div class="custom-file">
                                         <div class="col-12">
                                             <input type="file" class="custom-file-input" id="Slider" name="slide[]"
-                                                   accept=".png, .jpg, .jpeg" onchange="addSlide(1)">
+                                                   accept=".png, .jpg, .jpeg, .gif" onchange="addSlide(1)">
                                             <label class="custom-file-label" for="Slider"
                                                    aria-describedby="inputGroupFileAddon">Choose image</label>
                                         </div>
@@ -195,7 +195,7 @@
                                     <div class="custom-file">
                                         <div class="col-12">
                                             <input type="file" class="custom-file-input" id="Slider1" name="slide[]"
-                                                   accept=".png, .jpg, .jpeg" onchange="addSlide(2)">
+                                                   accept=".png, .jpg, .jpeg, .gif" onchange="addSlide(2)">
                                             <label class="custom-file-label" for="Slider1"
                                                    aria-describedby="inputGroupFileAddon">Choose image</label>
                                         </div>
@@ -209,7 +209,7 @@
                                     <div class="custom-file">
                                         <div class="col-12">
                                             <input type="file" class="custom-file-input" id="Slider2" name="slide[]"
-                                                   accept=".png, .jpg, .jpeg" onchange="addSlide(3)">
+                                                   accept=".png, .jpg, .jpeg, .gif" onchange="addSlide(3)">
                                             <label class="custom-file-label" for="Slider2"
                                                    aria-describedby="inputGroupFileAddon">Choose image</label>
                                         </div>
@@ -223,7 +223,7 @@
                                     <div class="custom-file">
                                         <div class="col-12">
                                             <input type="file" class="custom-file-input" id="Slider3" name="slide[]"
-                                                   accept=".png, .jpg, .jpeg" onchange="addSlide(4)">
+                                                   accept=".png, .jpg, .jpeg, .gif" onchange="addSlide(4)">
                                             <label class="custom-file-label" for="Slider3"
                                                    aria-describedby="inputGroupFileAddon">Choose image</label>
                                         </div>
@@ -237,7 +237,7 @@
                                     <div class="custom-file">
                                         <div class="col-12">
                                             <input type="file" class="custom-file-input" id="Slider4" name="slide[]"
-                                                   accept=".png, .jpg, .jpeg" onchange="addSlide(5)">
+                                                   accept=".png, .jpg, .jpeg, .gif" onchange="addSlide(5)">
                                             <label class="custom-file-label" for="Slider4"
                                                    aria-describedby="inputGroupFileAddon">Choose image</label>
                                         </div>
@@ -251,7 +251,7 @@
                                     <div class="custom-file">
                                         <div class="col-12">
                                             <input type="file" class="custom-file-input" id="Slider5" name="slide[]"
-                                                   accept=".png, .jpg, .jpeg" onchange="addSlide(6)">
+                                                   accept=".png, .jpg, .jpeg, .gif" onchange="addSlide(6)">
                                             <label class="custom-file-label" for="Slider5"
                                                    aria-describedby="inputGroupFileAddon">Choose image</label>
                                         </div>

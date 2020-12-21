@@ -150,8 +150,8 @@
                                     <img src="{{ $article->image }}" alt="Pic" class="img-fluid">
                                 </a>
                             </p>
-                            <h4><span>{!! \Illuminate\Support\Str::limit($article->title, 20) !!}</span> {{ \Illuminate\Support\Str::limit($article->heading, 10) }}</h4>
-                            <p>{!! \Illuminate\Support\Str::limit($article->content) !!}</p>
+                            <h4><a href="{{ route('articles.detail', ['slug' => $article->slug]) }}">{{ $article->title }}</a></h4>
+                            <p>{!! \Illuminate\Support\Str::limit($article->heading, 50) !!}</p>
                         </div>
                     @endforeach
                 </div>

@@ -104,7 +104,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên</label>
-                                        <input class="form-control" name="first_name" id="first_name" type="text" value="{{ auth()->user()->first_name }}">
+                                        <input class="form-control" name="first_name" id="first_name" type="text" value="{{ auth()->user()->first_name ? auth()->user()->first_name : old('first_name') }}">
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -115,7 +115,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Họ và tên đệm</label>
-                                        <input class="form-control" name="last_name" id="last_name" type="text" value="{{ auth()->user()->last_name }}">
+                                        <input class="form-control" name="last_name" id="last_name" type="text" value="{{ auth()->user()->last_name ? auth()->user()->last_name : old('last_name') }}">
                                         @error('last_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -129,7 +129,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Số điện thoại</label>
-                                        <input class="form-control" name="phone" type="text" value="{{ auth()->user()->phone }}">
+                                        <input class="form-control" name="phone" type="text" value="{{ auth()->user()->phone ? auth()->user()->phone : old('phone') }}">
                                         @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -141,7 +141,7 @@
                                     <div class="form-group">
                                         <label>Ngày sinh <small>(dd/mm/yyyy)</small>
                                         </label>
-                                        <input class="form-control" name="birthday" type="date" value="{{ \Carbon\Carbon::parse(auth()->user()->birthday)->format('d/m/Y') }}">
+                                        <input class="form-control" name="birthday" type="date" value="{{ auth()->user()->birthday? \Carbon\Carbon::parse(auth()->user()->birthday)->format('d/m/Y') : old('birthday') }}">
                                         @error('birthday')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -159,7 +159,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Đường</label>
-                                        <input class="form-control" name="address" type="text" value="{{ auth()->user()->address }}">
+                                        <input class="form-control" name="address" type="text" value="{{ auth()->user()->address ? auth()->user()->address : old('address') }}">
                                         @error('address')
                                              <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -170,7 +170,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Thành phố/Thị trấn</label>
-                                        <input class="form-control" name="city" type="text" value="{{ auth()->user()->city }}">
+                                        <input class="form-control" name="city" type="text" value="{{ auth()->user()->city ? auth()->user()->city : old('city') }}">
                                         @error('city')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -184,7 +184,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Zip code</label>
-                                        <input class="form-control" name="zipcode" type="text" value="{{ auth()->user()->zipcode }}">
+                                        <input class="form-control" name="zipcode" type="text" value="{{ auth()->user()->zipcode ? auth()->user()->zipcode : old('zipcode') }}">
                                         @error('zipcode')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -201,9 +201,12 @@
                                             </span>
                                         @enderror
                                         <select id="country" class="form-control" name="country">
-                                            <option class="text-capitalize"
-                                                    value="{{Auth::user()->country}}">{{Auth::user()->country}}</option>
-                                            <option value="vi">Việt Nam</option>
+                                            <option class="text-capitalize" selected
+                                                    value="{{Auth::user()->country}}"
+                                            >
+                                                {{Auth::user()->country}}
+                                            </option>
+                                            <option value="Việt Nam">Việt Nam</option>
                                             <option class="text-capitalize" value="korean">Korean</option>
                                             <option class="text-capitalize" value="japan">Japan</option>
                                         </select>
