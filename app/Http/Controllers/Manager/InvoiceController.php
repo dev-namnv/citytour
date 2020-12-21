@@ -21,8 +21,7 @@ class InvoiceController extends Controller
                 ->orderBy('id','DESC')
                 ->paginate(PAGINATION_TOUR);
         } else {
-            $invoices = Invoice::query()->withoutGlobalScopes()
-                ->whereIn('status', $status)
+            $invoices = Invoice::query()->whereIn('status', $status)
                 ->orderBy('id','DESC')
                 ->paginate(PAGINATION_TOUR);
         }
