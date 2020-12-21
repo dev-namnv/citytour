@@ -2,6 +2,10 @@
 
 @section('title', isset($category) ? $category->name : 'Thêm danh mục')
 
+@section('extra-css')
+    <link rel="stylesheet" href="{{ asset('Libraries/Main/css/fontello/css/all-fontello.min.css') }}">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="card card-custom">
@@ -17,7 +21,7 @@
                     <div class="form-group">
                         <label>Input</label>
                         <input type="text" name="name" value="{{ isset($category) ? $category->name : old('name') }}"
-                               class="form-control form-control-solid @error('name') is-invalid @enderror" placeholder="Tên danh mục"/>
+                               class="form-control form-control-solid @error('name') is-invalid @enderror" placeholder="Tên danh mục" required/>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -25,11 +29,16 @@
                     <div class="form-group">
                         <div class="col-6 float-left">
                             <label>Icon</label>
-                            <select name="icon" class="form-control form-control-solid">
+                            <div class="select_icon">
+                                <input type="hidden" name="icon" value="{{isset($category) ? $category->icon : old('icon')}}">
                                 @foreach($icons as $icon)
-                                    <option @if(isset($category) && $category->icon == $icon['icon']) selected @endif value="{{ $icon['icon'] }}">{{ $icon['name'] }}</option>
+                                    @if(isset($category) && $category->icon == $icon['icon'])
+                                        <i class="icon {!! $icon['icon'] !!}" style="color: blue" data-value="{!! $icon['icon'] !!}"></i>
+                                    @else
+                                        <i class="icon {!! $icon['icon'] !!}" data-value="{!! $icon['icon'] !!}"></i>
+                                    @endif
                                 @endforeach
-                            </select>
+                            </div>
                             @error('icon')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -37,7 +46,7 @@
                         <div class="col-6 float-left">
                             <label>Thứ tự sắp xếp</label>
                             <input type="number" name="sort_order" value="{{ isset($category) ? $category->sort_order : old('sort_order') }}"
-                                   class="form-control form-control-solid" placeholder="Thứ tự sắp xếp"/>
+                                   class="form-control form-control-solid" placeholder="Thứ tự sắp xếp" />
                             @error('sort_order')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -60,4 +69,25 @@
             <!--end::Form-->
         </div>
     </div>
+@endsection
+
+@section('extra-js')
+    <script>
+        $('.icon').click(function (){
+            $('.icon').each(function (){
+                $(this).removeAttr('style')
+            })
+            $(`input[name='icon']`).val($(this).data('value'));
+            $(this).css('color','blue')
+        })
+    </script>
+    @if(old('icon'))
+        <script>
+            $('.icon').each(function (){
+                if ($(this).data('value') === '{{old('icon')}}') {
+                    $(this).css('color','blue')
+                }
+            })
+        </script>
+    @endif
 @endsection
