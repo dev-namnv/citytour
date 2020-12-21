@@ -34,6 +34,7 @@ class ContactController extends Controller
             //send mail to email admin
             Mail::send('Main.contact.layout_content', $request->all(), function ($msg) use ($request){
                 $msg->to(env('MAIL_USERNAME'), 'Admin')
+                    ->cc($request->email)
                     ->from($request->email,$request->lastName)
                     ->setSubject($request->subject);
             });
