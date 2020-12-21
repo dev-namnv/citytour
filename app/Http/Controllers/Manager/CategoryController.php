@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\CategoryRequest;
 use App\Models\Category;
+use App\Models\Tour;
 
 class CategoryController extends Controller
 {
@@ -27,13 +28,14 @@ class CategoryController extends Controller
     public function delete($id)
     {
         try {
-            $check = Category::query()->find($id);
-
-            if ($check) {
-                $check->delete();
+            $category = Category::query()->find($id);
+            $check = Tour::query()->where('category_id',$category->id)->count();
+            if ($check != 0) {
+                return response(['check'=>'false','message' => 'Còn tour liên quan nên không thể xóa danh mục này !'],200);
             }
-            return $check
-                ? response(['message' => 'Đã xóa danh mục'])
+            $category->delete();
+            return $category
+                ? response(['check'=>'true','message' => 'Đã xóa danh mục'],200)
                 : response(['message' => 'Không tìm thấy danh mục'], 404);
         } catch (\Exception $exception) {
             return response()->json(['message' => 'Có lỗi xảy ra'], 500);

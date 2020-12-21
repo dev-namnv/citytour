@@ -177,7 +177,6 @@
             type: 'get',
             success: function (res) {
                 let notification = res.data.map(function (val,index){
-                    console.log(val)
                     let date = new Date(val.created_at);
                     return `<div class="p-2">
                         <strong class="d-block">
