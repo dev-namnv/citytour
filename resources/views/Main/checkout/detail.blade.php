@@ -377,6 +377,22 @@
     </script>
 
     <script>
+
+        $(`select[name='batch']`).change(function (){
+            let tour_id = {{ $tour->id }};
+            let start_date = $(this).val();
+            let customer_total = document.querySelector('#customer_total');
+            $.ajax({
+                url: `{{ route('api-customer-total') }}`,
+                method: "GET",
+                data: {
+                    tour_id: tour_id,
+                    start_date: start_date,
+                }
+            }).done(function (res) {
+                customer_total.textContent = res.customer_total;
+            })
+        })
         function checkExistTour(batch) {
             fetch(`${BASE_URL}/checkout/check-tour-exist/{{{ $tour->id }}}/${batch}`, {
                 method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -401,6 +417,7 @@
         $('#js-tour-batch').on('change', function () {
             checkExistTour($('#js-tour-batch').val())
         })
+
     </script>
 
 @endsection

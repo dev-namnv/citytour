@@ -39,6 +39,9 @@ class CheckoutController extends Controller
     public function detail($slug)
     {
         $tour = Tour::query()->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
+            ->whereHas('batches',function ($query){
+                $query->where('batch','>',date('Y-m-d'));
+            })
             ->with('albums', 'reviews', 'category', 'schedules')
             ->with(['batches' => function ($q) {
                 $q->where('batch', '>', now())->select();

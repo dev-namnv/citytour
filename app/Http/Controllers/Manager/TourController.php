@@ -102,15 +102,7 @@ class TourController extends Controller
     public function edit($slug)
     {
         $categories = Category::query()->get()->toArray();
-        if (Auth::user()->role === ADMIN){
-            $tour = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
-                ->where('slug',$slug)
-                ->with('schedules','albums')
-                ->with(['batches'=>function ($q){
-                    $q->select()->where('batch','>=',date('Y-m-d'));
-                }])
-                ->firstOrFail();
-        }else{
+        if (Auth::user()->role === GUIDE){
             $tour = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
                 ->where('slug',$slug)
                 ->where('guide_id', Auth::id())
@@ -119,6 +111,15 @@ class TourController extends Controller
                     $q->select()->where('batch','>=',date('Y-m-d'));
                 }])
                 ->firstOrFail();
+        }else{
+            return redirect()->route('Main.tour.show', $slug);
+//            $tour = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
+//                ->where('slug',$slug)
+//                ->with('schedules','albums')
+//                ->with(['batches'=>function ($q){
+//                    $q->select()->where('batch','>=',date('Y-m-d'));
+//                }])
+//                ->firstOrFail();
         }
         return view('Manager.tour.edit', compact('tour','categories'));
     }
