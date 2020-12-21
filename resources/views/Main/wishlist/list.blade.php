@@ -53,7 +53,7 @@
                                                     class="icon-smile  voted"></i><i class="icon-smile"></i>
                                             </div>
                                             <h3><strong>{{$tour->name}}</strong></h3>
-                                            <p>{{$tour->description}}</p>
+                                            <p>{!! \Illuminate\Support\Str::limit($tour->description, 50) !!}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-md-2">
