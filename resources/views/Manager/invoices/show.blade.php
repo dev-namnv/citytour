@@ -101,7 +101,7 @@
                                     <tr>
                                         <th scope="col">Tour Du Lịch</th>
                                         <th scope="col">Người Hướng Dẫn</th>
-                                        <th scope="col">Địa Chỉ</th>
+                                        <th scope="col">Ngày khởi hành</th>
                                         <th class="text-right" scope="col">Số người</th>
                                         <th class="text-right" scope="col">Giá Tiền</th>
                                     </tr>
@@ -112,7 +112,7 @@
                                             <a href="{{ route('invoice-schedule',['sku'=>$invoice->sku]) }}" target="_blank" class="text-primary">{{ $invoice->invoice_detail->name }}</a>
                                         </td>
                                         <td>{{ $invoice->guide->first_name .' '. $invoice->guide->last_name }}</td>
-                                        <td>{{ $invoice->invoice_detail->address }}</td>
+                                        <td>{{ date_format(new DateTime($invoice->start_date),'d-m-Y') }}</td>
                                         <td class="text-right">
                                             <span class="d-block">Người lớn:</span>
                                             <span class="text-info">{{ $invoice->adult_count }}</span>

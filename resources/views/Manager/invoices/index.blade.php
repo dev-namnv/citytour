@@ -48,7 +48,7 @@
                                 <th>Tên tour</th>
                                 <th>Ảnh thu nhỏ</th>
                                 <th>Tên khách hàng</th>
-                                <th>Địa chỉ khách hàng</th>
+                                <th>Ngày khởi hành</th>
                                 <th>Số người </th>
                                 <th>Trạng Thái</th>
                                 <th>Hành Động</th>
@@ -65,7 +65,7 @@
                                         <img src="{{$invoice->invoice_detail->thumbnail}}" alt="{{$invoice->invoice_detail->name}}" width="80"/>
                                     </td>
                                     <td>{{ $invoice->customer_name }}</td>
-                                    <td>{{ $invoice->customer_address }}</td>
+                                    <td>{{ date_format(new DateTime($invoice->start_date),'d-m-Y') }}</td>
                                     <td>
                                         <span class="d-block">Người lớn:</span>
                                         <span class="text-danger">{{ $invoice->adult_count }}</span>

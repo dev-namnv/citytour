@@ -7,7 +7,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     @hasSection('title')
         <title>@yield('title') | Manager - {{ env('APP_NAME') }}</title>
     @else
@@ -150,7 +149,8 @@
     <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
 
     <script>
-        $.ajax({
+        @if(Auth::user()->role === GUIDE)
+            $.ajax({
             url: '{{route('api-new-invoice')}}',
             type: 'get',
             success: function (res) {
@@ -171,6 +171,31 @@
                 console.log(error)
             }
         })
+        @else
+        $.ajax({
+            url: '{{route('api-new-tour')}}',
+            type: 'get',
+            success: function (res) {
+                let notification = res.data.map(function (val,index){
+                    console.log(val)
+                    let date = new Date(val.created_at);
+                    return `<div class="p-2">
+                        <strong class="d-block">
+                            <a href="/tours/show/${val.slug}" target="_blank">${val.name}</a>
+                        </strong>
+                        <small>${val.guide.first_name} ${val.guide.last_name}</small></br>
+                        <span>** ${date.toLocaleTimeString()} - ${date.toLocaleDateString("vi")} **</span>
+                    </div><hr>`;
+                })
+                $(`.total-notification`).text(res.data.length)
+                $(`.notification`).append(notification)
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+        @endif
+
     </script>
     <!-- Extra js -->
     @yield('extra-js')

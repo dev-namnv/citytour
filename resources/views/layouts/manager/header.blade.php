@@ -31,6 +31,7 @@
                 <!--begin::Dropdown-->
                 <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
                     <div class="quick-search quick-search-dropdown" id="kt_quick_search_dropdown">
+                        {!! Auth::user()->role === ADMIN ? '<h4>Tour mới</h4>' : '<h4>Hóa đơn mới</h4>' !!}
                         <!--begin::Scroll-->
                         <div class="scroll notification" data-scroll="true" data-height="325"
                              data-mobile-height="200"></div>

@@ -144,7 +144,7 @@
                                                 </div>
                                                 <div class="ml-2">
                                                     <div class="font-weight-bold line-height-sm">
-                                                        <a class="text-dark-75" href="{{ route('tour-edit',['slug'=>'/']) }}/${row.slug}">${row.name.length >= 25 ? `${row.name.substring(0, 25)}...`: row.name}</a>
+                                                        <a class="text-dark-75" target="_blank" href="{{ route('tour-edit',['slug'=>'/']) }}/${row.slug}">${row.name.length >= 25 ? `${row.name.substring(0, 25)}...`: row.name}</a>
                                                     </div>
                                                 </div>
                                             </div>`

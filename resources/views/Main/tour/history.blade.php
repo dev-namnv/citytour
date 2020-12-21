@@ -459,6 +459,7 @@
 
                         </div>
                     @endif
+                    @if (count($invoices) > 0 && today()->toDateString() > $invoices[0]->end_date || count($invoices) > 0 && $invoices[0]->status >=5)
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Các tour đã đi</h3>
@@ -534,6 +535,7 @@
                             </table>
                         </div><!-- End col-md-12-->
                     </div>
+                        @endif
                     @else
                         <h2>Bạn chưa từng đi một tour nào cả !</h2>
                     @endif

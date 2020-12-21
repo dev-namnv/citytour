@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Review;
 use App\Models\Tour;
+use App\Scopes\ActiveScope;
 use App\Scopes\GuideBehaviorScope;
 use App\Scopes\GuideBusyScope;
 use Carbon\Carbon;
@@ -114,17 +115,26 @@ class TourController extends Controller
 
     public function show($slug)
     {
-        $tour = Tour::query()
-            ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
-            ->whereHas('batches',function ($query){
-                $query->where('batch','>',date('Y-m-d'));
-            })
-            ->with('albums','reviews','category','schedules')
-            ->with(['batches'=>function($q){
-                $q->where('batch','>',now())->select();
-            }])
-            ->where('slug',$slug)
-            ->firstOrFail();
+        $role = Auth::user()->role ?? null;
+        if ( !empty($role) && $role === ADMIN) {
+            $tour = Tour::query()
+                ->withoutGlobalScope(ActiveScope::class )
+                ->with('albums','reviews','category','schedules','batches')
+                ->where('slug',$slug)
+                ->firstOrFail();
+        } else {
+            $tour = Tour::query()
+                ->withGlobalScope('GuideBehaviorScope', new GuideBehaviorScope)
+                ->whereHas('batches',function ($query){
+                    $query->where('batch','>',date('Y-m-d'));
+                })
+                ->with('albums','reviews','category','schedules')
+                ->with(['batches'=>function($q){
+                    $q->where('batch','>',now())->select();
+                }])
+                ->where('slug',$slug)
+                ->firstOrFail();
+        }
 
         $tour_recommend = Tour::query()->where('category_id',$tour->category->id)
             ->whereHas('batches',function ($query){
@@ -136,11 +146,8 @@ class TourController extends Controller
             ->orderBy('id','desc')
             ->get();
 
-        $invoices = Invoice::query()->where('tour_id',$tour->id)
-            ->where('start_date',$tour->batches->first()->batch)
-            ->get(['adult_count','child_count']);
-        $customer_total = $invoices->sum('adult_count') + $invoices->sum('child_count');
-        return view('Main.tour.detail', compact('tour','customer_total','tour_recommend'));
+
+        return view('Main.tour.detail', compact('tour','tour_recommend'));
     }
     public function printPdf($slug) {
         $tour = Tour::query()
