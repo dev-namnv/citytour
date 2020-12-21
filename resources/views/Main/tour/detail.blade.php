@@ -93,11 +93,11 @@
                         </div>
                     </div>
                     <hr/>
-                    <div class="row mb-2">
-                        <strong class="ml-3">Ngày khởi hành: </strong>
-                        <div class="col-lg-12 text-center mb-2">
+                    <div class="row mb-2 bg-white p-3">
+                        <div class="col-lg-12 mb-2">
+                            <strong class="d-inline-block">Ngày khởi hành: </strong>
                             @foreach($tour->batches as $batch)
-                                <span class="d-inline-block p-1 bg-secondary rounded text-white">{{ date('d-m-Y', strtotime($batch->batch)) }}</span>
+                                <span style="color: #0a6aa1" class="d-inline-block bg-light p-1 border rounded">{{ date('d-m-Y', strtotime($batch->batch)) }}</span>
                             @endforeach
                         </div>
                         <div class="col-lg-12 text-center">
@@ -136,7 +136,7 @@
                         <div class="col-lg-3">
                             <h3>Lịch trình</h3>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9 image-schedule">
                            @if(count($tour->schedules) > 1)
                                 @foreach($tour->schedules as $key => $schedule)
                                     <h4><strong>Ngày {{ $key + 1 }}</strong></h4>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
                 <!--End  single_tour_desc-->
-                <div class="col-lg-3" style="z-index: -1">
+                <div class="col-lg-3">
                     <div style="position: sticky; top: 100px;">
                         <div class="sidebar border" style="">
                             <ul class="navbar-nav bg-white">
@@ -327,6 +327,10 @@
             })
         })
     </script>
-
+<style>
+    .image-schedule img{
+        width: 100%;
+    }
+</style>
 @endsection
 

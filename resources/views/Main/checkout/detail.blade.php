@@ -383,7 +383,7 @@
             let start_date = $(this).val();
             let customer_total = document.querySelector('#customer_total');
             $.ajax({
-                url: `{{ route('api-customer-total') }}`,
+                url: `${BASE_URL}/api/get-customer-total`,
                 method: "GET",
                 data: {
                     tour_id: tour_id,
