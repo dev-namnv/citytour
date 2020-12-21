@@ -28,7 +28,7 @@ class TourUpdateRequest extends FormRequest
             'address' => 'required|max:255',
             'thumbnail' => 'mimes:png,jpg,jpeg,gif|max:5000',
             'banner' => 'mimes:png,jpg,jpeg,gif|max:5000',
-            'slide.*' => 'mimes:png,jpg,jpeg|max:5000',
+            'slide.*' => 'mimes:png,jpg,jpeg,gif|max:5000',
             'adult_price' => 'required|numeric|min:0|max:20000000',
             'child_price' => 'required|numeric|min:0|max:20000000',
             'category_id' => 'required|numeric',
