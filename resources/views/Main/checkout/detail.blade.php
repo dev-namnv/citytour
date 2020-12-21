@@ -404,8 +404,7 @@
                 referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
             })
                 .then((r) => {
-                    console.log(r)
-                    if (r.data.exist) {
+                    if (r.status === 409) {
                         Toastr.show({status: 'warning', title: 'Trùng ngày khởi hành', content: `Bạn đã đặt <b>Tour</b> này trùng ngày khởi hành đã chọn: ${batch}`})
                     }
                 })

@@ -332,10 +332,10 @@ class CheckoutController extends Controller
                             .' đến hết ngày '
                             . Carbon::parse($item->busy_end_at)->format('d-m-Y')
                     ]));
-                    return response()->json(['exist' => true]);
+                    return response(['exist' => true], 409);
                 }
             };
         }
-        return response()->json(['exist' => false]);
+        return response(['exist' => false]);
     }
 }
