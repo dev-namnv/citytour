@@ -15,14 +15,12 @@ class InvoiceController extends Controller
     {
         $status = $request->has('status') ? [$request->status] : array_keys(config('masterdata')['invoice']['status']);
         if (Auth::user()->role === GUIDE) {
-            $invoices = Invoice::query()->withoutGlobalScopes()
-                ->where('guide_id',Auth::id())
+            $invoices = Invoice::query()->where('guide_id',Auth::id())
                 ->whereIn('status', $status)
                 ->orderBy('id','DESC')
                 ->paginate(PAGINATION_TOUR);
         } else {
-            $invoices = Invoice::query()->withoutGlobalScopes()
-                ->whereIn('status', $status)
+            $invoices = Invoice::query()->whereIn('status', $status)
                 ->orderBy('id','DESC')
                 ->paginate(PAGINATION_TOUR);
         }
