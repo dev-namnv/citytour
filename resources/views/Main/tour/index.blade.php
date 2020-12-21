@@ -83,7 +83,7 @@
                                 <h6>Khởi hành</h6>
                                 <div class="form-group row">
                                     <div class="col-12">
-                                        <input class="form-control" name="when" type="date" value="{{ date('Y-m-d', strtotime(now()->toTimeString())) }}" id="example-date-input">
+                                        <input class="form-control" name="when" type="date" value="{{ request()->when ?? '' }}" id="example-date-input">
                                     </div>
                                 </div>
                             </div>
