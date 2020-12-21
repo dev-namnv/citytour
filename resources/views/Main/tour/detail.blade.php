@@ -1,6 +1,6 @@
 @extends('layouts.main.app')
 
-@section('title','Danh sách tour')
+@section('title', $tour->name)
 
 @section('extra-css')
     <style>
