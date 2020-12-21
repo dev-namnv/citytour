@@ -317,25 +317,16 @@ class CheckoutController extends Controller
 
     public function checkTourExist($id, $batch)
     {
-        $tour = Tour::query()->findOrFail($id);
-        foreach ($tour->guide->busyTime as $item) {
-            if ($item->tour_id !== $tour->id) {
-                if (Carbon::parse($batch) >= $item->busy_start_at
-                    && Carbon::parse($batch) <= $item->busy_end_at
-                ) {
-                    session()->flash(TOASTR, json_encode([
-                        'status' => TOASTR_WARNING,
-                        'content' => 'Bạn không thể đặt Tour vào ngày '
-                            .Carbon::parse($batch)->format('d-m-Y')
-                            .'. Hướng dẫn viên này đang có lịch Tour khác từ '
-                            . Carbon::parse($item->busy_start_at)->format('d-m-Y')
-                            .' đến hết ngày '
-                            . Carbon::parse($item->busy_end_at)->format('d-m-Y')
-                    ]));
-                    return response(['exist' => true], 409);
-                }
-            };
-        }
-        return response(['exist' => false]);
+        $checkTourExist = PaymentLog::query()
+            ->where('vnp_ResponseCode', '00')
+            ->where('tour_id', $id)
+            ->where('user_id', Auth::id())
+            ->where('batch', $batch)
+            ->first();
+
+        $invoice = Invoice::query()->orderBy('id', 'desc')
+            ->with('invoice_detail', 'guide')
+            ->firstOrFail();
+        return $checkTourExist ? response()->json(['exist' => true, 'invoice' => $checkTourExist], 409) : response()->json(['exist' => false, 'invoice' => $checkTourExist]);
     }
 }
