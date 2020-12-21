@@ -7,7 +7,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @hasSection('title')
         <title>@yield('title') | Manager - {{ env('APP_NAME') }}</title>
     @else
