@@ -173,7 +173,7 @@
                                 title: 'Hình thức',
                             }, {
                                 field: 'status',
-                                title: 'status',
+                                title: 'Trạng thái',
                                 // callback function support for column rendering
                                 template: function(row) {
                                     const status = {
