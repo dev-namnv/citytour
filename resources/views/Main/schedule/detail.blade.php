@@ -89,7 +89,7 @@
                             Ngày thứ {{$key+1}}
                         @endif
                     </h2>
-                    <p>{{$schedule->description}}</p>
+                    <p>{!! $schedule->description !!}</p>
                     <img src="{{$schedule->image}}" alt="">
                 </div>
             </li>

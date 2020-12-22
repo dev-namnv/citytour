@@ -93,3 +93,6 @@ define('PAY_TYPE_PAYMENT_TO_GUIDE', 100);
 define('PAY_TYPE_REFUND_TO_USER', 200);
 define('PAY_STATUS_REQUEST', 100);
 define('PAY_STATUS_CONFIRM', 200);
+
+define('PAGINATION_INVOICE', 20);
+define('CHECKOUT_INFO_INVOICE', 'checkout_info_invoice');

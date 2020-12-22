@@ -124,6 +124,11 @@ class Tour extends Model
         return $this->hasMany('App\Models\PaymentLog');
     }
 
+    public function invoices()
+    {
+        return $this->hasMany('App\Models\Invoice');
+    }
+
     /**
      * TODO: Convert data
      *

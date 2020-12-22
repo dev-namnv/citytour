@@ -358,4 +358,17 @@ class TourController extends Controller
         $schedules = Schedule::query()->where('tour_id', '=', $id)->get();
         return response()->json($schedules);
     }
+
+    public function getNewTour()
+    {
+        if (Auth::user()->role === ADMIN){
+            $tour = Tour::query()->withoutGlobalScopes()
+                ->where('active', 0)
+                ->whereRaw('created_at','updated_at')
+                ->with('guide')
+                ->orderBy('created_at','DESC')
+                ->get();
+        }
+        return response(['data'=>$tour]);
+    }
 }

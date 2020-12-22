@@ -48,12 +48,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="tour_list_desc">
-                                            <div class="rating"><i class="icon-smile voted"></i><i
-                                                    class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i
-                                                    class="icon-smile  voted"></i><i class="icon-smile"></i>
-                                            </div>
-                                            <h3><strong>{{$tour->name}}</strong></h3>
-                                            <p>{{$tour->description}}</p>
+                                            <h3>{{\Illuminate\Support\Str::limit($tour->name, 30)}}</h3>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-md-2">

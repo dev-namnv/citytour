@@ -137,16 +137,16 @@
                         <span class="tape"></span>
                         <h4>{!! __('pages.contact.main.address') !!} <span><i class="icon-pin pull-right"></i></span></h4>
                         <p>
-                            Place Charles de Gaulle, 75008 Paris
+                            Số 14, phố Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội.
                         </p>
                         <hr>
                         <h4>{!! __('pages.contact.main.help') !!} <span><i class="icon-help pull-right"></i></span></h4>
                         <p>
-                            Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie.
+                            Nếu bạn cần trao đổi với nhân viên hỗ trợ, hãy liên hệ hotline.
                         </p>
                         <ul id="contact-info">
-                            <li>{{ __('info.hotline') }}</li>
-                            <li><a href="#">info@domain.com</a>
+                            <li>Hotline: {{ __('info.hotline') }}</li>
+                            <li>Email: <a href="mailto:help@citytoour.top">help@citytoour.top</a>
                             </li>
                         </ul>
                     </div>

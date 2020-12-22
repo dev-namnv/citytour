@@ -46,4 +46,12 @@ class LoginController extends Controller
             $this->redirectTo = RouteServiceProvider::MANAGER;
         }
     }
+
+    protected function credentials(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+        // Customization: validate if client status is active (1)
+        $credentials['status'] = ACTIVE;
+        return $credentials;
+    }
 }

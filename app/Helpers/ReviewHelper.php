@@ -11,6 +11,6 @@ class ReviewHelper
             $total += $item->star;
         }
 
-        return $total !== 0 ? round($total/count($value), 2) . '⭐' : 'NaN';
+        return $total !== 0 ? round($total/count($value), 2) . '⭐' : 'Chưa có đánh giá';
     }
 }
