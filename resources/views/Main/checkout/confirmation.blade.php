@@ -190,6 +190,7 @@
                     </div>
                     @guest
                         <div class="box_style_4">
+                            <h6 class="text-primary">Nếu bạn chưa có tài khoản.</h6>
                             <h6 class="text-primary">Bạn có thể đăng nhập với:</h6>
                             <table class="table mt-2">
                                 <tbody>

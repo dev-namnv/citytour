@@ -263,7 +263,7 @@ class CheckoutController extends Controller
             ->first();
         $tour = Tour::query()->findOrFail($payment_log->tour_id);
 
-        if ($request->get('vnp_ResponseCode') !== '00') {
+        if ($request->has('vnp_ResponseCode') && $request->get('vnp_ResponseCode') != '00') {
             $error = ['status' => TOASTR_ERROR, 'content' => 'Có lỗi xảy ra trong quá trình thanh toán'];
             session()->flash(TOASTR, json_encode($error));
             return redirect()->route('checkout.detail', ['slug' => $tour->slug]);
@@ -272,6 +272,7 @@ class CheckoutController extends Controller
         try {
                 if ($request->has('vnp_TxnRef')) {
                     $invoice = Invoice::query()
+                        ->withoutGlobalScopes()
                         ->where('payment_code', $request->get('vnp_TxnRef'))
                         ->first();
 
