@@ -272,6 +272,7 @@ class CheckoutController extends Controller
         try {
                 if ($request->has('vnp_TxnRef')) {
                     $invoice = Invoice::query()
+                        ->withoutGlobalScopes()
                         ->where('payment_code', $request->get('vnp_TxnRef'))
                         ->first();
 
