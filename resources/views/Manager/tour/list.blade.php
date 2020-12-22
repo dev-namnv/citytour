@@ -87,7 +87,7 @@
                                     method: 'GET'
                                 },
                             },
-                            pageSize: 5, // display 20 records per page
+                            pageSize: 20, // display 20 records per page
                             serverPaging: true,
                             serverFiltering: true,
                             serverSorting: true,
@@ -545,19 +545,6 @@
                             }, {
                                 field: 'address',
                                 title: 'Địa chỉ'
-                            }, {
-                                field: 'description',
-                                title: 'Mô tả',
-                                type: 'string',
-                                template: function (row) {
-                                    return `${row.description.substring(0, 30)}...`
-                                }
-                            }, {
-                                field: 'content',
-                                title: 'Nội dung',
-                                template: function (row) {
-                                    return `${row.description.substring(0, 30)}...`
-                                }
                             }, {
                                 field: 'publish',
                                 title: 'Công khai',

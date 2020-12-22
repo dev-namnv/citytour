@@ -22,9 +22,9 @@
                                 method: 'GET',
                             },
                         },
-                        pageSize: 10, // display 20 records per page
+                        pageSize: 20, // display 20 records per page
                         serverPaging: true,
-                        serverFiltering: false,
+                        serverFiltering: true,
                         serverSorting: true,
                     },
 
@@ -46,7 +46,7 @@
 
                     search: {
                         input: $('#kt_datatable_search_query'),
-                        key: 'generalSearch'
+                        key: 'keyword'
                     },
 
                     // columns definition
@@ -100,6 +100,12 @@
                             title: 'Địa chỉ',
                         }],
                 });
+
+                $('#kt_datatable_search_status').on('change', function() {
+                    datatable.search($(this).val().toLowerCase(), 'status');
+                });
+
+                $('#kt_datatable_search_status, #kt_datatable_search_type').selectpicker();
 
                 function subTableInit(e) {
                     $('<div/>').attr('id', 'child_data_ajax_' + e.data.id).appendTo(e.detailCell).KTDatatable({
@@ -222,12 +228,12 @@
         <div class="card card-custom">
             <div class="card-header flex-wrap border-0 pt-6 pb-0">
                 <div class="card-title">
-                    <h3 class="card-label">Quản lý Tour
+                    <h3 class="card-label">Quản lý hóa đơn
                         <span class="d-block text-muted pt-2 font-size-sm">
                             @if (Auth::user()->role === ADMIN)
-                                Danh sách tất cả Tour của hệ thống
+                                Danh sách tất cả hóa đơn của hệ thống
                             @else
-                                Danh sách tất cả Tour của bạn
+                                Danh sách tất cả hóa đơn của bạn
                             @endif
                         </span></h3>
                 </div>
@@ -239,13 +245,28 @@
                     <div class="row align-items-center">
                         <div class="col-lg-9 col-xl-8">
                             <div class="row align-items-center">
-                                <div class="col-md-12 my-2 my-md-0">
+                                <div class="col-md-6 my-2 my-md-0">
                                     <div class="input-icon">
                                         <input type="text" class="form-control" placeholder="Search..."
                                                id="kt_datatable_search_query"/>
                                         <span>
                                             <i class="flaticon2-search-1 text-muted"></i>
                                         </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 my-2 my-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="mr-3 mb-0 d-none d-md-block">Trạng thái:</label>
+                                        <select class="form-control" id="kt_datatable_search_status">
+                                            <option value="">Tất cả</option>
+                                            <option value="0">Đã tiếp nhận</option>
+                                            <option value="1">Đã xác nhận</option>
+                                            <option value="2">Đã xác thanh toán</option>
+                                            <option value="3">Đang diễn ra</option>
+                                            <option value="4">Đã hoàn thành</option>
+                                            <option value="5">Xác nhận hoàn thành</option>
+                                            <option value="6">Hoàn tất</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

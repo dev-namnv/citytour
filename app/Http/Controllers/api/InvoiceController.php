@@ -66,6 +66,13 @@ class InvoiceController extends Controller
             $docs = $docs->ofGuide();
         }
 
+        // query theo status
+        if (is_array($query) && array_key_exists('status', $query) && $query['status'] != '') {
+            $docs = $docs->whereHas('invoices', function ($q) use ($query) {
+                $q->where('status', '=', $query['status']);
+            });
+        }
+
         // Nếu có sort order
         if ($sort && in_array($sort['sort'], ['asc', 'desc'])) {
             // Lấy giá trị theo field và type sort

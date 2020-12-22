@@ -141,6 +141,14 @@
                             <span class="menu-text">Danh sách</span>
                         </a>
                     </li>
+                    <li class="menu-item" aria-haspopup="true">
+                        <a href="{{route('invoice-list')}}" class="menu-link">
+                            <i class="menu-bullet menu-bullet-line">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Danh sách theo Tour</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
