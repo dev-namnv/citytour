@@ -172,7 +172,7 @@
                                 field: 'payment_type',
                                 title: 'Hình thức',
                             }, {
-                                field: 'Trạng thái',
+                                field: 'status',
                                 title: 'status',
                                 // callback function support for column rendering
                                 template: function(row) {
