@@ -137,7 +137,6 @@
                 @isset($tour_min)
                     <div class="banner colored">
                         <h4>Đặt Tour ngay <span>chỉ với {{ $tour_min->adult_price }}</span></h4>
-                        <p>{!! \Illuminate\Support\Str::limit($tour_min->description, 150) !!}</p>
                         <a href="{{ route('Main.tour.show', ['slug' => $tour_min->slug]) }}" class="btn_1 white">Xem thêm</a>
                     </div>
                 @endisset
