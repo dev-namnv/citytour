@@ -28,7 +28,7 @@ class TourCreateRequest extends FormRequest
             'tour_address' => 'required|max:255',
             'thumbnail' => 'required|mimes:png,jpg,jpeg,gif|max:5000',
             'banner' => 'required|mimes:png,jpg,jpeg,gif|max:5000',
-            'slide.*' => 'mimes:png,jpg,jpeg|max:5000',
+            'slide.*' => 'mimes:png,jpg,jpeg,gif|max:5000',
             'price_adult' => 'required|numeric|min:0|max:20000000',
             'price_child' => 'required|numeric|min:0|max:20000000',
             'tour_category' => 'required|numeric',
