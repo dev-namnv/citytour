@@ -67,15 +67,15 @@
 @section('content')
     <div id="tableCaption" class="col-lg-12 col-12 layout-spacing ">
         <div class="statbox widget box box-shadow">
-            <div class="widget-header">
-                <div class="row">
-                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <h4>Users</h4>
-                    </div>
-                </div>
-            </div>
             <div class="container bg-white">
                 <div class="row layout-top-spacing">
+                    <div class="widget-header" style="padding:20px">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Danh sách tài khoản</h4>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
                         <div class="widget-content widget-content-area br-6">
                             <div class="table-responsive mb-4 mt-4">
