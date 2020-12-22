@@ -27,7 +27,7 @@ class InvoiceController extends Controller
                 ->paginate(PAGINATION_TOUR);
         }
 
-        return view('manager.invoices.index', compact('invoices'));
+        return view('Manager.invoices.index', compact('invoices'));
     }
 
     public function list()
