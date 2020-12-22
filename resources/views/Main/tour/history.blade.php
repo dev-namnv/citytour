@@ -201,10 +201,12 @@
                                                     <tr>
                                                         <td></td>
                                                         <td style="float: right">
-                                                            @if(\Carbon\Carbon::parse($invoices[0]->start_date)->diffInDays(\Carbon\Carbon::now()) >= 0 && !$invoices[0]->refund)
-                                                                <button class="btn btn-danger pay-refund" invoice-id="{{ $invoices[0]->id }}">Hủy tour</button>
-                                                            @elseif($invoices[0]->refund)
-                                                                <button class="btn btn-danger" style="cursor: not-allowed" disabled="disabled">Đã gửi yêu cầu</button>
+                                                            @if ($invoices[0]->status == 0)
+                                                                @if(\Carbon\Carbon::parse($invoices[0]->start_date)->diffInDays(\Carbon\Carbon::now()) >= 0 && !$invoices[0]->refund)
+                                                                    <button class="btn btn-danger pay-refund" invoice-id="{{ $invoices[0]->id }}">Hủy tour</button>
+                                                                @elseif($invoices[0]->refund)
+                                                                    <button class="btn btn-danger" style="cursor: not-allowed" disabled="disabled">Đã gửi yêu cầu</button>
+                                                                @endif
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -472,7 +474,6 @@
                                     <th>Lịch trình</th>
                                     <th>Hóa đơn</th>
                                     <th>Đánh giá</th>
-                                    <th>Hủy tour</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -492,15 +493,7 @@
                                             <td>
                                                 <a href="#Review" class="btn_1 bg-success review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
                                             </td>
-                                            @if(\Carbon\Carbon::parse($invoices[0]->start_date)->diffInDays(\Carbon\Carbon::now()) >= 0 && !$invoices[0]->refund)
-                                                <td>
-                                                    <button class="btn btn-danger pay-refund pay-refund" invoice-id="{{ $invoice->id }}">Hủy tour</button>
-                                                </td>
-                                            @elseif($invoice->refund)
-                                                <td>
-                                                    <button class="btn btn-danger pay-refund" style="cursor: not-allowed" disabled="disabled">Đã gửi yêu cầu</button>
-                                                </td>
-                                            @endif
+
                                         </tr>
                                     @endforeach
                                 @else
@@ -519,15 +512,7 @@
                                             <td>
                                                 <a href="#Review" class="btn_1 review" data-id="{{$invoice->tour->id}}" data-tour="{{$invoice->tour->name}}" data-toggle="modal" data-target="#myReview">Đánh giá</a>
                                             </td>
-                                            @if(\Carbon\Carbon::parse($invoices[0]->start_date)->diffInDays(\Carbon\Carbon::now()) >= 0 && !$invoices[0]->refund)
-                                                <td>
-                                                    <button class="btn btn-danger pay-refund pay-refund" invoice-id="{{ $invoice->id }}">Hủy tour</button>
-                                                </td>
-                                            @elseif($invoice->refund)
-                                                <td>
-                                                    <button class="btn btn-danger pay-refund" style="cursor: not-allowed" disabled="disabled">Đã gửi yêu cầu</button>
-                                                </td>
-                                            @endif
+
                                         </tr>
                                     @endforeach
                                 @endif
