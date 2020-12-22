@@ -14,14 +14,14 @@ class InvoiceController extends Controller
     public function getNewInvoice()
     {
         if (Auth::user()->role === GUIDE){
-            $invoices = Invoice::query()->withoutGlobalScopes()
+            $invoices = Invoice::query()
                 ->where('guide_id',Auth::id())
                 ->where('status', INVOICE_NEW)
                 ->with('invoice_detail')
                 ->orderBy('created_at','DESC')
                 ->get();
         }else{
-            $invoices = Invoice::query()->withoutGlobalScopes()
+            $invoices = Invoice::query()
                 ->where('status', INVOICE_NEW)
                 ->with('invoice_detail')
                 ->orderBy('created_at','DESC')
