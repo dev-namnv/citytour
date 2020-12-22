@@ -47,50 +47,42 @@
 
             @if($reviews->count() > 0)
                 <div class="row">
-                    @foreach($reviews[0] as $key => $review)
-                        <div class="col-md-6">
-                            <div class="review_strip">
-                                <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
-                                     class="rounded-circle">
-                                <h4>{{$review->user->getFullName()}}</h4>
-                                <p>
-                                    {{$review->content}}
-                                </p>
-                                <div class="rating">
-                                    @for($i = 0; $i < 5; $i++)
-                                        @if ($i < $review->star)
-                                            <i class="icon-star voted"></i>
-                                        @else
-                                            <i class=" icon-star-empty"></i>
-                                        @endif
-                                    @endfor
+                    @if(isset($reviews[0]))
+                        @foreach($reviews[0] as $key => $review)
+                            <div class="col-md-6">
+                                <div class="review_strip">
+                                    <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
+                                         class="rounded-circle">
+                                    <h4>{{$review->user->getFullName()}}</h4>
+                                    <p>
+                                        {{$review->content}}
+                                    </p>
+                                    <div class="rating">
+                                        <p class="d-inline-block badge-success text-white rounded">điểm {{ round($review->avg('star'),1) }}/10</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
                 <div class="row">
-                    @foreach($reviews[1] as $key => $review)
-                        <div class="col-md-6">
-                            <div class="review_strip">
-                                <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
-                                     class="rounded-circle">
-                                <h4>{{$review->user->getFullName()}}</h4>
-                                <p>
-                                    {{$review->content}}
-                                </p>
-                                <div class="rating">
-                                    @for($i = 0; $i < 5; $i++)
-                                        @if ($i < $review->star)
-                                            <i class="icon-star voted"></i>
-                                        @else
-                                            <i class=" icon-star-empty"></i>
-                                        @endif
-                                    @endfor
+                    @if(isset($reviews[1]))
+                        @foreach($reviews[1] as $key => $review)
+                            <div class="col-md-6">
+                                <div class="review_strip">
+                                    <img src="{{$review->user->avatar}}" style="width: 60px; margin-top: 20px" alt="{{$review->user->getFullName()}}"
+                                         class="rounded-circle">
+                                    <h4>{{$review->user->getFullName()}}</h4>
+                                    <p>
+                                        {{$review->content}}
+                                    </p>
+                                    <div class="rating">
+                                        <p class="d-inline-block badge-success text-white rounded">điểm {{ round($review->avg('star'),1) }}/10</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                @endforeach
+                        @endforeach
+                    @endif
                 </div>
             @endif
         </div>

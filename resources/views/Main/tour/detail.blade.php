@@ -72,13 +72,19 @@
                 <div class="col-lg-9" id="single_tour_desc">
                     <div class="row p-3 bg-white">
                         <div class="col-md-4">
-                            <div class="row">
+                            <div class="row p-1">
                                 <strong>ĐIỂM XUẤT PHÁT: </strong>
                                 <span class="ml-1">{{ $tour->origin }}</span>
                             </div>
-                            <div class="row">
+                            <div class="row p-1">
                                 <strong>THỜI GIAN: </strong>
                                 <span class="ml-1">{{ $tour->schedules->count() }} ngày</span>
+                            </div>
+                            <div class="row p-1">
+                                <strong>HƯỚNG DẪN VIÊN: </strong>
+                                <span class="ml-1">
+                                    <a href="{{ route('guide.detail', ['guide_id' => $tour->guide_id]) }}">{{$tour->guide->first_name}} {{$tour->guide->last_name}}</a>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-3">
