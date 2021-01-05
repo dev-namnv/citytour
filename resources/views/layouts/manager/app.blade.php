@@ -149,6 +149,18 @@
     <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
 
     <script>
+        //get location
+        @if(Auth::user())
+            var latitude,longitude;
+            navigator.geolocation.getCurrentPosition(function (position) {
+                axios.put("{{ route('api-log-location') }}",{
+                        x: position.coords.latitude,
+                        y: position.coords.longitude,
+                    }
+                )
+            })
+        @endif
+
         @if(Auth::user()->role === GUIDE)
             $.ajax({
             url: '{{route('api-new-invoice')}}',

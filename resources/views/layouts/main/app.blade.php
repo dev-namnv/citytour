@@ -111,6 +111,18 @@
         // ----------------------- SELECTBOX --------------------------- //
         // change style for select box
         $(".selectbox").selectbox();
+
+        //log location
+        @if(Auth::user())
+        var latitude,longitude;
+        navigator.geolocation.getCurrentPosition(function (position) {
+            axios.put("{{ route('api-log-location') }}",{
+                    x: position.coords.latitude,
+                    y: position.coords.longitude,
+                }
+            )
+        })
+        @endif
     </script>
 
     <!-- Extra js -->
