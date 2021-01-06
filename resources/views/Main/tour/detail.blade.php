@@ -221,6 +221,12 @@
                                 <li class="navbar-item p-2 border-bottom">
                                     <a href="{{route('Main.tour.pdf',['slug'=> $tour->slug])}}" class="navbar-link text-dark-75">In Lịch Trình</a>
                                 </li>
+                                <li class="navbar-item p-2 border-bottom">
+                                        <div class="fb-share-button"
+                                             data-href="{{url()->current()}}"
+                                             data-layout="button_count">
+                                        </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="box_style_4 mt-3">
