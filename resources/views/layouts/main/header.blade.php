@@ -40,7 +40,6 @@
                                 <a href="#sign-in-dialog" id="access_link">Đăng nhập</a>
                             </li>
                         @endguest
-                        </li>
                     </ul>
                 </div>
             </div>

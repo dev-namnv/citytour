@@ -63,6 +63,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     // Invoices
     Route::group(['prefix' => 'invoices'], function () {
         Route::get('/', 'InvoiceController@index')->name('invoice-index');
+        Route::get('/list', 'InvoiceController@list')->name('invoice-list');
         Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
         Route::get('/schedule/{sku}', 'InvoiceController@schedule')->name('invoice-schedule');
         Route::get('/update/{sku}-{status}', 'InvoiceController@updateStatus')->name('invoice-update-status');

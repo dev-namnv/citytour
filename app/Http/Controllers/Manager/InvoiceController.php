@@ -11,7 +11,26 @@ use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+    {
+        $status = $request->has('status') ? [$request->status] : array_keys(config('masterdata')['invoice']['status']);
+        if (Auth::user()->role === GUIDE) {
+            $invoices = Invoice::query()
+                ->where('guide_id',Auth::id())
+                ->whereIn('status', $status)
+                ->orderBy('id','DESC')
+                ->paginate(PAGINATION_TOUR);
+        } else {
+            $invoices = Invoice::query()
+                ->whereIn('status', $status)
+                ->orderBy('id','DESC')
+                ->paginate(PAGINATION_TOUR);
+        }
+
+        return view('Manager.invoices.index', compact('invoices'));
+    }
+
+    public function list()
     {
         return view('Manager.invoices.list');
     }
