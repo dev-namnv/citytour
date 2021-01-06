@@ -112,6 +112,12 @@
                                 {!! $article->content !!}
                             </div>
                         </div>
+                        <div class="row float-right">
+                            <div class="fb-share-button"
+                                 data-href="{{url()->current()}}"
+                                 data-layout="button_count">
+                            </div>
+                        </div>
                         <!-- end post -->
                     </div>
                     <!-- end box_style_1 -->
