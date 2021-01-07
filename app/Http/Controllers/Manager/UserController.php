@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserLogLocation;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -28,5 +29,13 @@ class UserController extends Controller
         ]);
 
         return response()->json(['flash_message' => 'Cập nhật trạng thái thành công', 'status' => $user->status]);
+    }
+
+    public function locationLogs()
+    {
+        $logs = UserLogLocation::query()->orderBy('id','desc')
+            ->with('user')
+            ->paginate(25);
+        return view('Manager.log.log-location',compact('logs'));
     }
 }
