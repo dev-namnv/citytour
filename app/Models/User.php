@@ -96,4 +96,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\GuideLog', 'guide_id');
     }
+
+    public function identity()
+    {
+        return $this->hasOne(IdentityImage::class, 'guide_id');
+    }
 }

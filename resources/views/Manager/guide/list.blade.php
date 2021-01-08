@@ -129,22 +129,30 @@
                                     <thead>
                                     <tr role="row">
                                         <th>Ảnh đại diện</th>
+                                        <th>Thẻ căn cước(CMND)</th>
                                         <th>Tên tài khoản</th>
                                         <th>Họ và tên</th>
                                         <th>Email</th>
                                         <th>Số điện thoại</th>
                                         <th>Trạng thái</th>
                                         <th>Điểm hành vi</th>
+
                                         <th>Hành động</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-
-
                                     @foreach($guides as $key => $guide)
                                         <tr id="guide_tr_{{$guide->id}}">
                                             <td>
-                                                <img src="{{$guide->avatar}}" alt="" width="100">
+                                                <img src="{{$guide->avatar}}" alt="" width="50">
+                                            </td>
+                                            <td class="text-center">
+                                                @if (!empty($guide->identity))
+                                                <img src="{{$guide->identity->front_image}}" alt="" width="50" style="margin-right: 10px">
+                                                <img src="{{$guide->identity->back_image}}" alt="" width="50">
+                                                @else
+                                                    <span class="text-danger">Chưa có</span>
+                                                @endif
                                             </td>
                                             <td>{{$guide->username}}</td>
                                             <td>{{$guide->getFullName()}}</td>

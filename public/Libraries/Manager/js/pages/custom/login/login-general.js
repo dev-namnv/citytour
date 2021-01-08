@@ -97,7 +97,11 @@ var KTLogin = function() {
 						validators: {
 							notEmpty: {
 								message: 'Tên không được để trống'
-							}
+							},
+                            regexp: {
+                                regexp: '^[a-zA-Z\\s]*$',
+                                message: 'Định dạng tên không hợp lệ'
+                            }
 						}
 					},
 					email: {
@@ -110,6 +114,17 @@ var KTLogin = function() {
 							}
 						}
 					},
+                    phone: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Số điện thoại không được để trống'
+                            },
+                            regexp: {
+                                regexp: '^(0[0-9]{9})$',
+                                message: 'Định dạng số điện thoại không hợp lệ'
+                            }
+                        }
+                    },
 					username: {
                         validators: {
 							notEmpty: {
@@ -153,6 +168,13 @@ var KTLogin = function() {
                             }
                         }
                     },
+                    "images[]": {
+                        validators: {
+                            notEmpty: {
+                                message: 'Bạn phải tải ảnh chứng minh thư lên'
+                            }
+                        }
+                    }
 				},
 				plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
