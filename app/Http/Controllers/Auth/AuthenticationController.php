@@ -98,8 +98,8 @@ class AuthenticationController extends Controller
             'guide_id' => $user->id
         ]);
 
-//        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NotificationNewGuide($user));
-//        Mail::to($request->email)->send(new RegisterGuide($user));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NotificationNewGuide($user));
+        Mail::to($request->email)->send(new RegisterGuide($user));
 
         session()->flash('register', ['status' => true, 'message' => 'Đăng ký thành công, vui lòng đợi xác thực đăng ký từ chúng tôi.']);
 

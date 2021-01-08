@@ -141,8 +141,6 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-{{--    {{dd($guides[0]->identity->image)}}--}}
-
                                     @foreach($guides as $key => $guide)
                                         <tr id="guide_tr_{{$guide->id}}">
                                             <td>
@@ -153,7 +151,7 @@
                                                 <img src="{{$guide->identity->front_image}}" alt="" width="50" style="margin-right: 10px">
                                                 <img src="{{$guide->identity->back_image}}" alt="" width="50">
                                                 @else
-                                                    Chưa có
+                                                    <span class="text-danger">Chưa có</span>
                                                 @endif
                                             </td>
                                             <td>{{$guide->username}}</td>
