@@ -20,7 +20,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('user')->orderBy('id', 'desc')->paginate(PAGINATION_ARTICLE);
+        $articles = Article::with('user')->where('user_id', '=', auth()->user()->id)->orderBy('id', 'desc')->paginate(PAGINATION_ARTICLE);
 //        dd($articles[0]->tags->pluck('id'));
         return view('Manager.articles.index', compact('articles'));
     }

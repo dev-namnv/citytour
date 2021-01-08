@@ -67,7 +67,7 @@
                                         <th>Tiêu đề</th>
                                         <th>Slug</th>
                                         <th>Ảnh</th>
-                                        <th>Tác giả</th>
+
                                         <th>Hành động</th>
                                     </tr>
                                     </thead>
@@ -81,7 +81,6 @@
                                                      class="img-thumbnail" width="200">
                                             </td>
 
-                                            <td>{{$article->user->getFullname()}}</td>
 
 
                                             <td nowrap="nowrap">
