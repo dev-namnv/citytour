@@ -107,6 +107,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('change-password', 'AccountController@changePassword')->name('account.change-password');
         Route::get('email-setting', 'AccountController@emailSetting')->name('account.email-setting');
         Route::match(['put', 'patch'], '/{id}/updateStatus', 'UserController@updateStatus')->name('Manager.user.updateStatus');
+        Route::get('log-location', 'UserController@locationLogs')->name('user.location');
     });
 
     // Error
