@@ -69,9 +69,13 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/update/{sku}-{status}', 'InvoiceController@updateStatus')->name('invoice-update-status');
     });
 
+    // Article
+    Route::resource('articles', 'ArticleController')->except(['show']);
+
+
     // Middleware admin
     Route::group(['middleware' => 'admin'], function () {
-        Route::resource('articles', 'ArticleController')->except(['show']);
+        // Article category
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
 
 

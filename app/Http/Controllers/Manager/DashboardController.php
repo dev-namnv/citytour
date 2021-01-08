@@ -17,13 +17,13 @@ class DashboardController extends Controller
     {
         $users = User::all();
         $invoices = Invoice::all();
-        $articles = Article::all();
+        $articles = Article::where('user_id', '=', auth()->user()->id)->get();
         $article_categories = ArticleCategory::all();
         $categories = Category::all();
         $tours = Tour::where('guide_id', '=', auth()->user()->id)->get();
 
         if (auth()->user()->role == ADMIN) {
-            $countCategories = $countArticleCategories = $countArticles = $countUsers = $countGuides = $totalIncome = $countInvoices = 0;
+            $countCategories = $countArticleCategories = $countUsers = $countGuides = $totalIncome = $countInvoices = 0;
 
             for ($i = 0; $i < count($users); $i++) {
                 if ($users[$i]->role == \USER) {
@@ -40,10 +40,6 @@ class DashboardController extends Controller
                 $totalIncome += $invoices[$i]->getRawOriginal('total_cost');
             }
 
-            for ($i = 0; $i < count($articles); $i++) {
-                $countArticles++;
-            }
-
             for ($i = 0; $i < count($article_categories); $i++) {
                 $countArticleCategories++;
             }
@@ -52,7 +48,7 @@ class DashboardController extends Controller
                 $countCategories++;
             }
 
-            return view('Manager.dashboard.analytic', compact(['countGuides', 'countUsers', 'countInvoices', 'totalIncome', 'countArticles', 'countArticleCategories', 'countCategories']));
+            return view('Manager.dashboard.analytic', compact(['countGuides', 'countUsers', 'countInvoices', 'totalIncome', 'countArticleCategories', 'countCategories']));
         }
 
         if (auth()->user()->role == GUIDE) {
@@ -60,12 +56,13 @@ class DashboardController extends Controller
             $countUsers = $invoices->groupBy('user_id')->count();
             $countInvoices = $invoices->count();
             $countTours = $tours->count();
+            $countArticles = $articles->count();
 
             $totalIncome = $invoices->sum(function ($invoice) {
                 return $invoice->getRawOriginal('total_cost');
             });
 
-            return view('Manager.dashboard.analytic', compact(['countUsers', 'countInvoices', 'totalIncome', 'countTours']));
+            return view('Manager.dashboard.analytic', compact(['countUsers', 'countInvoices', 'totalIncome', 'countTours', 'countArticles']));
         }
 
     }
