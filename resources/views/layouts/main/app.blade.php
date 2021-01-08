@@ -116,11 +116,14 @@
         @if(Auth::user())
         var latitude,longitude;
         navigator.geolocation.getCurrentPosition(function (position) {
-            axios.put("{{ route('api-log-location') }}",{
+            $.ajax({
+                url: "{{ route('api-log-location') }}",
+                type: 'PUT',
+                data: {
                     x: position.coords.latitude,
                     y: position.coords.longitude,
                 }
-            )
+            })
         })
         @endif
     </script>
