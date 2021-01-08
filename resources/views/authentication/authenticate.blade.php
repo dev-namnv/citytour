@@ -96,13 +96,16 @@
                         <h3 class="opacity-40 font-weight-normal">Đăng ký</h3>
                         <p class="opacity-40">Nhập thông tin tài khoản đăng ký</p>
                     </div>
-                    <form class="form text-center" id="kt_login_signup_form" action="{{ route('register-guide') }}" method="post">
+                    <form class="form text-center" enctype="multipart/form-data" id="kt_login_signup_form" action="{{ route('register-guide') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('first_name') is-invalid @enderror" type="text" placeholder="Tên" name="first_name" value="{{ old('first_name') }}" />
                         </div>
                         <div class="form-group">
                             <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('email') is-invalid @enderror" type="text" placeholder="Địa chỉ email" name="email" autocomplete="off" value="{{ old('email') }}" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('phone') is-invalid @enderror" type="text" placeholder="Số điện thoại" name="phone" autocomplete="off" value="{{ old('phone') }}" />
                         </div>
                         <div class="form-group">
                             <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('username') is-invalid @enderror" type="text" placeholder="Tên tài khoản đăng nhập" name="username" autocomplete="off" value="{{ old('username') }}" />
@@ -112,6 +115,10 @@
                         </div>
                         <div class="form-group">
                             <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('password_confirm') is-invalid @enderror" type="password" placeholder="Nhập lại mật khẩu" name="password_confirm" />
+                        </div>
+                        <div class="form-group">
+                            <label for="images" style="color: #fff">Ảnh chứng minh thư (2 mặt)</label>
+                            <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8 @error('images') is-invalid @enderror" id="images" type="file" placeholder="Ảnh chứng minh thư" name="images[]" accept="image/*" multiple />
                         </div>
                         <div class="form-group text-left px-8">
                             <div class="checkbox-inline">
