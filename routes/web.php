@@ -77,7 +77,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     Route::group(['middleware' => 'admin'], function () {
         // Article category
         Route::resource('article_categories', 'ArticleCategoryController')->except(['show']);
-
+        Route::resource('faqs', 'FaqController')->except(['show']);
 
         //Contacts
         Route::resource('contacts','ContactController');

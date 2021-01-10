@@ -29,16 +29,6 @@
         <div class="container margin_60">
             <div class="row">
                 <aside class="col-lg-3">
-                    <div class="box_style_cat">
-                        <ul id="cat_nav">
-                            @foreach ($faqs as $key => $item)
-                                <li>
-                                    <a href="#{!! $key !!}"><i class="icon_set_1_icon-95"></i>{!! $key !!}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-
                     <div class="box_style_2">
                         <i class="icon_set_1_icon-57"></i>
                         <h4>Need <span>Help?</span></h4>
@@ -48,22 +38,20 @@
                 </aside>
                 <!--End aside -->
                 <div class="col-lg-9" id="faq">
+                    <h3 class="nomargin_top"> Các câu hỏi thường gặp</h3>
                     @foreach ($faqs as $key => $item)
-                        <h3 class="nomargin_top" id="{{$key}}"> {{$key}}</h3>
-                        @foreach ($item as $index => $i)
                             <div id="payment" class="accordion_styled">
                                 <div class="card">
                                     <div class="card-header">
                                         <h4>
-                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#payment" href="#collapseTwo_{!! $key.$index !!}">{{$i->heading}}<i class="indicator icon-plus float-right"></i></a>
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#payment" href="#collapseTwo_{!! $key !!}">{{$item->heading}}<i class="indicator icon-plus float-right"></i></a>
                                         </h4>
                                     </div>
-                                    <div id="collapseTwo_{!! $key.$index !!}" class="collapse" data-parent="#payment">
-                                        <div class="card-body">{{$i->content}}</div>
+                                    <div id="collapseTwo_{!! $key !!}" class="collapse" data-parent="#payment">
+                                        <div class="card-body">{!! $item->content !!}</div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
                     @endforeach
                 </div>
                 <!-- End col lg-9 -->

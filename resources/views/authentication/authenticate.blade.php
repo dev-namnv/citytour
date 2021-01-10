@@ -125,7 +125,7 @@
                                 <label class="checkbox checkbox-outline checkbox-white opacity-60 text-white m-0 @error('agree') is-invalid @enderror">
                                     <input type="checkbox" name="agree" />
                                     <span></span>Tôi đồng ý với
-                                    <a href="#" class="text-white font-weight-bold ml-1">các điều khoản và điều kiện</a>.</label>
+                                    <a href="{{route('faq')}}" target="_blank" class="text-white font-weight-bold ml-1">các điều khoản và điều kiện</a>.</label>
                             </div>
                             <div class="form-text text-muted text-center"></div>
                         </div>

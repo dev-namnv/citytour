@@ -10,10 +10,7 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $faqs = Faq::select('*')
-            ->orderByDesc('id')
-            ->get()
-            ->groupBy('title');
+        $faqs = Faq::all();
 
         return view('Main.faq.index', compact('faqs'));
     }
