@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Common seeder
-//        $this->call(UserSeeder::class);
+        $this->call(UserSeeder::class);
 
         // Article
 //        $this->call(ArticleCategorySeeder::class);
@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 //        $this->call(ContactSeeder::class);
 
         // Service
-//        $this->call(ServiceSeeder::class);
-//        $this->call(Category::class);
-//        $this->call(TourSeeder::class);
+        $this->call(ServiceSeeder::class);
+        $this->call(Category::class);
+        $this->call(TourSeeder::class);
 
         // Invoice
 //        $this->call(InvoiceSeeder::class);
@@ -40,6 +40,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(WishlistSeeder::class);
 
         // Cancel policy
-//        $this->call(CancelPolicySeeder::class);
+        $this->call(CancelPolicySeeder::class);
     }
 }

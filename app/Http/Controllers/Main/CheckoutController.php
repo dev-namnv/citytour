@@ -165,8 +165,9 @@ class CheckoutController extends Controller
                             'city' => $request->city,
                             'zipcode' => $request->zipcode,
                             'country' => $request->country,
-                            'password' => Hash::make($request->customer_email),
-                            'state' => $request->state
+                            'password' => Hash::make(explode('@', $request->customer_email)[0]),
+                            'state' => $request->state,
+                            'is_register' => IS_NOT_REGISTER
                         ]);
                         $user->save();
                     }
@@ -306,7 +307,7 @@ class CheckoutController extends Controller
                         $new_guide_log->save();
                     }
                     if (session()->has(PAYMENT_CODE)) {
-                        Mail::to($invoice->customer_email)->send(new InvoiceMail($invoice));
+                        Mail::to($invoice->customer_email)->send(new InvoiceMail($payment_log->user, $invoice));
                         session()->forget(PAYMENT_CODE);
                     } else {
                         $error = ['status' => TOASTR_INFO, 'content' => 'Phiên làm việc đã hết hạn'];

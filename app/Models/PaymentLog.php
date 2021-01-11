@@ -41,4 +41,9 @@ class PaymentLog extends Model
     {
         return $this->hasOne('App\Models\Invoice', 'payment_code', 'payment_code');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

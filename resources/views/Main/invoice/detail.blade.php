@@ -58,7 +58,7 @@
                         </table>
                     </address>
                 </div>
-                <div class="col-6">
+                <div class="@if(isset($user) && $user->is_register === IS_NOT_REGISTER) col-3 @else col-6 @endif">
                     <address>
                         <h3>Hình thức thanh toán:</h3><br>
                         <table class="table table-condensed">
@@ -76,11 +76,30 @@
                         </table>
                     </address>
                 </div>
+                @if(isset($user) && $user->is_register === IS_NOT_REGISTER)
+                    <div class="col-3">
+                        <address>
+                            <h3>Thông tin tài khoản: </h3>
+                            <table class="table table-condensed">
+                                <tbody>
+                                <tr>
+                                    <th width="50%">Email: </th>
+                                    <td>{{ $user->email }}</td>
+                                </tr>
+                                <tr>
+                                    <th width="50%">Mật khẩu: </th>
+                                    <td>{{ explode('@', $user->email)[0] }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </address>
+                    </div>
+                @endif
             </div>
 
         </div>
     </div>
-
+    <hr>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
