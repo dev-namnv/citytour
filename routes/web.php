@@ -33,7 +33,7 @@ Route::group(['prefix' => 'authentication', 'namespace' => 'Auth'], function () 
 Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => 'guide'], function () {
     // Manager
     Route::get('/', function () {
-        return redirect()->route('dashboard-analytic');
+        return redirect()->route('dashboard-sale');
     })->name('manager');
 
     // Dashboard

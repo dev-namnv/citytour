@@ -11,12 +11,13 @@ class InvoiceController extends Controller
     public function detail($id)
     {
         $invoice = Invoice::find($id);
+        $user = $invoice->user;
 
         if (empty($invoice) || $invoice->user_id != auth()->user()->id) {
             return abort(404);
         }
 
-        return view('Main.invoice.detail', compact(['invoice']));
+        return view('Main.invoice.detail', compact('invoice', 'user'));
     }
 
     public function schedule($id)

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -69,6 +70,15 @@ class DashboardController extends Controller
 
     public function sale()
     {
+        $currentDate = Carbon::now();
+        $nowDate = $currentDate->subDays($currentDate->dayOfWeek + 1);
+        $invoices = Invoice::query()->where('created_at', '>=', $nowDate);
+
+        if (auth()->user()->role === GUIDE) {
+            $invoices = $invoices->ofGuide();
+        }
+        $invoices = $invoices->get();
+
         return view('Manager.dashboard.sale');
     }
 

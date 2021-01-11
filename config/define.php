@@ -96,3 +96,7 @@ define('PAY_STATUS_CONFIRM', 200);
 
 define('PAGINATION_INVOICE', 20);
 define('CHECKOUT_INFO_INVOICE', 'checkout_info_invoice');
+
+// Check account is register
+define('IS_REGISTER', 1);
+define('IS_NOT_REGISTER', 0);
