@@ -6,6 +6,8 @@ use App\Casts\Currency;
 use App\Casts\Json;
 use App\Scopes\ActiveScope;
 use App\Scopes\PublishScope;
+use Carbon\Carbon;
+use Carbon\Traits\Date;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -150,5 +152,15 @@ class Tour extends Model
     {
         $masterData = config('masterdata')['tour'];
         return $masterData['publish'][$this->publish];
+    }
+
+    public function getStartAt($batch): string
+    {
+        return $batch->batch;
+    }
+
+    public function getEndAt($batch): string
+    {
+        return Carbon::parse($batch->batch)->addDays($this->schedules->count() - 1);
     }
 }

@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers\api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\Tour;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class CalendarController extends Controller
+{
+    public function index(): JsonResponse
+    {
+        $tours = Tour::query()->with('batches', 'schedules', 'invoices');
+        $invoices = Invoice::query();
+
+        if (auth()->user()->role === GUIDE) {
+            $tours = $tours->ofGuide();
+            $invoices = $invoices->ofGuide();
+        }
+
+        $tours = $tours->get();
+        $invoices = $invoices->get();
+        $res_tours = [];
+        foreach ($tours as $key => $tour) {
+            foreach ($tour->batches as $batch) {
+                array_push($res_tours, static::generate($tour, $batch));
+            }
+        }
+
+        return response()->json($res_tours);
+    }
+
+    public function generate($tour, $batch): array
+    {
+        if (Carbon::parse($tour->getEndAt($batch))->greaterThanOrEqualTo(now())) {
+            if ($tour->invoices->count() > 0) {
+                $desc = 'Đã có khách đặt, đang đợi xuất phát';
+                $class = 'fc-event-danger fc-event-solid-warning';
+            } else {
+                $desc = 'Chưa có khách nào đặt';
+                $class = 'fc-event-light fc-event-solid-info';
+            }
+        } elseif (Carbon::parse(now())->greaterThanOrEqualTo($tour->getStartAt($batch)) && Carbon::parse($tour->getEndAt($batch))->greaterThanOrEqualTo(now())) {
+            $desc = 'Tour đang di chuyển';
+            $class = 'fc-event-danger fc-event-solid-danger';
+        } else {
+            $desc = 'Đã hoàn thành hoặc quá thời gian';
+            $class = 'fc-event-success fc-event-solid-secondary';
+        }
+
+        return [
+            'title' => Str::limit($tour->name),
+            'start' => Carbon::parse($batch->batch)->format('Y-m-d'),
+            'end' => Carbon::parse($batch->batch)
+                ->addDays($tour->schedules->count() - 1)
+                ->format('Y-m-d'),
+            'description' => $desc,
+            'url' => route('Main.tour.show', ['slug' => $tour->slug]),
+            'className' => $class
+        ];
+    }
+}

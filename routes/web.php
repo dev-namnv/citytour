@@ -123,6 +123,8 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::post('{id}/update', 'CategoryController@update')->name('category.update');
         Route::delete('{id}/delete', 'CategoryController@delete')->name('category.delete');
     });
+
+    Route::get('calendar', 'CalendarController@index')->name('calendar');
 });
 
 // Main
@@ -229,4 +231,6 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
         Route::get('tours', 'InvoiceController@tours');
         Route::get('list-by-tour/{id}', 'InvoiceController@listByTour');
     });
+
+    Route::get('calendar', 'CalendarController@index');
 });
