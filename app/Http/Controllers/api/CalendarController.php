@@ -15,15 +15,12 @@ class CalendarController extends Controller
     public function index(): JsonResponse
     {
         $tours = Tour::query()->with('batches', 'schedules', 'invoices');
-        $invoices = Invoice::query();
 
         if (auth()->user()->role === GUIDE) {
             $tours = $tours->ofGuide();
-            $invoices = $invoices->ofGuide();
         }
 
         $tours = $tours->get();
-        $invoices = $invoices->get();
         $res_tours = [];
         foreach ($tours as $key => $tour) {
             foreach ($tour->batches as $batch) {
@@ -53,7 +50,9 @@ class CalendarController extends Controller
         }
 
         return [
-            'title' => Str::limit($tour->name),
+            'title' => auth()->user()->role === ADMIN
+                        ? Str::limit($tour->name) . ' - ' . $tour->guide->getFullName()
+                        : Str::limit($tour->name),
             'start' => Carbon::parse($batch->batch)->format('Y-m-d'),
             'end' => Carbon::parse($batch->batch)
                 ->addDays($tour->schedules->count() - 1)
