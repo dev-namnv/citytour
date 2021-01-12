@@ -33,7 +33,7 @@ class CalendarController extends Controller
 
     public function generate($tour, $batch): array
     {
-        if (Carbon::parse($tour->getEndAt($batch))->greaterThanOrEqualTo(now())) {
+        if (Carbon::parse($tour->getEndAt($batch))->greaterThan(now())) {
             if ($tour->invoices->count() > 0) {
                 $desc = 'Đã có khách đặt, đang đợi xuất phát';
                 $class = 'fc-event-danger fc-event-solid-warning';
@@ -53,10 +53,8 @@ class CalendarController extends Controller
             'title' => auth()->user()->role === ADMIN
                         ? Str::limit($tour->name) . ' - ' . $tour->guide->getFullName()
                         : Str::limit($tour->name),
-            'start' => Carbon::parse($batch->batch)->format('Y-m-d'),
-            'end' => Carbon::parse($batch->batch)
-                ->addDays($tour->schedules->count() - 1)
-                ->format('Y-m-d'),
+            'start' => Carbon::parse($tour->getStartAt($batch))->format('Y-m-d'),
+            'end' => Carbon::parse($tour->getEndAt($batch))->format('Y-m-d'),
             'description' => $desc,
             'url' => route('Main.tour.show', ['slug' => $tour->slug]),
             'className' => $class
