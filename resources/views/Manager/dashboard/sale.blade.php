@@ -12,61 +12,7 @@
                 <div class="card card-custom bg-gray-100 card-stretch gutter-b">
                     <!--begin::Header-->
                     <div class="card-header border-0 bg-danger py-5">
-                        <h3 class="card-title font-weight-bolder text-white">Sales Stat</h3>
-                        <div class="card-toolbar">
-                            <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-transparent-white btn-sm font-weight-bolder dropdown-toggle px-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Export</a>
-                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                    <!--begin::Navigation-->
-                                    <ul class="navi navi-hover">
-                                        <li class="navi-header pb-1">
-                                            <span class="text-primary text-uppercase font-weight-bold font-size-sm">Add new:</span>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-shopping-cart-1"></i>
-																		</span>
-                                                <span class="navi-text">Order</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-calendar-8"></i>
-																		</span>
-                                                <span class="navi-text">Event</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-graph-1"></i>
-																		</span>
-                                                <span class="navi-text">Report</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-rocket-1"></i>
-																		</span>
-                                                <span class="navi-text">Post</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-writing"></i>
-																		</span>
-                                                <span class="navi-text">File</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <!--end::Navigation-->
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="card-title font-weight-bolder text-white">Truy cập nhanh</h3>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -92,39 +38,35 @@
 																</svg>
                                                                 <!--end::Svg Icon-->
 															</span>
-                                    <a href="#" class="text-warning font-weight-bold font-size-h6">Weekly Sales</a>
+                                    <a href="#" class="text-warning font-weight-bold font-size-h6">{{ number_format($totalIncome * 0.05, 0, '', ',') }} đ</a>
                                 </div>
                                 <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
-															<span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-																<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
-																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																		<polygon points="0 0 24 0 24 24 0 24" />
-																		<path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-																		<path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-																	</g>
-																</svg>
-                                                                <!--end::Svg Icon-->
-															</span>
-                                    <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">New Users</a>
+                                <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24"/>
+                                            <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"/>
+                                            <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L12.5,10 C13.3284271,10 14,10.6715729 14,11.5 C14,12.3284271 13.3284271,13 12.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3"/>
+                                        </g>
+                                    </svg>
+                                </span>
+                                    <a href="{{ route('articles.index') }}" class="text-primary font-weight-bold font-size-h6 mt-2">Bài viết</a>
                                 </div>
                             </div>
                             <!--end::Row-->
                             <!--begin::Row-->
                             <div class="row m-0">
                                 <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
-															<span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
-																<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-																<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																	<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																		<polygon points="0 0 24 0 24 24 0 24" />
-																		<path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero" />
-																		<path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3" />
-																	</g>
-																</svg>
-                                                                <!--end::Svg Icon-->
-															</span>
-                                    <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Item Orders</a>
+                                    <span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M12,4.56204994 L7.76822128,9.6401844 C7.4146572,10.0644613 6.7840925,10.1217854 6.3598156,9.76822128 C5.9355387,9.4146572 5.87821464,8.7840925 6.23177872,8.3598156 L11.2317787,2.3598156 C11.6315738,1.88006147 12.3684262,1.88006147 12.7682213,2.3598156 L17.7682213,8.3598156 C18.1217854,8.7840925 18.0644613,9.4146572 17.6401844,9.76822128 C17.2159075,10.1217854 16.5853428,10.0644613 16.2317787,9.6401844 L12,4.56204994 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                <path d="M3.5,9 L20.5,9 C21.0522847,9 21.5,9.44771525 21.5,10 C21.5,10.132026 21.4738562,10.2627452 21.4230769,10.3846154 L17.7692308,19.1538462 C17.3034221,20.271787 16.2111026,21 15,21 L9,21 C7.78889745,21 6.6965779,20.271787 6.23076923,19.1538462 L2.57692308,10.3846154 C2.36450587,9.87481408 2.60558331,9.28934029 3.11538462,9.07692308 C3.23725479,9.02614384 3.36797398,9 3.5,9 Z M12,17 C13.1045695,17 14,16.1045695 14,15 C14,13.8954305 13.1045695,13 12,13 C10.8954305,13 10,13.8954305 10,15 C10,16.1045695 10.8954305,17 12,17 Z" fill="#000000"/>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">{{ $invoices->count() }} hóa đơn</a>
                                 </div>
                                 <div class="col bg-light-success px-6 py-8 rounded-xl">
 															<span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
@@ -138,7 +80,7 @@
 																</svg>
                                                                 <!--end::Svg Icon-->
 															</span>
-                                    <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">Bug Reports</a>
+                                    <a href="{{ route('calendar') }}" class="text-success font-weight-bold font-size-h6 mt-2">Thời gian biểu</a>
                                 </div>
                             </div>
                             <!--end::Row-->
@@ -155,67 +97,9 @@
                     <!--begin::Header-->
                     <div class="card-header align-items-center border-0 mt-4">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="font-weight-bolder text-dark">My Activity</span>
-                            <span class="text-muted mt-3 font-weight-bold font-size-sm">890,344 Sales</span>
+                            <span class="font-weight-bolder text-dark">Hoạt động</span>
+                            <span class="text-muted mt-3 font-weight-bold font-size-sm">{{ $invoices->count() }} người đặt tour</span>
                         </h3>
-                        <div class="card-toolbar">
-                            <div class="dropdown dropdown-inline">
-                                <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ki ki-bold-more-hor"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                                    <!--begin::Navigation-->
-                                    <ul class="navi navi-hover">
-                                        <li class="navi-header font-weight-bold py-4">
-                                            <span class="font-size-lg">Choose Label:</span>
-                                            <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
-                                        </li>
-                                        <li class="navi-separator mb-3 opacity-70"></li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-text">
-																			<span class="label label-xl label-inline label-light-success">Customer</span>
-																		</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-text">
-																			<span class="label label-xl label-inline label-light-danger">Partner</span>
-																		</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-text">
-																			<span class="label label-xl label-inline label-light-warning">Suplier</span>
-																		</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-text">
-																			<span class="label label-xl label-inline label-light-primary">Member</span>
-																		</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-item">
-                                            <a href="#" class="navi-link">
-																		<span class="navi-text">
-																			<span class="label label-xl label-inline label-light-dark">Staff</span>
-																		</span>
-                                            </a>
-                                        </li>
-                                        <li class="navi-separator mt-3 opacity-70"></li>
-                                        <li class="navi-footer py-4">
-                                            <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                                <i class="ki ki-plus icon-sm"></i>Add new</a>
-                                        </li>
-                                    </ul>
-                                    <!--end::Navigation-->
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -223,129 +107,26 @@
                         <!--begin::Timeline-->
                         <div class="timeline timeline-6 mt-3">
                             <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">08:42</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-warning icon-xl"></i>
+                            @foreach($invoices as $invoice)
+                                <div class="timeline-item align-items-start">
+                                    <!--begin::Label-->
+                                    <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">
+                                        {{ \Carbon\Carbon::parse($invoice->created_at)->format('H:m') }}
+                                        <small class="text-muted">{{ \Carbon\Carbon::parse($invoice->created_at)->format('d/m') }}</small>
+                                    </div>
+                                    <!--end::Label-->
+                                    <!--begin::Badge-->
+                                    <div class="timeline-badge">
+                                        <i class="fa fa-genderless text-{{ $classActivities[array_rand($classActivities, 1)] }} icon-xl"></i>
+                                    </div>
+                                    <!--end::Badge-->
+                                    <!--begin::Content-->
+                                    <div class="timeline-content d-flex">
+                                        <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">Đơn đặt Tour: {{ $invoice->tour->name }}</span>
+                                    </div>
+                                    <!--end::Content-->
                                 </div>
-                                <!--end::Badge-->
-                                <!--begin::Text-->
-                                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">Outlines keep you honest. And keep structure</div>
-                                <!--end::Text-->
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">10:00</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-success icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Content-->
-                                <div class="timeline-content d-flex">
-                                    <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">AEOL meeting</span>
-                                </div>
-                                <!--end::Content-->
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">14:37</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-danger icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Desc-->
-                                <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">Make deposit
-                                    <a href="#" class="text-primary">USD 700</a>. to ESL</div>
-                                <!--end::Desc-->
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">16:50</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-primary icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Text-->
-                                <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">Indulging in poorly driving and keep structure keep great</div>
-                                <!--end::Text-->
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">21:03</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-danger icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Desc-->
-                                <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">New order placed
-                                    <a href="#" class="text-primary">#XF-2356</a>.</div>
-                                <!--end::Desc-->
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">23:07</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-info icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Text-->
-                                <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">Outlines keep and you honest. Indulging in poorly driving</div>
-                                <!--end::Text-->
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">16:50</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-primary icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Text-->
-                                <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">Indulging in poorly driving and keep structure keep great</div>
-                                <!--end::Text-->
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">21:03</div>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-danger icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Desc-->
-                                <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">New order placed
-                                    <a href="#" class="text-primary">#XF-2356</a>.</div>
-                                <!--end::Desc-->
-                            </div>
+                            @endforeach
                             <!--end::Item-->
                         </div>
                         <!--end::Timeline-->

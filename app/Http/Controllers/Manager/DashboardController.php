@@ -79,7 +79,13 @@ class DashboardController extends Controller
         }
         $invoices = $invoices->get();
 
-        return view('Manager.dashboard.sale');
+        $totalIncome = $invoices->sum(function ($invoice) {
+            return $invoice->getRawOriginal('total_cost');
+        });
+
+        $classActivities = ['danger', 'primary', 'success', 'default', 'secondary', 'warning'];
+
+        return view('Manager.dashboard.sale', compact('invoices', 'totalIncome', 'classActivities'));
     }
 
 }
