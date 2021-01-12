@@ -148,6 +148,11 @@
 
     <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
 
+    <!-- Extra js -->
+    @yield('extra-js')
+
+    @yield('lasted-js')
+
     <script>
         $(document).ready(function (){
             //get location
@@ -211,10 +216,56 @@
             })
             @endif
         })
-    </script>
-    <!-- Extra js -->
-    @yield('extra-js')
 
-    @yield('lasted-js')
+        $(`select[name='type']`).change(function () {
+            let value = $(this).val();
+            let data = {};
+            switch (value) {
+                case "days": data = {title: 'Nhắc nhở',message:'Hãy nhập chính xác ngày - tháng - năm ! '}
+                break;
+                case "months": data = {title: 'Nhắc nhở',message:'Hãy nhập chính xác tháng - năm ! '}
+                break;
+                case "years": data = {title: 'Nhắc nhở',message:'Hãy nhập chính xác năm ! '}
+                break;
+            }
+            $.notify(data,{
+                allow_dismiss: false,
+                newest_on_top: true,
+                mouse_over:  false,
+                showProgressbar:  false,
+                spacing: 10,
+                timer: 500,
+                delay: 200,
+            })
+        })
+        showNotify = (res, error = false) => {
+            $.notify({
+                title: !error ? (res.data.title || '') : 'Error',
+                message: !error ? res.data.message : 'Có lỗi xảy ra'
+            }, {
+                type: !error ? (res.status === 200 ? 'success' : 'danger') : 'danger',
+                allow_dismiss: false,
+                newest_on_top: true,
+                mouse_over:  false,
+                showProgressbar:  false,
+                spacing: 10,
+                timer: 2000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                },
+                offset: {
+                    x: 30,
+                    y: 30
+                },
+                delay: 1000,
+                z_index: 10000,
+                animate: {
+                    enter: 'animate__animated animate__bounceIn',
+                    exit: 'animate__animated animate__bounceOut'
+                }
+            });
+        }
+    </script>
 </body>
 </html>

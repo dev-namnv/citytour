@@ -10,6 +10,7 @@ use App\Http\Requests\Article\StoreArticle;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleTag;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -18,10 +19,18 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::with('user')->where('user_id', '=', auth()->user()->id)->orderBy('id', 'desc')->paginate(PAGINATION_ARTICLE);
-//        dd($articles[0]->tags->pluck('id'));
+        $query = Article::with('user')->where('user_id', '=', auth()->user()->id)
+            ->orderBy('id', 'desc');
+
+        if ($request->has('date') || $request->has('type')){
+            $date = $request->date ?? date('d-m-Y');
+            $type = $request->type ?? 'days';
+            $articles = $this->getOnTime($query,$date,$type,PAGINATION_ARTICLE);
+        }else{
+            $articles = $query->paginate(PAGINATION_ARTICLE);
+        }
         return view('Manager.articles.index', compact('articles'));
     }
 

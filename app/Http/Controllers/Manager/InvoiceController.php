@@ -15,18 +15,23 @@ class InvoiceController extends Controller
     {
         $status = $request->has('status') ? [$request->status] : array_keys(config('masterdata')['invoice']['status']);
         if (Auth::user()->role === GUIDE) {
-            $invoices = Invoice::query()
+            $query = Invoice::query()
                 ->where('guide_id',Auth::id())
                 ->whereIn('status', $status)
-                ->orderBy('id','DESC')
-                ->paginate(PAGINATION_TOUR);
+                ->orderBy('id','DESC');
         } else {
-            $invoices = Invoice::query()
+            $query = Invoice::query()
                 ->whereIn('status', $status)
-                ->orderBy('id','DESC')
-                ->paginate(PAGINATION_TOUR);
+                ->orderBy('id','DESC');
         }
-
+        $query->with('invoice_detail');
+        if ($request->has('date') || $request->has('type')){
+            $date = $request->date ?? date('d-m-Y');
+            $type = $request->type ?? 'days';
+            $invoices = $this->getOnTime($query,$date,$type,PAGINATION_INVOICE);
+        }else{
+            $invoices = $query->paginate(PAGINATION_INVOICE);
+        }
         return view('Manager.invoices.index', compact('invoices'));
     }
 

@@ -20,10 +20,17 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         $status = $request->has('status') ? [$request->status] : array_keys(config('masterdata')['contact']['status']);
-        $contacts = Contact::query()
+        $query = Contact::query()
             ->whereIn('status',$status)
-            ->orderBy('id', 'desc')
-            ->paginate(20);
+            ->orderBy('id', 'desc');
+
+        if ($request->has('date') || $request->has('type')){
+            $date = $request->date ?? date('d-m-Y');
+            $type = $request->type ?? 'days';
+            $contacts = $this->getOnTime($query,$date,$type,20);
+        }else{
+            $contacts = $query->paginate(20);
+        }
         return view('Manager.contacts.index',compact('contacts'));
     }
 
