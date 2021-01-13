@@ -9,9 +9,17 @@ use Illuminate\Http\Request;
 
 class GuideController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
-        $guides = User::withoutGlobalScopes()->where('role', '=', GUIDE)->paginate(5);
+        $query = User::withoutGlobalScopes()->where('role', '=', GUIDE);
+
+        if ($request->has('date') || $request->has('type')){
+            $date = $request->date ?? date('d-m-Y');
+            $type = $request->type ?? 'days';
+            $guides = $this->getOnTime($query,$date,$type,20);
+        }else{
+            $guides = $query->paginate(20);
+        }
         return view('Manager.guide.list', compact(['guides']));
     }
 
