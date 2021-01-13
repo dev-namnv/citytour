@@ -19,7 +19,7 @@
                         {{ Form::select('type',['days'=>'Ngày','months'=>'Tháng','years'=>'Năm'],request()->toArray(),['class'=>'form-control']) }}
                     </div>
                     <div class="col-md-6 mt-1">
-                        {{ Form::date('date',request()->get('date'),['class'=>'form-control','required'=>'']) }}
+                        {{ Form::date('date',request()->get('date') ?? \Carbon\Carbon::now(),['class'=>'form-control','required'=>'']) }}
                     </div>
                     <div class="col-md-2">
                         <button class="btn">
