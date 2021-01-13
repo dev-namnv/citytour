@@ -48,8 +48,6 @@
                 // Private functions
 
                 // basic demo
-                let type = $(`select[name='type']`).val()
-                let date = $(`input[name='date']`).val()
                 const demo = function () {
                     const datatable = $('#kt_datatable').KTDatatable({
                         // datasource definition
@@ -57,7 +55,7 @@
                             type: 'remote',
                             source: {
                                 read: {
-                                    url: BASE_URL + `/api_v1/tour/manager/list?type=${type}&date=${date}`,
+                                    url: BASE_URL + `/api_v1/tour/manager/list`,
                                     method: 'GET'
                                 },
                             },
@@ -350,12 +348,6 @@
             jQuery(document).ready(function () {
                 KTDefaultDatatableDemo.init();
             });
-            $(`#form-filter`).submit(function () {
-                jQuery(document).ready(function () {
-                    KTDefaultDatatableDemo.init();
-                });
-                return false;
-            })
         </script>
     @else
         <script>
