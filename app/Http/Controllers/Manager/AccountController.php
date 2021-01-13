@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Helpers\BreadcrumbHelper;
 use App\Helpers\StorageS3Helper;
 use App\Http\Controllers\Controller;
+use App\Models\IdentityImage;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -109,8 +110,32 @@ class AccountController extends Controller
                     })
                         : ''
                 ],
-                'avatar' => 'nullable|image|mimes:jpeg,jpg,png'
+                'avatar' => 'nullable|image|mimes:jpeg,jpg,png',
+                'identity_images' => 'array|min:2|max:2',
+                'identity_images.*' => 'mimes:jpeg,bmp,png,jpg,gif,svg|max:2000'
             ]);
+
+            $user_id = auth()->user()->id;
+            $checkIdentityExist = IdentityImage::where('guide_id', '=', $user_id)->first();
+
+            if ($request->hasFile('identity_images')) {
+                $urlFrontImage = StorageS3Helper::getUrlAfterUpload('images/identity', $request->identity_images[0]);
+                $urlBackImage = StorageS3Helper::getUrlAfterUpload('images/identity', $request->identity_images[1]);
+
+                if (!$checkIdentityExist) {
+                    IdentityImage::create([
+                        'front_image' => $urlFrontImage,
+                        'back_image' => $urlBackImage,
+                        'guide_id' => $user_id
+                    ]);
+                } else {
+                    $checkIdentityExist->update([
+                        'front_image' => $urlFrontImage,
+                        'back_image' => $urlBackImage
+                    ]);
+                }
+            }
+
             $data = $request->only(['first_name', 'last_name', 'phone', 'email']);
 
             $user = User::query()->findOrFail(Auth::id());
