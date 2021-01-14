@@ -31,11 +31,18 @@ class UserController extends Controller
         return response()->json(['flash_message' => 'Cập nhật trạng thái thành công', 'status' => $user->status]);
     }
 
-    public function locationLogs()
+    public function locationLogs(Request $request)
     {
-        $logs = UserLogLocation::query()->orderBy('id','desc')
-            ->with('user')
-            ->paginate(25);
+        $query = UserLogLocation::query()->orderBy('id','desc')
+            ->with('user');
+
+        if ($request->has('date') || $request->has('type')){
+            $date = $request->date ?? date('d-m-Y');
+            $type = $request->type ?? 'days';
+            $logs = $this->getOnTime($query,$date,$type,20);
+        }else{
+            $logs = $query->paginate(20);
+        }
         return view('Manager.log.log-location',compact('logs'));
     }
 }

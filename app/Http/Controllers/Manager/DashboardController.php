@@ -15,14 +15,14 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function analytic()
+    public function analytic(Request $request)
     {
-        $users = User::all();
-        $invoices = Invoice::all();
-        $articles = Article::where('user_id', '=', auth()->user()->id)->get();
-        $article_categories = ArticleCategory::all();
-        $categories = Category::all();
-        $tours = Tour::where('guide_id', '=', auth()->user()->id)->get();
+        $users = $this->getAll($request,User::query());
+        $invoices = $this->getAll($request,Invoice::query());
+        $articles = $this->getAll($request, Article::where('user_id', '=', auth()->user()->id));
+        $article_categories = $this->getAll($request, ArticleCategory::query());
+        $categories = $this->getAll($request, Category::query());
+        $tours = $this->getAll($request, Tour::where('guide_id', '=', auth()->user()->id));
 
         if (auth()->user()->role == ADMIN) {
             $countCategories = $countArticleCategories = $countUsers = $countGuides = $totalIncome = $countInvoices = 0;
@@ -118,4 +118,15 @@ class DashboardController extends Controller
         );
     }
 
+    public function getAll($request,$query)
+    {
+        if ($request->has('date') || $request->has('type')){
+            $date = $request->date ?? date('d-m-Y');
+            $type = $request->type ?? 'days';
+            $results = $this->getOnTime($query,$date,$type);
+        }else{
+            $results = $query->get();
+        }
+        return $results;
+    }
 }

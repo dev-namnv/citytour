@@ -7,34 +7,6 @@
     <script src="{{ asset('js/moment.js') }}"></script>
     @if(Auth::user()->role === ADMIN)
         <script>
-            showNotify = (res, error = false) => {
-                $.notify({
-                    title: !error ? (res.data.title || '') : 'Error',
-                    message: !error ? res.data.message : 'Có lỗi xảy ra'
-                }, {
-                    type: !error ? (res.status === 200 ? 'success' : 'danger') : 'danger',
-                    allow_dismiss: false,
-                    newest_on_top: true,
-                    mouse_over:  false,
-                    showProgressbar:  false,
-                    spacing: 10,
-                    timer: 2000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    },
-                    offset: {
-                        x: 30,
-                        y: 30
-                    },
-                    delay: 1000,
-                    z_index: 10000,
-                    animate: {
-                        enter: 'animate__animated animate__bounceIn',
-                        exit: 'animate__animated animate__bounceOut'
-                    }
-                });
-            }
             deleteTour = (id) => {
                 axios.delete(`${BASE_URL}/api_v1/tour/manager/${id}/delete`)
                     .then(res => {
@@ -83,7 +55,7 @@
                             type: 'remote',
                             source: {
                                 read: {
-                                    url: BASE_URL + '/api_v1/tour/manager/list',
+                                    url: BASE_URL + `/api_v1/tour/manager/list`,
                                     method: 'GET'
                                 },
                             },
