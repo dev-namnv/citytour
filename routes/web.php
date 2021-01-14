@@ -39,7 +39,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     // Dashboard
     Route::group(['prefix' => 'dashboard'], function () {
         Route::get('/', function () {
-            return redirect()->route('dashboard-analytic');
+            return redirect()->route('dashboard-sale');
         })->name('dashboard');
         Route::get('/analytic', 'DashboardController@analytic')->name('dashboard-analytic');
         Route::get('/sale', 'DashboardController@sale')->name('dashboard-sale');
