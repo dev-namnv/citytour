@@ -67,6 +67,7 @@
                 }
             }
         );
+
     </script>
 @endsection
 
@@ -129,6 +130,47 @@
                             {{ $message }}
                         </div>
                         @enderror
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xl-3 col-lg-3 col-form-label">Thẻ căn cước (CMND)</label>
+                        <div class="col-lg-9 col-xl-6">
+                            <div class="image-input image-input-outline" id="kt_identity_front_image"
+                                 style="background-image: url({{ asset('Libraries/Manager/media/users/blank.png') }})">
+                                <div class="image-input-wrapper"
+                                     style="background-image: url({{ Auth::user()->identity->front_image ?? '' }})"></div>
+                                <label
+                                    class="btn-white btn-hover-text-primary btn-shadow"
+                                    data-action="change"
+                                    >
+                                </label>
+
+                            </div>
+{{--                            <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>--}}
+
+                            <div class="image-input image-input-outline ml-5" id="kt_identity_back_image"
+                                 style="background-image: url({{ asset('Libraries/Manager/media/users/blank.png') }})">
+                                <div class="image-input-wrapper"
+                                     style="background-image: url({{ Auth::user()->identity->back_image ?? '' }})"></div>
+                                <label
+                                    class="btn-white btn-hover-text-primary btn-shadow"
+                                    data-action="change"
+                                >
+                                </label>
+                            </div>
+                            <input type="file" class="form-control mt-3" name="identity_images[]" accept="image/*" multiple>
+                            <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                        </div>
+                        @error('identity_images')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        @error('back_image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+
                     </div>
                     <div class="form-group row">
                         <label class="col-xl-3 col-lg-3 col-form-label">Tên</label>
