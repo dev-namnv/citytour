@@ -12,6 +12,8 @@ class Invoice extends Model
 {
     protected $table = 'invoices';
 
+    protected $with = ['user'];
+
     protected $fillable = [
         'sku',
         'name',

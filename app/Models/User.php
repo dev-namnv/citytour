@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Cknow\Money\Money;
 
 class User extends Authenticatable
 {
@@ -101,5 +102,25 @@ class User extends Authenticatable
     public function identity()
     {
         return $this->hasOne(IdentityImage::class, 'guide_id');
+    }
+
+    public function getTotalIncome(): string
+    {
+        $total = 0;
+        $docs = Invoice::query();
+        if (auth()->user()->role === GUIDE) {
+            $docs = $docs->ofGuide();
+        }
+        $invoices = $docs->get();
+
+        foreach ($invoices as $invoice) {
+            $total += $invoice->getRawOriginal('total_cost');
+        }
+
+        if (auth()->user()->role === ADMIN) {
+            $total = $total * 0.05;
+        }
+
+        return Money::VND($total);
     }
 }

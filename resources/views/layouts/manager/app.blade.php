@@ -146,8 +146,6 @@
     <script src="{{ asset('Libraries/Manager/js/scripts.bundle.js') }}"></script>
     <!--end::Global Theme Bundle-->
 
-    <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
-
     <script>
         $(document).ready(function (){
             //get location

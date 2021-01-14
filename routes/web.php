@@ -230,6 +230,8 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
     Route::group(['prefix' => 'invoice'], function () {
         Route::get('tours', 'InvoiceController@tours');
         Route::get('list-by-tour/{id}', 'InvoiceController@listByTour');
+        Route::get('weekly-income', 'InvoiceController@weeklyIncome');
+        Route::get('total-income', 'InvoiceController@totalIncome');
     });
 
     Route::get('calendar', 'CalendarController@index');
