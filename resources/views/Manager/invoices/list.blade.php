@@ -76,6 +76,7 @@
                         }, {
                             field: 'invoices',
                             title: 'Tổng số hóa đơn',
+                            sortable: false,
                             template: function (row) {
                                 return `<span class="text-info">${row.invoices.length}</span>`
                             }
