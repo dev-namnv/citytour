@@ -63,7 +63,11 @@ class InvoiceController extends Controller
             $perPage = (int)$pagination['perpage'];
         }
 
-        $docs = Tour::query()->with('guide', 'batches', 'schedules', 'invoices');
+        $docs = Tour::query()
+            ->with('guide', 'batches', 'schedules', 'invoices')
+            ->whereHas('invoices.user', function ($q) {
+                $q->orderBy('created_at', 'desc');
+            });
         if (Auth::user()->role === GUIDE) {
             $docs = $docs->ofGuide();
         }
@@ -99,7 +103,23 @@ class InvoiceController extends Controller
         }
         $tours = $docs->paginate($perPage, '*', 'pagination[page]', $pagination['page']);
 
-        return response()->json($tours);
+        $meta = [
+            'page' => $tours->currentPage(),
+            'pages' => $tours->lastPage(),
+            'perpage' => $tours->perPage(),
+            'total' => $tours->total()
+        ];
+
+        return response()->json([
+            'total' => $tours->total(),
+            'per_page' => $tours->perPage(),
+            'current_page' => $tours->currentPage(),
+            'last_page' => $tours->lastPage(),
+            'from' => $tours->firstItem(),
+            'to' => $tours->lastItem(),
+            'data' => $tours->items(),
+            'meta' => $meta
+        ]);
     }
 
     public function listByTour(Request $request, $id)
