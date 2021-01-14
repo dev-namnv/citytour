@@ -10,6 +10,7 @@ use App\Models\Invoice;
 use App\Models\Tour;
 use App\Models\User;
 use Carbon\Carbon;
+use Cknow\Money\Money;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -70,16 +71,51 @@ class DashboardController extends Controller
 
     public function sale()
     {
-        $currentDate = Carbon::now();
-        $nowDate = $currentDate->subDays($currentDate->dayOfWeek + 1);
-        $invoices = Invoice::query()->where('created_at', '>=', $nowDate);
+        $tours = Tour::query()->whereHas('invoices.user', function ($q) {
+            $q->orderBy('created_at', 'desc');
+        });
+        $invoices = Invoice::query();
 
         if (auth()->user()->role === GUIDE) {
+            $tours = $tours->ofGuide();
             $invoices = $invoices->ofGuide();
         }
         $invoices = $invoices->get();
+        $monthTours = $tours->whereHas('invoices', function ($q) {
+            $q->where('created_at', '>=', Carbon::parse()->startOfMonth());
+        })->get();
+        $weekTours = $tours->whereHas('invoices', function ($q) {
+            $q->where('created_at', '>=', Carbon::parse()->startOfWeek());
+        })->get();
+        $dayTours = $tours->whereHas('invoices', function ($q) {
+            $q->where('created_at', '>=', Carbon::parse());
+        })->get();
 
-        return view('Manager.dashboard.sale');
+        $weekIncome = 0;
+        foreach ($invoices as $invoice) {
+            if (Carbon::parse($invoice->created_at)->isCurrentWeek()) {
+                $weekIncome += $invoice->getRawOriginal('total_cost');
+            }
+        }
+
+        $classActivities = ['danger', 'primary', 'success', 'default', 'secondary', 'warning'];
+
+        if (auth()->user()->role === ADMIN) {
+            $weekIncome = $weekIncome * 0.05;
+        }
+        $weekIncome = Money::VND($weekIncome);
+
+        return view(
+            'Manager.dashboard.sale',
+            compact(
+                'invoices',
+                'classActivities',
+                'weekIncome',
+                'monthTours',
+                'weekTours',
+                'dayTours'
+            )
+        );
     }
 
     public function getAll($request,$query)

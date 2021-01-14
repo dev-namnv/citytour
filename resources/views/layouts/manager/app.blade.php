@@ -146,13 +146,6 @@
     <script src="{{ asset('Libraries/Manager/js/scripts.bundle.js') }}"></script>
     <!--end::Global Theme Bundle-->
 
-    <script src="{{ asset('Libraries/Manager/js/pages/widgets.js') }}"></script>
-
-    <!-- Extra js -->
-    @yield('extra-js')
-
-    @yield('lasted-js')
-
     <script>
         $(document).ready(function (){
             //get location
@@ -267,5 +260,9 @@
             });
         }
     </script>
+    <!-- Extra js -->
+    @yield('extra-js')
+
+    @yield('lasted-js')
 </body>
 </html>

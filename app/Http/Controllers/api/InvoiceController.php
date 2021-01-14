@@ -5,9 +5,11 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Tour;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class InvoiceController extends Controller
 {
@@ -132,5 +134,57 @@ class InvoiceController extends Controller
 
         $invoices = $docs->paginate($perPage, '*', 'pagination[page]', $pagination['page']);
         return response()->json($invoices);
+    }
+
+    public function weeklyIncome(): JsonResponse
+    {
+        $invoices = Invoice::query()->where('created_at', '>=', Carbon::parse()->startOfWeek());
+        if (\auth()->user()->role === GUIDE) {
+            $invoices = $invoices->ofGuide();
+        }
+        $invoices = $invoices->get();
+
+        $response = [];
+        foreach ($invoices as $invoice) {
+            array_push($response,
+                \auth()->user()->role === ADMIN
+                    ? [
+                        'money' => $invoice->getRawOriginal('total_cost') * 0.05,
+                        'title' => Str::limit($invoice->tour->name, 50)
+                ]
+                    : [
+                        'money' => $invoice->getRawOriginal('total_cost'),
+                        'title' => Str::limit($invoice->tour->name, 50)
+                ]
+            );
+        }
+
+        return response()->json($response);
+    }
+
+    public function totalIncome(): JsonResponse
+    {
+        $invoices = Invoice::query();
+        if (\auth()->user()->role === GUIDE) {
+            $invoices = $invoices->ofGuide();
+        }
+        $invoices = $invoices->get();
+
+        $response = [];
+        foreach ($invoices as $invoice) {
+            array_push($response,
+                \auth()->user()->role === ADMIN
+                    ? [
+                        'money' => $invoice->getRawOriginal('total_cost') * 0.05,
+                        'title' => Str::limit($invoice->tour->name, 50)
+                ]
+                    : [
+                        'money' => $invoice->getRawOriginal('total_cost'),
+                        'title' => Str::limit($invoice->tour->name, 50)
+                ]
+            );
+        }
+
+        return response()->json($response);
     }
 }

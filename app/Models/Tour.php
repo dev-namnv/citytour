@@ -161,6 +161,6 @@ class Tour extends Model
 
     public function getEndAt($batch): string
     {
-        return Carbon::parse($batch->batch)->addDays($this->schedules->count() - 1);
+        return Carbon::parse($batch->batch)->addDays($this->schedules->count());
     }
 }

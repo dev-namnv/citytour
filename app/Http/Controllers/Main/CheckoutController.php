@@ -310,7 +310,7 @@ class CheckoutController extends Controller
                         Mail::to($invoice->customer_email)->send(new InvoiceMail($payment_log->user, $invoice));
                         session()->forget(PAYMENT_CODE);
                     } else {
-                        $error = ['status' => TOASTR_INFO, 'content' => 'Phiên làm việc đã hết hạn'];
+                        $error = ['status' => TOASTR_INFO, 'content' => 'Đã hết phiên giao dịch'];
                         session()->flash(TOASTR, json_encode($error));
                     }
                 }
