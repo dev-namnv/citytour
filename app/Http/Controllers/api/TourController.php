@@ -114,7 +114,23 @@ class TourController extends Controller
             $tour->rating = ReviewHelper::rating($tour->reviews);
         }
 
-        return response()->json($tours);
+        $meta = [
+            'page' => $tours->currentPage(),
+            'pages' => $tours->lastPage(),
+            'perpage' => $tours->perPage(),
+            'total' => $tours->total()
+        ];
+
+        return response()->json([
+            'total' => $tours->total(),
+            'per_page' => $tours->perPage(),
+            'current_page' => $tours->currentPage(),
+            'last_page' => $tours->lastPage(),
+            'from' => 1,
+            'to' => $tours->lastPage(),
+            'data' => $tours->items(),
+            'meta' => $meta
+        ]);
     }
 
     /**

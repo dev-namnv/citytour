@@ -59,7 +59,7 @@
                                     method: 'GET'
                                 },
                             },
-                            pageSize: 20, // display 20 records per page
+                            pageSize: 5, // display 20 records per page
                             serverPaging: true,
                             serverFiltering: true,
                             serverSorting: true,
