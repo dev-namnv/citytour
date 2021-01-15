@@ -88,12 +88,15 @@
                             title: 'Email',
                             sortable: false,
                             template: function (row) {
-                                return `<span class="text-info">${row.user.email}</span>`
+                                return `<a href="mailto:${row.user.email}" class="text-info">${row.user.email}</a>`
                             }
                         }, {
                             field: 'user.phone',
                             title: 'Số điện thoại',
                             sortable: false,
+                            template: function (row) {
+                                return `<a href="tel:${row.user.phone}" class="text-warning">${row.user.phone}</a>`
+                            }
                         }, {
                             field: 'status',
                             title: 'Status',
