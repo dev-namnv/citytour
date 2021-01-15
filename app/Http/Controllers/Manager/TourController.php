@@ -10,6 +10,7 @@ use App\Http\Requests\Tour\TourUpdateRequest;
 use App\Models\Album;
 use App\Models\Batch;
 use App\Models\Category;
+use App\Models\Invoice;
 use App\Models\Schedule;
 use App\Models\Tour;
 use App\Scopes\ActiveScope;
@@ -181,5 +182,69 @@ class TourController extends Controller
     public function detail($id) {
         $tour = Tour::query()->withoutGlobalScope(new ActiveScope)->findOrFail($id);
         return view('Manager.tour.detail', compact('tour'));
+    }
+    
+    //check schedule status
+    public function status($slug) {
+        //getDetail
+        $tour = Tour::query()
+            ->withoutGlobalScope(ActiveScope::class )
+            ->with('albums','reviews','category','schedules','batches')
+            ->where('slug',$slug)
+            ->firstOrFail();
+        if ($tour->guide->id !== Auth::id()) {
+            return abort(403);
+        }
+        $invoice = Invoice::where('tour_id','=',$tour->id)->firstOrFail();
+        return view('Manager.guide.tourStatus', compact('tour','invoice'));
+
+    }
+    public function step2($slug) {
+        $tour = Tour::query()
+            ->withoutGlobalScope(ActiveScope::class )
+            ->with('albums','reviews','category','schedules','batches')
+            ->where('slug',$slug)
+            ->firstOrFail();
+        $invoice = Invoice::where('tour_id','=',$tour->id)->firstOrFail();
+        return view('Manager.guide.statusStep2', compact('tour','invoice'));
+    }
+    public function statusSchedule($id, Request $request) {
+        $schedule = Schedule::find($id);
+        if ($request->status == 'on') {
+            $schedule->checked = 1;
+            $schedule->save();
+        }
+        return redirect()->back();
+    }
+    public function changeStatus($id) {
+        $schedule = Schedule::select('checked')->where('tour_id', '=',$id)->get();
+        $count = 0;
+        $invoice = Invoice::where('tour_id', '=', $id)->firstOrFail();
+        $tour = Tour::query()
+            ->withoutGlobalScope(ActiveScope::class )
+            ->with('albums','reviews','category','schedules','batches')
+            ->where('id',$id)
+            ->firstOrFail();
+        foreach ($schedule as $item){
+            if($item->checked == 0){
+                $count++;
+            }
+        }
+        if ($count > 0) {
+            return view('Manager.guide.statusStep3',compact('tour','count'));
+        } else {
+            $invoice->status = INVOICE_COMPLETE;
+            $invoice->update();
+            return view('Manager.guide.statusStep3', compact('tour','count'));
+        }
+
+    }
+    public function tourList(Request $request) {
+        $status = $request->has('status') ? [$request->status] : array_keys(config('masterdata')['invoice']['status']);
+        $invoices = Invoice::query()
+            ->where('guide_id',Auth::id())
+            ->whereIn('status', $status)
+            ->paginate(5);
+        return view('Manager.guide.tourList', compact('invoices'));
     }
 }

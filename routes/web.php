@@ -72,7 +72,14 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
     // Article
     Route::resource('articles', 'ArticleController')->except(['show']);
 
-
+    //Middleware guide schedule
+    Route::group(['middleware' => 'guide'], function() {
+        Route::get('{slug}/status', 'TourController@status')->name('step1');
+        Route::get('{slug}/step2', 'TourController@step2')->name('step2');
+        Route::post('update/{id}', 'TourController@statusSchedule')->name('update.step2');
+        Route::get('step3/{id}', 'TourController@changeStatus')->name('step3');
+        Route::get('schedule-list', 'TourController@tourList')->name('tourList');
+    });
     // Middleware admin
     Route::group(['middleware' => 'admin'], function () {
         // Article category

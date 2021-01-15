@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class Tour extends Model
 {
     protected $table = 'tours';
-
+    protected $with = ['invoices'];
     protected $fillable = [
         'name',
         'slug',
