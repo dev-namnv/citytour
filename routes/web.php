@@ -67,6 +67,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/{sku}', 'InvoiceController@show')->name('invoice-show');
         Route::get('/schedule/{sku}', 'InvoiceController@schedule')->name('invoice-schedule');
         Route::get('/update/{sku}-{status}', 'InvoiceController@updateStatus')->name('invoice-update-status');
+        Route::get('statistical/{id}', 'InvoiceController@listUsers')->name('invoice.listUsers');
     });
 
     // Article
@@ -232,6 +233,7 @@ Route::group(['namespace' => 'api', 'prefix' => 'api_v1'], function () {
         Route::get('list-by-tour/{id}', 'InvoiceController@listByTour');
         Route::get('weekly-income', 'InvoiceController@weeklyIncome');
         Route::get('total-income', 'InvoiceController@totalIncome');
+        Route::get('list-users/{id}', 'InvoiceController@listUsers');
     });
 
     Route::get('calendar', 'CalendarController@index');

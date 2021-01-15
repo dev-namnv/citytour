@@ -241,7 +241,7 @@
                                                     <span class="label label-lg label-light-warning label-inline">{{ auth()->user()->role === GUIDE ? 'Tour của bạn' : $tour->guide->getFullName() }}</span>
                                                 </td>
                                                 <td class="text-right pr-0">
-                                                    <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-container="body" data-toggle="tooltip" data-placement="left" title="Xem chi tiết">
+                                                    <a href="{{ route('invoice.listUsers', ['id' => $tour->id]) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-container="body" data-toggle="tooltip" data-placement="left" title="Xem chi tiết">
                                                         <span class="svg-icon svg-icon-primary svg-icon-2x">
                                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -303,7 +303,7 @@
                                                     <span class="label label-lg label-light-warning label-inline">{{ auth()->user()->role === GUIDE ? 'Tour của bạn' : $tour->guide->getFullName() }}</span>
                                                 </td>
                                                 <td class="text-right pr-0">
-                                                    <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-container="body" data-toggle="tooltip" data-placement="left" title="Xem chi tiết">
+                                                    <a href="{{ route('invoice.listUsers', ['id' => $tour->id]) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-container="body" data-toggle="tooltip" data-placement="left" title="Xem chi tiết">
                                                         <span class="svg-icon svg-icon-primary svg-icon-2x">
                                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -365,7 +365,7 @@
                                                     <span class="label label-lg label-light-warning label-inline">{{ auth()->user()->role === GUIDE ? 'Tour của bạn' : $tour->guide->getFullName() }}</span>
                                                 </td>
                                                 <td class="text-right pr-0">
-                                                    <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-container="body" data-toggle="tooltip" data-placement="left" title="Xem chi tiết">
+                                                    <a href="{{ route('invoice.listUsers', ['id' => $tour->id]) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" data-container="body" data-toggle="tooltip" data-placement="left" title="Xem chi tiết">
                                                         <span class="svg-icon svg-icon-primary svg-icon-2x">
                                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

@@ -207,4 +207,80 @@ class InvoiceController extends Controller
 
         return response()->json($response);
     }
+
+    public function listUsers(Request $request, $id): JsonResponse
+    {
+        // Lấy param query
+        $pagination = $request->get('pagination');
+        $query = $request->get('query');
+        $sort = $request->get('sort');
+        $batch = $query && $query['batch'] ? $query['batch'] : null;
+
+        // Phân trang mặc định
+        $perPage = PAGINATION_TOUR;
+        // Nếu phân trang > 0 và <= 50 thì sẽ lấy giá trị
+        if ($request->has('pagination') && (int)$pagination['perpage'] > 0 && (int)$pagination['perpage'] <= 50) {
+            $perPage = (int)$pagination['perpage'];
+        }
+
+        $docs = Invoice::query()
+            ->where('tour_id', $id)
+            ->where('start_date', $batch)
+            ->with('user', 'tour');
+
+        if (auth()->user()->role === GUIDE) {
+            $docs = $docs->ofGuide();
+        }
+
+        // query theo status
+        if (is_array($query) && array_key_exists('status', $query) && $query['status'] != '') {
+            $docs = $docs->where('status', '=', $query['status']);
+        }
+
+        // Nếu có sort order
+        if ($sort && in_array($sort['sort'], ['asc', 'desc'])) {
+            // Lấy giá trị theo field và type sort
+            $docs = $docs->orderBy($sort['field'], $sort['sort']);
+        } else {
+            // Nếu không mặc định sort order theo created_at
+            $docs = $docs->orderBy('created_at', 'desc');
+        }
+
+
+        // Kiểm tra tồn tại query thì thêm where
+        if ($query) {
+            // Kiểm tra keyword search tồn tại
+            // Search theo: tour name
+            if (!empty($query['keyword']) && $query['keyword']) {
+                $docs = $docs->whereHas('user', function ($q) use ($query) {
+                        $q->where('first_name', 'like', '%'.$query['keyword'].'%')
+                            ->whereOr('last_name', 'like', '%'.$query['keyword'].'%')
+                            ->whereOr('email', 'like', '%'.$query['keyword'].'%');
+                    });
+            }
+        }
+
+        if (!$pagination) {
+            $pagination['page'] = 1;
+        }
+        $invoices = $docs->paginate($perPage, '*', 'pagination[page]', $pagination['page']);
+
+        $meta = [
+            'page' => $invoices->currentPage(),
+            'pages' => $invoices->lastPage(),
+            'perpage' => $invoices->perPage(),
+            'total' => $invoices->total()
+        ];
+
+        return response()->json([
+            'total' => $invoices->total(),
+            'per_page' => $invoices->perPage(),
+            'current_page' => $invoices->currentPage(),
+            'last_page' => $invoices->lastPage(),
+            'from' => $invoices->firstItem(),
+            'to' => $invoices->lastItem(),
+            'data' => $invoices->items(),
+            'meta' => $meta
+        ]);
+    }
 }
