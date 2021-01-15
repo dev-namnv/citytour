@@ -238,7 +238,7 @@ class InvoiceController extends Controller
         }
 
         // Nếu có sort order
-        if ($sort && in_array($sort['sort'], ['asc', 'desc'])) {
+        if ($sort && in_array($sort['sort'], ['asc', 'desc']) && $sort['field'] == 'status') {
             // Lấy giá trị theo field và type sort
             $docs = $docs->orderBy($sort['field'], $sort['sort']);
         } else {
