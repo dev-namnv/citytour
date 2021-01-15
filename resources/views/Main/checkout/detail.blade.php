@@ -101,15 +101,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Xác thưc lại email</label>
-                                    <input type="email" id="email_booking_2" name="customer_email_confirm" value="{{ old('customer_email_confirm') }}" class="form-control @error('customer_email_confirm') is-invalid @enderror">
-                                    @error('customer_email_confirm')
-                                    <small class="text-sm-left text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!--End step -->
