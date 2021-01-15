@@ -100,3 +100,6 @@ define('CHECKOUT_INFO_INVOICE', 'checkout_info_invoice');
 // Check account is register
 define('IS_REGISTER', 1);
 define('IS_NOT_REGISTER', 0);
+
+// Số giờ sau khi book có thể hoàn tiền 100%
+define('REFUND_HOURS', 5);

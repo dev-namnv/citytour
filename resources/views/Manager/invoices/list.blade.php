@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="ml-2">
                                         <div class="text-dark-75 font-weight-bold line-height-sm">
-                                            <a class="text-dark-75" href="{{ route('Main.tour.show', ['slug' => '/']) }}/${row.slug}">${row.name.length >= 50 ? `${row.name.substring(0, 50)}...`: row.name}</a>
+                                            <a class="text-dark-75" href="{{ route('invoice.listUsers', ['id' => '/']) }}/${row.id}">${row.name.length >= 50 ? `${row.name.substring(0, 50)}...`: row.name}</a>
                                         </div>
                                     </div>
                                 </div>`

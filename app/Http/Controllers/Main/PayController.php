@@ -37,10 +37,12 @@ class PayController extends Controller
                 .'&todate=' .Carbon::parse(now())->format('d-m-Y')
                 .'&tnxref='.$invoice->payment_code
                 .'&payType=&trace=&status=&desc=';
-            foreach ($cancel_policies as $policy) {
-                if (Carbon::parse($invoice->start_date)->diffInDays(Carbon::now()) >= $policy->date) {
-                    $cost = $invoice->getRawOriginal('deposit_cost') * ($policy->refunds/100);
-                    break;
+           if (Carbon::parse($invoice->created_at)->addHours(REFUND_HOURS) > Carbon::now()) {
+                foreach ($cancel_policies as $policy) {
+                    if (Carbon::parse($invoice->start_date)->diffInDays(Carbon::now()) >= $policy->date) {
+                        $cost = $invoice->getRawOriginal('deposit_cost') * ($policy->refunds/100);
+                        break;
+                    }
                 }
             }
 
