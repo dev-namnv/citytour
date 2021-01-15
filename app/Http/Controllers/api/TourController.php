@@ -126,8 +126,8 @@ class TourController extends Controller
             'per_page' => $tours->perPage(),
             'current_page' => $tours->currentPage(),
             'last_page' => $tours->lastPage(),
-            'from' => 1,
-            'to' => $tours->lastPage(),
+            'from' => $tours->firstItem(),
+            'to' => $tours->lastItem(),
             'data' => $tours->items(),
             'meta' => $meta
         ]);

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
+use App\Models\Batch;
 use App\Models\Invoice;
+use App\Models\Tour;
 use App\Scopes\ActiveScope;
 use App\Scopes\PublishScope;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\In;
 
 class InvoiceController extends Controller
 {
@@ -70,5 +74,34 @@ class InvoiceController extends Controller
     {
         Invoice::query()->where('sku',$sku)->update(['status' => $status]);
         return redirect()->back();
+    }
+
+    public function listUsers(Request $request, $id)
+    {
+        $currentTour = Tour::query()->findOrFail($id);
+        $batch = $request->has('batch')
+            ? Batch::query()
+                ->where('batch', Carbon::parse($request->get('batch'))->format('Y-m-d'))
+                ->first()
+            : null;
+
+        $tours = Tour::query();
+        if (\auth()->user()->role === GUIDE) {
+            $tours = $tours->ofGuide();
+        }
+
+        $tours = $tours->get();
+
+        if ($currentTour && $batch) {
+            $invoices = Invoice::query()
+                ->where('tour_id', $currentTour->id)
+                ->whereHas('batch', function ($query) use ($batch) {
+                    $query->where('batch', $batch->batch);
+                });
+        } else {
+            $invoices = [];
+        }
+
+        return view('Manager.invoices.statistical', compact('tours', 'currentTour', 'batch', 'invoices'));
     }
 }
