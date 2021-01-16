@@ -170,11 +170,11 @@ class InvoiceController extends Controller
                 \auth()->user()->role === ADMIN
                     ? [
                         'money' => $invoice->getRawOriginal('total_cost') * 0.05,
-                        'title' => Str::limit($invoice->tour->name, 50)
+                        'title' => Carbon::parse($invoice->created_at)->format('d/m/Y H:m') . ': ' . Str::limit($invoice->tour->name, 50)
                 ]
                     : [
                         'money' => $invoice->getRawOriginal('total_cost'),
-                        'title' => Str::limit($invoice->tour->name, 50)
+                        'title' => Carbon::parse($invoice->created_at)->format('d/m/Y H:m') . ': ' . Str::limit($invoice->tour->name, 50)
                 ]
             );
         }
@@ -196,11 +196,11 @@ class InvoiceController extends Controller
                 \auth()->user()->role === ADMIN
                     ? [
                         'money' => $invoice->getRawOriginal('total_cost') * 0.05,
-                        'title' => Str::limit($invoice->tour->name, 50)
+                        'title' => Carbon::parse($invoice->created_at)->format('d/m/Y H:m') . ': ' . Str::limit($invoice->tour->name, 50)
                 ]
                     : [
                         'money' => $invoice->getRawOriginal('total_cost'),
-                        'title' => Str::limit($invoice->tour->name, 50)
+                        'title' => Carbon::parse($invoice->created_at)->format('d/m/Y H:m') . ': ' . Str::limit($invoice->tour->name, 50)
                 ]
             );
         }
