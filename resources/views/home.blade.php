@@ -23,13 +23,13 @@
                             <div class="row no-gutters custom-search-input-2">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="where" type="text" placeholder="Địa điểm..." id="autocomplete">
+                                        <input class="form-control" name="where" type="text" placeholder="Địa điểm..." id="autocomplete" autocomplete="off">
                                         <i class="icon_pin_alt"></i>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <input class="form-control date-pick" id="example-date-input" type="text" name="when" placeholder="Ngày..">
+                                        <input class="form-control date-pick" id="example-date-input" type="text" name="when" placeholder="Ngày.." autocomplete="off">
                                         <i class="icon_calendar"></i>
                                     </div>
                                 </div>

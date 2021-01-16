@@ -56,7 +56,7 @@ class CalendarController extends Controller
             'start' => Carbon::parse($tour->getStartAt($batch))->format('Y-m-d'),
             'end' => Carbon::parse($tour->getEndAt($batch))->format('Y-m-d'),
             'description' => $desc,
-            'url' => route('Main.tour.show', ['slug' => $tour->slug]),
+            'url' => route('invoice.listUsers', ['id' => $tour->id]),
             'className' => $class
         ];
     }
