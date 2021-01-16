@@ -98,39 +98,35 @@
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
-                    <div class="card-body pt-0">
+                    <div class="card-body pt-0 scroll" data-scroll="true" data-height="500" data-mobile-height="auto">
                         <!--begin::Item-->
-                        @php($keyActivity = 0)
                         @foreach($invoices as $invoice)
-                            @php($keyActivity ++)
-                            @if ($keyActivity <= 4)
-                                <div class="mb-10">
-                                    <!--begin::Section-->
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-45 symbol-light mr-5">
-                                    <span class="symbol-label">
-                                        <img src="{{ $invoice->tour->thumbnail }}" class="h-50 align-self-center" alt="" />
-                                    </span>
-                                        </div>
-                                        <!--end::Symbol-->
-                                        <!--begin::Text-->
-                                        <div class="d-flex flex-column flex-grow-1">
-                                            <a href="{{ route('invoice-show', ['sku' => $invoice->sku]) }}" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">
-                                                {{ $invoice->user->getFullName() }} đã đặt Tour
-                                            </a>
-                                            <span class="text-muted font-weight-bold">{{ \Carbon\Carbon::parse($invoice->created_at)->fromNow() }}</span>
-                                        </div>
-                                        <!--end::Text-->
+                            <div class="mb-10">
+                                <!--begin::Section-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-45 symbol-light mr-5">
+                                <span class="symbol-label">
+                                    <img src="{{ $invoice->tour->thumbnail }}" class="h-50 align-self-center" alt="" />
+                                </span>
                                     </div>
-                                    <!--end::Section-->
-                                    <!--begin::Desc-->
-                                    <p class="text-dark-50 m-0 pt-5 font-weight-normal">
-                                        {{ $invoice->user->getFullName() }} đã đặt {{ \Illuminate\Support\Str::limit($invoice->tour->name, 100) }} @if(auth()->user()->role === GUIDE) của bạn @endif
-                                    </p>
-                                    <!--end::Desc-->
+                                    <!--end::Symbol-->
+                                    <!--begin::Text-->
+                                    <div class="d-flex flex-column flex-grow-1">
+                                        <a href="{{ route('invoice-show', ['sku' => $invoice->sku]) }}" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">
+                                            {{ $invoice->user->getFullName() }} đã đặt Tour
+                                        </a>
+                                        <span class="text-muted font-weight-bold">{{ \Carbon\Carbon::parse($invoice->created_at)->fromNow() }}</span>
+                                    </div>
+                                    <!--end::Text-->
                                 </div>
-                            @endif
+                                <!--end::Section-->
+                                <!--begin::Desc-->
+                                <p class="text-dark-50 m-0 pt-5 font-weight-normal">
+                                    {{ $invoice->user->getFullName() }} đã đặt {{ \Illuminate\Support\Str::limit($invoice->tour->name, 100) }} @if(auth()->user()->role === GUIDE) của bạn @endif
+                                </p>
+                                <!--end::Desc-->
+                            </div>
                         @endforeach
                         <!--end::Item-->
                     </div>

@@ -74,7 +74,7 @@ class DashboardController extends Controller
         $tours = Tour::query()->whereHas('invoices.user', function ($q) {
             $q->orderBy('created_at', 'desc');
         });
-        $invoices = Invoice::query();
+        $invoices = Invoice::query()->orderBy('created_at', 'desc');
 
         if (auth()->user()->role === GUIDE) {
             $tours = $tours->ofGuide();
