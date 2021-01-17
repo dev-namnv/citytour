@@ -103,6 +103,14 @@
                             autoHide: false,
                             // callback function support for column rendering
                             template: function (row) {
+                                const invoices_status_button = document.getElementById('invoices_status')
+                                invoices_status_button.style.visibility = 'hidden'
+
+                                if (row && row.status < {{INVOICE_COMPLETE}}) {
+                                    invoices_status_button.style.visibility = 'visible'
+                                }
+
+
                                 const status = {
                                     0: {'title': 'Đã tiếp nhận', 'class': ' label-light-info'},
                                     1: {'title': 'Đã xác nhận', 'class': 'label-light-default'},
@@ -119,12 +127,11 @@
                 });
 
                 $('#kt_datatable_search_batch').on('change', function () {
+                    document.getElementById('start_date_input').value = $(this).val()
                     datatable.search($(this).val().toLowerCase(), 'batch');
                 });
 
                 $('#kt_datatable_search_batch').selectpicker();
-
-
             };
 
             return {
@@ -187,6 +194,11 @@
                             <span class="text-muted mt-1 font-weight-bold font-size-sm">
                                 {{ $currentTour && $batch ? \Illuminate\Support\Str::limit($currentTour->name, 50) : 'Vui lòng chọn ngày khởi hành để xem chi tiết' }}
                             </span>
+                            <span class="text-danger mt-1 font-weight-bold font-size-sm">
+                                @if(session()->has('message_error'))
+                                    {{ session('message_error')  }}
+                                @endif
+                            </span>
                         </h3>
                     </div>
                     <div class="card-body">
@@ -215,7 +227,12 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                                    <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+                                    <form action="{{route('invoices.update-status', $currentTour->id)}} "method="POST">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="start_date" id="start_date_input">
+                                        <button style="visibility: hidden" id="invoices_status" class="btn btn-light-primary px-6 font-weight-bold">Cập nhật trạng thái</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

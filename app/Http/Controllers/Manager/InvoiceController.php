@@ -104,4 +104,33 @@ class InvoiceController extends Controller
 
         return view('Manager.invoices.statistical', compact('tours', 'currentTour', 'batch', 'invoices'));
     }
+
+    public function changeInvoicesStatus(Request $request, $id)
+    {
+        $tour = Tour::query()->findOrFail($id);
+        $invoices = Invoice::where([
+            ['tour_id', '=', $id],
+            ['start_date', '=', $request->start_date]
+        ])->get();
+
+        foreach ($invoices as $invoice) {
+            if ($invoice->status + 1 === INVOICE_IN_PROGRESS && Carbon::parse($tour->getStartAtByDate($request->start_date))->isCurrentDay()){
+                $invoice->update([
+                    'status' => INVOICE_IN_PROGRESS
+                ]);
+            } elseif ($invoice->status + 1 === INVOICE_COMPLETE && Carbon::parse($tour->getEndAtByDate($request->start_date))->isCurrentDay()) {
+                $invoice->update([
+                    'status' => INVOICE_COMPLETE
+                ]);
+            } elseif ($invoice->status + 1 < INVOICE_IN_PROGRESS) {
+                $invoice->update([
+                    'status' => $invoice->status + 1
+                ]);
+            } else {
+                session()->flash('message_error', 'Không thể cập nhật trạng thái');
+            }
+        }
+
+        return redirect()->back();
+    }
 }

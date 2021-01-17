@@ -163,4 +163,14 @@ class Tour extends Model
     {
         return Carbon::parse($batch->batch)->addDays($this->schedules->count());
     }
+
+    public function getStartAtByDate($date): string
+    {
+        return $date;
+    }
+
+    public function getEndAtByDate($date): string
+    {
+        return Carbon::parse($date)->addDays($this->schedules->count());
+    }
 }
