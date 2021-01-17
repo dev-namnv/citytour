@@ -4,6 +4,7 @@
 
 @section('extra-css')
     <link href="{{ asset('Libraries/Manager/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/simple-calendar.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
 @endsection
 
@@ -31,7 +32,6 @@
         </ul>
 
         <!-- Tab panes -->
-{{--        <form action="{{ route('tour-store') }}" method="post" enctype="multipart/form-data" id="formAddTour" >--}}
         {{ Form::open(['method'=>'POST','url'=>route('tour-store'),'files'=>true,'id'=>'formAddTour']) }}
             <div class="tab-content">
                 <div id="tab1" class="container tab-pane active"><br>
@@ -40,8 +40,6 @@
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Tên tour<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-{{--                                    <input class="form-control form-control-lg form-control-solid" name="tour_name"--}}
-{{--                                           type="text" data-label="Tên tour" placeholder="Tên tour" required>--}}
                                     {!! Form::text('tour_name','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Tên tour','placeholder'=>'Tên tour','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
@@ -49,8 +47,6 @@
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Địa chỉ<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-{{--                                    <input class="form-control form-control-lg form-control-solid" name="tour_address"--}}
-{{--                                           type="text" placeholder="Địa chỉ" data-label="Địa chỉ" required>--}}
                                     {!! Form::text('tour_address','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Địa chỉ','placeholder'=>'Địa chỉ','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
@@ -83,15 +79,11 @@
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Giá người lớn<span class="text-danger">*</span></label>
                                 <div class="col-lg-3 col-xl-3">
-{{--                                    <input class="form-control form-control-lg form-control-solid" name="price_adult"--}}
-{{--                                           type="number" min="0" placeholder="Giá người lớn" data-label="Giá người lớn" required>--}}
                                     {!! Form::text('price_adult','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Giá người lớn','placeholder'=>'Giá người lớn','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
                                 <label class="col-xl-2 col-lg-2 col-form-label text-right">Giá trẻ em<span class="text-danger">*</span></label>
                                 <div class="col-lg-3 col-xl-3">
-{{--                                    <input class="form-control form-control-lg form-control-solid" name="price_child"--}}
-{{--                                           type="number" min="0" placeholder="Giá trẻ em" data-label="Giá trẻ em" required>--}}
                                     {!! Form::text('price_child','',['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Giá trẻ em','placeholder'=>'Giá trẻ em','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
@@ -119,8 +111,6 @@
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Mô tả<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-{{--                                <textarea class="form-control form-control-lg form-control-solid" id="description" name="tour_description" required data-label="Mô tả">--}}
-{{--                                </textarea>--}}
                                     {!! Form::textarea('tour_description','',['id'=>'description','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Mô tả','required']) !!}
                                     <div class="fv-plugins-message-container"></div>
                                 </div>
@@ -128,8 +118,6 @@
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Ghi chú<span class="text-danger">*</span></label>
                                 <div class="col-lg-8 col-xl-8">
-{{--                                <textarea class="form-control form-control-lg form-control-solid" id="note" name="tour_note" required data-label="Ghi chú">--}}
-{{--                                </textarea>--}}
                                     {!! Form::textarea('tour_note','',['id'=>'note','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ghi chú','required']) !!}
                                 </div>
                             </div>
@@ -181,8 +169,6 @@
                             <div class="form-group row fv-plugins-icon-container">
                                 <label class="col-xl-2 col-lg-2 col-form-label">Ngày 1<span class="text-danger">*</span></label>
                                 <div class="col-lg-10 col-xl-10">
-{{--                                <textarea class="form-control form-control-lg form-control-solid" id="schedule1" name="schedule[]" required data-label="Lịch trình">--}}
-{{--                                </textarea>--}}
                                     {!! Form::textarea('schedule[]','',['id'=>'schedule1','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Lịch trình','required']) !!}
                                 </div>
                             </div>
@@ -205,11 +191,17 @@
                 </div>
                 <div id="tab3" class="container tab-pane fade"><br>
                     <h3>Ngày khởi hành<span class="text-danger">*</span></h3>
+                    <div class="text-center">
+                        <p class="text-danger">Bạn hãy đảm bảo rằng lịch trình không bị trùng bởi những tour du lịch khác.</p>
+                        <p>
+                            <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">lịch trình</a>
+                        </p>
+
+                    </div>
                     <div class="row" id="batches">
                         <div class="col-xl-10 ml-auto">
-                            <div class="form-group row m-3 fv-plugins-icon-container">
-                                <div class="col-lg-3 col-xl-3">
-{{--                                    <input class="form-control" name="batches[]" type="date" id="example-date-input" required data-label="Ngày khởi hành">--}}
+                            <div class="form-group col-6 m-3 pl-3 fv-plugins-icon-container">
+                                <div class="col-lg-10 col-xl-10 m-auto">
                                     {!! Form::date('batches[]','',['id'=>'example-date-input','class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ngày khởi hành','required','min'=>date('Y-m-d')]) !!}
                                 </div>
                             </div>
@@ -234,6 +226,15 @@
                 </div>
             </div>
         {{ Form::close() }}
+        <!-- Large modal -->
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content p-2">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
     </div>
 @endsection
 
@@ -241,6 +242,8 @@
     <!-- include summernote css/js -->
     <script src="{{ asset('Libraries/Manager/plugins/summernote/summernote.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+    <script src="{{ asset('js/jquery.simple-calendar.js') }}"></script>
+    <script src="{{ asset('js/jquery.simple-calendar.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#description').summernote({
@@ -258,7 +261,30 @@
                 tabsize: 2,
                 height: 200,
             });
+            var schedules;
+            $.ajax({
+                url: `{{route('api-check-batch')}}`,
+                type: 'get',
+                success: schedules = function (res) {
+                    calendar(res)
+                }
+            })
         });
+
+        function calendar(schedules) {
+            console.log(schedules)
+            $("#calendar").simpleCalendar({
+
+                // displays events
+                displayEvent: true,
+
+                // event dates
+                events: schedules,
+                disableEventDetails: false,
+                disableEmptyDetails: false
+
+            });
+        }
 
         function addSlide(index) {
             $('#sliders').children().eq(index).removeClass('d-none')
@@ -293,8 +319,8 @@
         }
         function addBatch() {
             $(`#batches`).children().append(`
-                <div class="form-group row m-3 fv-plugins-icon-container">
-                    <div class="col-lg-3 col-xl-3">
+                <div class="form-group col-6 m-3 pl-3 fv-plugins-icon-container">
+                    <div class="col-lg-10 col-xl-10 m-auto">
                         <div class="bg-danger text-danger col-lg-12 col-xl-12 mb-0 small" onclick="$(this).parent().parent().remove();">--</div>
                         <input class="form-control" name="batches[]" type="date" id="example-date-input" min="{{date('Y-m-d')}}" required data-label="Ngày khởi hành">
                     </div>
@@ -313,6 +339,5 @@
                 }
             })
         })
-
     </script>
 @endsection
