@@ -62,6 +62,20 @@
                 @include('layouts.manager.header')
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     @include('layouts.manager.subheader')
+                    @if (session()->has('message'))
+                        <div class="alert alert-warning">
+                            <ul>
+                                <li>{!! session()->get('message') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{!! session()->get('success') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
                     <div class="d-flex flex-column-fluid">
                         @yield('content')
                     </div>

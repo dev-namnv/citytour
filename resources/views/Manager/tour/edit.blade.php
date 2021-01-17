@@ -6,6 +6,7 @@
     <link href="{{ asset('Libraries/Manager/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css"
           rel="stylesheet">
+    <link href="{{ asset('css/simple-calendar.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -306,11 +307,18 @@
             </div>
             <div id="tab3" class="container tab-pane fade"><br>
                 <h3>Ngày khởi hành<span class="text-danger">*</span></h3>
+                <div class="text-center">
+                    <p class="text-danger">Bạn hãy đảm bảo rằng lịch trình không bị trùng bởi những tour du lịch khác.</p>
+                    <p>
+                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">lịch trình</a>
+                    </p>
+
+                </div>
                 <div class="row" id="batches">
                     <div class="col-xl-10 ml-auto">
                         @foreach($tour->batches as $key => $batch)
-                            <div class="form-group row m-3 fv-plugins-icon-container">
-                                <div class="col-lg-3 col-xl-3">
+                            <div class="form-group col-6 m-3 pl-3 fv-plugins-icon-container">
+                                <div class="col-lg-10 col-xl-10 m-auto">
                                     {{Form::hidden('batch_id[]',$batch->id)}}
                                     {!! Form::date('batches[]',$batch->batch,['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ngày khởi hành','required','min'=>date('Y-m-d')]) !!}
                                 </div>
@@ -337,6 +345,15 @@
             </div>
         </div>
         {{ Form::close() }}
+        <!-- Large modal -->
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content p-2">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
     </div>
 @endsection
 
@@ -344,10 +361,11 @@
     <!-- include summernote css/js -->
 
     <script src="{{asset('Libraries/Manager/plugins/custom/ckeditor/ckeditor-classic.bundle.js')}}"></script>
-    <script
-        src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
-    <script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+    <script src="{{ asset('js/jquery.simple-calendar.js') }}"></script>
+    <script src="{{ asset('js/jquery.simple-calendar.min.js') }}"></script>
 
+    <script>
         var KTCkeditor = function () {
             // Private functions
             var demos = function () {
@@ -364,8 +382,30 @@
         }();
         // Initialization
         jQuery(document).ready(function () {
-            KTCkeditor.init();
+            KTCkeditor.init();var schedules;
+            $.ajax({
+                url: `{{route('api-check-batch')}}`,
+                type: 'get',
+                success: schedules = function (res) {
+                    calendar(res)
+                }
+            })
         });
+
+        function calendar(schedules) {
+            console.log(schedules)
+            $("#calendar").simpleCalendar({
+
+                // displays events
+                displayEvent: true,
+
+                // event dates
+                events: schedules,
+                disableEventDetails: false,
+                disableEmptyDetails: false
+
+            });
+        }
 
         function addSlide(index) {
             $('#sliders').children().eq(index).removeClass('d-none')
@@ -401,10 +441,10 @@
 
         function addBatch() {
             $(`#batches`).children().append(`
-                <div class="form-group row m-3 fv-plugins-icon-container">
-                    <div class="col-lg-3 col-xl-3">
+                <div class="form-group col-6 m-3 pl-3 fv-plugins-icon-container">
+                    <div class="col-lg-10 col-xl-10 m-auto">
                         <div class="bg-danger text-danger col-lg-12 col-xl-12 mb-0 small" onclick="$(this).parent().parent().remove();">--</div>
-                        <input class="form-control" name="batches[]" type="date" id="example-date-input" min="{{date('Y-m-d')}}" required data-label="Ngày khởi hành">
+                        <input class="form-control form-control-lg form-control-solid" name="batches[]" type="date" id="example-date-input" min="{{date('Y-m-d')}}" required data-label="Ngày khởi hành">
                     </div>
                 </div>
             `)

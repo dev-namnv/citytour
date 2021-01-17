@@ -6,16 +6,19 @@ use App\Helpers\ConvertSlugHelper;
 use App\Helpers\ReviewHelper;
 use App\Helpers\StorageS3Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Batch;
 use App\Models\Schedule;
 use App\Models\Tour;
 use App\Scopes\ActiveScope;
 use App\Scopes\PublishScope;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -386,5 +389,28 @@ class TourController extends Controller
                 ->get();
         }
         return response(['data'=>$tour]);
+    }
+
+    public function checkStartTime()
+    {
+        $user = Auth::id();
+        $tours = Tour::query()->withoutGlobalScopes()->where('guide_id',$user)
+            ->with(['batches'=>function ($q){
+                $q->select()->where('batch','>=',date('Y-m-d'));
+            }])
+            ->with('schedules')->get();
+        $results = [];
+        for ($i=0; $i<count($tours); $i++) {
+            for ($j=0; $j<count($tours[$i]->batches);$j++) {
+                $data['startDate'] = Carbon::parse($tours[$i]->batches[$j]->batch)
+                    ->format('Y-m-d\TH:i:s.uP');
+                $data['endDate'] = Carbon::parse($tours[$i]->batches[$j]->batch)
+                    ->addDays($tours[$i]->schedules->count())
+                    ->format('Y-m-d\TH:i:s.uP');
+                $data['summary'] = $tours[$i]->name;
+                array_push($results,$data);
+            }
+        }
+        return \response($results);
     }
 }
