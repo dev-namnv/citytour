@@ -152,7 +152,7 @@
                         </a>
                     </li>
                     <li class="menu-item" aria-haspopup="true">
-                        <a href="{{ route('invoice.listUsers', ['id' => auth()->user()->role === GUIDE ? \App\Models\Tour::query()->inRandomOrder()->ofGuide()->first()->id : \App\Models\Tour::query()->inRandomOrder()->first()->id]) }}" class="menu-link">
+                        <a href="{{ route('invoice.listUsers') }}" class="menu-link">
                             <i class="menu-bullet menu-bullet-line">
                                 <span></span>
                             </i>

@@ -76,9 +76,10 @@ class InvoiceController extends Controller
         return redirect()->back();
     }
 
-    public function listUsers(Request $request, $id)
+    public function listUsers(Request $request)
     {
-        $currentTour = Tour::query()->findOrFail($id);
+        $id = $request->has('id') ? $request->id : null;
+        $currentTour = Tour::query()->find($id);
         $batch = $request->has('batch')
             ? Batch::query()
                 ->where('batch', Carbon::parse($request->get('batch'))->format('Y-m-d'))
