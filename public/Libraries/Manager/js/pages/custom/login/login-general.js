@@ -97,11 +97,7 @@ var KTLogin = function() {
 						validators: {
 							notEmpty: {
 								message: 'Tên không được để trống'
-							},
-                            regexp: {
-                                regexp: '^[a-zA-Z\\s]*$',
-                                message: 'Định dạng tên không hợp lệ'
-                            }
+							}
 						}
 					},
 					email: {
