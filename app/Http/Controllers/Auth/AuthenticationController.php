@@ -67,7 +67,7 @@ class AuthenticationController extends Controller
     public function registerGuide(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'first_name' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required|regex:/^(0[0-9]{9})$/',
             'username' => 'required|unique:users|regex:'.REGEX_USERNAME,
