@@ -31,7 +31,7 @@ class Controller extends BaseController
         if ($paginate != 0) {
             $result = $result->paginate($paginate);
         } else {
-//            $result = $result->get();
+            $result = $result->get();
         }
         return $result;
     }
