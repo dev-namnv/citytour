@@ -317,10 +317,13 @@
                 <div class="row" id="batches">
                     <div class="col-xl-10 ml-auto">
                         @foreach($tour->batches as $key => $batch)
-                            <div class="form-group col-6 m-3 pl-3 fv-plugins-icon-container">
+                            <div class="form-group col-6 m-3 pl-3 row fv-plugins-icon-container" id="batch-{{$batch->id}}">
                                 <div class="col-lg-10 col-xl-10 m-auto">
                                     {{Form::hidden('batch_id[]',$batch->id)}}
                                     {!! Form::date('batches[]',$batch->batch,['class'=>'form-control form-control-lg form-control-solid','data-label'=>'Ngày khởi hành','required','min'=>date('Y-m-d')]) !!}
+                                </div>
+                                <div class="d-inline" onclick="delBatch({{$batch->id}})">
+                                    <i class="fas fa-trash-alt btn text-danger"></i>
                                 </div>
                             </div>
                         @endforeach
@@ -433,6 +436,18 @@
                 </div>
             `)
             ClassicEditor.create(document.querySelector(`#schedule${index}`));
+        }
+
+        function delBatch(id)
+        {
+            $.ajax({
+                url: `{{route('api-delete-batch')}}?id=${id}`,
+                type: 'get',
+                success: function (res) {
+                    console.log(res)
+                    $(`#batch-${id}`).remove()
+                }
+            })
         }
 
         $(`textarea[name='schedule[]']`).each(function (index,value){

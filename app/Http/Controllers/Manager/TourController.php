@@ -93,7 +93,7 @@ class TourController extends Controller
         // batches
         $batches = '';
         foreach ($request->batches as $batch){
-            if ($this->checkStartTime($tours, $batch) === 0) {
+            if ($this->checkStartTime($tours, $batch,count($request->schedule)) === 0) {
                 Batch::query()->create([
                     'batch' => $batch,
                     'tour_id' => $tour->id,
@@ -199,7 +199,7 @@ class TourController extends Controller
         return view('Manager.tour.detail', compact('tour'));
     }
 
-    public function checkStartTime($tours, $batch)
+    public function checkStartTime($tours, $batch,$schedules)
     {
         $batch = Carbon::parse($batch)->timestamp;
         $results = 0;
@@ -209,7 +209,7 @@ class TourController extends Controller
                 $endDate = Carbon::parse($tours[$i]->batches[$j]->batch)
                     ->addDays($tours[$i]->schedules->count())->timestamp;
                 $endBatch = Carbon::parse($batch)
-                    ->addDays($tours[$i]->schedules->count())->timestamp;
+                    ->addDays($schedules)->timestamp;
                 if (($batch >= $startDate && $batch <= $endDate) || ($endBatch >= $startDate && $endBatch <= $endDate)) {
                     $results = $results + 1;
                 }
