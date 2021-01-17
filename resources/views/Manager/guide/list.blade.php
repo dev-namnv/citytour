@@ -148,8 +148,12 @@
                                             </td>
                                             <td class="text-center">
                                                 @if (!empty($guide->identity))
-                                                <img src="{{$guide->identity->front_image}}" alt="" width="50" style="margin-right: 10px">
-                                                <img src="{{$guide->identity->back_image}}" alt="" width="50">
+                                                    <a href="{{$guide->identity->front_image}}" target="_blank">
+                                                        <img src="{{$guide->identity->front_image}}" alt="" width="50" style="margin-right: 5px">
+                                                    </a>
+                                                    <a href="{{$guide->identity->back_image}}" target="_blank">
+                                                        <img src="{{$guide->identity->back_image}}" alt="" width="50">
+                                                    </a>
                                                 @else
                                                     <span class="text-danger">Chưa có</span>
                                                 @endif
