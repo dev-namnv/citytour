@@ -10,6 +10,7 @@ use App\Http\Requests\Tour\TourUpdateRequest;
 use App\Models\Album;
 use App\Models\Batch;
 use App\Models\Category;
+use App\Models\CheckStatus;
 use App\Models\Invoice;
 use App\Models\Schedule;
 use App\Models\Tour;
@@ -183,7 +184,7 @@ class TourController extends Controller
         $tour = Tour::query()->withoutGlobalScope(new ActiveScope)->findOrFail($id);
         return view('Manager.tour.detail', compact('tour'));
     }
-    
+
     //check schedule status
     public function status($slug) {
         //getDetail
@@ -195,7 +196,7 @@ class TourController extends Controller
         if ($tour->guide->id !== Auth::id()) {
             return abort(403);
         }
-        $invoice = Invoice::where('tour_id','=',$tour->id)->firstOrFail();
+        $invoice = Invoice::where('tour_id','=',$tour->id)->get()->last();
         return view('Manager.guide.tourStatus', compact('tour','invoice'));
 
     }
@@ -206,14 +207,25 @@ class TourController extends Controller
             ->where('slug',$slug)
             ->firstOrFail();
         $invoice = Invoice::where('tour_id','=',$tour->id)->firstOrFail();
-        return view('Manager.guide.statusStep2', compact('tour','invoice'));
+        $checked = new CheckStatus;
+        $checkStatus = CheckStatus::query()->where('tour_id','=', $tour->id)->get();
+        if ($checkStatus == NULL || $checkStatus->start_date <= $invoice->start_date) {
+            foreach ($tour->schedules as $schedule) {
+                $checked->start_date = $invoice->start_date;
+                $checked->tour_id = $tour->id;
+                $checked->status = NULL;
+                $checked->schedule_id = $schedule->id;
+                $checked->save();
+            }
+        }
+        $checked = CheckStatus::query()->where('tour_id','=', $tour->id)->get();
+        return view('Manager.guide.statusStep2', compact('tour','invoice', 'checked'));
     }
     public function statusSchedule($id, Request $request) {
-        $schedule = Schedule::find($id);
-        if ($request->status == 'on') {
-            $schedule->checked = 1;
-            $schedule->save();
-        }
+        $checked = new CheckStatus;
+        $checked->start_date = $request->start_date;
+        $checked->tour_id = $request->tour_id;
+        $checked->checked_date = $request->start_date;
         return redirect()->back();
     }
     public function changeStatus($id) {
