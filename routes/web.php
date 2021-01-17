@@ -68,6 +68,7 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
         Route::get('/schedule/{sku}', 'InvoiceController@schedule')->name('invoice-schedule');
         Route::get('/update/{sku}-{status}', 'InvoiceController@updateStatus')->name('invoice-update-status');
         Route::get('statistical/{id}', 'InvoiceController@listUsers')->name('invoice.listUsers');
+        Route::put('/update-status/{id}', 'InvoiceController@changeInvoicesStatus')->name('invoices.update-status');
     });
 
     // Article

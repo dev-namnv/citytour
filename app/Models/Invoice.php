@@ -44,10 +44,10 @@ class Invoice extends Model
      * @var integer string
      */
 
-    public function getStatus()
+    public function getStatus($addNumber = 0)
     {
         $masterData = config('masterdata')['invoice'];
-        return $masterData['status'][$this->status];
+        return $masterData['status'][$this->status + $addNumber];
     }
 
     public function getColor()
