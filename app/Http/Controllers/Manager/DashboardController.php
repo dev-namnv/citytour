@@ -92,7 +92,7 @@ class DashboardController extends Controller
             $q->where('created_at', '>=', Carbon::parse()->startOfWeek());
         })->get();
         $dayTours = $tours->whereHas('invoices', function ($q) {
-            $q->where('created_at', '>=', Carbon::parse());
+            $q->where('created_at', '>=', Carbon::parse()->format('Y-m-d'));
         })->get();
 
         $weekIncome = 0;
