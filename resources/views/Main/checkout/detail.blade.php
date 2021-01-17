@@ -288,6 +288,7 @@
                                     <span class="text-danger">{{ $tour->child_price }}</span>
                                     x
                                     <span class="person-child">0</span>
+                                    <small>Trẻ em từ 6 - 11 tuổi</small>
                                 </td>
                             </tr>
                             <tr class="total">
@@ -308,7 +309,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <button class="btn_full" type="submit">Đặt ngay</button>
+                        <button class="btn_full" type="submit">Đặt cọc 30% tổng giá trị</button>
                         <a @if(!auth()->guest()) onclick="Main.addToWishlist({{$tour->id}})" @else onclick="Toastr.show({'status': 'error', 'content': 'Bạn cần phải đăng nhập'})" @endif class="btn_full_outline" href="javascript:void(0)"><i class=" icon-heart"></i> Yêu thích</a>
                     </div>
 

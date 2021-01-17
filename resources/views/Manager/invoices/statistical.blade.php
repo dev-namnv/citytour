@@ -78,7 +78,7 @@
                                                 </div>
                                                 <div class="ml-2">
                                                     <div class="font-weight-bold line-height-sm">
-                                                        <a class="text-dark-75" target="_blank" href="#">${row.user.first_name} ${row.user.last_name}</a>
+                                                        <a class="text-dark-75" target="_blank" href="{{ route('invoice-show', ['sku' => '/'])}}/${row.sku}">${row.user.first_name} ${row.user.last_name}</a>
                                                     </div>
                                                 </div>
                                             </div>`
