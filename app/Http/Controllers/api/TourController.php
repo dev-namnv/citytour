@@ -413,4 +413,10 @@ class TourController extends Controller
         }
         return \response($results);
     }
+
+    public function destroyBatch(Request $request)
+    {
+        $batch = Batch::query()->findOrFail($request->id)->delete();
+        return \response($batch);
+    }
 }
