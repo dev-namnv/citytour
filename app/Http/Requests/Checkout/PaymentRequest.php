@@ -32,7 +32,6 @@ class PaymentRequest extends FormRequest
             'customer_name' => 'required|string',
             'customer_phone' => 'required|min:9',
             'customer_email' => 'required|email',
-            'customer_email_confirm' => 'required|email|same:customer_email',
             'customer_address' => 'required|min:20',
             'country' => 'required|string|min:2',
             'state' => 'required',
