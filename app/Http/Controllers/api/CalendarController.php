@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Tour;
+use App\Scopes\ActiveScope;
+use App\Scopes\PublishScope;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,7 +16,9 @@ class CalendarController extends Controller
 {
     public function index(): JsonResponse
     {
-        $tours = Tour::query()->with('batches', 'schedules', 'invoices');
+        $tours = Tour::query()
+            ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
+            ->with('batches', 'schedules', 'invoices');
 
         if (auth()->user()->role === GUIDE) {
             $tours = $tours->ofGuide();

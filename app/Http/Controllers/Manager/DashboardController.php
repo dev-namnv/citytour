@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Tour;
 use App\Models\User;
+use App\Scopes\ActiveScope;
+use App\Scopes\PublishScope;
 use Carbon\Carbon;
 use Cknow\Money\Money;
 use Illuminate\Http\Request;
@@ -71,9 +73,11 @@ class DashboardController extends Controller
 
     public function sale()
     {
-        $tours = Tour::query()->whereHas('invoices.user', function ($q) {
-            $q->orderBy('created_at', 'desc');
-        });
+        $tours = Tour::query()
+            ->withoutGlobalScopes([ActiveScope::class, PublishScope::class])
+            ->whereHas('invoices.user', function ($q) {
+                $q->orderBy('created_at', 'desc');
+            });
         $invoices = Invoice::query()->orderBy('created_at', 'desc');
 
         if (auth()->user()->role === GUIDE) {
@@ -88,7 +92,7 @@ class DashboardController extends Controller
             $q->where('created_at', '>=', Carbon::parse()->startOfWeek());
         })->get();
         $dayTours = $tours->whereHas('invoices', function ($q) {
-            $q->where('created_at', '>=', Carbon::parse());
+            $q->where('created_at', '>=', Carbon::parse()->format('Y-m-d'));
         })->get();
 
         $weekIncome = 0;

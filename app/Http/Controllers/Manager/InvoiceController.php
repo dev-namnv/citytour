@@ -76,16 +76,17 @@ class InvoiceController extends Controller
         return redirect()->back();
     }
 
-    public function listUsers(Request $request, $id)
+    public function listUsers(Request $request)
     {
-        $currentTour = Tour::query()->findOrFail($id);
+        $id = $request->has('id') ? $request->id : null;
+        $currentTour = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class])->find($id);
         $batch = $request->has('batch')
             ? Batch::query()
                 ->where('batch', Carbon::parse($request->get('batch'))->format('Y-m-d'))
                 ->first()
             : null;
 
-        $tours = Tour::query();
+        $tours = Tour::query()->withoutGlobalScopes([ActiveScope::class, PublishScope::class]);
         if (\auth()->user()->role === GUIDE) {
             $tours = $tours->ofGuide();
         }

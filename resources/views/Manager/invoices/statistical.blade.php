@@ -16,7 +16,7 @@
                         type: 'remote',
                         source: {
                             read: {
-                                url: BASE_URL + '/api_v1/invoice/list-users/' + '{{ $currentTour->id }}',
+                                url: BASE_URL + '/api_v1/invoice/list-users/' + '{{ $currentTour ? $currentTour->id : null }}',
                                 method: 'GET'
                             },
                         },
@@ -174,7 +174,7 @@
                                             <br/>@if(auth()->user()->role === ADMIN) Guide: {{ $tour->guide->getFullName() }} @endif
                                         </span>
                                         <div>
-                                            <a href="{{ route('invoice.listUsers', ['id' => $tour->id]) }}" class="btn font-weight-bolder font-size-sm py-2 @if($tour->id == $currentTour->id) btn-light-primary active @else btn-light @endif">
+                                            <a href="{{ route('invoice.listUsers', ['id' => $tour->id]) }}" class="btn font-weight-bolder font-size-sm py-2 @if($currentTour && $tour->id == $currentTour->id) btn-light-primary active @else btn-light @endif">
                                                 Xem chi tiết
                                             </a>
                                         </div>
@@ -190,7 +190,7 @@
                 <div class="card card-custom">
                     <div class="card-header flex-wrap border-0 pt-6 pb-0">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label font-weight-bolder text-dark mb-3">{{ \Illuminate\Support\Str::limit($currentTour->name, 100) }}</span>
+                            <span class="card-label font-weight-bolder text-dark mb-3">{{ $currentTour ? \Illuminate\Support\Str::limit($currentTour->name, 100) : 'Vui lòng chọn Tour' }}</span>
                             <span class="text-muted mt-1 font-weight-bold font-size-sm">
                                 {{ $currentTour && $batch ? \Illuminate\Support\Str::limit($currentTour->name, 50) : 'Vui lòng chọn ngày khởi hành để xem chi tiết' }}
                             </span>
@@ -219,15 +219,17 @@
                                             <select class="form-control form-control-solid"
                                                     id="kt_datatable_search_batch">
                                                 <option value="">Ngày khởi hành</option>
-                                                @foreach($currentTour->batches as $batch)
-                                                    <option value="{{ $batch->batch }}">{{ \Carbon\Carbon::parse($batch->batch)->format('d/m/Y') }}</option>
-                                                @endforeach
+                                                @if($currentTour)
+                                                    @foreach($currentTour->batches as $batch)
+                                                        <option value="{{ $batch->batch }}">{{ \Carbon\Carbon::parse($batch->batch)->format('d/m/Y') }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                                    <form action="{{route('invoices.update-status', $currentTour->id)}} "method="POST">
+                                    <form action="{{route('invoices.update-status', $currentTour ? $currentTour->id : '')}} " method="POST">
                                         @method('PUT')
                                         @csrf
                                         <input type="hidden" name="start_date" id="start_date_input">
